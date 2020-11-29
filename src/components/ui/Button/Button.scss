@@ -1,0 +1,18 @@
+.Button {
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.size_m {
+    height: 60px;
+    padding: 18px;
+  }
+
+  &.theme_black {
+    background-color: var(--black);
+    border-color: #123;
+    color: var(--white);
+  }
+}

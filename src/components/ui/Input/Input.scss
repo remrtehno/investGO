@@ -1,0 +1,49 @@
+.input {
+  height: 60px;
+  width: 100%;
+  padding: 8px 16px;
+  background-color: var(--white);
+  border: 1px solid var(--gray2);
+  border-radius: 6px;
+  box-sizing: border-box;
+  position: relative;
+
+  &.focused {
+    border-color: var(--black);
+  }
+
+  &.withError,
+  &.focused.withError {
+    border-color: var(--red);
+  }
+}
+
+.label {
+  position: absolute;
+  transition: all 0.15s ease-out;
+  top: calc(50% - 12px);
+
+  &.isControlVisible {
+    top: 8px;
+  }
+}
+
+.control {
+  border: none;
+  outline: none;
+  height: 0;
+  transition: height 0.15s ease-out;
+  margin-top: 0;
+  padding: 0;
+
+  &.isControlVisible {
+    height: auto;
+    margin-top: 18px;
+  }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  right: 0;
+}

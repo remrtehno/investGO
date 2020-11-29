@@ -1,0 +1,42 @@
+.Text {
+  &.size {
+    &_h3 {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    &_caption1 {
+      font-family: "Open Sans";
+      font-size: 11px;
+      line-height: 18px;
+      color: var(--label);
+    }
+
+    &_body1 {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    &_bodyMini {
+      font-family: Nunito;
+      font-size: 12px;
+      letter-spacing: -0.2px;
+    }
+  }
+
+  &.color {
+    &_gray4 {
+      color: var(--gray4);
+    }
+
+    &_red {
+      color: var(--red);
+    }
+  }
+}

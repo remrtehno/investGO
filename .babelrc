@@ -1,0 +1,7 @@
+{
+  "presets": ["@babel/react", "@babel/typescript", ["@babel/env", { "modules": false }]],
+  "plugins": [
+    "@loadable/babel-plugin",
+    "react-hot-loader/babel"
+  ]
+}

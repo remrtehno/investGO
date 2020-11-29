@@ -1,0 +1,10 @@
+{
+    "api": {
+        "base": "/api",
+        "proxy": "https://testing.icoqa.com"
+    },
+    "isDev": true,
+    "needConsole": true,
+    "useCompression": false,
+    "useOfflinePlugin": false
+}

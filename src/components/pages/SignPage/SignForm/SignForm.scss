@@ -1,0 +1,12 @@
+.field {
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-bottom: 32px;
+
+  .selected {
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--black);
+  }
+}
