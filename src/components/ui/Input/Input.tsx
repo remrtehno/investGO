@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState} from "react";
-import {Color} from "../../../constants/colors";
+import {Color} from "../../../types/Color";
 import {useOnClickOutside} from "../../../hooks/useOnClickOutside";
 import {Text, TextSize} from "../Text";
 import s from './Input.scss';

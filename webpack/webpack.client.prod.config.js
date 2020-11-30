@@ -34,7 +34,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(css|scss)$/,
+                test: /\.(css)$/,
                 use: [
                     {
                         loader: ExtractCssChunks.loader,
@@ -42,7 +42,26 @@ const config = {
                             minimize: true
                         }
                     },
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                    }
+                ]
+            },
+            {
+                test: /\.(scss)$/,
+                use: [
+                    {
+                        loader: ExtractCssChunks.loader,
+                        options: {
+                            minimize: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                        }
+                    },
                     'postcss-loader',
                     'sass-loader'
                 ]
@@ -53,10 +72,6 @@ const config = {
     plugins: [
         new LoadablePlugin(),
         new ExtractCssChunks({filename: '[name].css', chunkFilename: '[id].css'}),
-        new PurgecssPlugin({
-            paths: glob.sync(path.join(appDirectory, 'src') + '/**/*',  { nodir: true }),
-            whitelistPatterns: [/[slick|notification|ReactTable|activity\-table]/],
-        }),
         // new OfflinePlugin({
         //     responseStrategy: "network-first",
         //     ServiceWorker: {

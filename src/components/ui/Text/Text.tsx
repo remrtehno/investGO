@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {Color} from "../../../constants/colors";
+import {Color} from "../../../types/Color";
 import s from './Text.scss';
 import cx from 'classnames';
 
