@@ -53,3 +53,4 @@ deploy_frontend:
     extends: .deploy
     variables:
         DEPLOYMENT: frontend
+        
