@@ -4,7 +4,7 @@ variables:
     RELEASE_IMAGE: $REGISTRY_HOST/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME:latest
     DOCKERFILE: Dockerfile
     REALESE_NAMESPACE: investgo-testing
-    TESTING_NAMESPACE: investgo-testing
+    TESTING_NAMESPACE: investgo-prod
 
 stages:
     - build
@@ -25,7 +25,7 @@ services:
         - docker tag $STAGING_IMAGE $RELEASE_IMAGE
         - docker push $RELEASE_IMAGE
     only:
-        - master
+#        - master
         - testing
 
 build:
@@ -46,11 +46,10 @@ build:
         - kubectl --namespace=$CONTEXT_NAMESPACE set image deployment/$DEPLOYMENT $DEPLOYMENT=$STAGING_IMAGE --record
         - kubectl --namespace=$CONTEXT_NAMESPACE rollout status deployment/$DEPLOYMENT
     only:
-        - master
+#        - master
         - testing
 
 deploy_frontend:
     extends: .deploy
     variables:
         DEPLOYMENT: frontend
-        
