@@ -34,7 +34,8 @@ build:
 .deploy:
     stage: deploy
     before_script:
-        - if [[ ${CI_COMMIT_REF_NAME} == 'master' ]]; then export CONTEXT_NAMESPACE=$REALESE_NAMESPACE; else export CONTEXT_NAMESPACE=$TESTING_NAMESPACE; fi
+        #- if [[ ${CI_COMMIT_REF_NAME} == 'master' ]]; then export CONTEXT_NAMESPACE=$REALESE_NAMESPACE; else export CONTEXT_NAMESPACE=$TESTING_NAMESPACE; fi
+        - export CONTEXT_NAMESPACE=$REALESE_NAMESPACE
         - apk update  && apk add --no-cache curl
         - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
         - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
