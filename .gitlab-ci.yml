@@ -1,0 +1,55 @@
+variables:
+    REGISTRY_HOST: registry.investgo.ru
+    STAGING_IMAGE: $REGISTRY_HOST/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHA
+    RELEASE_IMAGE: $REGISTRY_HOST/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/$CI_COMMIT_REF_NAME:latest
+    DOCKERFILE: Dockerfile
+    REALESE_NAMESPACE: investgo-testing
+    TESTING_NAMESPACE: investgo-testing
+
+stages:
+    - build
+    - deploy
+
+image: docker:git
+
+services:
+    - docker:19.03.11-dind
+
+.build:
+    stage: build
+    before_script:
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $REGISTRY_HOST
+    script:
+        - docker build --build-arg ref_name=$CI_COMMIT_REF_NAME -t $STAGING_IMAGE -f $DOCKERFILE .
+        - docker push $STAGING_IMAGE
+        - docker tag $STAGING_IMAGE $RELEASE_IMAGE
+        - docker push $RELEASE_IMAGE
+    only:
+        - master
+        - testing
+
+build:
+    extends: .build
+
+.deploy:
+    stage: deploy
+    before_script:
+        - if [[ ${CI_COMMIT_REF_NAME} == 'master' ]]; then export CONTEXT_NAMESPACE=$REALESE_NAMESPACE; else export CONTEXT_NAMESPACE=$TESTING_NAMESPACE; fi
+        - apk update  && apk add --no-cache curl
+        - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+        - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+    script:
+        - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
+        - kubectl config set-credentials admin --token="$KUBE_TOKEN"
+        - kubectl config set-context default --cluster=k8s --user=admin
+        - kubectl config use-context default
+        - kubectl --namespace=$CONTEXT_NAMESPACE set image deployment/$DEPLOYMENT $DEPLOYMENT=$STAGING_IMAGE --record
+        - kubectl --namespace=$CONTEXT_NAMESPACE rollout status deployment/$DEPLOYMENT
+    only:
+        - master
+        - testing
+
+deploy_frontend:
+    extends: .deploy
+    variables:
+        DEPLOYMENT: frontend
