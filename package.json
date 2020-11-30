@@ -5,7 +5,8 @@
     "build": "rimraf ./build && yarn run build:client && yarn run build:server",
     "build:server": "webpack --config ./webpack/webpack.server.prod.config.js",
     "build:client": "webpack --config ./webpack/webpack.client.prod.config.js",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "start:prod": "node build/bundle.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",
