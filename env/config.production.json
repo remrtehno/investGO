@@ -1,6 +1,6 @@
 {
     "api": {
-        "base": "https://testing.icoqa.com",
+        "base": "https://testing.investgo.ru",
         "proxy": ""
     },
     "isDev": false,

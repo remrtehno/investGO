@@ -42,7 +42,7 @@ const intlSizeSum = glob.sync('../assets/intl/*.json')
 
 const apiConfig = {
   base: process.env.API_BASE ? process.env.API_BASE + '/api' : '/api',
-  serverBase: process.env.SERVER_API_BASE ? process.env.SERVER_API_BASE + '/api' : 'https://testing.icoqa.com' + '/api',
+  serverBase: process.env.SERVER_API_BASE ? process.env.SERVER_API_BASE + '/api' : 'https://testing.investgo.ru' + '/api',
   intlSizeSum,
 };
 
