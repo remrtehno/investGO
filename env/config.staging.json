@@ -1,6 +1,6 @@
 {
     "api": {
-        "base": "https://api-stage.stablekoin.com",
+        "base": "https://testing.investgo.ru",
         "proxy": ""
     },
     "isDev": false,
