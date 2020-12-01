@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const basePath = path.resolve(__dirname, '..');
 
@@ -27,7 +27,12 @@ const baseConfig = {
     }, {
       test: /\.css$/,
       use: [
-        MiniCssExtractPlugin.loader,
+        {
+          loader: ExtractCssChunks.loader,
+          options: {
+            hmr: true,
+          }
+        },
         {
           loader: 'css-loader'
         }
@@ -35,11 +40,18 @@ const baseConfig = {
     }, {
       test: /\.scss$/,
       use: [
-        MiniCssExtractPlugin.loader,
+        {
+          loader: ExtractCssChunks.loader,
+          options: {
+            hmr: true,
+          }
+        },
         {
           loader: 'css-loader',
           options: {
-            modules: true,
+            modules: {
+              localIdentName: "[local]-[hash:base64:5]",
+            },
           }
         },
         'postcss-loader',
@@ -66,10 +78,7 @@ const baseConfig = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[name].[hash].css',
-    }),
+    new ExtractCssChunks({filename: '[name].css', chunkFilename: '[id].css'})
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
@@ -98,10 +107,7 @@ module.exports = [{
   },
   plugins: [
     ...baseConfig.plugins,
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[name].[hash].css',
-    }),
+    new ExtractCssChunks({filename: '[name].css', chunkFilename: '[id].css'})
   ],
 }, {
   ...baseConfig,

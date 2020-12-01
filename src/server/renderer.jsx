@@ -2,7 +2,7 @@
  * Server renderer
  * used in both dev and prod builds
  */
-
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Helmet } from 'react-helmet';

@@ -9,9 +9,9 @@ type Props = {
 
 export const Page: FC<Props> = (props) => {
   return (
-    <div className={cx(s.Page, props.className)}>
+    <div className={cx(s.page, props.className)}>
       <PageHeader/>
-      {props.children}
+      <div className={s.content}>{props.children}</div>
     </div>
   );
 };
