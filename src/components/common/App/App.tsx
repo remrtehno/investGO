@@ -13,7 +13,10 @@ const AppContent: FC = () => {
   }, []);
 
   return (
-    <SignPage/>
+    <div>
+      <SignPage/>
+      <div id="modal-root"/>
+    </div>
   )
 }
 

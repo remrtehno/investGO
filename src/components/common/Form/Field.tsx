@@ -33,6 +33,10 @@ export const Field: FC<Field.Props> = (props) => {
     form.onChange(value, field.name);
   }, [field]);
 
+  if (field.isHidden) {
+    return null;
+  }
+
   return (
     <div className={props.className}>
       <Component

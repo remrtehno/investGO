@@ -1,10 +1,9 @@
 import React, {FC} from "react";
 import {Input} from "../../../ui/Input";
-import {useFormModel} from "../Form";
+import {FieldType, Form, useFormModel} from "../Form";
 import {FieldProps, fieldsModel} from "./fieldsModel";
-import {Field, FieldType} from "./types";
 
-export const TextField: FC<FieldProps<Field>> = (props) => {
+export const TextField: FC<FieldProps<Form.Field>> = (props) => {
   const { field } = props;
   const form = useFormModel();
 

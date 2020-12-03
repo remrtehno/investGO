@@ -28,6 +28,13 @@
       font-size: 12px;
       letter-spacing: -0.2px;
     }
+
+    &_subHeadline1 {
+      font-family: Open Sans;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 28px;
+    }
   }
 
   &.color {
@@ -38,5 +45,9 @@
     &_red {
       color: var(--red);
     }
+  }
+
+  &.bold {
+    font-weight: bold;
   }
 }

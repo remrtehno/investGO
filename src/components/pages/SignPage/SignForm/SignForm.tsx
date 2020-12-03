@@ -1,17 +1,20 @@
 import cx from "classnames";
-import React, {FC, useCallback, useState} from "react";
+import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {Form} from "../../../common/Form";
 import {Field} from "../../../common/Form/Field";
+import {FieldType} from "../../../common/Form/Form";
+import {email} from "../../../common/Form/validations/email";
 import {required} from "../../../common/Form/validations/required";
-import {FieldModel, FieldType} from "../../../common/Form/fields/types";
 import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
 import {Text, TextSize} from "../../../ui/Text";
 import s from './SignForm.scss';
+import {SmsForm} from "./SmsForm";
 
 export declare namespace SignForm {
   export type SignValues = {
-    login: string,
+    email: string,
     password: string,
+    phone: string,
   }
 
   export type Props = {
@@ -19,29 +22,46 @@ export declare namespace SignForm {
   };
 }
 
-const signFields: Record<string, FieldModel> = {
-  login: {
-    type: FieldType.text,
-    name: 'login',
-    validations: [required()],
-    label: 'Введите свой email'
-  },
-  password: {
-    type: FieldType.text,
-    name: 'password',
-    validations: [required()],
-    label: 'Введите пароль',
-  }
-};
-
-export const initialValues: SignForm.SignValues = {
-  login: '',
+const initialValues: SignForm.SignValues = {
+  email: '',
   password: '',
+  phone: '',
 };
 
 export const SignForm: FC<SignForm.Props> = (props) => {
   const [values, setValues] = useState<SignForm.SignValues>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
+  const formApiRef = useRef<Form.Api | null>(null);
+  const [isNeedShowPhone, setIsNeedShowPhone] = useState(false);
+  const [isShowSmsForm, setIsShowSmsForm] = useState(false);
+
+  useEffect(() => {
+    setIsShowSmsForm(true);
+  }, []);
+
+  const signFields = useMemo((): Form.FieldModels => {
+    return {
+      email: {
+        type: FieldType.text,
+        name: 'email',
+        validations: [required(), email()],
+        label: 'Введите свой email'
+      },
+      password: {
+        type: FieldType.text,
+        name: 'password',
+        validations: [required()],
+        label: 'Введите пароль',
+      },
+      phone: {
+        type: FieldType.text,
+        isHidden: !isNeedShowPhone,
+        name: 'phone',
+        validations: [required()],
+        label: 'Введите свой номер телефона',
+      }
+    };
+  }, [isNeedShowPhone]);
 
   const onChange = useCallback((values: SignForm.SignValues, errors: Form.Errors) => {
     setValues(values);
@@ -58,6 +78,15 @@ export const SignForm: FC<SignForm.Props> = (props) => {
     )
   }
 
+  const onContinue = useCallback(() => {
+    if (!isNeedShowPhone) {
+      setIsNeedShowPhone(true);
+      return;
+    }
+
+    setIsShowSmsForm(true);
+  }, [isNeedShowPhone]);
+
   return (
     <Form
       initialValues={initialValues}
@@ -65,13 +94,26 @@ export const SignForm: FC<SignForm.Props> = (props) => {
       errors={errors}
       fields={signFields}
       onChange={onChange}
+      formApiRef={formApiRef}
     >
       {renderTitle()}
-      <Field className={s.field} name='login'/>
+      <Field className={s.field} name='email'/>
       <Field className={s.field} name='password'/>
-      <Button size={ButtonSize.m} theme={ButtonTheme.black}>
+      <Field className={s.field} name='phone'/>
+      <Button
+        className={s.continueButton}
+        size={ButtonSize.m}
+        theme={ButtonTheme.black}
+        disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+        onClick={onContinue}
+      >
         Продолжить
       </Button>
+      {isShowSmsForm ? (
+        <SmsForm>
+
+        </SmsForm>
+      ) : null}
     </Form>
   )
 };

@@ -15,4 +15,8 @@
     border-color: #123;
     color: var(--white);
   }
+
+  &.disabled {
+    color: var(--gray4);
+  }
 }

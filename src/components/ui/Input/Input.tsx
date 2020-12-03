@@ -60,6 +60,7 @@ export const Input: FC<Input.Props> = (props) => {
         {props.label}
       </Text>
       <input
+        autoComplete='off'
         onFocus={onFocus}
         onBlur={onBlur}
         ref={controlRef}
