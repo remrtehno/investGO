@@ -17,6 +17,7 @@ export declare namespace Form {
     name: string,
     type: string,
 
+    isDisabled?: boolean,
     isHidden?: boolean,
     validations?: Array<(value: any, values: any) => string | null>,
   }) & (
@@ -94,20 +95,6 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
       }, null);
     }
   }
-
-  useEffect(() => {
-    const errors = _.reduce(props.fields, (errors: Form.Errors, field) => {
-      const error = validateField(props.values[field.name], field.name);
-      if (error) {
-        errors[field.name] = error;
-      }
-      return errors;
-    }, {});
-
-    if (!_.isEqual(errors, props.errors)) {
-      props.onChange(props.values, errors);
-    }
-  }, [props.fields]);
 
   function updateFormApi() {
     if (!props.formApiRef) {

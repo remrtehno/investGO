@@ -4,11 +4,12 @@ import s from './Text.scss';
 import cx from 'classnames';
 
 export enum TextSize {
+  h2 = 'h2',
   h3 = 'h3',
   subHeadline1 = 'subHeadline1',
   body1 = 'body1',
   caption1 = 'caption1',
-  bodyMini = 'bodyMini'
+  bodyMini = 'bodyMini',
 }
 
 export declare namespace Text {

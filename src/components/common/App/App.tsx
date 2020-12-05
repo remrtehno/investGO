@@ -1,9 +1,12 @@
-
 import React, {FC, useEffect} from "react";
 import {RecoilRoot} from "recoil";
-import {useUserApi} from "../../../hooks/useUser";
-
-import {SignPage} from "../../pages/SignPage";
+import {useUserApi} from "src/hooks/useUser";
+import 'src/libs/bootstrap/bootstrap-grid.css';
+import 'src/libs/bootstrap/bootstrap-reboot.css';
+import 'src/theme/colors.css';
+import 'src/components/common/Form/fields/textField';
+import {StaticRouter, Route, BrowserRouter} from 'react-router-dom';
+import {routes} from "./routes";
 
 const AppContent: FC = () => {
   const userApi = useUserApi();
@@ -14,16 +17,45 @@ const AppContent: FC = () => {
 
   return (
     <div>
-      <SignPage/>
+      {routes.map((route, index) => {
+        const { Component, ...routeProps } = route;
+        return (
+          <Route key={index} {...routeProps}>
+            <Component/>
+          </Route>
+        )
+      })}
       <div id="modal-root"/>
     </div>
   )
 }
 
-export const App: FC = () => {
+export declare namespace App {
+  export type Props = {
+    url?: string
+  };
+}
+
+export const App: FC<App.Props> = (props) => {
+  function renderRouter() {
+    if (typeof window === 'undefined') {
+      return (
+        <StaticRouter location={props.url}>
+          <AppContent/>
+        </StaticRouter>
+      )
+    }
+
+    return (
+      <BrowserRouter>
+        <AppContent/>
+      </BrowserRouter>
+    )
+  }
+
   return (
     <RecoilRoot>
-      <AppContent/>
+      {renderRouter()}
     </RecoilRoot>
   )
 };

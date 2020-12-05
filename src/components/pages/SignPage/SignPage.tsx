@@ -6,16 +6,14 @@ import s from './SignPage.scss';
 
 export const SignPage: FC = () => {
   return (
-    <div style={{ backgroundColor: '#F8F9FA' }}>
+    <Page>
       <div className='container'>
-        <Page>
-          <div className={cx(s.formContainer, 'row justify-content-center align-items-center')}>
-            <div className='col-4'>
-              <SignForm isEmailExists={true}/>
-            </div>
+        <div className={cx(s.formContainer, 'row justify-content-center align-items-center')}>
+          <div className='col-4'>
+            <SignForm isEmailExists={true}/>
           </div>
-        </Page>
+        </div>
       </div>
-    </div>
+    </Page>
   )
 };

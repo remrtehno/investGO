@@ -19,6 +19,7 @@ export const TextField: FC<FieldProps<Form.Field>> = (props) => {
         name={field.name}
         error={field.isDirty ? field.error : null}
         onChange={form.onChange}
+        isDisabled={field.isDisabled}
       />
     </div>
   )

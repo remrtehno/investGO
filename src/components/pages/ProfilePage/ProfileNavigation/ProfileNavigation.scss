@@ -1,0 +1,12 @@
+.link {
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  &.active {
+    cursor: default;
+  }
+}
+
+.navigation {
+  min-width: 170px;
+}

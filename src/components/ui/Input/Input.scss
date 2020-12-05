@@ -16,6 +16,10 @@
   &.focused.withError {
     border-color: var(--red);
   }
+
+  &.disabled {
+    background-color: var(--gray2);
+  }
 }
 
 .label {

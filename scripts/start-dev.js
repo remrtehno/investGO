@@ -26,10 +26,11 @@ const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name 
 
 let isStarted = false;
 
-app.use('/images', express.static(path.resolve(process.cwd(), 'assets/image')));
-app.use('/manifest', express.static(path.resolve(process.cwd(), 'assets/manifest')));
-app.use('/intl', express.static(path.resolve(process.cwd(), 'assets/intl')));
-app.use('/manifest.json', express.static(path.resolve(process.cwd(), 'assets/manifest/manifest.json')));
+app.get('/test', (req, res) => {
+  res.send('TEST');
+})
+console.log(process.cwd());
+app.use(express.static(path.resolve(process.cwd(), 'build')));
 
 app.use(cookieParser());
 
@@ -45,24 +46,26 @@ app.use(cookieParser());
 
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
-    webpackDevMiddleware(multiCompiler, {
-        publicPath: clientConfig.output.publicPath,
-    })
+  webpackDevMiddleware(multiCompiler, {
+    publicPath: clientConfig.output.publicPath,
+    writeToDisk: true,
+  })
 );
 app.use(webpackHotMiddleware(clientCompiler, {
-    path: '/__webpack_hmr'
+  path: '/__webpack_hmr'
 }));
 app.use(webpackHotServerMiddleware(multiCompiler, {
-    serverRendererOptions: { outputPath: clientConfig.output.path },
+  serverRendererOptions: {outputPath: clientConfig.output.path},
+  publicPath: clientConfig.output.publicPath,
 }));
 
 // Add multiCompiler done hook for nice console output
 multiCompiler.hooks.done.tap('startSsr', () => {
-    // prevent server to try to start again after hot reload
-    if (!isStarted) {
-        app.listen(1212, () => {
-            console.log('Running on http://localhost:1212/');
-        });
-        isStarted = true;
-    }
+  // prevent server to try to start again after hot reload
+  if (!isStarted) {
+    app.listen(1212, () => {
+      console.log('Running on http://localhost:1212/');
+    });
+    isStarted = true;
+  }
 });

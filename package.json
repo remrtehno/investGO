@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "rimraf ./build && cross-env NODE_ENV=development node scripts/start-dev.js",
+    "devDebug": "cross-env DEBUG=express:* yarn dev",
     "prod": "cross-env NODE_ENV=production yarn run build && node build/bundle.js",
     "build": "rimraf ./build && yarn run build:client && yarn run build:server",
     "build:server": "webpack --config ./webpack/webpack.server.prod.config.js",
@@ -29,6 +30,7 @@
     "@types/lodash": "^4.14.165",
     "@types/react-dom": "^17.0.0",
     "@types/react-helmet": "^6.1.0",
+    "@types/react-router-dom": "^5.1.6",
     "@types/react-transition-group": "^4.4.0",
     "@types/webpack-dev-middleware": "^3.7.2",
     "babel-loader": "^8.2.1",
@@ -56,6 +58,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-hot-loader": "^4.13.0",
+    "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.1",
     "recoil": "^0.1.2",
     "rimraf": "^3.0.2",

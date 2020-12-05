@@ -39,7 +39,7 @@ export const SignForm: FC<SignForm.Props> = (props) => {
     setIsShowSmsForm(true);
   }, []);
 
-  const signFields = useMemo((): Form.FieldModels => {
+    const signFields = useMemo((): Form.FieldModels => {
     return {
       email: {
         type: FieldType.text,

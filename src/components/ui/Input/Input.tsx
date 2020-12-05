@@ -14,6 +14,7 @@ export declare namespace Input {
     error?: string | null,
     className?: string,
     name?: string | null,
+    isDisabled?: boolean,
   };
 }
 
@@ -31,11 +32,15 @@ export const Input: FC<Input.Props> = (props) => {
   }, [props.onChange, props.name]);
 
   const onFocus = useCallback(() => {
+    if (props.isDisabled) {
+      return;
+    }
+
     setIsFocused(true);
     if (controlRef.current) {
       controlRef.current.focus();
     }
-  }, []);
+  }, [props.isDisabled]);
 
   const onBlur: FocusEventHandler<HTMLInputElement> = useCallback((e) => {
     setIsFocused(false);
@@ -49,6 +54,7 @@ export const Input: FC<Input.Props> = (props) => {
       className={cx(s.input, props.className, {
         [s.withError]: props.error,
         [s.focused]: isFocused,
+        [s.disabled]: props.isDisabled
       })}
       onClick={onFocus}
     >
@@ -68,6 +74,7 @@ export const Input: FC<Input.Props> = (props) => {
         onChange={onChange}
         name={props.name || undefined}
         value={props.value || ''}
+        disabled={props.isDisabled}
       />
       { props.error ? (
         <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{props.error}</Text>

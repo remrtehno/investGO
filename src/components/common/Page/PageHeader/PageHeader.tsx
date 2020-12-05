@@ -4,8 +4,10 @@ import s from './PageHeader.scss';
 
 export const PageHeader: FC = () => {
   return (
-    <div className={s.PageHeader}>
-      <LogoIcon/>
+    <div className={s.pageHeader}>
+      <div className='container'>
+        <LogoIcon/>
+      </div>
     </div>
   )
 };

@@ -15,12 +15,14 @@ const baseConfig = {
         loader: 'babel-loader'
       }
     }, {
-      test: /\.(jpg|jpeg|png|gif|mp3)$/,
+      test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
       use: [
         {
           loader: 'file-loader',
           options: {
-            name: '[path][name]-[hash:8].[ext]'
+            name: '[name]-[hash:8].[ext]',
+            outputPath: '/public/img/',
+            publicPath: '/public/img'
           }
         }
       ]
@@ -58,19 +60,12 @@ const baseConfig = {
         'sass-loader'
       ],
     }, {
-      test: /\.svg/,
-      use: {
-        loader: 'svg-url-loader',
-        options: {
-          limit: 1000
-        }
-      }
-    }, {
       test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
       use: [{
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
+          publicPath: '/public'
         }
       }]
     }]
@@ -101,6 +96,7 @@ module.exports = [{
     path.resolve(basePath, 'src/index.tsx'),
   ],
   output: {
+    path: path.resolve(basePath, 'build'),
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
     publicPath: '/public',
@@ -118,6 +114,7 @@ module.exports = [{
   ],
   externals: [nodeExternals()],
   output: {
+    path: path.resolve(basePath, 'build'),
     filename: 'server.js',
     publicPath: '/public',
     libraryTarget: 'commonjs2'

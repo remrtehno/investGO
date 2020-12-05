@@ -38,7 +38,7 @@ export default ({ clientStats, hot }) => (req, res, next) => {
         // console.log('-========== Data loaded: ', data);
 
         const component = ReactDOMServer.renderToString(chunkExtractor.collectChunks(
-          <App />
+          <App url={req.url} />
         ));
 
         // Disable css embedding for Dev server

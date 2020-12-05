@@ -1,5 +1,13 @@
 .Text {
   &.size {
+    &_h2 {
+      font-family: "Open Sans";
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 26px;
+    }
+
     &_h3 {
       font-family: "Open Sans";
       font-style: normal;
@@ -44,6 +52,18 @@
 
     &_red {
       color: var(--red);
+    }
+
+    &_white {
+      color: var(--white);
+    }
+
+    &_black {
+      color: var(--black);
+    }
+
+    &_label {
+      color: var(--label);
     }
   }
 
