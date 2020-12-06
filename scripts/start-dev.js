@@ -26,10 +26,6 @@ const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name 
 
 let isStarted = false;
 
-app.get('/test', (req, res) => {
-  res.send('TEST');
-})
-console.log(process.cwd());
 app.use(express.static(path.resolve(process.cwd(), 'build')));
 
 app.use(cookieParser());

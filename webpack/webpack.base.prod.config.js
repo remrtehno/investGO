@@ -20,24 +20,17 @@ module.exports = {
                 }
             },
             {
-                test: /\.(jpg|jpeg|png|gif|mp3)$/,
+                test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[path][name]-[hash:8].[ext]'
+                            name: '[name]-[hash:8].[ext]',
+                            outputPath: '/img/',
+                            publicPath: '/public/img'
                         }
                     }
                 ]
-            },
-            {
-                test: /\.svg/,
-                use: {
-                    loader: 'svg-url-loader',
-                    options: {
-                        limit: 1000
-                    }
-                }
             },
             {
                 test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -45,6 +38,7 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
+                        publicPath: '/fonts',
                     }
                 }]
             },

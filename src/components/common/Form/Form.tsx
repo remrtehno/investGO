@@ -2,40 +2,22 @@ import React, {createContext, MutableRefObject, ReactNode, useContext, useEffect
 import _ from 'lodash';
 import {useLatestRef} from "../../../hooks/useLatestRef";
 import {useStateRef} from "../../../hooks/useStateRef";
+import {FormField, FormFieldModel} from "./types";
 
 export enum FieldType {
   text = 'text',
+  date = 'date',
+  number = 'number',
+  documentArray = 'documentArray',
 }
 
 export declare namespace Form {
-  export type TextFieldModel = {
-    type: FieldType.text,
-    label: string,
-  };
-
-  export type FieldModel = ({
-    name: string,
-    type: string,
-
-    isDisabled?: boolean,
-    isHidden?: boolean,
-    validations?: Array<(value: any, values: any) => string | null>,
-  }) & (
-    TextFieldModel
-  );
-
+  export type FieldModel = FormFieldModel;
+  export type Field = FormField;
   export type OnChange = (values: any, errors: Errors) => void
   export type Values = Record<string, any>;
   export type Errors<TValues extends Values = Values> = Partial<Record<keyof TValues, string>>;
   export type Fields = Record<string, Field>;
-
-  export type Field = FieldModel & {
-    value: any,
-    error: string | null,
-    isValid: boolean,
-    isDirty: boolean,
-    isChanged: boolean,
-  };
 
   export type FieldModels = Record<string, FieldModel>;
 

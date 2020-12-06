@@ -15,6 +15,7 @@ export declare namespace Input {
     className?: string,
     name?: string | null,
     isDisabled?: boolean,
+    regExp?: RegExp,
   };
 }
 
@@ -28,8 +29,14 @@ export const Input: FC<Input.Props> = (props) => {
   });
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    props.onChange(e.currentTarget.value, props.name || null);
-  }, [props.onChange, props.name]);
+    const { value } = e.currentTarget;
+
+    if (props.regExp && !props.regExp.test(value)) {
+      return;
+    }
+
+    props.onChange(value, props.name || null);
+  }, [props.onChange, props.name, props.regExp]);
 
   const onFocus = useCallback(() => {
     if (props.isDisabled) {

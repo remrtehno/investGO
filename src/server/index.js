@@ -26,14 +26,7 @@ if (envConfig.useCompression) {
 }
 
 // for temporary old landing
-app.use('/build/public', express.static(path.resolve(process.cwd(), 'build/public')));
-app.use('/images', express.static(path.resolve(process.cwd(), 'assets/image')));
-app.use('/documents', express.static(path.resolve(process.cwd(), 'assets/documents')));
-app.use('/manifest', express.static(path.resolve(process.cwd(), 'assets/manifest')));
-app.use('/manifest.json', express.static(path.resolve(process.cwd(), 'assets/manifest/manifest.json')));
-app.use('/intl', express.static(path.resolve(process.cwd(), 'assets/intl')));
-app.use('/sw.js', express.static(path.resolve(process.cwd(), 'build/public/sw.js')));
-app.use('/robots.txt', express.static(path.resolve(process.cwd(), 'robots.txt')));
+app.use('/public', express.static(path.resolve(process.cwd(), 'build/public')));
 
 if (process.env.APP_ENV === 'stage') {
     app.use('/storybook', express.static(path.resolve(process.cwd(), 'build/storybook')));

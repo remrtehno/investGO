@@ -4,9 +4,11 @@ import {useUserApi} from "src/hooks/useUser";
 import 'src/libs/bootstrap/bootstrap-grid.css';
 import 'src/libs/bootstrap/bootstrap-reboot.css';
 import 'src/theme/colors.css';
-import 'src/components/common/Form/fields/textField';
 import {StaticRouter, Route, BrowserRouter} from 'react-router-dom';
 import {routes} from "./routes";
+
+import 'src/components/common/Form/fields/textField';
+import 'src/components/common/Form/fields/numberField';
 
 const AppContent: FC = () => {
   const userApi = useUserApi();

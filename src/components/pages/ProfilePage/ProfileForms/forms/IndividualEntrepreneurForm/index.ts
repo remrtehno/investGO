@@ -1,0 +1,1 @@
+export {IndividualEntrepreneurForm} from './IndividualEntrepreneurForm';

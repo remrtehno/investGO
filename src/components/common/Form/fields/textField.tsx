@@ -1,15 +1,16 @@
 import React, {FC} from "react";
 import {Input} from "../../../ui/Input";
-import {FieldType, Form, useFormModel} from "../Form";
+import {FieldType, useFormModel} from "../Form";
+import {FormField} from "../types";
 import {FieldProps, fieldsModel} from "./fieldsModel";
 
-export const TextField: FC<FieldProps<Form.Field>> = (props) => {
+export declare namespace TextField {
+  export type Props = FieldProps<FormField.Text> & Pick<Input.Props, 'regExp'>;
+}
+
+export const TextField: FC<TextField.Props> = (props) => {
   const { field } = props;
   const form = useFormModel();
-
-  if (field.type !== FieldType.text) {
-    throw `TextField: "${field.type}" not supported`;
-  }
 
   return (
     <div>
@@ -20,6 +21,7 @@ export const TextField: FC<FieldProps<Form.Field>> = (props) => {
         error={field.isDirty ? field.error : null}
         onChange={form.onChange}
         isDisabled={field.isDisabled}
+        regExp={props.regExp}
       />
     </div>
   )
@@ -27,5 +29,15 @@ export const TextField: FC<FieldProps<Form.Field>> = (props) => {
 
 fieldsModel.register({
   type: FieldType.text,
+  component: TextField,
+});
+
+fieldsModel.register({
+  type: FieldType.date,
+  component: TextField,
+});
+
+fieldsModel.register({
+  type: FieldType.documentArray,
   component: TextField,
 });

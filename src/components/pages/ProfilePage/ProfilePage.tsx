@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, {FC, useMemo} from "react";
 import {Page} from "../../common/Page";
 import {ProfileForms} from "./ProfileForms";
@@ -5,7 +6,6 @@ import {ProfileHeader} from "./ProfileHeader";
 import {ProfileStep} from "./ProfileHeader/ProfileHeader";
 import {ProfileNavigation} from "./ProfileNavigation/ProfileNavigation";
 import s from './ProfilePage.scss';
-import cx from 'classnames';
 import {ProfileFormType} from "./profilePageTypes";
 
 export declare namespace ProfilePage {
@@ -24,7 +24,13 @@ export const ProfilePage: FC = () => {
       title: 'Профиль'
     }, {
       id: ProfileFormType.passport,
-      title: 'Пасспорт'
+      title: 'Паспорт'
+    }, {
+      id: ProfileFormType.individualEntrepreneur,
+      title: 'ИП'
+    }, {
+      id: ProfileFormType.requisitions,
+      title: 'Реквизиты'
     }];
   }, []);
 
