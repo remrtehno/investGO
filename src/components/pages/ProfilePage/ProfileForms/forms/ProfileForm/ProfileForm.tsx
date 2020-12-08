@@ -45,7 +45,7 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
   }, [fields]);
 
   return (
-    <div className='container'>
+    <div ref={props.formRef} className='container'>
       <div className='row'>
         <div className='col-12'>
           <FormTitle>{props.form.title}</FormTitle>

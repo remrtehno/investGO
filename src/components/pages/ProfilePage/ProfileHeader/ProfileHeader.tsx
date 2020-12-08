@@ -1,4 +1,4 @@
-import React, {FC, Fragment} from "react";
+import React, {FC} from "react";
 import {Color} from "../../../../types/Color";
 import {Text, TextSize} from "../../../ui/Text";
 import s from './ProfileHeader.scss';
@@ -41,14 +41,12 @@ export const ProfileHeader: FC<ProfileHeader.Props> = (props) => {
       <div className={s.steps}>
         {steps.map((step, index) => {
           return (
-            <Fragment>
-              <Text
-                size={TextSize.body1}
-                color={props.activeStep === step.id ? Color.white : Color.gray4}
-                className={s.step}
-                key={step.id}
-              >{step.label}</Text>
-            </Fragment>
+            <Text
+              size={TextSize.body1}
+              color={props.activeStep === step.id ? Color.white : Color.gray4}
+              className={s.step}
+              key={step.id}
+            >{step.label}</Text>
           )
         })}
       </div>

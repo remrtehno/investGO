@@ -30,7 +30,8 @@ export const RequisitionsForm: FC<RequisitionsForm.Props> = (props) => {
       accountNumber: {
         name: 'accountNumber',
         type: FieldType.number,
-        label: 'Номер счета'
+        label: 'Номер счета',
+        isInteger: true,
       },
       ownerFio: {
         name: 'ownerFio',
@@ -40,22 +41,26 @@ export const RequisitionsForm: FC<RequisitionsForm.Props> = (props) => {
       bik: {
         name: 'bik',
         type: FieldType.number,
-        label: 'БИК'
+        label: 'БИК',
+        isInteger: true,
       },
       corrNumber: {
         name: 'corrNumber',
         type: FieldType.number,
-        label: 'Корр. счет'
+        label: 'Корр. счет',
+        isInteger: true,
       },
       inn: {
         name: 'inn',
         type: FieldType.number,
-        label: 'ИНН'
+        label: 'ИНН',
+        isInteger: true,
       },
       kpp: {
         name: 'kpp',
         type: FieldType.number,
-        label: 'КПП'
+        label: 'КПП',
+        isInteger: true,
       }
     };
   }, []);
@@ -65,7 +70,7 @@ export const RequisitionsForm: FC<RequisitionsForm.Props> = (props) => {
   }, [fields]);
 
   return (
-    <div className={cx(s.RequisitionsForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.RequisitionsForm, 'container')}>
       <Form
         initialValues={initialValues}
         errors={errors}

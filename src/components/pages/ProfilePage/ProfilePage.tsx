@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, {FC, useMemo} from "react";
+import React, {FC, useMemo, useState} from "react";
 import {Page} from "../../common/Page";
 import {ProfileForms} from "./ProfileForms";
 import {ProfileHeader} from "./ProfileHeader";
@@ -17,6 +17,7 @@ export declare namespace ProfilePage {
 
 export const ProfilePage: FC = () => {
   const step = ProfileStep.profile;
+  const [currentForm, setCurrentForm] = useState(ProfileFormType.profile);
 
   const forms = useMemo((): ProfilePage.FormInfo[] => {
     return [{
@@ -39,8 +40,20 @@ export const ProfilePage: FC = () => {
       <div className={s.profilePage}>
         <ProfileHeader activeStep={step}/>
         <div className={cx(s.content, 'container')}>
-          <ProfileNavigation forms={forms} activeForm={ProfileFormType.profile}/>
-          <ProfileForms forms={forms}/>
+          <div className='row'>
+            <ProfileNavigation
+              className='col-2'
+              forms={forms}
+              currentForm={currentForm}
+              onChangeCurrentForm={setCurrentForm}
+            />
+            <ProfileForms
+              onChangeCurrentForm={setCurrentForm}
+              currentForm={currentForm}
+              className='col-8'
+              forms={forms}
+            />
+          </div>
         </div>
       </div>
     </Page>

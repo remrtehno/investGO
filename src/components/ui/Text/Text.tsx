@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {Color} from "../../../types/Color";
 import s from './Text.scss';
 import cx from 'classnames';
+import _ from 'lodash';
 
 export enum TextSize {
   h2 = 'h2',
@@ -13,7 +14,7 @@ export enum TextSize {
 }
 
 export declare namespace Text {
-  export type Props = {
+  export type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
     size: TextSize,
 
     color?: Color | null,
@@ -29,7 +30,7 @@ export const Text: FC<Text.Props> = (props) => {
   }, props.className);
 
   return (
-    <div className={className}>
+    <div {..._.omit(props, 'size', 'color', 'isBold', 'className')} className={className}>
       {props.children}
     </div>
   )

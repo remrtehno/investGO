@@ -25,12 +25,13 @@ export const IndividualEntrepreneurForm: FC<IndividualEntrepreneurForm.Props> = 
       ogrnip: {
         name: 'ogrnip',
         type: FieldType.number,
-        label: 'ОГРНИП'
+        label: 'ОГРНИП',
+        isInteger: true,
       },
       ogrnipDate: {
         name: 'ogrnipDate',
         type: FieldType.text,
-        label: 'Дата приссвоения ОГРНИП'
+        label: 'Дата приссвоения ОГРНИП',
       },
       documents: {
         name: 'documents',
@@ -44,7 +45,7 @@ export const IndividualEntrepreneurForm: FC<IndividualEntrepreneurForm.Props> = 
   }, [fields]);
 
   return (
-    <div className={cx(s.IndividualEntrepreneurForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.IndividualEntrepreneurForm, 'container')}>
       <Form
         initialValues={initialValues}
         fields={fields}

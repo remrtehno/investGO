@@ -10,6 +10,7 @@ import {maxLength} from "../../../../../common/Form/validations/maxLength";
 import {minLength} from "../../../../../common/Form/validations/minLength";
 import {required} from "../../../../../common/Form/validations/required";
 import {Button, ButtonSize, ButtonTheme} from "../../../../../ui/Button/Button";
+import {Text, TextSize} from "../../../../../ui/Text";
 import {ProfileForms} from "../../ProfileForms";
 import s from './PassportForm.scss';
 import _ from 'lodash';
@@ -107,7 +108,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   }, []);
 
   return (
-    <div className={cx(s.PassportForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.PassportForm, 'container')}>
       <Form
         initialValues={initialValues}
         fields={fields}
@@ -122,8 +123,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         </FormRow>
         <FormRow>
           <Field className='col-6' name='number'/>
-          <Field className='col-4' name='serial'/>
-          <Field className='col-2' name='date_of_issue'/>
+          <Field className='col-3' name='serial'/>
+          <Field className='col-3' name='date_of_issue'/>
         </FormRow>
         <FormRow>
           <Field className='col-12' name='authority'/>
@@ -139,7 +140,18 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           <Field className='col-6' name='inn'/>
         </FormRow>
         <FormRow>
-          <Field className='col-12' name='documents'/>
+          <div className='col-12'>
+            <div className={s.documentsTitme}>
+              <Text size={TextSize.subHeadline1}>
+                Загрузите документы
+              </Text>
+              <div>
+                — Копию документа, удостоверяющего личность физического лица (лицевая сторона, а также страница с адресом
+                регистрации по месту жительства).
+              </div>
+            </div>
+            <Field name='documents'/>
+          </div>
         </FormRow>
         <FormActions>
           <div className='col-3'>
