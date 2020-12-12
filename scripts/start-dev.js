@@ -8,7 +8,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const webpack = require('webpack');
 const [clientConfig, serverConfig] = require('../webpack/webpackDevConfig');
-const proxy = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -30,15 +30,12 @@ app.use(express.static(path.resolve(process.cwd(), 'build')));
 
 app.use(cookieParser());
 
-// app.use(
-//     envConfig.api.base,
-//     proxy({
-//       target: envConfig.api.proxy,
-//       changeOrigin: true,
-//       logLevel: 'debug',
-//       cookieDomainRewrite: '',
-//     })
-// );
+app.use('/api', createProxyMiddleware({
+  target: 'https://testing.investgo.ru',
+  changeOrigin: true,
+  logLevel: 'debug',
+  cookieDomainRewrite: '',
+}));
 
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(

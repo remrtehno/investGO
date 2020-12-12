@@ -38,6 +38,6 @@ fieldsModel.register({
 });
 
 fieldsModel.register({
-  type: FieldType.documentArray,
+  type: FieldType.fileArray,
   component: TextField,
 });

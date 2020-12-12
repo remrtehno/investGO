@@ -1,4 +1,9 @@
-import React, {FC, useCallback, useMemo, useState} from 'react';
+import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
+import {useRecoilValue} from "recoil";
+import {useGetPassport} from "../../../../../../api/passportApi/useGetPassport";
+import {useSavePassport} from "../../../../../../api/passportApi/useSavePassport";
+import {userState} from "../../../../../../recoil/userState";
+import {User} from "../../../../../../types/User";
 import {Form} from "../../../../../common/Form";
 import {Field} from "../../../../../common/Form/Field";
 import {FieldType} from "../../../../../common/Form/Form";
@@ -20,8 +25,8 @@ export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
 }
 
-export const PassportForm: FC<PassportForm.Props> = (props) => {
-  const fields = useMemo((): Form.FieldModels => {
+const useFields = () => {
+  return useMemo((): Form.FieldModels => {
     return {
       fio: {
         name: 'fio',
@@ -35,19 +40,19 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         label: 'Дата рождения',
         validations: [required()],
       },
-      number: {
-        name: 'number',
+      serial: {
+        name: 'subdivision_code',
         type: FieldType.number,
         label: 'Серия / номер паспорта',
         isInteger: true,
         validations: [required(), minLength(10), maxLength(10)],
       },
-      serial: {
+      subdivision_code: {
         name: 'serial',
         type: FieldType.number,
         label: 'Код подразделения',
         isInteger: true,
-        validations: [required(), minLength(10), maxLength(6)],
+        validations: [required(), minLength(6), maxLength(6)],
       },
       date_of_issue: {
         name: 'date_of_issue',
@@ -87,25 +92,54 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         isInteger: true,
         validations: [required(), minLength(10), maxLength(10)],
       },
-      documents: {
-        name: 'documents',
-        type: FieldType.documentArray,
+      personal_data_documents: {
+        name: 'personal_data_documents',
+        type: FieldType.fileArray,
         validations: [required()],
       }
     };
   }, []);
+};
 
-  const initialValues = useMemo(() => {
-    return getDefaultFieldValues(fields);
-  }, [fields]);
+export const PassportForm: FC<PassportForm.Props> = (props) => {
+  const [, getPassport] = useGetPassport();
+  const [, savePassport] = useSavePassport();
+  const { user } = useRecoilValue(userState);
+  const fields = useFields();
+
+  useEffect(() => {
+    if (user && !user.passport) {
+      getPassport();
+    }
+  }, []);
+
+  const getValuesFromPassport = () => {
+    return {"fio":"аыаыв","date_of_birth":"20.04.1991","number":"2343434344","serial":"324323","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]};
+    return {
+      ...getDefaultFieldValues(fields),
+      ...(user && user.passport ? user.passport : {})
+    } as User.Passport;
+  };
+
+  const initialValues = useMemo(() => getValuesFromPassport(), [fields]);
 
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (user && user.passport && !_.isEqual(user.passport, values)) {
+      setValues(getValuesFromPassport());
+    }
+  }, [user && user.passport])
 
   const onChange: Form.OnChange = useCallback((values, errors) => {
     setValues(values);
     setErrors(errors);
   }, []);
+
+  const onSave = useCallback(() => {
+    savePassport(values);
+  }, [values, savePassport]);
 
   return (
     <div ref={props.formRef} className={cx(s.PassportForm, 'container')}>
@@ -122,8 +156,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           <Field className='col-6' name='date_of_birth'/>
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='number'/>
-          <Field className='col-3' name='serial'/>
+          <Field className='col-6' name='serial'/>
+          <Field className='col-3' name='subdivision_code'/>
           <Field className='col-3' name='date_of_issue'/>
         </FormRow>
         <FormRow>
@@ -158,7 +192,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}
-              onClick={_.noop}
+              disabled={false && _.isEmpty(errors)}
+              onClick={onSave}
             >Продолжить</Button>
           </div>
         </FormActions>

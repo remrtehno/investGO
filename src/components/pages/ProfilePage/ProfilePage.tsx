@@ -1,12 +1,15 @@
 import cx from 'classnames';
-import React, {FC, useMemo, useState} from "react";
+import React, {useMemo, useState} from "react";
+import {useClaims} from "../../../hooks/useClaim";
 import {Page} from "../../common/Page";
+import {withAuth} from "../../hocs/withAuth";
 import {ProfileForms} from "./ProfileForms";
 import {ProfileHeader} from "./ProfileHeader";
 import {ProfileStep} from "./ProfileHeader/ProfileHeader";
 import {ProfileNavigation} from "./ProfileNavigation/ProfileNavigation";
 import s from './ProfilePage.scss';
 import {ProfileFormType} from "./profilePageTypes";
+import _ from 'lodash';
 
 export declare namespace ProfilePage {
   export type FormInfo = {
@@ -15,24 +18,30 @@ export declare namespace ProfilePage {
   }
 }
 
-export const ProfilePage: FC = () => {
+export const ProfilePage = withAuth(() => {
   const step = ProfileStep.profile;
   const [currentForm, setCurrentForm] = useState(ProfileFormType.profile);
+  const claims = useClaims();
 
   const forms = useMemo((): ProfilePage.FormInfo[] => {
-    return [{
-      id: ProfileFormType.profile,
-      title: 'Профиль'
-    }, {
-      id: ProfileFormType.passport,
-      title: 'Паспорт'
-    }, {
-      id: ProfileFormType.individualEntrepreneur,
-      title: 'ИП'
-    }, {
-      id: ProfileFormType.requisitions,
-      title: 'Реквизиты'
-    }];
+    return _.compact([
+      {
+        id: ProfileFormType.profile,
+        title: 'Профиль'
+      },
+      {
+        id: ProfileFormType.passport,
+        title: 'Паспорт'
+      },
+      claims.individualEntrepreneurForm.read() ? {
+        id: ProfileFormType.individualEntrepreneur,
+        title: 'ИП'
+      } : null,
+      claims.requisitionsForm.read() ? {
+        id: ProfileFormType.requisitions,
+        title: 'Реквизиты'
+      } : null,
+    ]);
   }, []);
 
   return (
@@ -58,4 +67,4 @@ export const ProfilePage: FC = () => {
       </div>
     </Page>
   )
-};
+});

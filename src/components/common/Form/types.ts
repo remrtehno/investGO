@@ -26,8 +26,8 @@ export declare namespace FormFieldModel {
     isInteger: boolean,
   };
 
-  export type DocumentArray = BaseFieldModel & {
-    type: FieldType.documentArray,
+  export type FileArray = BaseFieldModel & {
+    type: FieldType.fileArray,
   }
 }
 
@@ -35,7 +35,7 @@ export type FormFieldModel =
   FormFieldModel.Text |
   FormFieldModel.Date |
   FormFieldModel.Number |
-  FormFieldModel.DocumentArray;
+  FormFieldModel.FileArray;
 
 export declare namespace FormField {
   type BaseField = {
@@ -49,11 +49,11 @@ export declare namespace FormField {
   export type Text = BaseField & FormFieldModel.Text;
   export type Date = BaseField & FormFieldModel.Date;
   export type Number = BaseField & FormFieldModel.Number;
-  export type DocumentArray = BaseField & FormFieldModel.DocumentArray;
+  export type FileArray = BaseField & FormFieldModel.FileArray;
 }
 
 export type FormField =
   FormField.Text |
   FormField.Date |
   FormField.Number |
-  FormField.DocumentArray;
+  FormField.FileArray;

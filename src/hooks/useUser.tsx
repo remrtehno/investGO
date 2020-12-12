@@ -9,8 +9,8 @@ export declare namespace useUserApi {
 }
 
 export function useUserApi(): useUserApi.Api {
-  const [, getUserApi] = useGetUserApi();
-  const [, signApi] = useSignInApi();
+  const getUserApi = useGetUserApi();
+  const signApi = useSignInApi();
 
   return {
     sign: signApi,

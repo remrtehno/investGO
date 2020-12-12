@@ -1,5 +1,6 @@
 import {FC} from "react";
 import {RouteProps} from "react-router";
+import {RegisterPage} from "../../pages/RegisterPage";
 import {SignPage} from "../../pages/SignPage";
 import {ProfilePage} from "../../pages/ProfilePage";
 
@@ -14,6 +15,10 @@ export const routes: RouteInfo[] = [{
 }, {
   path: '/profile',
   Component: ProfilePage,
+  exact: true,
+}, {
+  path: '/registration',
+  Component: RegisterPage,
   exact: true,
 }, {
   path: '/',

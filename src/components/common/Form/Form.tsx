@@ -8,7 +8,7 @@ export enum FieldType {
   text = 'text',
   date = 'date',
   number = 'number',
-  documentArray = 'documentArray',
+  fileArray = 'fileArray',
 }
 
 export declare namespace Form {

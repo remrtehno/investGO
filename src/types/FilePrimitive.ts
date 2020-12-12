@@ -1,3 +1,7 @@
 export type FilePrimitive = {
-  path: string
+  id: string,
+  original_name: string,
+  size: number,
+  url: string,
+  user_id: string
 }

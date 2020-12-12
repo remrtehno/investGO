@@ -3,6 +3,7 @@ import {api} from "../../contstants/api";
 import useApi from "../../hooks/useApi";
 import useApiRequest from "../../hooks/useApiRequest";
 import {userState} from "../../recoil/userState";
+import {RequestStatus} from "../../types/common";
 import {User} from "../../types/User";
 
 export declare namespace useSignInApi {
@@ -24,7 +25,11 @@ export const useSignInApi = () => {
       preventNotifyOn400: true,
     });
 
-    setUser(user);
+    setUser({
+      user,
+      status: RequestStatus.loading,
+      error: null,
+    });
     return null;
 
   }, null);

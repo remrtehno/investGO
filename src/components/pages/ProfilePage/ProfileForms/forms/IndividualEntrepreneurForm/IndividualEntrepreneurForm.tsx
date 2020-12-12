@@ -35,7 +35,7 @@ export const IndividualEntrepreneurForm: FC<IndividualEntrepreneurForm.Props> = 
       },
       documents: {
         name: 'documents',
-        type: FieldType.documentArray
+        type: FieldType.fileArray
       }
     }
   }, []);

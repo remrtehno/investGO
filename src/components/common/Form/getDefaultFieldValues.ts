@@ -5,7 +5,7 @@ function getDefaultFieldValue(field: Form.FieldModel) {
   switch (field.type) {
     case FieldType.text: return '';
     case FieldType.number: return null;
-    case FieldType.documentArray: return [];
+    case FieldType.fileArray: return [];
     case FieldType.date: return '';
     default: return null;
   }

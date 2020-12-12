@@ -1,20 +1,37 @@
-import useReduxFormApi from "#/hooks/useReduxFormApi";
-import useApiRequest from "#/hooks/useApiRequest";
+import {useSetRecoilState} from "recoil";
+import {api} from "../../contstants/api";
+import useApi from "../../hooks/useApi";
+import useApiRequest from "../../hooks/useApiRequest";
+import {userState} from "../../recoil/userState";
+import {RequestStatus} from "../../types/common";
+import {User} from "../../types/User";
 
-export type SignUpPayload = {
-    email: string,
-    password: string,
+export declare namespace useSignUpApi {
+    export type Payload = {
+        email: string,
+        password: string,
+    }
 }
 
-export const useSignUpApi = (formName: string) => {
+export const useSignUpApi = () => {
     const request = useApiRequest();
+    const setUser = useSetRecoilState(userState);
 
-    return useReduxFormApi<SignUpPayload, null>(formName, async (payload) => {
-        await request('/user/signup', {
+    return useApi<useSignUpApi.Payload, null>(async (payload) => {
+        const user = await request<User | null>(api.user.signUp(), {
             method: 'POST',
-            body: payload,
+            body: JSON.stringify(payload),
+            showNotifyOnError: false,
             preventNotifyOn400: true,
         });
+
+        setUser({
+            user,
+            status: RequestStatus.loading,
+            error: null,
+        });
         return null;
-    });
+
+    }, null);
 };
+
