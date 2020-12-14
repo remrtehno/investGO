@@ -1,4 +1,6 @@
 import React, {FC, useMemo} from 'react';
+import {useRecoilValue} from "recoil";
+import {userState} from "../../../../../../recoil/userState";
 import {Form} from "../../../../../common/Form";
 import {Field} from "../../../../../common/Form/Field";
 import {FieldType} from "../../../../../common/Form/Form";
@@ -8,21 +10,15 @@ import {getDefaultFieldValues} from "../../../../../common/Form/getDefaultFieldV
 import {ProfileForms} from "../../ProfileForms";
 import {FormTitle} from "../../../../../common/Form/FormTitle";
 
-const values: ProfileForm.Values = {
-  email: 'EgorKluch@gmail.com',
-  phone: '89166666666',
-};
-
 const errors = {};
 
 export declare namespace ProfileForm {
-  export type Values = {
-    email: string,
-    phone: string,
-  }
+
 }
 
 export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
+  const { user } = useRecoilValue(userState);
+
   const fields = useMemo((): Form.FieldModels => {
     return {
       email: {
@@ -41,8 +37,11 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
   }, []);
 
   const initialValues = useMemo(() => {
-    return getDefaultFieldValues(fields);
-  }, [fields]);
+    return {
+      ...getDefaultFieldValues(fields),
+      ...(user ? { email: user.email, phone: '89166613613' } : {})
+    };
+  }, [fields, user]);
 
   return (
     <div ref={props.formRef} className='container'>
@@ -52,7 +51,7 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
         </div>
       </div>
       <Form
-        values={values}
+        values={initialValues}
         errors={errors}
         initialValues={initialValues}
         fields={fields}

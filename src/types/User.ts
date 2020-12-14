@@ -24,4 +24,5 @@ export type User = {
   login: string,
   roles: User.Role[],
   passport: User.Passport | null,
+  email: string,
 }

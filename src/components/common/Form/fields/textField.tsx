@@ -36,8 +36,3 @@ fieldsModel.register({
   type: FieldType.date,
   component: TextField,
 });
-
-fieldsModel.register({
-  type: FieldType.fileArray,
-  component: TextField,
-});

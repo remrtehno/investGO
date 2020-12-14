@@ -16,6 +16,11 @@
     color: var(--white);
   }
 
+  &.theme_light {
+    background-color: var(--gray2);
+    border: none;
+  }
+
   &.disabled {
     color: var(--gray4);
   }

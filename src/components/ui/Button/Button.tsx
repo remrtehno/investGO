@@ -10,7 +10,8 @@ export enum ButtonSize {
 export enum ButtonTheme {
   black = 'black',
   red = 'red',
-  white = 'white'
+  white = 'white',
+  light = 'light',
 }
 
 export declare namespace Button {

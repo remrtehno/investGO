@@ -7,5 +7,8 @@ export const api = {
   passport: {
     get: () => '/passport',
     save: () => '/passport',
+  },
+  common: {
+    uploadFile: () => '/file/upload',
   }
 };

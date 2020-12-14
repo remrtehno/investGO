@@ -64,7 +64,7 @@ const useFields = () => {
         name: 'authority',
         type: FieldType.text,
         label: 'Кем выдан',
-        validations: [required()],
+        validations: [required(), minLength(6)],
       },
       place_of_register: {
         name: 'place_of_register',
@@ -90,7 +90,7 @@ const useFields = () => {
         type: FieldType.number,
         label: 'ИНН (при наличии)',
         isInteger: true,
-        validations: [required(), minLength(10), maxLength(10)],
+        validations: [required(), minLength(12), maxLength(12)],
       },
       personal_data_documents: {
         name: 'personal_data_documents',
@@ -111,10 +111,10 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
     if (user && !user.passport) {
       getPassport();
     }
-  }, []);
+  }, [user]);
 
   const getValuesFromPassport = () => {
-    return {"fio":"аыаыв","date_of_birth":"20.04.1991","number":"2343434344","serial":"324323","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]};
+    // return {"fio":"аыаыв","date_of_birth":"20.04.1991","number":"2343434344","serial":"324323","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]};
     return {
       ...getDefaultFieldValues(fields),
       ...(user && user.passport ? user.passport : {})
@@ -184,7 +184,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
                 регистрации по месту жительства).
               </div>
             </div>
-            <Field name='documents'/>
+            <Field name='personal_data_documents'/>
           </div>
         </FormRow>
         <FormActions>

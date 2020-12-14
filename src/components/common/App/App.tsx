@@ -9,6 +9,7 @@ import {routes} from "./routes";
 
 import 'src/components/common/Form/fields/textField';
 import 'src/components/common/Form/fields/numberField';
+import 'src/components/common/Form/fields/fileArrayField';
 
 const AppContent: FC = () => {
   const userApi = useUserApi();

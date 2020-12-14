@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import {Color} from "../../../types/Color";
+import {DivProps} from "../../../types/common";
 import s from './Text.scss';
 import cx from 'classnames';
 import _ from 'lodash';
@@ -14,7 +15,7 @@ export enum TextSize {
 }
 
 export declare namespace Text {
-  export type Props = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+  export type Props = Omit<DivProps, 'color'> & {
     size: TextSize,
 
     color?: Color | null,
