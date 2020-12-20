@@ -10,6 +10,7 @@ export declare namespace useSignUpApi {
     export type Payload = {
         email: string,
         password: string,
+        phone: string,
     }
 }
 

@@ -5,7 +5,7 @@ export declare namespace FormFieldModel {
     name: string,
     type: string,
 
-    isDisabled?: boolean,
+    disabled?: boolean,
     isHidden?: boolean,
     validations?: Array<(value: any, values: any) => string | null>,
   }
@@ -29,13 +29,19 @@ export declare namespace FormFieldModel {
   export type FileArray = BaseFieldModel & {
     type: FieldType.fileArray,
   }
+
+  export type Password = BaseFieldModel & {
+    type: FieldType.password,
+    label: string,
+  }
 }
 
 export type FormFieldModel =
   FormFieldModel.Text |
   FormFieldModel.Date |
   FormFieldModel.Number |
-  FormFieldModel.FileArray;
+  FormFieldModel.FileArray |
+  FormFieldModel.Password;
 
 export declare namespace FormField {
   type BaseField = {

@@ -27,7 +27,7 @@ export const useGetUserApi = () => {
       });
     } catch (err) {
       const error = _.get(err, '0', null);
-      if (error && error.code === 'access') {
+      if (error && error.message === 'forbidden') {
         setUser({
           user,
           status: RequestStatus.failed,

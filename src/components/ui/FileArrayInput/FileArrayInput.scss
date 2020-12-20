@@ -1,3 +1,7 @@
+.FileArrayInput {
+  padding: 0;
+}
+
 .addButtonContainer {
   width: 224px;
   margin-top: 32px;
@@ -9,11 +13,18 @@
 
 .file {
   margin-top: 32px;
-  width: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.fileLabel {
+  white-space: nowrap;
 }
 
 .fileIcon {
   margin-right: 18px;
+  min-width: 40px;
 }
 
 .files {

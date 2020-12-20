@@ -1,12 +1,13 @@
+import cx from 'classnames';
 import React, {CSSProperties, FC, useMemo, useRef} from "react";
 import {usePageScroll} from "../../../../hooks/usePageScroll";
 import {usePosition} from "../../../../hooks/usePosition";
 import {Color} from "../../../../types/Color";
 import {Text, TextSize} from "../../../ui/Text";
+import {TextWeight} from "../../../ui/Text/Text";
 import {ProfilePage} from "../ProfilePage";
 import {ProfileFormType} from "../profilePageTypes";
 import s from './ProfileNavigation.scss';
-import cx from 'classnames';
 
 export declare namespace ProfileNavigation {
   export type Props = {
@@ -45,7 +46,7 @@ export const ProfileNavigation: FC<ProfileNavigation.Props> = (props) => {
           const isActive = props.currentForm === form.id;
           return (
             <Text
-              isBold={isActive}
+              weight={isActive ? TextWeight.bold : TextWeight.normal}
               size={TextSize.body1}
               color={isActive ? Color.black : Color.label}
               key={form.id}

@@ -2,8 +2,16 @@ import {FC, useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 
 export const ModalPortal: FC = (props) => {
-  const elRef = useRef<HTMLDivElement | null>(typeof document !== 'undefined' ? document.createElement('div') : null);
-  const rootRef = useRef<HTMLElement | null>(typeof document !== 'undefined' ? document.getElementById('modal-root') : null);
+  const elRef = useRef<HTMLDivElement | null>(
+    typeof document !== 'undefined' ? document.createElement('div')
+      : null
+  );
+
+  const rootRef = useRef<HTMLElement | null>(
+    typeof document !== 'undefined'
+      ? document.getElementById('modal-root')
+      : null
+  );
 
   useEffect(() => {
     if (!rootRef.current || !elRef.current) {

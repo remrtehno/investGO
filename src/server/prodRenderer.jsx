@@ -116,7 +116,6 @@ export default ({ clientStats, hot }) => (req, res, next) => {
                     </head>
                     <body>
                         <section class="hero is-fullheight" id="app">${component}</section>
-                        <div id="modal-root"></div>
 
                         <script>window.__INITIAL__DATA__ = ${JSON.stringify(initialState)}</script>
                         ${scriptTags}

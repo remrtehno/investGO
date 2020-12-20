@@ -38,10 +38,16 @@
     }
 
     &_subHeadline1 {
-      font-family: Open Sans;
+      font-family: "Open Sans";
       font-weight: 600;
       font-size: 18px;
       line-height: 28px;
+    }
+
+    &_tabMenu {
+      font-family: "Open Sans";
+      font-size: 13px;
+      line-height: 18px;
     }
   }
 
@@ -68,6 +74,6 @@
   }
 
   &.bold {
-    font-weight: bold;
+    font-weight: 600;
   }
 }

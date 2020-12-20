@@ -18,7 +18,7 @@ export const FileArrayField: FC<FileArrayField.Props> = (props) => {
       files={field.value}
       name={field.name}
       onChange={form.onChange}
-      disabled={field.isDisabled}
+      disabled={field.disabled}
     />
   )
 };

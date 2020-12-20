@@ -1,7 +1,9 @@
 import cx from "classnames";
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useUserCheckExists} from "../../../../api/userApi/useUserCheckExists";
 import {useSignInApi} from "../../../../api/userApi/useSignInApi";
 import {useSignUpApi} from "../../../../api/userApi/useSignUpApi";
+import {useLatestRef} from "../../../../hooks/useLatestRef";
 import {Form} from "../../../common/Form";
 import {Field} from "../../../common/Form/Field";
 import {FieldType} from "../../../common/Form/Form";
@@ -21,7 +23,6 @@ export declare namespace SignForm {
   }
 
   export type Props = {
-    isEmailExists: boolean,
   };
 }
 
@@ -32,14 +33,15 @@ const initialValues: SignForm.SignValues = {
 };
 
 export const SignForm: FC<SignForm.Props> = (props) => {
-  const [, signIn, signInError] = useSignInApi();
-  const [, signUp, signUpError] = useSignUpApi();
+  const [, signInApi, signInState] = useSignInApi();
+  const [, signUpApi, signUpState] = useSignUpApi();
+  const [isUserExists, checkUserExistsApi, checkUserExistsState] = useUserCheckExists();
   const [values, setValues] = useState<SignForm.SignValues>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
   const formApiRef = useRef<Form.Api | null>(null);
   const [isNeedShowPhone, setIsNeedShowPhone] = useState(false);
   const [isShowSmsForm, setIsShowSmsForm] = useState(false);
-  const isRegister = false;
+  const emailRef = useLatestRef(values.email);
   
   const signFields = useMemo((): Form.FieldModels => {
     return {
@@ -47,13 +49,15 @@ export const SignForm: FC<SignForm.Props> = (props) => {
         type: FieldType.text,
         name: 'email',
         validations: [required(), email()],
-        label: 'Введите свой email'
+        label: 'Введите свой email',
+        disabled: isNeedShowPhone,
       },
       password: {
-        type: FieldType.text,
+        type: FieldType.password,
         name: 'password',
         validations: [required()],
         label: 'Введите пароль',
+        disabled: isNeedShowPhone,
       },
       phone: {
         type: FieldType.text,
@@ -73,42 +77,54 @@ export const SignForm: FC<SignForm.Props> = (props) => {
   function renderTitle() {
     return (
       <Text className={s.title} size={TextSize.h3}>
-        <span className={cx(props.isEmailExists ? s.selected : null)}>Вход</span>
+        <span className={cx(isUserExists ? s.selected : null)}>Вход</span>
         {' '}или{' '}
-        <span className={cx(props.isEmailExists ? null : s.selected)}>регистрация</span>
+        <span className={cx(isUserExists ? null : s.selected)}>регистрация</span>
       </Text>
     )
   }
 
-  const onSave = useCallback(() => {
-    if (isRegister) {
-      signUp({
-        email: values.email,
-        password: values.password,
-      });
-    } else {
-      signIn({
-        email: values.email,
-        password: values.password,
-      });
-    }
-  }, [values]);
+  const checkEmail = useMemo(() => {
+    return _.debounce(() => {
+      checkUserExistsApi({ email: emailRef.current });
+    }, 300);
+  }, []);
 
   useEffect(() => {
-    const error = isRegister ? signUpError : signInError;
-    if (_.get(error, 'error[0].message') === "incorrect_password") {
+    if (!errors.email && values.email) {
+      checkEmail();
+    } else {
+      checkUserExistsState.resetValue();
+    }
+  }, [values.email, errors.email]);
+
+  useEffect(() => {
+    const error = isUserExists ? signUpState.error : signInState.error;
+    if (_.get(error, '[0].message') === "incorrect_password") {
       setErrors({...errors, password: 'Неверный пароль'});
     }
-  }, [signInError, signUpError, isRegister]);
+  }, [signInState.error, signUpState.error, isUserExists]);
+
+  const signUp = useCallback(() => {
+    signUpApi(values);
+  }, [values]);
 
   const onContinue = useCallback(() => {
+    if (isUserExists) {
+      signInApi({
+        email: values.email,
+        password: values.password,
+      });
+      return;
+    }
+
     if (!isNeedShowPhone) {
       setIsNeedShowPhone(true);
       return;
     }
 
     setIsShowSmsForm(true);
-  }, [isNeedShowPhone]);
+  }, [isNeedShowPhone, isUserExists, values]);
 
   return (
     <Form
@@ -128,12 +144,12 @@ export const SignForm: FC<SignForm.Props> = (props) => {
         size={ButtonSize.m}
         theme={ButtonTheme.black}
         disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
-        onClick={onSave}
+        onClick={onContinue}
       >
         Продолжить
       </Button>
       {isShowSmsForm ? (
-        <SmsForm/>
+        <SmsForm onConfirm={signUp} phone={values.phone}/>
       ) : null}
     </Form>
   )

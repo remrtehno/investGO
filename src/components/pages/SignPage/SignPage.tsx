@@ -10,7 +10,7 @@ export const SignPage: FC = () => {
       <div className='container'>
         <div className={cx(s.formContainer, 'row justify-content-center align-items-center')}>
           <div className='col-4'>
-            <SignForm isEmailExists={true}/>
+            <SignForm/>
           </div>
         </div>
       </div>

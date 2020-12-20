@@ -2,6 +2,7 @@ import cx from 'classnames';
 import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState} from "react";
 import {Color} from "../../../types/Color";
 import {useOnClickOutside} from "../../../hooks/useOnClickOutside";
+import {DivProps} from "../../../types/common";
 import {Text, TextSize} from "../Text";
 import s from './Input.scss';
 
@@ -9,13 +10,15 @@ export declare namespace Input {
   export type Props = {
     value: string,
     label: string,
-    onChange(value: string, name: string | null): void,
+    onChange(value: string, name: string | null, e: ChangeEvent<HTMLInputElement>): void,
 
-    error?: string | null,
     className?: string,
+    containerProps?: DivProps,
+    error?: string | null,
     name?: string | null,
-    isDisabled?: boolean,
+    disabled?: boolean,
     regExp?: RegExp,
+    isPassword?: boolean,
   };
 }
 
@@ -35,11 +38,11 @@ export const Input: FC<Input.Props> = (props) => {
       return;
     }
 
-    props.onChange(value, props.name || null);
+    props.onChange(value, props.name || null, e);
   }, [props.onChange, props.name, props.regExp]);
 
   const onFocus = useCallback(() => {
-    if (props.isDisabled) {
+    if (props.disabled) {
       return;
     }
 
@@ -47,7 +50,7 @@ export const Input: FC<Input.Props> = (props) => {
     if (controlRef.current) {
       controlRef.current.focus();
     }
-  }, [props.isDisabled]);
+  }, [props.disabled]);
 
   const onBlur: FocusEventHandler<HTMLInputElement> = useCallback((e) => {
     setIsFocused(false);
@@ -57,11 +60,12 @@ export const Input: FC<Input.Props> = (props) => {
 
   return (
     <div
+      {...props.containerProps}
       ref={inputRef}
       className={cx(s.input, props.className, {
         [s.withError]: props.error,
         [s.focused]: isFocused,
-        [s.disabled]: props.isDisabled
+        [s.disabled]: props.disabled
       })}
       onClick={onFocus}
     >
@@ -73,6 +77,7 @@ export const Input: FC<Input.Props> = (props) => {
         {props.label}
       </Text>
       <input
+        type={props.isPassword ? 'password' : 'text'}
         autoComplete='off'
         onFocus={onFocus}
         onBlur={onBlur}
@@ -81,7 +86,7 @@ export const Input: FC<Input.Props> = (props) => {
         onChange={onChange}
         name={props.name || undefined}
         value={props.value || ''}
-        disabled={props.isDisabled}
+        disabled={props.disabled}
       />
       { props.error ? (
         <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{props.error}</Text>

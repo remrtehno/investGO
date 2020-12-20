@@ -1,7 +1,6 @@
 import {FC} from "react";
 import {RouteProps} from "react-router";
 import {RegisterPage} from "../../pages/RegisterPage";
-import {SignPage} from "../../pages/SignPage";
 import {ProfilePage} from "../../pages/ProfilePage";
 
 export type RouteInfo = RouteProps & {
@@ -9,10 +8,6 @@ export type RouteInfo = RouteProps & {
 }
 
 export const routes: RouteInfo[] = [{
-  path: '/signin',
-  Component: SignPage,
-  exact: true,
-}, {
   path: '/profile',
   Component: ProfilePage,
   exact: true,

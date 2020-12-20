@@ -1,8 +1,8 @@
+import cx from 'classnames';
 import React, {FC, useRef} from 'react';
 import {PageScrollProvider} from "../../../hooks/usePageScroll";
-import {PageHeader} from "./PageHeader";
-import cx from 'classnames';
 import s from './Page.scss';
+import {PageHeader} from "./PageHeader";
 
 type Props = {
   className?: string,

@@ -9,6 +9,7 @@ export enum FieldType {
   date = 'date',
   number = 'number',
   fileArray = 'fileArray',
+  password = 'password',
 }
 
 export declare namespace Form {
@@ -100,7 +101,7 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
         isValid: !props.errors[field.name],
         error: (props.errors[field.name] || null) as string | null,
         isDirty: dirtyFieldsRef.current.includes(field.name),
-        isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name])
+        isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name]),
       };
 
       return fields;

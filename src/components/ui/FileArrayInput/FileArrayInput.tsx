@@ -7,6 +7,7 @@ import {Button, ButtonSize, ButtonTheme} from "../Button/Button";
 import {Text, TextSize} from "../Text";
 import s from './FileArrayInput.scss';
 import _ from 'lodash';
+import cx from 'classnames';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
@@ -79,13 +80,13 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   });
 
   return (
-    <div className={s.FileArrayInput}>
-      <div className={s.files}>
+    <div className={cx('container', s.FileArrayInput)}>
+      <div className={cx(s.files, 'row')}>
         {files.map((file, index) => {
           return (
-            <div className={s.file} key={file.isNew ? index : file.id}>
+            <div className={cx(s.file, 'col-6')} key={file.isNew ? index : file.id}>
               <FileImgIcon className={s.fileIcon}/>
-              {file.original_name}
+              <div className={s.fileLabel}>{file.original_name}</div>
             </div>
           );
         })}

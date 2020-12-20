@@ -12,6 +12,7 @@ type Props = {
     hideHeader?: boolean,
     onClose?(): void,
     allowClose?: boolean,
+    isFullscreen?: boolean,
 };
 
 const Modal: FC<Props> = (props) => {
@@ -26,7 +27,7 @@ const Modal: FC<Props> = (props) => {
     return (
         <ModalPortal>
             <div
-                className={cx(s.modal, className)}
+                className={cx(s.modal, { isFullscreen: props.isFullscreen }, className)}
                 onClick={() => { !hardClose && allowClose && onClose();}}
             >
                 <div

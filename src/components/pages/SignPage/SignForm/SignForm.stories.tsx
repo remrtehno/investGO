@@ -11,7 +11,7 @@ export const SignFormStory = () => {
     <div className='container' style={{ backgroundColor: '#F8F9FA' }}>
       <div className='row justify-content-center align-items-center' style={{ height: '100vh' }}>
         <div className='col-4'>
-          <SignForm isEmailExists={true}/>
+          <SignForm/>
         </div>
       </div>
     </div>

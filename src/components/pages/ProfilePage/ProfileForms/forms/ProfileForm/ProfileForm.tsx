@@ -25,13 +25,13 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
         name: 'email',
         type: FieldType.text,
         label: 'Ваш email',
-        isDisabled: true
+        disabled: true
       },
       phone: {
         name: 'phone',
         type: FieldType.text,
         label: 'Номер телефона',
-        isDisabled: true
+        disabled: true
       }
     };
   }, []);
@@ -39,7 +39,7 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
   const initialValues = useMemo(() => {
     return {
       ...getDefaultFieldValues(fields),
-      ...(user ? { email: user.email, phone: '89166613613' } : {})
+      ...(user ? { email: user.email, phone: user.phone } : {})
     };
   }, [fields, user]);
 
