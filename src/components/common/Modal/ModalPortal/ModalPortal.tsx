@@ -13,6 +13,8 @@ export const ModalPortal: FC = (props) => {
       : null
   );
 
+  console.log(rootRef.current);
+
   useEffect(() => {
     if (!rootRef.current || !elRef.current) {
       return;

@@ -17,5 +17,5 @@ export const routes: RouteInfo[] = [{
   exact: true,
 }, {
   path: '/',
-  Component: () => null,
+  Component: ProfilePage,
 }];

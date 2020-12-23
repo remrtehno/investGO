@@ -102,7 +102,7 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
         error: (props.errors[field.name] || null) as string | null,
         isDirty: dirtyFieldsRef.current.includes(field.name),
         isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name]),
-      };
+      } as any;
 
       return fields;
     }, {});

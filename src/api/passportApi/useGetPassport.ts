@@ -2,13 +2,14 @@ import {useRecoilState} from "recoil";
 import {api} from "../../contstants/api";
 import useApi from "../../hooks/useApi";
 import useApiRequest from "../../hooks/useApiRequest";
-import {userState} from "../../recoil/userState";
+import {userAtom} from "../../recoil/userAtom";
 import {RequestStatus} from "../../types/common";
 import {User} from "../../types/User";
+import _ from 'lodash';
 
 export function useGetPassport() {
   const request = useApiRequest();
-  const [{ user }, setUser] = useRecoilState(userState);
+  const [{ user }, setUser] = useRecoilState(userAtom);
 
   return useApi<void, null>(async() => {
     if (!user) {
@@ -22,7 +23,10 @@ export function useGetPassport() {
     setUser({
       user: {
         ...user,
-        passport: passport || null,
+        passport: passport ? {
+          ..._.omit(passport, 'serialNumber'),
+          serialNumber: passport.serial + passport.number
+        } : null,
       },
       status: RequestStatus.success,
       error: null

@@ -1,6 +1,6 @@
 import React, {FC, useMemo} from 'react';
 import {useRecoilValue} from "recoil";
-import {userState} from "../../../../../../recoil/userState";
+import {userAtom} from "../../../../../../recoil/userAtom";
 import {Form} from "../../../../../common/Form";
 import {Field} from "../../../../../common/Form/Field";
 import {FieldType} from "../../../../../common/Form/Form";
@@ -17,7 +17,7 @@ export declare namespace ProfileForm {
 }
 
 export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
-  const { user } = useRecoilValue(userState);
+  const { user } = useRecoilValue(userAtom);
 
   const fields = useMemo((): Form.FieldModels => {
     return {

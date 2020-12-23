@@ -13,6 +13,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const fs = require('fs');
 
 // const envConfig = require('../config/env');
 
@@ -29,6 +30,10 @@ let isStarted = false;
 app.use(express.static(path.resolve(process.cwd(), 'build')));
 
 app.use(cookieParser());
+
+app.get('/', (req, res, next) => {
+  res.sendFile(path.resolve(process.cwd(), 'landing/index.html'));
+});
 
 app.use('/api', createProxyMiddleware({
   target: 'https://testing.investgo.ru',

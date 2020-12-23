@@ -16,6 +16,7 @@ export declare namespace User {
     serial: string,
     snils: string,
     subdivision_code: string,
+    serialNumber: string,
   }
 }
 

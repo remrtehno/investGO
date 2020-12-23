@@ -2,7 +2,7 @@ import React, {FC, useCallback} from "react";
 import {useRecoilValue} from "recoil";
 import {useSignOutApi} from "../../../../api/userApi/useSignOutApi";
 import {LogoIcon} from "../../../../icons/LogoIcon";
-import {userState} from "../../../../recoil/userState";
+import {userAtom} from "../../../../recoil/userAtom";
 import {Text, TextSize} from "../../../ui/Text";
 import {TextWeight} from "../../../ui/Text/Text";
 import s from './PageHeader.scss';
@@ -24,7 +24,7 @@ const LogoutIcon: FC<LogoutIcon.Props> = (props) => {
 }
 
 export const PageHeader: FC = () => {
-  const { user } = useRecoilValue(userState);
+  const { user } = useRecoilValue(userAtom);
   const [, logoutApi] = useSignOutApi();
   const history = useHistory();
 

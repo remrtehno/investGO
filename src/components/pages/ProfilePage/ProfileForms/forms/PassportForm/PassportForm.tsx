@@ -2,7 +2,7 @@ import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from "recoil";
 import {useGetPassport} from "../../../../../../api/passportApi/useGetPassport";
 import {useSavePassport} from "../../../../../../api/passportApi/useSavePassport";
-import {userState} from "../../../../../../recoil/userState";
+import {userAtom} from "../../../../../../recoil/userAtom";
 import {User} from "../../../../../../types/User";
 import {Form} from "../../../../../common/Form";
 import {Field} from "../../../../../common/Form/Field";
@@ -40,15 +40,15 @@ const useFields = () => {
         label: 'Дата рождения',
         validations: [required()],
       },
-      serial: {
-        name: 'subdivision_code',
+      serialNumber: {
+        name: 'serialNumber',
         type: FieldType.number,
         label: 'Серия / номер паспорта',
         isInteger: true,
         validations: [required(), minLength(10), maxLength(10)],
       },
       subdivision_code: {
-        name: 'serial',
+        name: 'subdivision_code',
         type: FieldType.number,
         label: 'Код подразделения',
         isInteger: true,
@@ -104,7 +104,7 @@ const useFields = () => {
 export const PassportForm: FC<PassportForm.Props> = (props) => {
   const [, getPassport] = useGetPassport();
   const [, savePassport] = useSavePassport();
-  const { user } = useRecoilValue(userState);
+  const { user } = useRecoilValue(userAtom);
   const fields = useFields();
 
   useEffect(() => {
@@ -114,8 +114,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   }, [user]);
 
   const getValuesFromPassport = () => {
-    // return {"fio":"аыаыв","date_of_birth":"20.04.1991","number":"2343434344","serial":"324323","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]};
     return {
+      //...{"fio":"аыаыв","date_of_birth":"20.04.1991","number":"2343434344","serial":"324323","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]},
       ...getDefaultFieldValues(fields),
       ...(user && user.passport ? user.passport : {})
     } as User.Passport;
@@ -156,8 +156,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           <Field className='col-6' name='date_of_birth'/>
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='serial'/>
-          <Field className='col-3' name='subdivision_code'/>
+          <Field className='col-6' name='subdivision_code'/>
+          <Field className='col-3' name='serialNumber'/>
           <Field className='col-3' name='date_of_issue'/>
         </FormRow>
         <FormRow>

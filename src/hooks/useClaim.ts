@@ -1,9 +1,9 @@
 import {useMemo} from "react";
 import {useRecoilValue} from "recoil";
-import {userState} from "../recoil/userState";
+import {userAtom} from "../recoil/userAtom";
 
 export function useClaims() {
-  const { user } = useRecoilValue(userState);
+  const { user } = useRecoilValue(userAtom);
 
   return useMemo(() => {
     return {

@@ -42,7 +42,7 @@ export const SignForm: FC<SignForm.Props> = (props) => {
   const [isNeedShowPhone, setIsNeedShowPhone] = useState(false);
   const [isShowSmsForm, setIsShowSmsForm] = useState(false);
   const emailRef = useLatestRef(values.email);
-  
+
   const signFields = useMemo((): Form.FieldModels => {
     return {
       email: {
@@ -99,9 +99,23 @@ export const SignForm: FC<SignForm.Props> = (props) => {
   }, [values.email, errors.email]);
 
   useEffect(() => {
-    const error = isUserExists ? signUpState.error : signInState.error;
-    if (_.get(error, '[0].message') === "incorrect_password") {
+    const error = isUserExists ? signInState.error : signUpState.error;
+    const errorMessage = _.get(error, '[0].message');
+
+    if (!errorMessage) {
+      return;
+    }
+
+    if (isUserExists) {
+      signInState.resetValue();
+    } else {
+      signUpState.resetValue();
+    }
+
+    if (errorMessage === "incorrect_password") {
       setErrors({...errors, password: 'Неверный пароль'});
+    } else if (errorMessage === 'email_not_confirmed') {
+      setErrors({ ...errors, email: 'Email не подтвержден' });
     }
   }, [signInState.error, signUpState.error, isUserExists]);
 

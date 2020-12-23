@@ -11,7 +11,4 @@ export enum RequestStatus {
   success = 'success',
 }
 
-export type RequestError = {
-  code: string,
-  message: string,
-}
+export type RequestError = any;

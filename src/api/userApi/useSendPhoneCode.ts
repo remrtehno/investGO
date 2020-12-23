@@ -13,16 +13,16 @@ export declare namespace useSendPhoneCode {
 export const useSendPhoneCode = () => {
   const request = useApiRequest();
 
-  return useApi<useSendPhoneCode.Payload, boolean>(async (payload) => {
-    const response = await request(api.user.sendPhoneCode(), {
+  return useApi<useSendPhoneCode.Payload, null>(async (payload) => {
+    await request(api.user.sendPhoneCode(), {
       method: 'POST',
       body: JSON.stringify(payload),
       showNotifyOnError: false,
       preventNotifyOn400: true,
     });
 
-    return response.exists;
+    return null;
 
-  }, false);
+  }, null);
 };
 

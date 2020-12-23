@@ -1,6 +1,6 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect} from "react";
 import {BrowserRouter, Route, StaticRouter} from 'react-router-dom';
-import {RecoilRoot, useRecoilValue} from "recoil";
+import {RecoilRoot, useRecoilValue, useSetRecoilState} from "recoil";
 
 import 'src/components/common/Form/fields/dateField';
 import 'src/components/common/Form/fields/fileArrayField';
@@ -12,15 +12,15 @@ import {useUserApi} from "src/hooks/useUser";
 import 'src/libs/bootstrap/bootstrap-grid.css';
 import 'src/libs/bootstrap/bootstrap-reboot.css';
 import 'src/theme/colors.css';
-import {userState} from "../../../recoil/userState";
+import {isPageInitAtom} from "../../../recoil/isPageInitAtom";
+import {userAtom} from "../../../recoil/userAtom";
 import {RequestStatus} from "../../../types/common";
-import {SignPage} from "../../pages/SignPage";
 import {routes} from "./routes";
 
 const AppContent: FC = () => {
   const userApi = useUserApi();
-  const { status: userStatus, user } = useRecoilValue(userState);
-  const [isUserInit, setIsUserInit] = useState(false);
+  const { status: userStatus } = useRecoilValue(userAtom);
+  const setIsPageInit = useSetRecoilState(isPageInitAtom);
 
   useEffect(() => {
     userApi.get();
@@ -28,15 +28,9 @@ const AppContent: FC = () => {
 
   useEffect(() => {
     if (userStatus === RequestStatus.success || userStatus === RequestStatus.failed) {
-      setIsUserInit(true);
+      setIsPageInit(true);
     }
   }, [userStatus]);
-
-  if (isUserInit && !user) {
-    return (
-      <SignPage/>
-    );
-  }
 
   return (
     <div>

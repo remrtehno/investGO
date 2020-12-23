@@ -2,6 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const basePath = path.resolve(__dirname, '..');
 
@@ -73,7 +74,10 @@ const baseConfig = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new ExtractCssChunks({filename: '[name].css', chunkFilename: '[id].css'})
+    new ExtractCssChunks({filename: '[name].css', chunkFilename: '[id].css'}),
+    new CopyPlugin({
+      patterns: [{ from: path.resolve(basePath, 'landing'), to: path.resolve(basePath, 'build/landing') },],
+    }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
