@@ -31,16 +31,28 @@ app.use(express.static(path.resolve(process.cwd(), 'build')));
 
 app.use(cookieParser());
 
-app.get('/', (req, res, next) => {
-  res.sendFile(path.resolve(process.cwd(), 'landing/index.html'));
-});
-
 app.use('/api', createProxyMiddleware({
   target: 'https://testing.investgo.ru',
   changeOrigin: true,
   logLevel: 'debug',
   cookieDomainRewrite: '',
 }));
+
+app.get('/', async (req, res, next) => {
+  const response = await fetch(`https://testing.investgo.ru/api/user`, {
+    headers: {
+      Cookie: req.headers.Cookie
+    }
+  })
+    .then((res) => res.json());
+
+  if (response.status === 'error') {
+    res.sendFile(path.resolve(process.cwd(), 'build/landing/index.html'));
+    return;
+  }
+
+  next();
+});
 
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
