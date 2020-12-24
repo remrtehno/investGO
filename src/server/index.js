@@ -27,12 +27,29 @@ if (envConfig.useCompression) {
 
 // for temporary old landing
 app.use('/public', express.static(path.resolve(process.cwd(), 'build/public')));
+app.use('/landing', express.static(path.resolve(process.cwd(), 'build/public/landing')));
 
 if (process.env.APP_ENV === 'stage') {
     app.use('/storybook', express.static(path.resolve(process.cwd(), 'build/storybook')));
 }
 
 app.use(cookieParser());
+
+app.get('/', async (req, res, next) => {
+    const response = await fetch(`https://testing.investgo.ru/api/user`, {
+        headers: {
+            Cookie: req.headers.Cookie
+        }
+    })
+      .then((res) => res.json());
+
+    if (response.status === 'error') {
+        res.sendFile(path.resolve(process.cwd(), 'build/public/landing/index.html'));
+        return;
+    }
+
+    next();
+});
 
 app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 

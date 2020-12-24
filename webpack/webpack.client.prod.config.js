@@ -8,6 +8,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const baseConfig = require('./webpack.base.prod.config');
 
@@ -72,6 +73,9 @@ const config = {
     plugins: [
         new LoadablePlugin(),
         new ExtractCssChunks({filename: '[name].css', chunkFilename: '[id].css'}),
+        new CopyPlugin({
+            patterns: [{ from: path.resolve(appDirectory, 'landing'), to: path.resolve(appDirectory, 'build/public/landing') },],
+        }),
         // new OfflinePlugin({
         //     responseStrategy: "network-first",
         //     ServiceWorker: {
