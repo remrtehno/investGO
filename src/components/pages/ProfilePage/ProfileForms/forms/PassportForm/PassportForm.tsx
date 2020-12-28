@@ -127,8 +127,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
 
   const getValuesFromPassport = () => {
     return {
-      ...{"fio":"аыаыв","date_of_birth":"20.04.1991", "serialNumber":"3243232433","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]},
-      // ...getDefaultFieldValues(fields),
+      // ...{"fio":"аыаыв","date_of_birth":"20.04.1991", "serialNumber":"3243232433","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]},
+      ...getDefaultFieldValues(fields),
       ...(user && user.passport ? {
         ...user.passport,
         serialNumber: user.passport.serial + ' ' + user.passport.number,
