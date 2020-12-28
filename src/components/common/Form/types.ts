@@ -1,3 +1,4 @@
+import {Input} from "../../ui/Input";
 import {FieldType} from "./Form";
 
 export declare namespace FormFieldModel {
@@ -8,11 +9,12 @@ export declare namespace FormFieldModel {
     disabled?: boolean,
     isHidden?: boolean,
     validations?: Array<(value: any, values: any) => string | null>,
+    toValue?(rawValue: any): any,
+    fromValue?(value: any): any
   }
 
-  export type Text = BaseFieldModel & {
+  export type Text = BaseFieldModel & Omit<Input.Props, 'value' | 'onChange'> & {
     type: FieldType.text,
-    label: string,
   };
 
   export type Date = BaseFieldModel & {
@@ -20,11 +22,15 @@ export declare namespace FormFieldModel {
     label: string,
   };
 
-  export type Number = BaseFieldModel & {
+  export type Number = Omit<Text, 'regExp' | 'type' | 'mask'> & {
     type: FieldType.number,
     label: string,
     isInteger: boolean,
   };
+
+  export type Phone = Omit<Text, 'regExp' | 'type' | 'mask'> & {
+    type: FieldType.phone,
+  }
 
   export type FileArray = BaseFieldModel & {
     type: FieldType.fileArray,
@@ -41,7 +47,8 @@ export type FormFieldModel =
   FormFieldModel.Date |
   FormFieldModel.Number |
   FormFieldModel.FileArray |
-  FormFieldModel.Password;
+  FormFieldModel.Password |
+  FormFieldModel.Phone;
 
 export declare namespace FormField {
   type BaseField = {
@@ -55,6 +62,7 @@ export declare namespace FormField {
   export type Text = BaseField & FormFieldModel.Text;
   export type Date = BaseField & FormFieldModel.Date;
   export type Number = BaseField & FormFieldModel.Number;
+  export type Phone = BaseField & FormFieldModel.Phone;
   export type FileArray = BaseField & FormFieldModel.FileArray;
 }
 
@@ -62,4 +70,5 @@ export type FormField =
   FormField.Text |
   FormField.Date |
   FormField.Number |
+  FormField.Phone |
   FormField.FileArray;

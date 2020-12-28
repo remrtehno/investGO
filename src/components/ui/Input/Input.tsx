@@ -5,6 +5,7 @@ import {useOnClickOutside} from "../../../hooks/useOnClickOutside";
 import {DivProps} from "../../../types/common";
 import {Text, TextSize} from "../Text";
 import s from './Input.scss';
+import InputMask from 'react-input-mask';
 
 export declare namespace Input {
   export type Props = {
@@ -19,6 +20,8 @@ export declare namespace Input {
     disabled?: boolean,
     regExp?: RegExp,
     isPassword?: boolean,
+    mask?: string,
+    postfix?: string,
   };
 }
 
@@ -58,6 +61,18 @@ export const Input: FC<Input.Props> = (props) => {
 
   const isControlVisible = Boolean(props.value || isFocused);
 
+  const controlProps = {
+    type: props.isPassword ? 'password' : 'text',
+    autoComplete: 'off',
+    onFocus,
+    onBlur,
+    className: cx(s.control, { [s.isControlVisible]: isControlVisible }),
+    onChange,
+    name: props.name || undefined,
+    value: props.value || '',
+    disabled: props.disabled,
+  };
+
   return (
     <div
       {...props.containerProps}
@@ -76,18 +91,20 @@ export const Input: FC<Input.Props> = (props) => {
       >
         {props.label}
       </Text>
-      <input
-        type={props.isPassword ? 'password' : 'text'}
-        autoComplete='off'
-        onFocus={onFocus}
-        onBlur={onBlur}
-        ref={controlRef}
-        className={cx(s.control, { [s.isControlVisible]: isControlVisible })}
-        onChange={onChange}
-        name={props.name || undefined}
-        value={props.value || ''}
-        disabled={props.disabled}
-      />
+      { props.mask ? (
+        <InputMask mask={props.mask} {...controlProps}>
+          {(inputProps: any) => {
+            return (
+              <input
+                {...inputProps}
+                ref={controlRef}
+              />
+            )
+          }}
+        </InputMask>
+      ) : (
+        <input {...controlProps} ref={controlRef}/>
+      ) }
       { props.error ? (
         <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{props.error}</Text>
       ) : null }

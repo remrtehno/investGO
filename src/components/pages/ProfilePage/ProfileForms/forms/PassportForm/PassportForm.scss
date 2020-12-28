@@ -1,3 +1,17 @@
 .PassportForm {
   margin-top: 60px;
 }
+
+.moderationInfo {
+  background-color: var(--gray2);
+  height: 96px;
+  border: 1px solid var(--black);
+  border-radius: 4px;
+  display: flex;
+  padding: 24px 38px;
+  margin-bottom: 96px;
+}
+
+.moderationIcon {
+  margin-right: 18px;
+}

@@ -5,11 +5,13 @@ import {FormField} from "../types";
 import {FieldProps, fieldsModel} from "./fieldsModel";
 
 export declare namespace TextField {
-  export type Props = FieldProps<FormField.Text> & Pick<Input.Props, 'regExp' | 'isPassword'>;
+  export type Props = FieldProps<FormField.Text> & Pick<Input.Props, 'regExp' | 'isPassword'> & {
+    onChange?(value: string, name: string | null): void,
+  };
 }
 
 export const TextField: FC<TextField.Props> = (props) => {
-  const { field, ...inputProps } = props;
+  const { field, onChange, ...inputProps } = props;
   const form = useFormModel();
 
   return (
@@ -19,9 +21,10 @@ export const TextField: FC<TextField.Props> = (props) => {
         label={field.label}
         name={field.name}
         error={field.isDirty ? field.error : null}
-        onChange={form.onChange}
+        onChange={onChange || form.onChange}
         disabled={field.disabled}
-        regExp={props.regExp}
+        regExp={field.regExp}
+        mask={field.mask}
         {...inputProps}
       />
     </div>

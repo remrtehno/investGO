@@ -1,9 +1,12 @@
 import cx from "classnames";
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useHistory} from "react-router-dom";
+import {useRecoilValue} from "recoil";
 import {useUserCheckExists} from "../../../../api/userApi/useUserCheckExists";
 import {useSignInApi} from "../../../../api/userApi/useSignInApi";
 import {useSignUpApi} from "../../../../api/userApi/useSignUpApi";
 import {useLatestRef} from "../../../../hooks/useLatestRef";
+import {userAtom} from "../../../../recoil/userAtom";
 import {Form} from "../../../common/Form";
 import {Field} from "../../../common/Form/Field";
 import {FieldType} from "../../../common/Form/Form";
@@ -11,6 +14,7 @@ import {email} from "../../../common/Form/validations/email";
 import {required} from "../../../common/Form/validations/required";
 import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
 import {Text, TextSize} from "../../../ui/Text";
+import {CheckEmailModal} from "./CheckEmailModal";
 import s from './SignForm.scss';
 import {SmsForm} from "./SmsForm";
 import _ from 'lodash';
@@ -42,6 +46,9 @@ export const SignForm: FC<SignForm.Props> = (props) => {
   const [isNeedShowPhone, setIsNeedShowPhone] = useState(false);
   const [isShowSmsForm, setIsShowSmsForm] = useState(false);
   const emailRef = useLatestRef(values.email);
+  const { user } = useRecoilValue(userAtom);
+  const history = useHistory();
+  const [isCheckEmailModalVisible, setIsCheckEmailModalVisible] = useState(false);
 
   const signFields = useMemo((): Form.FieldModels => {
     return {
@@ -60,7 +67,7 @@ export const SignForm: FC<SignForm.Props> = (props) => {
         disabled: isNeedShowPhone,
       },
       phone: {
-        type: FieldType.text,
+        type: FieldType.phone,
         isHidden: !isNeedShowPhone,
         name: 'phone',
         validations: [required()],
@@ -119,6 +126,28 @@ export const SignForm: FC<SignForm.Props> = (props) => {
     }
   }, [signInState.error, signUpState.error, isUserExists]);
 
+  useEffect(() => {
+    if (user && signInState.isSuccess) {
+      if (!user.is_approved_passport) {
+        history.push('/registration');
+      } else {
+        history.push('/');
+      }
+    }
+  }, [signInState, user, history]);
+
+  useEffect(() => {
+    if (signUpState.isSuccess) {
+      setIsCheckEmailModalVisible(true);
+      setIsShowSmsForm(false);
+    }
+  }, [signUpState.isSuccess]);
+
+  useEffect(() => {
+    console.log(signUpState.error);
+    setIsShowSmsForm(false);
+  }, [signUpState.error]);
+
   const signUp = useCallback(() => {
     signUpApi(values);
   }, [values]);
@@ -164,6 +193,13 @@ export const SignForm: FC<SignForm.Props> = (props) => {
       </Button>
       {isShowSmsForm ? (
         <SmsForm onConfirm={signUp} phone={values.phone}/>
+      ) : null}
+      {isCheckEmailModalVisible ? (
+        <CheckEmailModal
+          onClose={() => {
+            window.location.pathname = '/';
+          }}
+        />
       ) : null}
     </Form>
   )

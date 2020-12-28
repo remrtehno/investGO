@@ -37,7 +37,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   const [uploadedFile, uploadFileApi, uploadApi] = useUploadFileApi();
 
   function getFilesFromProps() {
-    return props.files.map((file): Value => {
+    return (props.files || []).map((file): Value => {
       return {
         ...file,
         isNew: false
@@ -96,7 +96,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
         <Button
           size={ButtonSize.m}
           theme={ButtonTheme.light}
-          onClick={() => null}
+          onClick={_.noop}
         >
           <AddButtonIcon/>
           <Text className={s.addButtonLabel} size={TextSize.body1}>Загрузить файл</Text>

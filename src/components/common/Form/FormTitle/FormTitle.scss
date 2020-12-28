@@ -1,3 +1,27 @@
 .FormTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 32px;
+}
+
+.title {
+}
+
+.status {
+  text-transform: uppercase;
+}
+
+.moderation {
+  color: var(--gray4);
+}
+
+.moderated {
+  color: var(--link);
+  display: flex;
+  align-items: center;
+}
+
+.moderatedIcon {
+  margin-right: 4px;
 }

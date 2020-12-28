@@ -8,9 +8,10 @@ import {maxLength} from "../../../../common/Form/validations/maxLength";
 import {minLength} from "../../../../common/Form/validations/minLength";
 import {required} from "../../../../common/Form/validations/required";
 import Modal from "../../../../common/Modal/Modal";
+import {Button, ButtonSize, ButtonTheme} from "../../../../ui/Button/Button";
 import {Text, TextSize} from "../../../../ui/Text";
-import {TextWeight} from "../../../../ui/Text/Text";
 import s from './SmsForm.scss';
+import _ from 'lodash';
 
 const fields: Form.FieldModels = {
   code: {
@@ -84,7 +85,12 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
         <Field className={s.field} name='code'/>
       </Form>
       <div className={s.resendContainer}>
-        <Text weight={TextWeight.bold} className={s.resend} size={TextSize.body1}>Отправить повторно</Text>
+        <Button
+          className={s.resend}
+          theme={ButtonTheme.black}
+          size={ButtonSize.m}
+          onClick={_.noop}
+        >Отправить повторно</Button>
       </div>
     </Modal>
   )

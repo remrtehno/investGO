@@ -19,16 +19,9 @@ export function useSavePassport() {
       return null;
     }
 
-    const serial = payload.serialNumber.slice(0, 4);
-    const number = payload.serialNumber.slice(-6);
-
     const passport = await request<User.Passport | null>(api.passport.save(), {
       method: user.passport ? 'PUT' : 'POST',
-      body: {
-        ...payload,
-        serial,
-        number,
-      },
+      body: payload,
     });
 
     setUser({

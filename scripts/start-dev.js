@@ -41,7 +41,7 @@ app.use('/api', createProxyMiddleware({
 app.get('/', async (req, res, next) => {
   const response = await fetch(`https://testing.investgo.ru/api/user`, {
     headers: {
-      Cookie: req.headers.Cookie
+      cookie: req.headers.cookie
     }
   })
     .then((res) => res.json());

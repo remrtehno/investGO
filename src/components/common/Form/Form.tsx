@@ -10,6 +10,7 @@ export enum FieldType {
   number = 'number',
   fileArray = 'fileArray',
   password = 'password',
+  phone = 'phone',
 }
 
 export declare namespace Form {
@@ -95,14 +96,21 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
 
   const fields = useMemo(() => {
     return _.reduce(props.fields, (fields: Form.Fields, field) => {
+      let value = props.values[field.name] || null;
+
+      if (field.toValue) {
+        value = field.toValue(value);
+      }
+
       fields[field.name] = {
         ...field,
-        value: props.values[field.name] || null,
+        value,
         isValid: !props.errors[field.name],
         error: (props.errors[field.name] || null) as string | null,
         isDirty: dirtyFieldsRef.current.includes(field.name),
         isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name]),
       } as any;
+
 
       return fields;
     }, {});
@@ -135,7 +143,9 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
           delete newErrors[name];
         }
 
-        const newValues = { ...valuesRef.current, [name]: value };
+        const { fromValue } = props.fields[name];
+
+        const newValues = { ...valuesRef.current, [name]: fromValue ? fromValue(value) : value };
 
         onChangeRef.current(
           newValues,

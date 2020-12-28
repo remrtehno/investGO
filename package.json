@@ -78,8 +78,10 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
+    "@types/react-input-mask": "^3.0.0",
     "copy-webpack-plugin": "6.4.1",
     "postcss-loader": "^4.1.0",
+    "react-input-mask": "^2.0.4",
     "remove": "^0.1.5"
   },
   "browserslist": [

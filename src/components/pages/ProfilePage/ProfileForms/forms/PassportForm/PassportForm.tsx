@@ -1,8 +1,11 @@
+import cx from 'classnames';
+import _ from 'lodash';
 import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from "recoil";
 import {useGetPassport} from "../../../../../../api/passportApi/useGetPassport";
 import {useSavePassport} from "../../../../../../api/passportApi/useSavePassport";
 import {userAtom} from "../../../../../../recoil/userAtom";
+import {SvgProps} from "../../../../../../types/common";
 import {User} from "../../../../../../types/User";
 import {Form} from "../../../../../common/Form";
 import {Field} from "../../../../../common/Form/Field";
@@ -10,6 +13,7 @@ import {FieldType} from "../../../../../common/Form/Form";
 import {FormActions} from "../../../../../common/Form/FormActions";
 import {FormRow} from "../../../../../common/Form/FormRow";
 import {FormTitle} from "../../../../../common/Form/FormTitle";
+import {FormStatus} from "../../../../../common/Form/FormTitle/FormTitle";
 import {getDefaultFieldValues} from "../../../../../common/Form/getDefaultFieldValues";
 import {maxLength} from "../../../../../common/Form/validations/maxLength";
 import {minLength} from "../../../../../common/Form/validations/minLength";
@@ -18,8 +22,17 @@ import {Button, ButtonSize, ButtonTheme} from "../../../../../ui/Button/Button";
 import {Text, TextSize} from "../../../../../ui/Text";
 import {ProfileForms} from "../../ProfileForms";
 import s from './PassportForm.scss';
-import _ from 'lodash';
-import cx from 'classnames';
+
+function TimeIcon(props: SvgProps) {
+  return (
+    <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <rect x="1.80469" y="6" width="31" height="13" rx="1" fill="black" stroke="black"/>
+      <circle cx="17.3047" cy="12.5" r="10.5" fill="#F2F2F2"/>
+      <circle cx="17.3047" cy="12.5" r="8.5" fill="black"/>
+      <path d="M17.8047 8V12H23.8047" stroke="#F2F2F2" strokeWidth="2" strokeLinejoin="round"/>
+    </svg>
+  );
+}
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
@@ -42,10 +55,15 @@ const useFields = () => {
       },
       serialNumber: {
         name: 'serialNumber',
-        type: FieldType.number,
+        type: FieldType.text,
         label: 'Серия / номер паспорта',
-        isInteger: true,
-        validations: [required(), minLength(10), maxLength(10)],
+        mask: '9999 999999',
+        validations: [required(), (value) => {
+          if (value.replace(/[\s_]/g, '').length === 10) {
+            return null;
+          }
+          return 'Обязательное поле';
+        }],
       },
       subdivision_code: {
         name: 'subdivision_code',
@@ -102,29 +120,33 @@ const useFields = () => {
 };
 
 export const PassportForm: FC<PassportForm.Props> = (props) => {
-  const [, getPassport] = useGetPassport();
-  const [, savePassport] = useSavePassport();
+  const [, getPassportApi] = useGetPassport();
+  const [, savePassportApi] = useSavePassport();
   const { user } = useRecoilValue(userAtom);
   const fields = useFields();
 
-  useEffect(() => {
-    if (user && !user.passport) {
-      getPassport();
-    }
-  }, [user]);
-
   const getValuesFromPassport = () => {
     return {
-      //...{"fio":"аыаыв","date_of_birth":"20.04.1991","number":"2343434344","serial":"324323","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]},
-      ...getDefaultFieldValues(fields),
-      ...(user && user.passport ? user.passport : {})
-    } as User.Passport;
+      ...{"fio":"аыаыв","date_of_birth":"20.04.1991", "serialNumber":"3243232433","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]},
+      // ...getDefaultFieldValues(fields),
+      ...(user && user.passport ? {
+        ...user.passport,
+        serialNumber: user.passport.serial + ' ' + user.passport.number,
+      } : {}),
+    } as Omit<User.Passport, 'serial' | 'number'> & { serialNumber: string };
   };
 
   const initialValues = useMemo(() => getValuesFromPassport(), [fields]);
 
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
+
+
+  useEffect(() => {
+    if (user && !user.passport) {
+      getPassportApi();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (user && user.passport && !_.isEqual(user.passport, values)) {
@@ -137,12 +159,34 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
     setErrors(errors);
   }, []);
 
-  const onSave = useCallback(() => {
-    savePassport(values);
-  }, [values, savePassport]);
+  const onContinue = useCallback(() => {
+    if (!user) {
+      return;
+    }
 
-  return (
-    <div ref={props.formRef} className={cx(s.PassportForm, 'container')}>
+    const serial = values.serialNumber.slice(0, 4);
+    const number = values.serialNumber.slice(-6);
+
+    savePassportApi({
+      ..._.omit(values, 'serialNumber'),
+      serial,
+      number,
+    });
+
+    if (user.passport && !user.passport.is_approved) {
+      const serial = values.serialNumber.slice(0, 4);
+      const number = values.serialNumber.slice(-6);
+
+      savePassportApi({
+        ..._.omit(values, 'serialNumber'),
+        serial,
+        number,
+      });
+    }
+  }, [user, values, savePassportApi]);
+
+  function renderForm() {
+    return (
       <Form
         initialValues={initialValues}
         fields={fields}
@@ -150,7 +194,6 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         errors={errors}
         values={values}
       >
-        <FormTitle>{props.form.title}</FormTitle>
         <FormRow>
           <Field className='col-6' name='fio'/>
           <Field className='col-6' name='date_of_birth'/>
@@ -192,12 +235,50 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}
-              disabled={false && _.isEmpty(errors)}
-              onClick={onSave}
+              disabled={!_.isEmpty(errors)}
+              onClick={onContinue}
             >Продолжить</Button>
           </div>
         </FormActions>
       </Form>
+    );
+  }
+
+  function renderModerationInfo() {
+    return (
+      <div className={s.moderationInfo}>
+        <TimeIcon className={s.moderationIcon}/>
+        <Text size={TextSize.body2}>
+          Ожидайте. Ваши данные в обработке. Это может занять до 15 минут. Вы получите СМС после ее завершения проверки.
+        </Text>
+      </div>
+    )
+  }
+
+  function getStatus() {
+    if (!user || !user.passport) {
+      return null;
+    }
+
+    return user.passport.is_approved ? FormStatus.moderated : FormStatus.moderation;
+  }
+
+  function renderContent() {
+    if (!user) {
+      return null;
+    }
+
+    if (!user.passport || user.passport.is_approved) {
+      return renderForm();
+    }
+
+    return renderModerationInfo();
+  }
+
+  return (
+    <div ref={props.formRef} className={cx(s.PassportForm, 'container')}>
+      <FormTitle status={getStatus()}>{props.form.title}</FormTitle>
+      { renderContent() }
     </div>
   );
 };

@@ -23,10 +23,7 @@ export function useGetPassport() {
     setUser({
       user: {
         ...user,
-        passport: passport ? {
-          ..._.omit(passport, 'serialNumber'),
-          serialNumber: passport.serial + passport.number
-        } : null,
+        passport,
       },
       status: RequestStatus.success,
       error: null

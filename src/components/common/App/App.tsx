@@ -6,7 +6,8 @@ import 'src/components/common/Form/fields/dateField';
 import 'src/components/common/Form/fields/fileArrayField';
 import 'src/components/common/Form/fields/numberField';
 import 'src/components/common/Form/fields/textField';
-import 'src/components/common/Form/fields/passportField';
+import '../Form/fields/passwordField';
+import '../Form/fields/phoneField';
 
 import {useUserApi} from "src/hooks/useUser";
 import 'src/libs/bootstrap/bootstrap-grid.css';

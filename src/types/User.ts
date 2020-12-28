@@ -16,7 +16,7 @@ export declare namespace User {
     serial: string,
     snils: string,
     subdivision_code: string,
-    serialNumber: string,
+    is_approved: boolean,
   }
 }
 
@@ -27,4 +27,6 @@ export type User = {
   passport: User.Passport | null,
   email: string,
   phone: string,
+  is_approved_passport: boolean,
+  is_selected_role: boolean,
 }

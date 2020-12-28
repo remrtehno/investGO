@@ -10,9 +10,11 @@ export enum TextSize {
   h3 = 'h3',
   subHeadline1 = 'subHeadline1',
   body1 = 'body1',
+  body2 = 'body2',
   caption1 = 'caption1',
   bodyMini = 'bodyMini',
-  tabMenu = 'tabMenu'
+  tabMenu = 'tabMenu',
+  status = 'status',
 }
 
 export enum TextWeight {

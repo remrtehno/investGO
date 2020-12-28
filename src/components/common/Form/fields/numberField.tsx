@@ -14,13 +14,13 @@ export const NumberField: FC<FieldProps<FormField.Number>> = (props) => {
     return {
       ...props.field,
       type: FieldType.text,
+      regExp: props.field.isInteger ? integerRegExp : numberRegExp,
     };
   }, [props.field]);
 
   return (
     <TextField
       field={field}
-      regExp={props.field.isInteger ? integerRegExp : numberRegExp}
     />
   )
 };
