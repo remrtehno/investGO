@@ -25,7 +25,7 @@ services:
         - docker tag $STAGING_IMAGE $RELEASE_IMAGE
         - docker push $RELEASE_IMAGE
     only:
-#        - master
+        - master
         - testing
 
 build:
@@ -46,7 +46,7 @@ build:
         - kubectl --namespace=$CONTEXT_NAMESPACE set image deployment/$DEPLOYMENT $DEPLOYMENT=$STAGING_IMAGE --record
         - kubectl --namespace=$CONTEXT_NAMESPACE rollout status deployment/$DEPLOYMENT
     only:
-#        - master
+        - master
         - testing
 
 deploy_frontend:
