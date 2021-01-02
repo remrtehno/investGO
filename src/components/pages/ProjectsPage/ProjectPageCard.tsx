@@ -12,18 +12,28 @@ import lg1 from 'src/assets/images/logo1.png';
 
 export declare namespace ProjectCard {
   export type Props = {
-    title?: string,
-    description?: string,
-    price?: string,
-    collect?: string,
-    progress?: string
-    image?: string,
+    title: string,
+    description: string,
+    price: string,
+    collect: string,
+    progress: string
+    image: string,
     logo?: string,
-    rate?: string,
-    term?: string,
+    rate: string,
+    term: string,
     investors?: string,
     offer?: string,
   };
+}
+
+function OfferIcon() {
+  return (
+    <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9.77691" cy="10.2222" r="6.22222" fill="#FF3B30"/>
+      <circle cx="7.99957" cy="10.2222" r="6.22222" fill="white"/>
+      <circle cx="6.22222" cy="10.2222" r="5.72222" fill="#FF3B30" stroke="#FF3B30"/>
+    </svg>
+  )
 }
 
 const ProjectPageCard: FC<ProjectCard.Props> = (props) => {
@@ -54,14 +64,10 @@ const ProjectPageCard: FC<ProjectCard.Props> = (props) => {
         </div>
         <ProgressBar progress={props.progress}/>
         <Text className={s.projectItemCollected} size={TextSize.bodyMini}>
-          <span color={Color.label} className={s.projectItemCollectedLabel}>Собрано</span> {props.collect} ₽
+          <Text size={TextSize.bodyMini} className={s.projectItemCollectedLabel}>Собрано</Text> {props.collect} ₽
           {props.offer &&
           <span className={s.projectItemCollectedOffer}>
-            <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="9.77691" cy="10.2222" r="6.22222" fill="#FF3B30"/>
-              <circle cx="7.99957" cy="10.2222" r="6.22222" fill="white"/>
-              <circle cx="6.22222" cy="10.2222" r="5.72222" fill="#FF3B30" stroke="#FF3B30"/>
-            </svg> &nbsp;
+            <OfferIcon/> &nbsp;
             {props.offer} ₽
           </span>}
         </Text>
