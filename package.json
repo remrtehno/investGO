@@ -7,7 +7,8 @@
     "build:server": "webpack --config ./webpack/webpack.server.prod.config.js",
     "build:client": "webpack --config ./webpack/webpack.client.prod.config.js",
     "storybook": "start-storybook -p 6006",
-    "start:prod": "node build/bundle.js"
+    "start:prod": "node build/bundle.js",
+    "eslint-fix": "eslint --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",
@@ -35,6 +36,8 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/react-transition-group": "^4.4.0",
     "@types/webpack-dev-middleware": "^3.7.2",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
     "babel-loader": "^8.2.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-polyfill": "^6.26.0",
@@ -44,6 +47,8 @@
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
     "es-abstract": "^1.18.0-next.1",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react": "^7.22.0",
     "express": "^4.17.1",
     "extract-css-chunks-webpack-plugin": "^4.8.0",
     "http-proxy-middleware": "^1.0.6",
