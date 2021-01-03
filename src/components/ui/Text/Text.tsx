@@ -1,6 +1,6 @@
-import React, {CSSProperties, FC, useMemo} from "react";
-import {Color} from "../../../types/Color";
-import {DivProps} from "../../../types/common";
+import React, {CSSProperties, FC, useMemo} from 'react';
+import {Color} from '../../../types/Color';
+import {DivProps} from '../../../types/common';
 import s from './Text.scss';
 import cx from 'classnames';
 import _ from 'lodash';
@@ -19,7 +19,7 @@ export enum TextSize {
 
 export enum TextWeight {
   bold= 700,
-  semibold =  600,
+  semibold = 600,
   normal = 400,
 }
 
@@ -38,9 +38,7 @@ export const Text: FC<Text.Props> = (props) => {
     [s[`color_${props.color}`]]: props.color,
   }, props.className);
 
-  const style = useMemo((): CSSProperties => {
-    return { fontWeight: props.weight };
-  }, [props.weight]);
+  const style = useMemo((): CSSProperties => ({fontWeight: props.weight}), [props.weight]);
 
   return (
     <div
@@ -48,7 +46,7 @@ export const Text: FC<Text.Props> = (props) => {
       className={className}
       style={style}
     >
-      {props.children}
+      { props.children }
     </div>
-  )
+  );
 };

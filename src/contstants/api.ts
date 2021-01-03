@@ -14,5 +14,5 @@ export const api = {
   },
   common: {
     uploadFile: () => '/file/upload',
-  }
+  },
 };

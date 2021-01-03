@@ -1,5 +1,5 @@
-import {Input} from "../../ui/Input";
-import {FieldType} from "./Form";
+import {Input} from '../../ui/Input';
+import {FieldType} from './Form';
 
 export declare namespace FormFieldModel {
   type BaseFieldModel = {

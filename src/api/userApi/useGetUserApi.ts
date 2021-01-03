@@ -1,15 +1,15 @@
 import _ from 'lodash';
-import {useRecoilState} from "recoil";
-import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
-import {userAtom} from "../../recoil/userAtom";
-import {RequestStatus} from "../../types/common";
-import {User} from "../../types/User";
+import {useRecoilState} from 'recoil';
+import {api} from '../../contstants/api';
+import useApi from '../../hooks/useApi';
+import useApiRequest from '../../hooks/useApiRequest';
+import {userAtom} from '../../recoil/userAtom';
+import {RequestStatus} from '../../types/common';
+import {User} from '../../types/User';
 
 export const useGetUserApi = () => {
   const request = useApiRequest();
-  const [{ user }, setUser] = useRecoilState(userAtom);
+  const [{user}, setUser] = useRecoilState(userAtom);
 
   const [, getUser] = useApi<void, null>(async() => {
     try {
@@ -20,7 +20,7 @@ export const useGetUserApi = () => {
       setUser({
         user: newUser ? {
           ...newUser,
-          passport: user && user.id === newUser.id ? user.passport : null
+          passport: user && user.id === newUser.id ? user.passport : null,
         } : null,
         status: RequestStatus.success,
         error: null,
@@ -31,14 +31,14 @@ export const useGetUserApi = () => {
         setUser({
           user,
           status: RequestStatus.failed,
-          error: { code: 'accessDenied', data: { message: 'Пользователь не авторизован' } }
+          error: {code: 'accessDenied', data: {message: 'Пользователь не авторизован'}},
         });
       } else {
         setUser({
           user,
           status: RequestStatus.failed,
-          error: { code: 'internalError', data: { message: 'Что-то пошло не так' } }
-        })
+          error: {code: 'internalError', data: {message: 'Что-то пошло не так'}},
+        });
       }
     }
 

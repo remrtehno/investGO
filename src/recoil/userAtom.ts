@@ -1,6 +1,6 @@
-import {atom} from "recoil";
-import {RequestError, RequestStatus} from "../types/common";
-import {User} from "../types/User";
+import {atom} from 'recoil';
+import {RequestError, RequestStatus} from '../types/common';
+import {User} from '../types/User';
 
 export type UserAtom = {
   user: User | null,
@@ -15,5 +15,5 @@ export const userAtom = atom<UserAtom>({
     status: RequestStatus.initial,
     error: null,
   },
-})
+});
 

@@ -1,16 +1,16 @@
-import React, {FC} from "react";
-import {FileArrayInput} from "../../../ui/FileArrayInput/FileArrayInput";
-import {Input} from "../../../ui/Input";
-import {FieldType, useFormModel} from "../Form";
-import {FormField} from "../types";
-import {FieldProps, fieldsModel} from "./fieldsModel";
+import React, {FC} from 'react';
+import {FileArrayInput} from '../../../ui/FileArrayInput/FileArrayInput';
+import {Input} from '../../../ui/Input';
+import {FieldType, useFormModel} from '../Form';
+import {FormField} from '../types';
+import {FieldProps, fieldsModel} from './fieldsModel';
 
 export declare namespace FileArrayField {
   export type Props = FieldProps<FormField.FileArray> & Pick<Input.Props, 'regExp'>;
 }
 
 export const FileArrayField: FC<FileArrayField.Props> = (props) => {
-  const { field } = props;
+  const {field} = props;
   const form = useFormModel();
 
   return (
@@ -20,7 +20,7 @@ export const FileArrayField: FC<FileArrayField.Props> = (props) => {
       onChange={form.onChange}
       disabled={field.disabled}
     />
-  )
+  );
 };
 
 fieldsModel.register({

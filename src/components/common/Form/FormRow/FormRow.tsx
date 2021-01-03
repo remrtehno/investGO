@@ -8,8 +8,5 @@ export declare namespace FormRow {
   };
 }
 
-export const FormRow: FC<FormRow.Props> = (props) => {
-  return (
-    <div className={cx('row', s.FormRow, props.className)}>{props.children}</div>
-  );
-}; 
+export const FormRow: FC<FormRow.Props> = (props) => <div className={cx('row', s.FormRow, props.className)}>{ props.children }</div>;
+

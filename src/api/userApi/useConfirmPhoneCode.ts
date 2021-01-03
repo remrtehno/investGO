@@ -1,6 +1,6 @@
-import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
+import {api} from '../../contstants/api';
+import useApi from '../../hooks/useApi';
+import useApiRequest from '../../hooks/useApiRequest';
 
 export declare namespace useConfirmPhoneCode {
   export type Payload = {
@@ -14,7 +14,7 @@ export declare namespace useConfirmPhoneCode {
 export const useConfirmPhoneCode = () => {
   const request = useApiRequest();
 
-  return useApi<useConfirmPhoneCode.Payload, boolean>(async (payload) => {
+  return useApi<useConfirmPhoneCode.Payload, boolean>(async(payload) => {
     await request<useConfirmPhoneCode.Response>(api.user.confirmPhoneCode(), {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -23,7 +23,6 @@ export const useConfirmPhoneCode = () => {
     });
 
     return true;
-
   }, false);
 };
 

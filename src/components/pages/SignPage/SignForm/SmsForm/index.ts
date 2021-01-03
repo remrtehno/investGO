@@ -1,1 +1,1 @@
-export { SmsForm } from './SmsForm';
+export {SmsForm} from './SmsForm';

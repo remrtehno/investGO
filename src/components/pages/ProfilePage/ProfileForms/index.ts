@@ -1,1 +1,1 @@
-export { ProfileForms } from './ProfileForms';
+export {ProfileForms} from './ProfileForms';

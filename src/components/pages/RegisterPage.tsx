@@ -1,8 +1,5 @@
-import React, {FC} from "react";
-import {ProfilePage} from "./ProfilePage";
+import React, {FC} from 'react';
+import {ProfilePage} from './ProfilePage';
 
-export const RegisterPage: FC = () => {
-  return (
-    <ProfilePage checkAuth={false}/>
-  )
-};
+export const RegisterPage: FC = () => <ProfilePage checkAuth={false} />;
+

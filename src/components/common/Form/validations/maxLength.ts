@@ -1,3 +1,1 @@
-export const maxLength = (max: number, msg = `Максимальная длинна: ${max}`) => (value: any) => {
-  return value && value.length > max ? msg : null;
-}
+export const maxLength = (max: number, msg = `Максимальная длинна: ${max}`) => (value: any) => (value && value.length > max ? msg : null);

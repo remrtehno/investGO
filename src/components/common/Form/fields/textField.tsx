@@ -1,8 +1,8 @@
-import React, {FC} from "react";
-import {Input} from "../../../ui/Input";
-import {FieldType, useFormModel} from "../Form";
-import {FormField} from "../types";
-import {FieldProps, fieldsModel} from "./fieldsModel";
+import React, {FC} from 'react';
+import {Input} from '../../../ui/Input';
+import {FieldType, useFormModel} from '../Form';
+import {FormField} from '../types';
+import {FieldProps, fieldsModel} from './fieldsModel';
 
 export declare namespace TextField {
   export type Props = FieldProps<FormField.Text> & Pick<Input.Props, 'regExp' | 'isPassword'> & {
@@ -11,7 +11,7 @@ export declare namespace TextField {
 }
 
 export const TextField: FC<TextField.Props> = (props) => {
-  const { field, onChange, ...inputProps } = props;
+  const {field, onChange, ...inputProps} = props;
   const form = useFormModel();
 
   return (
@@ -28,7 +28,7 @@ export const TextField: FC<TextField.Props> = (props) => {
         {...inputProps}
       />
     </div>
-  )
+  );
 };
 
 fieldsModel.register({

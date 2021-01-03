@@ -1,15 +1,10 @@
 import React from 'react';
-import {Button, ButtonSize, ButtonTheme} from "./Button";
+import {Button, ButtonSize, ButtonTheme} from './Button';
 
 export default {
   component: Button,
-  title: 'Common/ui'
+  title: 'Common/ui',
 };
 
-export const ButtonsStory = () => {
-  return (
-    <Button size={ButtonSize.m} theme={ButtonTheme.black}/>
-  )
-};
-
-ButtonsStory.story = { name: 'Buttons' };
+export const ButtonsStory = () => <Button size={ButtonSize.m} theme={ButtonTheme.black} />;
+ButtonsStory.story = {name: 'Buttons'};

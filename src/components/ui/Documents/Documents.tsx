@@ -5,10 +5,9 @@ export declare namespace Documents {
   export type Props = {};
 }
 
-export const Documents: FC<Documents.Props> = (props) => {
+export const Documents: FC<Documents.Props> = () => {
   return (
-    <div className={s.Documents}>
-
-    </div>
+    <div className={s.Documents} />
   );
-}; 
+};
+

@@ -1,12 +1,12 @@
-import React, {FC, useEffect, useRef} from "react";
-import {usePageScroll} from "../../../../hooks/usePageScroll";
-import {getElementPosition} from "../../../../utils/getElementPosition";
-import {ProfilePage} from "../ProfilePage";
-import {ProfileFormType} from "../profilePageTypes";
-import {IndividualEntrepreneurForm} from "./forms/IndividualEntrepreneurForm";
-import {PassportForm} from "./forms/PassportForm";
-import {ProfileForm} from "./forms/ProfileForm";
-import {RequisitionsForm} from "./forms/RequisitionsForm";
+import React, {FC, useEffect, useRef} from 'react';
+import {usePageScroll} from '../../../../hooks/usePageScroll';
+import {getElementPosition} from '../../../../utils/getElementPosition';
+import {ProfilePage} from '../ProfilePage';
+import {ProfileFormType} from '../profilePageTypes';
+import {IndividualEntrepreneurForm} from './forms/IndividualEntrepreneurForm';
+import {PassportForm} from './forms/PassportForm';
+import {ProfileForm} from './forms/ProfileForm';
+import {RequisitionsForm} from './forms/RequisitionsForm';
 import s from './ProfileForms.scss';
 import cx from 'classnames';
 
@@ -33,7 +33,7 @@ export declare namespace ProfileForms {
 }
 
 export const ProfileForms: FC<ProfileForms.Props> = (props) => {
-  const { scrollTop } = usePageScroll();
+  const {scrollTop} = usePageScroll();
   const formsRef = useRef<Record<string, HTMLDivElement | null>>({});
   const prevFormRef = useRef<ProfileFormType | null>(null);
   const preventHandleScrollRef = useRef(false);
@@ -52,19 +52,18 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
         return;
       }
 
-      const { top } = getElementPosition(el);
-      const pos = Math.abs(top + el.offsetHeight / 2);
+      const {top} = getElementPosition(el);
+      const pos = Math.abs(top + (el.offsetHeight / 2));
 
       if (!newCurrentForm || newCurrentForm.pos > pos) {
         newCurrentForm = {
           id: form.id,
-          pos
+          pos,
         };
-        return;
       }
     });
 
-    const formId = newCurrentForm && (newCurrentForm as any).id
+    const formId = newCurrentForm && (newCurrentForm as any).id;
     if (formId && formId !== prevFormRef.current) {
       props.onChangeCurrentForm(formId);
       prevFormRef.current = formId;
@@ -85,7 +84,7 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
 
   return (
     <div className={cx(s.ProfileForms, props.className)}>
-      {props.forms.map((form) => {
+      { props.forms.map((form) => {
         const Form = forms[form.id];
 
         return (
@@ -97,7 +96,7 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
             }}
           />
         );
-      })}
+      }) }
     </div>
-  )
+  );
 };

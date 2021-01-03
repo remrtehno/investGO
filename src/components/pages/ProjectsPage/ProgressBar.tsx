@@ -1,5 +1,5 @@
-import React, {FC} from "react";
-import s from "./ProjectsPage.scss";
+import React, {FC} from 'react';
+import s from './ProjectsPage.scss';
 
 export declare namespace ProgressBar {
   export type Props = {
@@ -7,12 +7,10 @@ export declare namespace ProgressBar {
   };
 }
 
-const ProgressBar: FC<ProgressBar.Props> = ({progress}) => {
-  return(
-    <div className={s.progressBar}>
-      <div className={s.progressBarInner} style={{width: `${progress}%`}}> </div>
-    </div>
-  )
-};
+const ProgressBar: FC<ProgressBar.Props> = ({progress}) => (
+  <div className={s.progressBar}>
+    <div className={s.progressBarInner} style={{width: `${progress}%`}}> </div>
+  </div>
+);
 
 export default ProgressBar;

@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC} from "react";
+import React, {CSSProperties, FC} from 'react';
 
 export declare namespace Margin {
   export type Props = {
@@ -6,10 +6,8 @@ export declare namespace Margin {
   };
 }
 
-export const Margin: FC<Margin.Props> = (props) => {
-  return (
-    <div className={'margin'} style={{ margin: props.margin }}>
-      {props.margin}
-    </div>
-  )
-};
+export const Margin: FC<Margin.Props> = (props) => (
+  <div className={'margin'} style={{margin: props.margin}}>
+    { props.margin }
+  </div>
+);

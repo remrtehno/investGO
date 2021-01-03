@@ -1,1 +1,1 @@
-export { SignPage } from './SignPage';
+export {SignPage} from './SignPage';

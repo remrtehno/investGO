@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from 'react';
 
 export enum ApiStatus {
     initial = 'initial',
@@ -8,7 +8,7 @@ export enum ApiStatus {
     canceled = 'canceled',
 }
 
-export interface ApiState {
+export type ApiState = {
     resetValue(): void,
     cancelRequest(): void,
     status: ApiStatus,
@@ -37,69 +37,65 @@ export type UseApi = <TRequest, TResponse>(
 ) => [TResponse, (payload: TRequest) => void, ApiState];
 
 const useApi: UseApi = <TRequest, TResponse>(
-    asyncFunc: (payload: TRequest) => Promise<TResponse>,
-    initialResult: TResponse,
-    options: UseApiOptions = {},
+  asyncFunc: (payload: TRequest) => Promise<TResponse>,
+  initialResult: TResponse,
+  options: UseApiOptions = {}
 ): [TResponse, (payload: TRequest) => void, ApiState] => {
-    const { isRequestAllowed = () => true } = options;
+  const {isRequestAllowed = () => true} = options;
 
-    const [state, setState] = useState<State<TResponse>>({
-        result: initialResult,
-        status: ApiStatus.initial,
-        error: null
-    });
+  const [state, setState] = useState<State<TResponse>>({
+    result: initialResult,
+    status: ApiStatus.initial,
+    error: null,
+  });
 
-    useEffect(() => {
-        return () => setState({ ...state, status: ApiStatus.canceled, error: null });
-    }, []);
+  useEffect(() => () => setState({...state, status: ApiStatus.canceled, error: null}), []);
 
-    const request = (payload: TRequest) => {
-        if (!isRequestAllowed()) {
-            return;
+  const request = (payload: TRequest) => {
+    if (!isRequestAllowed()) {
+      return;
+    }
+
+    setState({...state, status: ApiStatus.loading, error: null});
+
+    asyncFunc(payload)
+      .then((result) => {
+        // Was the validation request canceled at run time?
+        if (state.status !== ApiStatus.canceled) {
+          setState({result, status: ApiStatus.success, error: null});
         }
+      })
+      .catch((error) => {
+        // Was the validation request canceled at run time?
+        if (state.status === ApiStatus.canceled) {
+          return;
+        }
+        console.error('API error', error);
+        setState({...state, status: ApiStatus.failed, error});
+      });
+  };
 
-        setState({ ...state, status: ApiStatus.loading, error: null });
+  const resultState = useMemo((): ApiState => ({
+    cancelRequest: () => setState({
+      ...state,
+      status: ApiStatus.canceled,
+      error: null,
+    }),
+    resetValue: () => setState({
+      result: initialResult,
+      status: ApiStatus.initial,
+      error: null,
+    }),
+    error: state.error,
+    status: state.status,
+    isInitial: state.status === ApiStatus.initial,
+    isLoading: state.status === ApiStatus.loading,
+    isFailed: state.status === ApiStatus.failed,
+    isCanceled: state.status === ApiStatus.canceled,
+    isSuccess: state.status === ApiStatus.success,
+  }), [state]);
 
-        asyncFunc(payload)
-            .then((result) => {
-                // Was the validation request canceled at run time?
-                if (state.status !== ApiStatus.canceled) {
-                    setState({ result, status: ApiStatus.success, error: null });
-                }
-            })
-            .catch((error) => {
-                // Was the validation request canceled at run time?
-                if (state.status === ApiStatus.canceled) {
-                    return;
-                }
-                console.error('API error', error);
-                setState({ ...state, status: ApiStatus.failed, error });
-            });
-    };
-
-    const resultState = useMemo((): ApiState => {
-        return {
-            cancelRequest: () => setState({
-                ...state,
-                status: ApiStatus.canceled,
-                error: null
-            }),
-            resetValue: () => setState({
-                result: initialResult,
-                status: ApiStatus.initial,
-                error: null
-            }),
-            error: state.error,
-            status: state.status,
-            isInitial: state.status === ApiStatus.initial,
-            isLoading: state.status === ApiStatus.loading,
-            isFailed: state.status === ApiStatus.failed,
-            isCanceled: state.status === ApiStatus.canceled,
-            isSuccess: state.status === ApiStatus.success,
-        };
-    }, [state]);
-
-    return [state.result, request, resultState];
+  return [state.result, request, resultState];
 };
 
 export default useApi;

@@ -1,9 +1,9 @@
 import cx from 'classnames';
-import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState} from "react";
-import {Color} from "../../../types/Color";
-import {useOnClickOutside} from "../../../hooks/useOnClickOutside";
-import {DivProps} from "../../../types/common";
-import {Text, TextSize} from "../Text";
+import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState} from 'react';
+import {Color} from '../../../types/Color';
+import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
+import {DivProps} from '../../../types/common';
+import {Text, TextSize} from '../Text';
 import s from './Input.scss';
 import InputMask from 'react-input-mask';
 
@@ -35,7 +35,7 @@ export const Input: FC<Input.Props> = (props) => {
   });
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+    const {value} = e.currentTarget;
 
     if (props.regExp && !props.regExp.test(value)) {
       return;
@@ -55,7 +55,7 @@ export const Input: FC<Input.Props> = (props) => {
     }
   }, [props.disabled]);
 
-  const onBlur: FocusEventHandler<HTMLInputElement> = useCallback((e) => {
+  const onBlur: FocusEventHandler<HTMLInputElement> = useCallback(() => {
     setIsFocused(false);
   }, []);
 
@@ -66,7 +66,7 @@ export const Input: FC<Input.Props> = (props) => {
     autoComplete: 'off',
     onFocus,
     onBlur,
-    className: cx(s.control, { [s.isControlVisible]: isControlVisible }),
+    className: cx(s.control, {[s.isControlVisible]: isControlVisible}),
     onChange,
     name: props.name || undefined,
     value: props.value || '',
@@ -80,34 +80,32 @@ export const Input: FC<Input.Props> = (props) => {
       className={cx(s.input, props.className, {
         [s.withError]: props.error,
         [s.focused]: isFocused,
-        [s.disabled]: props.disabled
+        [s.disabled]: props.disabled,
       })}
       onClick={onFocus}
     >
       <Text
-        className={cx(s.label, { [s.isControlVisible]: isControlVisible })}
+        className={cx(s.label, {[s.isControlVisible]: isControlVisible})}
         size={isControlVisible ? TextSize.caption1 : TextSize.body1}
         color={isControlVisible ? null : Color.gray4}
       >
-        {props.label}
+        { props.label }
       </Text>
       { props.mask ? (
         <InputMask mask={props.mask} {...controlProps}>
-          {(inputProps: any) => {
-            return (
-              <input
-                {...inputProps}
-                ref={controlRef}
-              />
-            )
-          }}
+          { (inputProps: any) => (
+            <input
+              {...inputProps}
+              ref={controlRef}
+            />
+          ) }
         </InputMask>
-      ) : (
-        <input {...controlProps} ref={controlRef}/>
-      ) }
-      { props.error ? (
-        <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{props.error}</Text>
-      ) : null }
+      )
+        : <input {...controlProps} ref={controlRef} />
+      }
+      { props.error
+        ? <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{ props.error }</Text>
+        : null }
     </div>
-  )
+  );
 };

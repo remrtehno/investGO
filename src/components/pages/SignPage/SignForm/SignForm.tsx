@@ -1,22 +1,22 @@
-import cx from "classnames";
-import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
-import {useHistory} from "react-router-dom";
-import {useRecoilValue} from "recoil";
-import {useUserCheckExists} from "../../../../api/userApi/useUserCheckExists";
-import {useSignInApi} from "../../../../api/userApi/useSignInApi";
-import {useSignUpApi} from "../../../../api/userApi/useSignUpApi";
-import {useLatestRef} from "../../../../hooks/useLatestRef";
-import {userAtom} from "../../../../recoil/userAtom";
-import {Form} from "../../../common/Form";
-import {Field} from "../../../common/Form/Field";
-import {FieldType} from "../../../common/Form/Form";
-import {email} from "../../../common/Form/validations/email";
-import {required} from "../../../common/Form/validations/required";
-import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
-import {Text, TextSize} from "../../../ui/Text";
-import {CheckEmailModal} from "./CheckEmailModal";
+import cx from 'classnames';
+import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import {useRecoilValue} from 'recoil';
+import {useUserCheckExists} from '../../../../api/userApi/useUserCheckExists';
+import {useSignInApi} from '../../../../api/userApi/useSignInApi';
+import {useSignUpApi} from '../../../../api/userApi/useSignUpApi';
+import {useLatestRef} from '../../../../hooks/useLatestRef';
+import {userAtom} from '../../../../recoil/userAtom';
+import {Form} from '../../../common/Form';
+import {Field} from '../../../common/Form/Field';
+import {FieldType} from '../../../common/Form/Form';
+import {email} from '../../../common/Form/validations/email';
+import {required} from '../../../common/Form/validations/required';
+import {Button, ButtonSize, ButtonTheme} from '../../../ui/Button/Button';
+import {Text, TextSize} from '../../../ui/Text';
+import {CheckEmailModal} from './CheckEmailModal';
 import s from './SignForm.scss';
-import {SmsForm} from "./SmsForm";
+import {SmsForm} from './SmsForm';
 import _ from 'lodash';
 
 export declare namespace SignForm {
@@ -36,7 +36,7 @@ const initialValues: SignForm.SignValues = {
   phone: '',
 };
 
-export const SignForm: FC<SignForm.Props> = (props) => {
+export const SignForm: FC<SignForm.Props> = () => {
   const [, signInApi, signInState] = useSignInApi();
   const [, signUpApi, signUpState] = useSignUpApi();
   const [isUserExists, checkUserExistsApi, checkUserExistsState] = useUserCheckExists();
@@ -46,35 +46,33 @@ export const SignForm: FC<SignForm.Props> = (props) => {
   const [isNeedShowPhone, setIsNeedShowPhone] = useState(false);
   const [isShowSmsForm, setIsShowSmsForm] = useState(false);
   const emailRef = useLatestRef(values.email);
-  const { user } = useRecoilValue(userAtom);
+  const {user} = useRecoilValue(userAtom);
   const history = useHistory();
   const [isCheckEmailModalVisible, setIsCheckEmailModalVisible] = useState(false);
 
-  const signFields = useMemo((): Form.FieldModels => {
-    return {
-      email: {
-        type: FieldType.text,
-        name: 'email',
-        validations: [required(), email()],
-        label: 'Введите свой email',
-        disabled: isNeedShowPhone,
-      },
-      password: {
-        type: FieldType.password,
-        name: 'password',
-        validations: [required()],
-        label: 'Введите пароль',
-        disabled: isNeedShowPhone,
-      },
-      phone: {
-        type: FieldType.phone,
-        isHidden: !isNeedShowPhone,
-        name: 'phone',
-        validations: [required()],
-        label: 'Введите свой номер телефона',
-      }
-    };
-  }, [isNeedShowPhone]);
+  const signFields = useMemo((): Form.FieldModels => ({
+    email: {
+      type: FieldType.text,
+      name: 'email',
+      validations: [required(), email()],
+      label: 'Введите свой email',
+      disabled: isNeedShowPhone,
+    },
+    password: {
+      type: FieldType.password,
+      name: 'password',
+      validations: [required()],
+      label: 'Введите пароль',
+      disabled: isNeedShowPhone,
+    },
+    phone: {
+      type: FieldType.phone,
+      isHidden: !isNeedShowPhone,
+      name: 'phone',
+      validations: [required()],
+      label: 'Введите свой номер телефона',
+    },
+  }), [isNeedShowPhone]);
 
   const onChange = useCallback((values: SignForm.SignValues, errors: Form.Errors) => {
     setValues(values);
@@ -85,17 +83,15 @@ export const SignForm: FC<SignForm.Props> = (props) => {
     return (
       <Text className={s.title} size={TextSize.h3}>
         <span className={cx(isUserExists ? s.selected : null)}>Вход</span>
-        {' '}или{' '}
+        { ' ' }или{ ' ' }
         <span className={cx(isUserExists ? null : s.selected)}>регистрация</span>
       </Text>
-    )
+    );
   }
 
-  const checkEmail = useMemo(() => {
-    return _.debounce(() => {
-      checkUserExistsApi({ email: emailRef.current });
-    }, 300);
-  }, []);
+  const checkEmail = useMemo(() => _.debounce(() => {
+    checkUserExistsApi({email: emailRef.current});
+  }, 300), []);
 
   useEffect(() => {
     if (!errors.email && values.email) {
@@ -119,10 +115,10 @@ export const SignForm: FC<SignForm.Props> = (props) => {
       signUpState.resetValue();
     }
 
-    if (errorMessage === "incorrect_password") {
+    if (errorMessage === 'incorrect_password') {
       setErrors({...errors, password: 'Неверный пароль'});
     } else if (errorMessage === 'email_not_confirmed') {
-      setErrors({ ...errors, email: 'Email не подтвержден' });
+      setErrors({...errors, email: 'Email не подтвержден'});
     }
   }, [signInState.error, signUpState.error, isUserExists]);
 
@@ -144,7 +140,6 @@ export const SignForm: FC<SignForm.Props> = (props) => {
   }, [signUpState.isSuccess]);
 
   useEffect(() => {
-    console.log(signUpState.error);
     setIsShowSmsForm(false);
   }, [signUpState.error]);
 
@@ -178,10 +173,10 @@ export const SignForm: FC<SignForm.Props> = (props) => {
       onChange={onChange}
       formApiRef={formApiRef}
     >
-      {renderTitle()}
-      <Field className={s.field} name='email'/>
-      <Field className={s.field} name='password'/>
-      <Field className={s.field} name='phone'/>
+      { renderTitle() }
+      <Field className={s.field} name='email' />
+      <Field className={s.field} name='password' />
+      <Field className={s.field} name='phone' />
       <Button
         className={s.continueButton}
         size={ButtonSize.m}
@@ -191,16 +186,16 @@ export const SignForm: FC<SignForm.Props> = (props) => {
       >
         Продолжить
       </Button>
-      {isShowSmsForm ? (
-        <SmsForm onConfirm={signUp} phone={values.phone}/>
-      ) : null}
-      {isCheckEmailModalVisible ? (
+      { isShowSmsForm
+        ? <SmsForm onConfirm={signUp} phone={values.phone} />
+        : null }
+      { isCheckEmailModalVisible ? (
         <CheckEmailModal
           onClose={() => {
             window.location.pathname = '/';
           }}
         />
-      ) : null}
+      ) : null }
     </Form>
-  )
+  );
 };

@@ -1,9 +1,9 @@
-import {FC} from "react";
-import {RouteProps} from "react-router";
-import {RegisterPage} from "../../pages/RegisterPage";
-import {ProfilePage} from "../../pages/ProfilePage";
-import {SignPage} from "../../pages/SignPage";
-import {ProjectsPage} from "../../pages/ProjectsPage";
+import {FC} from 'react';
+import {RouteProps} from 'react-router';
+import {RegisterPage} from '../../pages/RegisterPage';
+import {ProfilePage} from '../../pages/ProfilePage';
+import {SignPage} from '../../pages/SignPage';
+import {ProjectsPage} from '../../pages/ProjectsPage';
 
 export type RouteInfo = RouteProps & {
   Component: FC

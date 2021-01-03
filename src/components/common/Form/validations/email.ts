@@ -3,4 +3,4 @@ export const email = (msg = 'Невалидный email') => (value: string) => 
     return msg;
   }
   return null;
-}
+};

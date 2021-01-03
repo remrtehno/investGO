@@ -1,5 +1,5 @@
-import cx from "classnames";
-import React, {FC, useCallback} from "react";
+import cx from 'classnames';
+import React, {FC, useCallback} from 'react';
 import s from './Button.scss';
 
 export enum ButtonSize {
@@ -31,7 +31,7 @@ export const Button: FC<Button.Props> = (props) => {
     s[`size_${props.size}`],
     s[`theme_${props.theme}`],
     props.disabled ? s.disabled : null,
-    props.className,
+    props.className
   );
 
   const onClick = useCallback(() => {
@@ -44,7 +44,7 @@ export const Button: FC<Button.Props> = (props) => {
 
   return (
     <button className={className} onClick={onClick}>
-      {props.children}
+      { props.children }
     </button>
-  )
+  );
 };

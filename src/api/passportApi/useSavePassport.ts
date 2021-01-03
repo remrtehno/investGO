@@ -1,10 +1,10 @@
-import {useRecoilState} from "recoil";
-import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
-import {userAtom} from "../../recoil/userAtom";
-import {RequestStatus} from "../../types/common";
-import {User} from "../../types/User";
+import {useRecoilState} from 'recoil';
+import {api} from '../../contstants/api';
+import useApi from '../../hooks/useApi';
+import useApiRequest from '../../hooks/useApiRequest';
+import {userAtom} from '../../recoil/userAtom';
+import {RequestStatus} from '../../types/common';
+import {User} from '../../types/User';
 
 export declare namespace useSavePassport {
   export type Payload = User.Passport;
@@ -12,7 +12,7 @@ export declare namespace useSavePassport {
 
 export function useSavePassport() {
   const request = useApiRequest();
-  const [{ user }, setUser] = useRecoilState(userAtom);
+  const [{user}, setUser] = useRecoilState(userAtom);
 
   return useApi<useSavePassport.Payload, null>(async(payload) => {
     if (!user) {
@@ -30,7 +30,7 @@ export function useSavePassport() {
         passport: passport || null,
       },
       status: RequestStatus.success,
-      error: null
+      error: null,
     });
 
     return null;

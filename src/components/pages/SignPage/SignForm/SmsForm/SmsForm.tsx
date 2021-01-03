@@ -1,15 +1,15 @@
 import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
-import {useConfirmPhoneCode} from "../../../../../api/userApi/useConfirmPhoneCode";
-import {useSendPhoneCode} from "../../../../../api/userApi/useSendPhoneCode";
-import {Form} from "../../../../common/Form";
-import {Field} from "../../../../common/Form/Field";
-import {FieldType} from "../../../../common/Form/Form";
-import {maxLength} from "../../../../common/Form/validations/maxLength";
-import {minLength} from "../../../../common/Form/validations/minLength";
-import {required} from "../../../../common/Form/validations/required";
-import Modal from "../../../../common/Modal/Modal";
-import {Button, ButtonSize, ButtonTheme} from "../../../../ui/Button/Button";
-import {Text, TextSize} from "../../../../ui/Text";
+import {useConfirmPhoneCode} from '../../../../../api/userApi/useConfirmPhoneCode';
+import {useSendPhoneCode} from '../../../../../api/userApi/useSendPhoneCode';
+import {Form} from '../../../../common/Form';
+import {Field} from '../../../../common/Form/Field';
+import {FieldType} from '../../../../common/Form/Form';
+import {maxLength} from '../../../../common/Form/validations/maxLength';
+import {minLength} from '../../../../common/Form/validations/minLength';
+import {required} from '../../../../common/Form/validations/required';
+import Modal from '../../../../common/Modal/Modal';
+import {Button, ButtonSize, ButtonTheme} from '../../../../ui/Button/Button';
+import {Text, TextSize} from '../../../../ui/Text';
 import s from './SmsForm.scss';
 import _ from 'lodash';
 
@@ -19,11 +19,11 @@ const fields: Form.FieldModels = {
     type: FieldType.text,
     validations: [required(), maxLength(5), minLength(5)],
     label: 'Введите код из СМС',
-  }
+  },
 };
 
 const initialValues: SmsForm.Values = {
-  code: ''
+  code: '',
 };
 
 export declare namespace SmsForm {
@@ -50,7 +50,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    sendPhoneCodeApi({ phone: props.phone });
+    sendPhoneCodeApi({phone: props.phone});
   }, [props.phone]);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
         onChange={onChange}
         formApiRef={formApiRef}
       >
-        <Field className={s.field} name='code'/>
+        <Field className={s.field} name='code' />
       </Form>
       <div className={s.resendContainer}>
         <Button
@@ -93,5 +93,5 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
         >Отправить повторно</Button>
       </div>
     </Modal>
-  )
-}
+  );
+};

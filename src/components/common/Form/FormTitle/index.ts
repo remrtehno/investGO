@@ -1,1 +1,1 @@
-export { FormTitle } from './FormTitle';
+export {FormTitle} from './FormTitle';

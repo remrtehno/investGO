@@ -1,5 +1,5 @@
-import {FC} from "react";
-import {Form} from "../Form";
+import {FC} from 'react';
+import {Form} from '../Form';
 
 export type FieldProps<TField = Form.Field> = {
   field: TField,
@@ -23,5 +23,5 @@ export const fieldsModel: FieldsModel = {
   },
   get(type) {
     return models[type] || null;
-  }
+  },
 };

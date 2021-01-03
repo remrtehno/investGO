@@ -1,13 +1,14 @@
 import React from 'react';
+import _ from 'lodash';
 
 export function useOnClickOutside(
   ref: React.RefObject<Element>,
   fn: (e: MouseEvent) => void,
-  isActive: boolean = true,
+  isActive = true
 ) {
   React.useEffect(() => {
     if (!isActive) {
-      return;
+      return _.noop;
     }
 
     function onClick(event: MouseEvent) {

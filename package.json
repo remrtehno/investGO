@@ -8,7 +8,8 @@
     "build:client": "webpack --config ./webpack/webpack.client.prod.config.js",
     "storybook": "start-storybook -p 6006",
     "start:prod": "node build/bundle.js",
-    "eslint-fix": "eslint --fix"
+    "eslint": "eslint ./src --ignore-path .eslintignore",
+    "eslint-fix": "eslint ./src --fix --ignore-path .eslintignore"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",
