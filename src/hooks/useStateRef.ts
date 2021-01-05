@@ -3,10 +3,11 @@ import {useLatestRef} from './useLatestRef';
 
 export function useStateRef<TValue>(
   initialValue: TValue | (() => TValue)
-): [MutableRefObject<TValue>, (value: TValue) => void] {
+): [TValue, (value: TValue) => void, MutableRefObject<TValue>] {
   const [value, setValue] = useState(initialValue);
   return [
-    useLatestRef(value),
+    value,
     setValue,
+    useLatestRef(value),
   ];
 }

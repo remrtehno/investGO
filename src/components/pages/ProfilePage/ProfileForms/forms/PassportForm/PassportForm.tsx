@@ -1,11 +1,12 @@
 import cx from 'classnames';
 import _ from 'lodash';
-import React, {FC, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 import {useGetPassport} from '../../../../../../api/passportApi/useGetPassport';
 import {useSavePassport} from '../../../../../../api/passportApi/useSavePassport';
 import {userAtom} from '../../../../../../recoil/userAtom';
 import {User} from '../../../../../../types/User';
+import {parseDate} from '../../../../../../utils/parseDate';
 import {Form} from '../../../../../common/Form';
 import {Field} from '../../../../../common/Form/Field';
 import {FieldType} from '../../../../../common/Form/Form';
@@ -22,9 +23,17 @@ import {Text, TextSize} from '../../../../../ui/Text';
 import {ProfileForms} from '../../ProfileForms';
 import s from './PassportForm.scss';
 import {TimeIcon} from './TimeIcon';
+import moment from 'moment';
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
+}
+
+function validateAge(value: string) {
+  if (moment().diff(moment(parseDate(value)), 'years') < 18) {
+    return 'Меньше 18 лет';
+  }
+  return null;
 }
 
 const useFields = () => useMemo((): Form.FieldModels => ({
@@ -38,7 +47,7 @@ const useFields = () => useMemo((): Form.FieldModels => ({
     name: 'date_of_birth',
     type: FieldType.date,
     label: 'Дата рождения',
-    validations: [required()],
+    validations: [required(), validateAge],
   },
   serialNumber: {
     name: 'serialNumber',
@@ -63,7 +72,15 @@ const useFields = () => useMemo((): Form.FieldModels => ({
     name: 'date_of_issue',
     type: FieldType.date,
     label: 'Дата выдачи',
-    validations: [required()],
+    validations: [required(), validateAge, (value, values) => {
+      if (!values.date_of_birth) {
+        return null;
+      }
+      if (moment(parseDate(value)).diff(parseDate(values.date_of_birth), 'days') < 0) {
+        return 'Меньше даты рождения';
+      }
+      return null;
+    }],
   },
   authority: {
     name: 'authority',
@@ -109,6 +126,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   const [, savePassportApi] = useSavePassport();
   const {user} = useRecoilValue(userAtom);
   const fields = useFields();
+  const formApiRef = useRef<Form.Api | null>(null);
 
   const getValuesFromPassport = () => ({
     // ...{"fio":"аыаыв","date_of_birth":"20.04.1991", "serialNumber":"3243232433","date_of_issue":"20.04.1991","authority":"sfsfsdf","place_of_register":"sdsdfsd","place_of_residence":"dsfsdfs","snils":"42344234233","inn":"2434234333","personal_data_documents":[]},
@@ -142,7 +160,12 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   }, []);
 
   const onContinue = useCallback(() => {
-    if (!user) {
+    if (!user || !formApiRef.current) {
+      return;
+    }
+
+    formApiRef.current.submit();
+    if (!formApiRef.current.isValid) {
       return;
     }
 
@@ -175,6 +198,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         onChange={onChange}
         errors={errors}
         values={values}
+        formApiRef={formApiRef}
       >
         <FormRow>
           <Field className='col-6' name='fio' />
@@ -217,7 +241,6 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}
-              disabled={!_.isEmpty(errors)}
               onClick={onContinue}
             >Продолжить</Button>
           </div>

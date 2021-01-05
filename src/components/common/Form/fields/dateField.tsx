@@ -18,6 +18,7 @@ export const DateField: FC<DateField.Props> = (props) => {
       onChange={form.onChange}
       name={field.name}
       label={field.label}
+      error={!field.isDirty ? null : field.error}
     />
   );
 };

@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
+import {formatDate} from '../../../utils/formatDate';
+import {parseDate} from '../../../utils/parseDate';
 import {Input} from '../Input';
 import s from './CalendarInput.scss';
 import cx from 'classnames';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 
 import 'src/libs/react-datepicker/react-datepicker.css';
 
@@ -13,29 +14,34 @@ export declare namespace CalendarInput {
     value: string | null,
     label: string,
 
+    error?: string | null,
     className?: string,
     name?: string | null,
   };
 }
 
-export const CalendarInput: FC<CalendarInput.Props> = (props) => {
-  const CustomInput = ({value, onChange, ...inputProps}: any) => (
+const CustomInput = ({value, onChange, name, label, error, ...inputProps}: any) => {
+  return (
     <Input
       containerProps={inputProps}
-      name={props.name}
+      name={name}
       onChange={(newValue, name, e) => onChange(e)}
+      mask='99.99.9999'
       value={value}
-      label={props.label}
+      label={label}
+      error={error}
     />
   );
+};
 
+export const CalendarInput: FC<CalendarInput.Props> = (props) => {
   return (
     <div className={cx(s.CalendarInput, props.className)}>
       <DatePicker
         name={props.name || undefined}
-        onChange={(value: Date) => props.onChange(moment(value).format('YYYY-MM-DD'), props.name || null)}
-        selected={props.value ? moment(props.value, 'YYYY-MM-DD').toDate() : null}
-        customInput={<CustomInput />}
+        onChange={(value: Date) => props.onChange(formatDate(value), props.name || null)}
+        selected={props.value ? parseDate(props.value) : null}
+        customInput={<CustomInput name={props.name} label={props.label} error={props.error} />}
         dateFormat='dd.MM.yyyy'
       />
     </div>
