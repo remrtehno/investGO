@@ -1,7 +1,8 @@
-import {useState, useEffect, MutableRefObject} from 'react';
 import _ from 'lodash';
+import type {MutableRefObject} from 'react';
+import {useEffect, useState} from 'react';
 
-const useScroll = (ref: MutableRefObject<Element | null>) => {
+export const useScroll = (ref: MutableRefObject<Element | null>) => {
   const [scroll, setScroll] = useState<number>(0);
 
   const scrollHandler = () => {
@@ -24,5 +25,3 @@ const useScroll = (ref: MutableRefObject<Element | null>) => {
 
   return scroll;
 };
-
-export default useScroll;

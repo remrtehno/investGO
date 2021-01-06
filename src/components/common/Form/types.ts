@@ -1,6 +1,7 @@
-import {CalendarInput} from '../../ui/CalendarInput';
-import {Input} from '../../ui/Input';
-import {FieldType} from './Form';
+import type {CalendarInput} from 'src/components/ui/CalendarInput';
+import type {Input} from 'src/components/ui/Input';
+
+import type {FieldType} from './Form';
 
 export declare namespace FormFieldModel {
   type BaseFieldModel = {

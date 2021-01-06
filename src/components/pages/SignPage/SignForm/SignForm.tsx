@@ -1,23 +1,26 @@
 import cx from 'classnames';
-import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import _ from 'lodash';
+import type {FC} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
-import {useUserCheckExists} from '../../../../api/userApi/useUserCheckExists';
-import {useSignInApi} from '../../../../api/userApi/useSignInApi';
-import {useSignUpApi} from '../../../../api/userApi/useSignUpApi';
-import {useLatestRef} from '../../../../hooks/useLatestRef';
-import {userAtom} from '../../../../recoil/userAtom';
-import {Form} from '../../../common/Form';
-import {Field} from '../../../common/Form/Field';
-import {FieldType} from '../../../common/Form/Form';
-import {email} from '../../../common/Form/validations/email';
-import {required} from '../../../common/Form/validations/required';
-import {Button, ButtonSize, ButtonTheme} from '../../../ui/Button/Button';
-import {Text, TextSize} from '../../../ui/Text';
+
+import {useSignInApi} from 'src/api/userApi/useSignInApi';
+import {useSignUpApi} from 'src/api/userApi/useSignUpApi';
+import {useUserCheckExists} from 'src/api/userApi/useUserCheckExists';
+import {Form} from 'src/components/common/Form';
+import {Field} from 'src/components/common/Form/Field';
+import {FieldType} from 'src/components/common/Form/Form';
+import {email} from 'src/components/common/Form/validations/email';
+import {required} from 'src/components/common/Form/validations/required';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {useLatestRef} from 'src/hooks/useLatestRef';
+import {userAtom} from 'src/recoil/userAtom';
+
 import {CheckEmailModal} from './CheckEmailModal';
 import s from './SignForm.scss';
 import {SmsForm} from './SmsForm';
-import _ from 'lodash';
 
 export declare namespace SignForm {
   export type SignValues = {

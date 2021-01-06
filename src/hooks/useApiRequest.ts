@@ -1,5 +1,6 @@
 import {stringify} from 'query-string';
-import {config} from '../config';
+
+import {config} from 'src/config';
 
 export type Options = Omit<RequestInit, 'body'> & {
     showNotifyOnError?: boolean,
@@ -8,7 +9,7 @@ export type Options = Omit<RequestInit, 'body'> & {
     body?: Record<string, any> | string
 }
 
-const useApiRequest = () => async <TResponse = any>(url: string, options: Options): Promise<TResponse> => {
+export const useApiRequest = () => async <TResponse = any>(url: string, options: Options): Promise<TResponse> => {
   const {showNotifyOnError = true, preventNotifyOn400, ...requestOptions} = options;
   const user = null;
 
@@ -82,5 +83,3 @@ const useApiRequest = () => async <TResponse = any>(url: string, options: Option
     throw err;
   }
 };
-
-export default useApiRequest;

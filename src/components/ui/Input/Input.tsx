@@ -1,11 +1,14 @@
 import cx from 'classnames';
-import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState} from 'react';
-import {Color} from '../../../types/Color';
-import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
-import {DivProps} from '../../../types/common';
-import {Text, TextSize} from '../Text';
-import s from './Input.scss';
+import type {ChangeEvent, FC, FocusEventHandler} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import InputMask from 'react-input-mask';
+
+import {Text, TextSize} from 'src/components/ui/Text';
+import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
+import {Color} from 'src/types/Color';
+import type {DivProps} from 'src/types/common';
+
+import s from './Input.scss';
 
 export declare namespace Input {
   export type Props = {

@@ -1,6 +1,7 @@
-import {FC, useEffect, useRef} from 'react';
-import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import type {FC} from 'react';
+import {useEffect, useRef} from 'react';
+import ReactDOM from 'react-dom';
 
 export const ModalPortal: FC = (props) => {
   const elRef = useRef<HTMLDivElement | null>(typeof document !== 'undefined' ? document.createElement('div')

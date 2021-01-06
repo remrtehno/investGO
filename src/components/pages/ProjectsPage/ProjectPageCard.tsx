@@ -1,13 +1,15 @@
-import React, {FC} from 'react';
-import s from 'src/components/pages/ProjectsPage/ProjectsPage.scss';
-import {Text, TextSize} from 'src/components/ui/Text';
-import {Color} from 'src/types/Color';
-import ProgressBar from 'src/components/pages/ProjectsPage/ProgressBar';
-import {TextWeight} from 'src/components/ui/Text/Text';
-// @ts-ignore
-import pr1 from 'src/assets/images/project-1.png';
+import type {FC} from 'react';
+import React from 'react';
+
 // @ts-ignore
 import lg1 from 'src/assets/images/logo1.png';
+// @ts-ignore
+import pr1 from 'src/assets/images/project-1.png';
+import {ProgressBar} from 'src/components/pages/ProjectsPage/ProgressBar';
+import s from 'src/components/pages/ProjectsPage/ProjectsPage.scss';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {TextWeight} from 'src/components/ui/Text/Text';
+import {Color} from 'src/types/Color';
 
 
 export declare namespace ProjectCard {
@@ -36,7 +38,7 @@ function OfferIcon() {
   );
 }
 
-const ProjectPageCard: FC<ProjectCard.Props> = (props) => (
+export const ProjectPageCard: FC<ProjectCard.Props> = (props) => (
   <div className='col-lg-4 col-md-6 col-sm-10 offset-sm-1 offset-md-0'>
     <div className={s.projectItem}>
       <div className={s.projectImageContainer}>
@@ -76,5 +78,3 @@ const ProjectPageCard: FC<ProjectCard.Props> = (props) => (
     </div>
   </div>
 );
-
-export default ProjectPageCard;

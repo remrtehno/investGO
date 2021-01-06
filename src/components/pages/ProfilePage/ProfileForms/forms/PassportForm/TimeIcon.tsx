@@ -1,5 +1,6 @@
 import React from 'react';
-import {SvgProps} from '../../../../../../types/common';
+
+import type {SvgProps} from 'src/types/common';
 
 export function TimeIcon(props: SvgProps) {
   return (

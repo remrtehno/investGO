@@ -1,5 +1,7 @@
-import React, {FC} from 'react';
-import {SvgProps} from '../types/common';
+import type {FC} from 'react';
+import React from 'react';
+
+import type {SvgProps} from 'src/types/common';
 
 export const LogoIcon: FC<SvgProps> = (props) => (
   <svg className={props.className} width='126' height='23' viewBox='0 0 126 23' fill='none' xmlns='http://www.w3.org/2000/svg'>

@@ -1,6 +1,8 @@
 import {atom} from 'recoil';
-import {RequestError, RequestStatus} from '../types/common';
-import {User} from '../types/User';
+
+import type {RequestError} from 'src/types/common';
+import {RequestStatus} from 'src/types/common';
+import type {User} from 'src/types/User';
 
 export type UserAtom = {
   user: User | null,

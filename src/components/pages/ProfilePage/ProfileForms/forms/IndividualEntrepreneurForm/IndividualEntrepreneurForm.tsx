@@ -1,16 +1,19 @@
-import React, {FC, useMemo} from 'react';
-import {Form} from '../../../../../common/Form';
-import {Field} from '../../../../../common/Form/Field';
-import {FieldType} from '../../../../../common/Form/Form';
-import {FormActions} from '../../../../../common/Form/FormActions';
-import {FormRow} from '../../../../../common/Form/FormRow';
-import {FormTitle} from '../../../../../common/Form/FormTitle';
-import {getDefaultFieldValues} from '../../../../../common/Form/getDefaultFieldValues';
-import {Button, ButtonSize, ButtonTheme} from '../../../../../ui/Button/Button';
-import {ProfileForms} from '../../ProfileForms';
-import s from './IndividualEntrepreneurForm.scss';
-import _ from 'lodash';
 import cx from 'classnames';
+import _ from 'lodash';
+import type {FC} from 'react';
+import React, {useMemo} from 'react';
+
+import {Form} from 'src/components/common/Form';
+import {Field} from 'src/components/common/Form/Field';
+import {FieldType} from 'src/components/common/Form/Form';
+import {FormActions} from 'src/components/common/Form/FormActions';
+import {FormRow} from 'src/components/common/Form/FormRow';
+import {FormTitle} from 'src/components/common/Form/FormTitle';
+import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+
+import s from './IndividualEntrepreneurForm.scss';
 
 const values = {};
 const errors = {};

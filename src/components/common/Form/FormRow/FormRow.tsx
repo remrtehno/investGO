@@ -1,6 +1,8 @@
-import React, {FC} from 'react';
-import s from './FormRow.scss';
 import cx from 'classnames';
+import type {FC} from 'react';
+import React from 'react';
+
+import s from './FormRow.scss';
 
 export declare namespace FormRow {
   export type Props = {

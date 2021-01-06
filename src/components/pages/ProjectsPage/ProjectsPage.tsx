@@ -1,10 +1,13 @@
-import React, {FC} from 'react';
-import {Page} from '../../common/Page';
 import cx from 'classnames';
-import s from './ProjectsPage.scss';
-import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
-import ProjectPageCard from 'src/components/pages/ProjectsPage/ProjectPageCard';
 import _ from 'lodash';
+import type {FC} from 'react';
+import React from 'react';
+
+import {Page} from 'src/components/common/Page';
+import {ProjectPageCard} from 'src/components/pages/ProjectsPage/ProjectPageCard';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+
+import s from './ProjectsPage.scss';
 
 const cards = [
   {

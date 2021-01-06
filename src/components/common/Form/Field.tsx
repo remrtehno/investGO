@@ -1,5 +1,8 @@
-import React, {FC, useCallback} from 'react';
+import type {FC} from 'react';
+import React, {useCallback} from 'react';
+
 import {fieldsModel} from './fields/fieldsModel';
+
 import {useFormField, useFormModel} from './Form';
 
 export declare namespace Field {

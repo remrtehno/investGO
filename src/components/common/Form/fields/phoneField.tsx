@@ -1,7 +1,11 @@
-import React, {FC, useCallback, useMemo} from 'react';
-import {FieldType, useFormModel} from '../Form';
-import {FormField} from '../types';
-import {FieldProps, fieldsModel} from './fieldsModel';
+import type {FC} from 'react';
+import React, {useCallback, useMemo} from 'react';
+
+import {FieldType, useFormModel} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+
+import type {FieldProps} from './fieldsModel';
+import {fieldsModel} from './fieldsModel';
 import {TextField} from './textField';
 
 function fromValue(value: string) {

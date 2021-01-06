@@ -1,17 +1,20 @@
-import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
-import {useConfirmPhoneCode} from '../../../../../api/userApi/useConfirmPhoneCode';
-import {useSendPhoneCode} from '../../../../../api/userApi/useSendPhoneCode';
-import {Form} from '../../../../common/Form';
-import {Field} from '../../../../common/Form/Field';
-import {FieldType} from '../../../../common/Form/Form';
-import {maxLength} from '../../../../common/Form/validations/maxLength';
-import {minLength} from '../../../../common/Form/validations/minLength';
-import {required} from '../../../../common/Form/validations/required';
-import Modal from '../../../../common/Modal/Modal';
-import {Button, ButtonSize, ButtonTheme} from '../../../../ui/Button/Button';
-import {Text, TextSize} from '../../../../ui/Text';
-import s from './SmsForm.scss';
 import _ from 'lodash';
+import type {FC} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+
+import {useConfirmPhoneCode} from 'src/api/userApi/useConfirmPhoneCode';
+import {useSendPhoneCode} from 'src/api/userApi/useSendPhoneCode';
+import {Form} from 'src/components/common/Form';
+import {Field} from 'src/components/common/Form/Field';
+import {FieldType} from 'src/components/common/Form/Form';
+import {maxLength} from 'src/components/common/Form/validations/maxLength';
+import {minLength} from 'src/components/common/Form/validations/minLength';
+import {required} from 'src/components/common/Form/validations/required';
+import {Modal} from 'src/components/common/Modal/Modal';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+
+import s from './SmsForm.scss';
 
 const fields: Form.FieldModels = {
   code: {

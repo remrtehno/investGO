@@ -1,9 +1,10 @@
-import {api} from '../../contstants/api';
-import useApi from '../../hooks/useApi';
-import {useLatestRef} from '../../hooks/useLatestRef';
 import _ from 'lodash';
-import {FilePrimitive} from '../../types/FilePrimitive';
-import {convertFileToBase64} from '../../utils/convertFileToBase64';
+
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useLatestRef} from 'src/hooks/useLatestRef';
+import type {FilePrimitive} from 'src/types/FilePrimitive';
+import {convertFileToBase64} from 'src/utils/convertFileToBase64';
 
 type UseUploadFileOptions = {
     onProgress?(progress: number): void

@@ -1,8 +1,11 @@
-import React, {createContext, MutableRefObject, ReactNode, useContext, useEffect, useMemo} from 'react';
 import _ from 'lodash';
-import {useLatestRef} from '../../../hooks/useLatestRef';
-import {useStateRef} from '../../../hooks/useStateRef';
-import {FormField, FormFieldModel} from './types';
+import type {MutableRefObject, ReactNode} from 'react';
+import React, {createContext, useContext, useEffect, useMemo} from 'react';
+
+import {useLatestRef} from 'src/hooks/useLatestRef';
+import {useStateRef} from 'src/hooks/useStateRef';
+
+import type {FormField, FormFieldModel} from './types';
 
 export enum FieldType {
   text = 'text',

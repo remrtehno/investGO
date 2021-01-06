@@ -1,9 +1,11 @@
-import React, {FC} from 'react';
+import type {FC} from 'react';
+import React from 'react';
 import {useRecoilValue} from 'recoil';
-import {isPageInitAtom} from '../../recoil/isPageInitAtom';
-import {userAtom} from '../../recoil/userAtom';
-import {isLoaded} from '../../utils/isLoaded';
-import {SignPage} from '../pages/SignPage';
+
+import {SignPage} from 'src/components/pages/SignPage';
+import {isPageInitAtom} from 'src/recoil/isPageInitAtom';
+import {userAtom} from 'src/recoil/userAtom';
+import {isLoaded} from 'src/utils/isLoaded';
 
 export declare namespace withAuth {
   export type Props<TProps> = TProps & {

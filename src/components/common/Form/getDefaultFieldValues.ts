@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import {FieldType, Form} from './Form';
+
+import type {Form} from './Form';
+import {FieldType} from './Form';
 
 function getDefaultFieldValue(field: Form.FieldModel) {
   switch (field.type) {

@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {SignForm} from './SignForm';
 
+// eslint-disable-next-line
 export default {
   component: SignForm,
   title: 'pages/SignPage',

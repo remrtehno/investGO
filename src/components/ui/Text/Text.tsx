@@ -1,9 +1,12 @@
-import React, {CSSProperties, FC, useMemo} from 'react';
-import {Color} from '../../../types/Color';
-import {DivProps} from '../../../types/common';
-import s from './Text.scss';
 import cx from 'classnames';
 import _ from 'lodash';
+import type {CSSProperties, FC} from 'react';
+import React, {useMemo} from 'react';
+
+import type {Color} from 'src/types/Color';
+import type {DivProps} from 'src/types/common';
+
+import s from './Text.scss';
 
 export enum TextSize {
   h2 = 'h2',

@@ -1,12 +1,15 @@
-import React, {FC} from 'react';
-import {formatDate} from '../../../utils/formatDate';
-import {parseDate} from '../../../utils/parseDate';
-import {Input} from '../Input';
-import s from './CalendarInput.scss';
 import cx from 'classnames';
-import DatePicker, {ReactDatePickerProps} from 'react-datepicker';
+import type {FC} from 'react';
+import React from 'react';
+import type {ReactDatePickerProps} from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 
 import 'src/libs/react-datepicker/react-datepicker.css';
+import {Input} from 'src/components/ui/Input';
+import {formatDate} from 'src/utils/formatDate';
+import {parseDate} from 'src/utils/parseDate';
+
+import s from './CalendarInput.scss';
 
 export declare namespace CalendarInput {
   export type CalendarProps = Omit<ReactDatePickerProps, 'onChange' | 'name'>;

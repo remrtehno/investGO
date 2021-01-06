@@ -36,7 +36,7 @@ export type UseApi = <TRequest, TResponse>(
     options?: UseApiOptions
 ) => [TResponse, (payload: TRequest) => void, ApiState];
 
-const useApi: UseApi = <TRequest, TResponse>(
+export const useApi: UseApi = <TRequest, TResponse>(
   asyncFunc: (payload: TRequest) => Promise<TResponse>,
   initialResult: TResponse,
   options: UseApiOptions = {}
@@ -97,5 +97,3 @@ const useApi: UseApi = <TRequest, TResponse>(
 
   return [state.result, request, resultState];
 };
-
-export default useApi;

@@ -1,28 +1,31 @@
 import cx from 'classnames';
 import _ from 'lodash';
-import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import moment from 'moment';
+import type {FC} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
-import {useGetPassport} from '../../../../../../api/passportApi/useGetPassport';
-import {useSavePassport} from '../../../../../../api/passportApi/useSavePassport';
-import {userAtom} from '../../../../../../recoil/userAtom';
-import {User} from '../../../../../../types/User';
-import {parseDate} from '../../../../../../utils/parseDate';
-import {Form} from '../../../../../common/Form';
-import {Field} from '../../../../../common/Form/Field';
-import {FieldType} from '../../../../../common/Form/Form';
-import {FormActions} from '../../../../../common/Form/FormActions';
-import {FormRow} from '../../../../../common/Form/FormRow';
-import {FormTitle} from '../../../../../common/Form/FormTitle';
-import {FormStatus} from '../../../../../common/Form/FormTitle/FormTitle';
-import {getDefaultFieldValues} from '../../../../../common/Form/getDefaultFieldValues';
-import {minLength} from '../../../../../common/Form/validations/minLength';
-import {required} from '../../../../../common/Form/validations/required';
-import {Button, ButtonSize, ButtonTheme} from '../../../../../ui/Button/Button';
-import {Text, TextSize} from '../../../../../ui/Text';
-import {ProfileForms} from '../../ProfileForms';
+
+import {useGetPassport} from 'src/api/passportApi/useGetPassport';
+import {useSavePassport} from 'src/api/passportApi/useSavePassport';
+import {Form} from 'src/components/common/Form';
+import {Field} from 'src/components/common/Form/Field';
+import {FieldType} from 'src/components/common/Form/Form';
+import {FormActions} from 'src/components/common/Form/FormActions';
+import {FormRow} from 'src/components/common/Form/FormRow';
+import {FormTitle} from 'src/components/common/Form/FormTitle';
+import {FormStatus} from 'src/components/common/Form/FormTitle/FormTitle';
+import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import {minLength} from 'src/components/common/Form/validations/minLength';
+import {required} from 'src/components/common/Form/validations/required';
+import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {userAtom} from 'src/recoil/userAtom';
+import type {User} from 'src/types/User';
+import {parseDate} from 'src/utils/parseDate';
+
 import s from './PassportForm.scss';
 import {TimeIcon} from './TimeIcon';
-import moment from 'moment';
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;

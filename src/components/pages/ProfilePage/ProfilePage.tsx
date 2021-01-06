@@ -1,15 +1,18 @@
 import cx from 'classnames';
+import _ from 'lodash';
 import React, {useMemo, useState} from 'react';
-import {useClaims} from '../../../hooks/useClaim';
-import {Page} from '../../common/Page';
-import {withAuth} from '../../hocs/withAuth';
-import {ProfileForms} from './ProfileForms';
-import {ProfileHeader} from './ProfileHeader';
+
+import {Page} from 'src/components/common/Page';
+import {withAuth} from 'src/components/hocs/withAuth';
+import {useClaims} from 'src/hooks/useClaim';
+
 import {ProfileStep} from './ProfileHeader/ProfileHeader';
 import {ProfileNavigation} from './ProfileNavigation/ProfileNavigation';
+
+import {ProfileForms} from './ProfileForms';
+import {ProfileHeader} from './ProfileHeader';
 import s from './ProfilePage.scss';
 import {ProfileFormType} from './profilePageTypes';
-import _ from 'lodash';
 
 export declare namespace ProfilePage {
   export type FormInfo = {
