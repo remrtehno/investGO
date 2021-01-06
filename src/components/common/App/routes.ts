@@ -4,12 +4,17 @@ import {RegisterPage} from '../../pages/RegisterPage';
 import {ProfilePage} from '../../pages/ProfilePage';
 import {SignPage} from '../../pages/SignPage';
 import {ProjectsPage} from '../../pages/ProjectsPage';
+import {AboutUs} from 'src/components/pages/AboutUs';
 
 export type RouteInfo = RouteProps & {
   Component: FC
 }
 
 export const routes: RouteInfo[] = [{
+  path: '/about',
+  Component: AboutUs,
+  exact: true,
+}, {
   path: '/projects',
   Component: ProjectsPage,
   exact: true,

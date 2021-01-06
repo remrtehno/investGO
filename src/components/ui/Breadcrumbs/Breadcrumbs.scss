@@ -1,0 +1,11 @@
+.Breadcrumbs {
+  display: flex;
+  flex-flow: wrap;
+  color: var(--label);
+  padding: 0;
+  list-style: none;
+}
+
+.BreadcrumbsList {
+  margin-right: 10px;
+}
