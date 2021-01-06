@@ -1,3 +1,4 @@
+import {CalendarInput} from '../../ui/CalendarInput';
 import {Input} from '../../ui/Input';
 import {FieldType} from './Form';
 
@@ -17,7 +18,7 @@ export declare namespace FormFieldModel {
     type: FieldType.text,
   };
 
-  export type Date = BaseFieldModel & {
+  export type Date = BaseFieldModel & CalendarInput.CalendarProps & {
     type: FieldType.date,
     label: string,
   };

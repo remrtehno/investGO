@@ -3,6 +3,8 @@ import {useDropzone} from 'react-dropzone';
 import {useUploadFileApi} from '../../../api/common/useUploadFileApi';
 import {FileImgIcon} from '../../../icons/files/FileImgIcon';
 import {FilePrimitive} from '../../../types/FilePrimitive';
+import {convertFileToBase64} from '../../../utils/convertFileToBase64';
+import {downloadFile} from '../../../utils/downloadFile';
 import {Button, ButtonSize, ButtonTheme} from '../Button/Button';
 import {Text, TextSize} from '../Text';
 import {AddButtonIcon} from './AddButtonIcon';
@@ -12,7 +14,7 @@ import cx from 'classnames';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
-  ({ isNew: true, original_name: string });
+  ({ isNew: true, original_name: string, id: string });
 
 export declare namespace FileArrayInput {
   export type Props = {
@@ -59,6 +61,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
           ...files,
           {
             isNew: true,
+            id: _.uniqueId('__'),
             original_name: file.name,
           },
         ]);
@@ -71,7 +74,17 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
     <div className={cx('container', s.FileArrayInput)}>
       <div className={cx(s.files, 'row')}>
         { files.map((file, index) => (
-          <div className={cx(s.file, 'col-6')} key={file.isNew ? index : file.id}>
+          <div
+            className={cx(s.file, 'col-6')}
+            key={file.id}
+            onClick={() => {
+              if (file.isNew) {
+                return;
+              }
+
+              downloadFile(file.url);
+            }}
+          >
             <FileImgIcon className={s.fileIcon} />
             <div className={s.fileLabel}>{ file.original_name }</div>
           </div>

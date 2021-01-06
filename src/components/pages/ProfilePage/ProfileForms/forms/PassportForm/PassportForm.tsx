@@ -15,7 +15,6 @@ import {FormRow} from '../../../../../common/Form/FormRow';
 import {FormTitle} from '../../../../../common/Form/FormTitle';
 import {FormStatus} from '../../../../../common/Form/FormTitle/FormTitle';
 import {getDefaultFieldValues} from '../../../../../common/Form/getDefaultFieldValues';
-import {maxLength} from '../../../../../common/Form/validations/maxLength';
 import {minLength} from '../../../../../common/Form/validations/minLength';
 import {required} from '../../../../../common/Form/validations/required';
 import {Button, ButtonSize, ButtonTheme} from '../../../../../ui/Button/Button';
@@ -48,6 +47,10 @@ const useFields = () => useMemo((): Form.FieldModels => ({
     type: FieldType.date,
     label: 'Дата рождения',
     validations: [required(), validateAge],
+    maxDate: moment().subtract(18, 'years')
+      .toDate(),
+    minDate: moment().subtract(100, 'years')
+      .toDate(),
   },
   serialNumber: {
     name: 'serialNumber',
@@ -63,16 +66,17 @@ const useFields = () => useMemo((): Form.FieldModels => ({
   },
   subdivision_code: {
     name: 'subdivision_code',
-    type: FieldType.number,
+    type: FieldType.text,
+    mask: '999999',
     label: 'Код подразделения',
-    isInteger: true,
-    validations: [required(), minLength(6), maxLength(6)],
+    validations: [required()],
   },
   date_of_issue: {
     name: 'date_of_issue',
     type: FieldType.date,
     label: 'Дата выдачи',
-    validations: [required(), validateAge, (value, values) => {
+    maxDate: new Date(),
+    validations: [required(), (value, values) => {
       if (!values.date_of_birth) {
         return null;
       }
@@ -102,17 +106,17 @@ const useFields = () => useMemo((): Form.FieldModels => ({
   },
   snils: {
     name: 'snils',
-    type: FieldType.number,
+    type: FieldType.text,
+    mask: '99999999999',
     label: 'СНИЛС',
-    isInteger: true,
-    validations: [required(), minLength(11), maxLength(11)],
+    validations: [required()],
   },
   inn: {
     name: 'inn',
-    type: FieldType.number,
+    type: FieldType.text,
+    mask: '999999999999',
     label: 'ИНН (при наличии)',
-    isInteger: true,
-    validations: [required(), minLength(12), maxLength(12)],
+    validations: [required()],
   },
   personal_data_documents: {
     name: 'personal_data_documents',
