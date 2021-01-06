@@ -1,13 +1,16 @@
-import React, {FC, useCallback} from 'react';
-import {useRecoilValue} from 'recoil';
-import {useSignOutApi} from '../../../../api/userApi/useSignOutApi';
-import {LogoIcon} from '../../../../icons/LogoIcon';
-import {userAtom} from '../../../../recoil/userAtom';
-import {Text, TextSize} from '../../../ui/Text';
-import {TextWeight} from '../../../ui/Text/Text';
-import s from './PageHeader.scss';
 import cx from 'classnames';
+import type {FC} from 'react';
+import React, {useCallback} from 'react';
 import {useHistory} from 'react-router-dom';
+import {useRecoilValue} from 'recoil';
+
+import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {TextWeight} from 'src/components/ui/Text/Text';
+import {LogoIcon} from 'src/icons/LogoIcon';
+import {userAtom} from 'src/recoil/userAtom';
+
+import s from './PageHeader.scss';
 
 declare namespace LogoutIcon {
   export type Props = {

@@ -1,8 +1,10 @@
-import React, {FC} from 'react';
-import s from './Modal.scss';
 import cx from 'classnames';
-import {ModalPortal} from './ModalPortal';
 import _ from 'lodash';
+import type {FC} from 'react';
+import React from 'react';
+
+import s from './Modal.scss';
+import {ModalPortal} from './ModalPortal';
 
 type Props = {
     isOpen?: boolean,
@@ -15,7 +17,7 @@ type Props = {
     isFullscreen?: boolean,
 };
 
-const Modal: FC<Props> = (props) => {
+export const Modal: FC<Props> = (props) => {
   const {
     hardClose,
     className,
@@ -42,5 +44,3 @@ const Modal: FC<Props> = (props) => {
     </ModalPortal>
   );
 };
-
-export default Modal;

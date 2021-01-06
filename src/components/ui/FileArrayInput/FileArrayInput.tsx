@@ -1,18 +1,23 @@
-import React, {FC, useEffect, useState} from 'react';
+import cx from 'classnames';
+import _ from 'lodash';
+import type {FC} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
-import {useUploadFileApi} from '../../../api/common/useUploadFileApi';
-import {FileImgIcon} from '../../../icons/files/FileImgIcon';
-import {FilePrimitive} from '../../../types/FilePrimitive';
-import {Button, ButtonSize, ButtonTheme} from '../Button/Button';
-import {Text, TextSize} from '../Text';
+
+import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {CloseIcon} from 'src/icons/CloseIcon';
+import {FileImgIcon} from 'src/icons/files/FileImgIcon';
+import type {FilePrimitive} from 'src/types/FilePrimitive';
+import {downloadFile} from 'src/utils/downloadFile';
+
 import {AddButtonIcon} from './AddButtonIcon';
 import s from './FileArrayInput.scss';
-import _ from 'lodash';
-import cx from 'classnames';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
-  ({ isNew: true, original_name: string });
+  ({ isNew: true, original_name: string, id: string });
 
 export declare namespace FileArrayInput {
   export type Props = {
@@ -59,6 +64,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
           ...files,
           {
             isNew: true,
+            id: _.uniqueId('__'),
             original_name: file.name,
           },
         ]);
@@ -70,10 +76,27 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   return (
     <div className={cx('container', s.FileArrayInput)}>
       <div className={cx(s.files, 'row')}>
-        { files.map((file, index) => (
-          <div className={cx(s.file, 'col-6')} key={file.isNew ? index : file.id}>
+        { files.map((file) => (
+          <div
+            className={cx(s.file, 'col-6')}
+            key={file.id}
+            onClick={() => {
+              if (file.isNew) {
+                return;
+              }
+
+              downloadFile(file.url);
+            }}
+          >
             <FileImgIcon className={s.fileIcon} />
             <div className={s.fileLabel}>{ file.original_name }</div>
+            <div className={s.deleteFile}>
+              <CloseIcon color='black' onClick={(e) => {
+                setFiles(files.filter((f) => file.id !== f.id));
+                e.preventDefault();
+                e.stopPropagation();
+              }} />
+            </div>
           </div>
         )) }
       </div>

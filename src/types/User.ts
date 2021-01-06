@@ -1,4 +1,4 @@
-import {FilePrimitive} from './FilePrimitive';
+import type {FilePrimitive} from './FilePrimitive';
 
 export declare namespace User {
   export type Role = 'user' | 'admin' | 'individual';

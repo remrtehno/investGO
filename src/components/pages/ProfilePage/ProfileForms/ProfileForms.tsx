@@ -1,14 +1,18 @@
-import React, {FC, useEffect, useRef} from 'react';
-import {usePageScroll} from '../../../../hooks/usePageScroll';
-import {getElementPosition} from '../../../../utils/getElementPosition';
-import {ProfilePage} from '../ProfilePage';
-import {ProfileFormType} from '../profilePageTypes';
+import cx from 'classnames';
+import type {FC} from 'react';
+import React, {useEffect, useRef} from 'react';
+
+import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
+import {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
+import {usePageScroll} from 'src/hooks/usePageScroll';
+import {getElementPosition} from 'src/utils/getElementPosition';
+
 import {IndividualEntrepreneurForm} from './forms/IndividualEntrepreneurForm';
 import {PassportForm} from './forms/PassportForm';
 import {ProfileForm} from './forms/ProfileForm';
 import {RequisitionsForm} from './forms/RequisitionsForm';
+
 import s from './ProfileForms.scss';
-import cx from 'classnames';
 
 const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.profile]: ProfileForm,

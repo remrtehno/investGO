@@ -20,6 +20,9 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    'import',
+    'simple-import-sort',
+    'replace-relative-imports',
   ],
 
   rules: {
@@ -322,7 +325,8 @@ module.exports = {
     'no-confusing-arrow': 'warn',
     'no-const-assign': 'error',
     'no-dupe-class-members': 'error',
-    'no-duplicate-imports': 'warn',
+    // @see https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-duplicate-imports.md
+    'no-duplicate-imports': 'off',
     'no-new-symbol': 'off',
     'no-restricted-exports': 'off',
     'no-restricted-imports': 'off',
@@ -459,7 +463,9 @@ module.exports = {
     '@typescript-eslint/consistent-indexed-object-style': 'off',
     '@typescript-eslint/consistent-type-assertions': 'off',
     '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
-    '@typescript-eslint/consistent-type-imports': 'off',
+    '@typescript-eslint/consistent-type-imports': ['warn', {
+      prefer: 'type-imports',
+    }],
     '@typescript-eslint/default-param-last': ['warn'],
     '@typescript-eslint/dot-notation': ['warn'],
     '@typescript-eslint/no-unused-vars': ['warn'],
@@ -470,5 +476,26 @@ module.exports = {
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-redeclare': 'off', // Doesn't work with type+namespace
     '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-duplicate-imports': ['warn'],
+
+    // https://github.com/benmosher/eslint-plugin-import
+    'import/no-default-export': ['warn'],
+    'import/order': 'off',
+
+    'simple-import-sort/imports': ['warn', {
+      groups: [
+        ['\\w'],
+        ['src'],
+        ['../'],
+        ['./'],
+      ],
+    }],
+    'simple-import-sort/exports': 'warn',
+
+    'replace-relative-imports/replace': ['warn', {
+      aliases: [
+        {name: 'src', path: './src'},
+      ],
+    }],
   },
 };

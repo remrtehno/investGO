@@ -1,6 +1,9 @@
 import cx from 'classnames';
-import React, {FC, useRef} from 'react';
-import {PageScrollProvider} from '../../../hooks/usePageScroll';
+import type {FC} from 'react';
+import React, {useRef} from 'react';
+
+import {PageScrollProvider} from 'src/hooks/usePageScroll';
+
 import s from './Page.scss';
 import {PageHeader} from './PageHeader';
 

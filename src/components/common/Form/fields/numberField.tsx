@@ -1,8 +1,12 @@
-import React, {FC, useMemo} from 'react';
-import {integerRegExp, numberRegExp} from '../../../../contstants/regExp';
-import {FieldType} from '../Form';
-import {FormField} from '../types';
-import {FieldProps, fieldsModel} from './fieldsModel';
+import type {FC} from 'react';
+import React, {useMemo} from 'react';
+
+import {FieldType} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+import {integerRegExp, numberRegExp} from 'src/contstants/regExp';
+
+import type {FieldProps} from './fieldsModel';
+import {fieldsModel} from './fieldsModel';
 import {TextField} from './textField';
 
 export declare namespace NumberField {

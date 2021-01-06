@@ -1,12 +1,15 @@
 import cx from 'classnames';
-import React, {CSSProperties, FC, useMemo, useRef} from 'react';
-import {usePageScroll} from '../../../../hooks/usePageScroll';
-import {usePosition} from '../../../../hooks/usePosition';
-import {Color} from '../../../../types/Color';
-import {Text, TextSize} from '../../../ui/Text';
-import {TextWeight} from '../../../ui/Text/Text';
-import {ProfilePage} from '../ProfilePage';
-import {ProfileFormType} from '../profilePageTypes';
+import type {CSSProperties, FC} from 'react';
+import React, {useMemo, useRef} from 'react';
+
+import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
+import type {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {TextWeight} from 'src/components/ui/Text/Text';
+import {usePageScroll} from 'src/hooks/usePageScroll';
+import {usePosition} from 'src/hooks/usePosition';
+import {Color} from 'src/types/Color';
+
 import s from './ProfileNavigation.scss';
 
 export declare namespace ProfileNavigation {

@@ -13,13 +13,36 @@
 
 .file {
   margin-top: 32px;
-  overflow: hidden;
+  cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
+
+  .deleteFile {
+    display: none;
+  }
+
+  &:hover {
+    .deleteFile {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      right: 0;
+      top: -15px;
+      background-color: var(--gray2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+  }
 }
 
 .fileLabel {
   white-space: nowrap;
+  max-width: calc(100% - 58px);
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .fileIcon {

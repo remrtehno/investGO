@@ -1,7 +1,10 @@
-import React, {FC} from 'react';
-import {Page} from '../../common/Page';
-import {SignForm} from './SignForm';
 import cx from 'classnames';
+import type {FC} from 'react';
+import React from 'react';
+
+import {Page} from 'src/components/common/Page';
+
+import {SignForm} from './SignForm';
 import s from './SignPage.scss';
 
 export const SignPage: FC = () => (

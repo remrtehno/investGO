@@ -1,8 +1,12 @@
-import React, {FC} from 'react';
-import {Input} from '../../../ui/Input';
-import {FieldType, useFormModel} from '../Form';
-import {FormField} from '../types';
-import {FieldProps, fieldsModel} from './fieldsModel';
+import type {FC} from 'react';
+import React from 'react';
+
+import {FieldType, useFormModel} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+import {Input} from 'src/components/ui/Input';
+
+import type {FieldProps} from './fieldsModel';
+import {fieldsModel} from './fieldsModel';
 
 export declare namespace TextField {
   export type Props = FieldProps<FormField.Text> & Pick<Input.Props, 'regExp' | 'isPassword'> & {

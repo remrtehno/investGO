@@ -1,5 +1,7 @@
-import {MutableRefObject, useEffect, useState} from 'react';
-import {getElementPosition} from '../utils/getElementPosition';
+import type {MutableRefObject} from 'react';
+import {useEffect, useState} from 'react';
+
+import {getElementPosition} from 'src/utils/getElementPosition';
 
 export type ElementPosition = {
   top: number,

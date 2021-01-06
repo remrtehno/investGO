@@ -1,8 +1,10 @@
 import React from 'react';
+
+import separator from 'src/assets/images/separator.png';
+import {Text, TextSize} from 'src/components/ui/Text/index';
+import {TextWeight} from 'src/components/ui/Text/Text';
+
 import s from './Breadcrumbs.scss';
-import {Text, TextSize} from '../Text/index';
-import separator from '../../../assets/images/separator.png';
-import {TextWeight} from "src/components/ui/Text/Text";
 
 type OwnProps = {
   breadcrumbs: string[],

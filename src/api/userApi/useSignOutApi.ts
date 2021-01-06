@@ -1,10 +1,11 @@
 import {useSetRecoilState} from 'recoil';
-import {api} from '../../contstants/api';
-import useApi from '../../hooks/useApi';
-import useApiRequest from '../../hooks/useApiRequest';
-import {userAtom} from '../../recoil/userAtom';
-import {RequestStatus} from '../../types/common';
-import {User} from '../../types/User';
+
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
+import {userAtom} from 'src/recoil/userAtom';
+import {RequestStatus} from 'src/types/common';
+import type {User} from 'src/types/User';
 
 export declare namespace useSignOutApi {
   export type Payload = void;

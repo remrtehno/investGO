@@ -1,7 +1,10 @@
-import React, {FC} from 'react';
-import {Text, TextSize} from '../../../ui/Text';
-import s from './FormTitle.scss';
 import cx from 'classnames';
+import type {FC} from 'react';
+import React from 'react';
+
+import {Text, TextSize} from 'src/components/ui/Text';
+
+import s from './FormTitle.scss';
 
 function ModeratedIcon() {
   return (

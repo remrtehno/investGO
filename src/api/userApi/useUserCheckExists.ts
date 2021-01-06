@@ -1,6 +1,6 @@
-import {api} from '../../contstants/api';
-import useApi from '../../hooks/useApi';
-import useApiRequest from '../../hooks/useApiRequest';
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
 
 export declare namespace useUserCheckExists {
   export type Payload = {

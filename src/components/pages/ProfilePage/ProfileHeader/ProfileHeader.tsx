@@ -1,6 +1,9 @@
-import React, {FC} from 'react';
-import {Color} from '../../../../types/Color';
-import {Text, TextSize} from '../../../ui/Text';
+import type {FC} from 'react';
+import React from 'react';
+
+import {Text, TextSize} from 'src/components/ui/Text';
+import {Color} from 'src/types/Color';
+
 import s from './ProfileHeader.scss';
 
 export enum ProfileStep {

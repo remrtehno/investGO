@@ -1,4 +1,5 @@
-import React, {FC, useEffect} from 'react';
+import type {FC} from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Route, StaticRouter} from 'react-router-dom';
 import {RecoilRoot, useRecoilValue, useSetRecoilState} from 'recoil';
 
@@ -6,16 +7,16 @@ import 'src/components/common/Form/fields/dateField';
 import 'src/components/common/Form/fields/fileArrayField';
 import 'src/components/common/Form/fields/numberField';
 import 'src/components/common/Form/fields/textField';
-import '../Form/fields/passwordField';
-import '../Form/fields/phoneField';
-
-import {useUserApi} from 'src/hooks/useUser';
+import 'src/components/common/Form/fields/passwordField';
+import 'src/components/common/Form/fields/phoneField';
 import 'src/libs/bootstrap/bootstrap-grid.css';
 import 'src/libs/bootstrap/bootstrap-reboot.css';
 import 'src/theme/colors.css';
-import {isPageInitAtom} from '../../../recoil/isPageInitAtom';
-import {userAtom} from '../../../recoil/userAtom';
-import {RequestStatus} from '../../../types/common';
+import {useUserApi} from 'src/hooks/useUser';
+import {isPageInitAtom} from 'src/recoil/isPageInitAtom';
+import {userAtom} from 'src/recoil/userAtom';
+import {RequestStatus} from 'src/types/common';
+
 import {routes} from './routes';
 
 const AppContent: FC = () => {

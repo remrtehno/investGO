@@ -1,4 +1,6 @@
-import {MutableRefObject, useState} from 'react';
+import type {MutableRefObject} from 'react';
+import {useState} from 'react';
+
 import {useLatestRef} from './useLatestRef';
 
 export function useStateRef<TValue>(

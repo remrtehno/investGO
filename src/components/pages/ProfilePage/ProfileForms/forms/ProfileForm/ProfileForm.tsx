@@ -1,14 +1,16 @@
-import React, {FC, useMemo} from 'react';
-import {useRecoilValue} from 'recoil';
-import {userAtom} from '../../../../../../recoil/userAtom';
-import {Form} from '../../../../../common/Form';
-import {Field} from '../../../../../common/Form/Field';
-import {FieldType} from '../../../../../common/Form/Form';
 import _ from 'lodash';
-import {FormRow} from '../../../../../common/Form/FormRow';
-import {getDefaultFieldValues} from '../../../../../common/Form/getDefaultFieldValues';
-import {ProfileForms} from '../../ProfileForms';
-import {FormTitle} from '../../../../../common/Form/FormTitle';
+import type {FC} from 'react';
+import React, {useMemo} from 'react';
+import {useRecoilValue} from 'recoil';
+
+import {Form} from 'src/components/common/Form';
+import {Field} from 'src/components/common/Form/Field';
+import {FieldType} from 'src/components/common/Form/Form';
+import {FormRow} from 'src/components/common/Form/FormRow';
+import {FormTitle} from 'src/components/common/Form/FormTitle';
+import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
+import {userAtom} from 'src/recoil/userAtom';
 
 const errors = {};
 

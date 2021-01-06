@@ -1,4 +1,5 @@
-import React, {FC} from 'react';
+import type {FC} from 'react';
+import React from 'react';
 
 export const FilePdfIcon: FC = () => (
   <svg width='45' height='40' viewBox='0 0 45 40' fill='none' xmlns='http://www.w3.org/2000/svg'>

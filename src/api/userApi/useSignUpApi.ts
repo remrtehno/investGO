@@ -1,7 +1,7 @@
-import {api} from '../../contstants/api';
-import useApi from '../../hooks/useApi';
-import useApiRequest from '../../hooks/useApiRequest';
-import {User} from '../../types/User';
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
+import type {User} from 'src/types/User';
 
 export declare namespace useSignUpApi {
     export type Payload = {

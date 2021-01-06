@@ -1,7 +1,10 @@
-import React, {FC} from 'react';
-import Modal from '../../../../common/Modal/Modal';
-import {Button, ButtonSize, ButtonTheme} from '../../../../ui/Button/Button';
-import {Text, TextSize} from '../../../../ui/Text';
+import type {FC} from 'react';
+import React from 'react';
+
+import {Modal} from 'src/components/common/Modal/Modal';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+
 import s from './CheckEmailModal.scss';
 
 export declare namespace CheckEmailModal {

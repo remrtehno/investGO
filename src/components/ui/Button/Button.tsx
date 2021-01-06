@@ -1,5 +1,7 @@
 import cx from 'classnames';
-import React, {FC, useCallback} from 'react';
+import type {FC} from 'react';
+import React, {useCallback} from 'react';
+
 import s from './Button.scss';
 
 export enum ButtonSize {

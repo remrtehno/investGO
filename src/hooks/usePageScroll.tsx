@@ -1,6 +1,8 @@
-import React, {createContext, FC, MutableRefObject, useCallback, useContext, useMemo} from 'react';
-import useScroll from './useScroll';
 import _ from 'lodash';
+import type {FC, MutableRefObject} from 'react';
+import React, {createContext, useCallback, useContext, useMemo} from 'react';
+
+import {useScroll} from './useScroll';
 
 const context = createContext<{scrollTop: number, setScrollTop(pos: number): void}>({
   scrollTop: 0, setScrollTop: _.noop,

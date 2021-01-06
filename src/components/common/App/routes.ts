@@ -1,10 +1,11 @@
-import {FC} from 'react';
-import {RouteProps} from 'react-router';
-import {RegisterPage} from '../../pages/RegisterPage';
-import {ProfilePage} from '../../pages/ProfilePage';
-import {SignPage} from '../../pages/SignPage';
-import {ProjectsPage} from '../../pages/ProjectsPage';
+import type {FC} from 'react';
+import type {RouteProps} from 'react-router';
+
 import {AboutUs} from 'src/components/pages/AboutUs';
+import {ProfilePage} from 'src/components/pages/ProfilePage';
+import {ProjectsPage} from 'src/components/pages/ProjectsPage';
+import {RegisterPage} from 'src/components/pages/RegisterPage';
+import {SignPage} from 'src/components/pages/SignPage';
 
 export type RouteInfo = RouteProps & {
   Component: FC

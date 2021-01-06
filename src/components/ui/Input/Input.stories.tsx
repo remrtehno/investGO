@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+
 import {Input} from './Input';
 
+// eslint-disable-next-line
 export default {
   component: Input,
   title: 'Common/ui',

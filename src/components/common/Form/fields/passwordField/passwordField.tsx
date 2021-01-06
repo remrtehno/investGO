@@ -1,9 +1,13 @@
-import React, {FC, useMemo, useState} from 'react';
-import {SvgProps} from '../../../../../types/common';
-import {FieldType} from '../../Form';
-import {FormField} from '../../types';
-import {FieldProps, fieldsModel} from '../fieldsModel';
-import {TextField} from '../textField';
+import type {FC} from 'react';
+import React, {useMemo, useState} from 'react';
+
+import type {FieldProps} from 'src/components/common/Form/fields/fieldsModel';
+import {fieldsModel} from 'src/components/common/Form/fields/fieldsModel';
+import {TextField} from 'src/components/common/Form/fields/textField';
+import {FieldType} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+import type {SvgProps} from 'src/types/common';
+
 import s from './passwordField.scss';
 
 function ShowIcon(props: SvgProps) {
