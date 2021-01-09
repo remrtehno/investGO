@@ -1,3 +1,109 @@
 .AboutUs {
   padding-top: 60px;
 }
+
+.AboutUsContent {
+  padding-top: 60px;
+}
+
+.banner {
+  position: relative;
+  min-height: 174px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  padding: 10px 30px;
+}
+
+.bannerIcon {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.bannerTitle {
+  font-size: 34px !important;
+  line-height: 1;
+  font-weight: 300;
+  margin-bottom: 5px;
+  padding-top: 20px;
+}
+
+.bannerImage {
+  max-width: 100%;
+}
+
+
+.contentPage {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 4px;
+}
+
+.contentPageTitle {
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.contentPageText {
+  margin-bottom: 20px;
+}
+
+.contentPageHeader {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+  margin-bottom: 45px;
+}
+
+.contentPageVideo {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.contentImagesWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 0;
+  padding-top: 40px;
+  margin-bottom: 35px;
+}
+
+.contentTeam {
+
+}
+
+.contentTeamItem {
+  margin-bottom: 45px;
+}
+
+.contentTeamTitle {
+  margin-bottom: 5px;
+}
+
+.contentTeamHeading {
+  margin-bottom: 28px;
+}
+
+.contentTeamSocial {
+  margin-bottom: 20px;
+}
+
+.contentTeamImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  margin-bottom: 15px;
+
+}
+
+.contentTeamSubTitle {
+  margin-bottom: 15px;
+}

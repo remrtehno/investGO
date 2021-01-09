@@ -1,0 +1,22 @@
+.RoadMap {
+
+}
+
+.RoadMapItem {
+  padding-left: 45px;
+  position: relative;
+  margin-bottom: 65px;
+}
+
+.RoadMapItemImg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.RoadMapItemDescription {
+  position: absolute;
+  left: 45px;
+  top: 100%;
+}

@@ -16,7 +16,7 @@ export const Breadcrumbs = ({breadcrumbs}: OwnProps) => {
       {
         breadcrumbs && breadcrumbs.map((element: string, index: number) => (
           <li className={s.BreadcrumbsList} key={index}>
-            <Text size={TextSize.bodyMini} weight={TextWeight.normal}>
+            <Text size={TextSize.bodyMini} weight={TextWeight.normal} className={s.BreadcrumbsListText}>
               <img src={separator} alt='separator' />
               { element }
             </Text>
