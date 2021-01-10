@@ -9,7 +9,7 @@ import {ProgressBar} from 'src/components/pages/ProjectsPage/ProgressBar';
 import s from 'src/components/pages/ProjectsPage/ProjectsPage.scss';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
-import {Color} from 'src/types/Color';
+import {Color} from 'src/contstants/Color';
 
 
 export declare namespace ProjectCard {

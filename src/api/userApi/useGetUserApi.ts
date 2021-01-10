@@ -22,6 +22,8 @@ export const useGetUserApi = () => {
         user: newUser ? {
           ...newUser,
           passport: user && user.id === newUser.id ? user.passport : null,
+          bankDetails: user && user.id === newUser.id ? user.bankDetails : null,
+          company: user && user.id === newUser.id ? user.company : null,
         } : null,
         status: RequestStatus.success,
         error: null,

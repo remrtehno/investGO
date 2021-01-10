@@ -7,18 +7,18 @@ import {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes
 import {usePageScroll} from 'src/hooks/usePageScroll';
 import {getElementPosition} from 'src/utils/getElementPosition';
 
-import {IndividualEntrepreneurForm} from './forms/IndividualEntrepreneurForm';
+import {BankDetailsForm} from './forms/BankDetailsForm';
+import {CompanyForm} from './forms/CompanyForm';
 import {PassportForm} from './forms/PassportForm';
 import {ProfileForm} from './forms/ProfileForm';
-import {RequisitionsForm} from './forms/RequisitionsForm';
 
 import s from './ProfileForms.scss';
 
 const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.profile]: ProfileForm,
   [ProfileFormType.passport]: PassportForm,
-  [ProfileFormType.requisitions]: RequisitionsForm,
-  [ProfileFormType.individualEntrepreneur]: IndividualEntrepreneurForm,
+  [ProfileFormType.requisitions]: BankDetailsForm,
+  [ProfileFormType.individualEntrepreneur]: CompanyForm,
 };
 
 export declare namespace ProfileForms {

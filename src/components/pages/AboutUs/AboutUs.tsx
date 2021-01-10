@@ -12,13 +12,13 @@ import VideoPoster from 'src/assets/images/video.png';
 import {Page} from 'src/components/common/Page';
 import {Breadcrumbs} from 'src/components/ui/Breadcrumbs';
 import {Navigation} from 'src/components/ui/Navigation';
+import {RoadMap} from 'src/components/ui/RoadMap';
 import {SideBar} from 'src/components/ui/Sidebar';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
-import {Color} from 'src/types/Color';
+import {Color} from 'src/contstants/Color';
 
 import s from './AboutUs.scss';
-import {RoadMap} from "src/components/ui/RoadMap";
 
 
 const breadcrumbs = [
@@ -108,7 +108,7 @@ const roadmap = [
   {
     label: 'Декабрь 2020',
     desc: 'MVP',
-  }
+  },
 ];
 
 function AddIcon() {
@@ -211,14 +211,14 @@ export const AboutUs: FC = () => {
                         <img src={team} alt='team' className={s.contentTeamImg} />
                         <Text size={TextSize.body2} className={s.contentTeamTitle} weight={TextWeight.semibold}>Орлов Александр Иванович</Text>
                         <Text size={TextSize.body1} weight={TextWeight.light} className={s.contentTeamSubTitle}>Генеральный директор</Text>
-                        <div className={s.contentTeamSocial}><a href='#'><FacebookIcon /></a> <a href='#'> <LinkInIcon/> </a></div>
+                        <div className={s.contentTeamSocial}><a href='#'><FacebookIcon /></a> <a href='#'> <LinkInIcon /> </a></div>
                         <Text size={TextSize.body1}>Такой-то специалист в таком-то деле. Лауреат того-то. Участник того-то.</Text>
                       </div>
                       <div className={classNames('col-md-6', s.contentTeamItem)}>
                         <img src={team} alt='team' className={s.contentTeamImg} />
                         <Text size={TextSize.body2} className={s.contentTeamTitle} weight={TextWeight.semibold}>Орлов Александр Иванович</Text>
                         <Text size={TextSize.body1} weight={TextWeight.light} className={s.contentTeamSubTitle}>Генеральный директор</Text>
-                        <div className={s.contentTeamSocial}><a href='#'><FacebookIcon /></a> <a href='#'> <LinkInIcon/> </a></div>
+                        <div className={s.contentTeamSocial}><a href='#'><FacebookIcon /></a> <a href='#'> <LinkInIcon /> </a></div>
                         <Text size={TextSize.body1}>Такой-то специалист в таком-то деле. Лауреат того-то. Участник того-то.</Text>
                       </div>
                     </div>
@@ -227,14 +227,14 @@ export const AboutUs: FC = () => {
                     <Text size={TextSize.h3}>Дорожная карта</Text>
                     <RoadMap data={roadmap} />
                   </div>
-                  <div id="contacts">
+                  <div id='contacts'>
                     <Text size={TextSize.h3}>Контактные данные</Text>
                     <table>
                       <tr>
                         <td>
                           <Text size={TextSize.body1}>Сайт:</Text>
                         </td>
-                        <td></td>
+                        <td />
                       </tr>
                     </table>
                   </div>

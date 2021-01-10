@@ -7,6 +7,7 @@ export const api = {
     get: () => '/user',
     sendPhoneCode: () => '/user/phone-send-code',
     confirmPhoneCode: () => '/user/phone-confirm',
+    selectRoles: () => '/user/roles',
   },
   passport: {
     get: () => '/passport',
@@ -14,5 +15,9 @@ export const api = {
   },
   common: {
     uploadFile: () => '/file/upload',
+  },
+  company: {
+    save: () => '/company',
+    saveBankDetails: () => '/company/bank-details',
   },
 };

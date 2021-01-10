@@ -3,7 +3,7 @@ import _ from 'lodash';
 import type {CSSProperties, FC} from 'react';
 import React, {useMemo} from 'react';
 
-import type {Color} from 'src/types/Color';
+import type {Color} from 'src/contstants/Color';
 import type {DivProps} from 'src/types/common';
 
 import s from './Text.scss';

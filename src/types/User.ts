@@ -1,8 +1,9 @@
+import type {ModerationStatus} from 'src/contstants/ModerationStatus';
+import type {Role} from 'src/contstants/Role';
+
 import type {FilePrimitive} from './FilePrimitive';
 
 export declare namespace User {
-  export type Role = 'user' | 'admin' | 'individual';
-
   export type Passport = {
     authority: string,
     date_of_birth: string,
@@ -16,15 +17,34 @@ export declare namespace User {
     serial: string,
     snils: string,
     subdivision_code: string,
-    is_approved: boolean,
+    status: ModerationStatus,
   }
+
+  export type BankDetails = {
+    account: string,
+    bank_name: string,
+    bic: string,
+    company_id: string,
+    correspondent_account: string,
+    inn: string,
+    kpp: string,
+    owner_name: string
+  }
+
+  export type Company = {
+    ogrn: string,
+    date_issue_ogrn: string,
+    document_registry_file: string,
+  };
 }
 
 export type User = {
   id: string,
   login: string,
-  roles: User.Role[],
+  roles: Role[],
   passport: User.Passport | null,
+  company: User.Company | null,
+  bankDetails: User.BankDetails | null,
   email: string,
   phone: string,
   is_approved_passport: boolean,
