@@ -5,9 +5,9 @@ import React from 'react';
 import circle from 'src/assets/images/circle.png';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
+import {Color} from 'src/contstants/Color';
 
 import s from './RoadMap.scss';
-import {Color} from "src/types/Color";
 
 declare namespace RoadMap {
   export type Items = {
@@ -51,7 +51,7 @@ export const RoadMap: FC<RoadMap.Props> = ({data}) => {
                 classNames(
                   s.RoadMapItem,
                   afterActive ? s.afterActive : '',
-                  active ? s.active : '',
+                  active ? s.active : ''
                 )
               }
               key={index}
@@ -60,7 +60,7 @@ export const RoadMap: FC<RoadMap.Props> = ({data}) => {
                 ? <CircleActive />
                 : <Circle /> }
 
-              <Text size={TextSize.subHeadline1} color={ active ? Color.red : Color.black }>{ label }</Text>
+              <Text size={TextSize.subHeadline1} color={active ? Color.red : Color.black}>{ label }</Text>
               <div className={s.RoadMapItemDescription}>
                 <Text size={TextSize.body1} weight={TextWeight.light}>{ desc }</Text>
               </div>
