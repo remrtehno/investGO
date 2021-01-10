@@ -2,6 +2,10 @@
   padding-top: 60px;
 }
 
+.AboutUsItemsTitle {
+  margin-bottom: 28px;
+}
+
 .AboutUsContent {
   padding-top: 60px;
 }
@@ -42,6 +46,18 @@
   background: var(--white);
   padding: 30px;
   border-radius: 4px;
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
+
+  &:last-child {
+    margin-bottom: 90px;
+  }
+
+  a {
+    color: var(--link);
+  }
 }
 
 .contentPageTitle {
@@ -57,7 +73,7 @@
   display: flex;
   justify-content: space-between;
   flex-flow: wrap;
-  margin-bottom: 45px;
+  margin-bottom: 30px;
 }
 
 .contentPageVideo {
@@ -106,4 +122,47 @@
 
 .contentTeamSubTitle {
   margin-bottom: 15px;
+}
+
+.contentRoadMap {
+  margin-bottom: 25px;
+}
+
+.contentTable {
+  width: 100%;
+  border-spacing: 0 10px;
+  border-collapse: separate;
+  margin-top: -10px;
+
+  tr > td:first-child {
+    padding-right: 15px;
+  }
+}
+
+.contentTabsHeading {
+  margin-bottom: 33px;
+}
+
+.contentDocumentItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+  align-items: center;
+  color: var(--black) !important;
+}
+
+.contentExpertsItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 33px;
+  margin-bottom: 20px;
+}
+
+.contentExpertsItemText {
+
+}
+
+.contentExpertsItemNotice {
+  padding-left: 94px;
 }
