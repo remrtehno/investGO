@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import type {FC} from 'react';
 import React from 'react';
 
@@ -12,10 +13,12 @@ declare namespace SideBar {
   export type Submenu = {
     label: string,
     hash?: string,
+    active?: boolean,
   }
   export type Menu = {
     heading: string,
     hash: string,
+    active?: boolean,
     items?: Submenu
   }
   export type Props = {
@@ -27,12 +30,12 @@ function Submenu(props: {items: SideBar.Submenu[] }) {
   return (
     <ul className={s.sideBarUl}>
       {
-        props.items && props.items.map(({label, hash}, index) => (
+        props.items && props.items.map(({label, hash, active}, index) => (
           <li key={index}>
             <Text
               color={Color.label}
               size={TextSize.tabMenu}
-              className={s.sideBarLinks}>
+              className={classNames(s.sideBarLinks, active ? s.active : '')}>
               <a href={hash}>{ label }</a>
             </Text>
           </li>
@@ -45,14 +48,14 @@ function Submenu(props: {items: SideBar.Submenu[] }) {
 
 export const SideBar:FC<SideBar.Props> = ({menuItems}) => {
   return (
-    <div>
+    <div className={s.sideBar}>
       {
-        menuItems && menuItems.map(({heading, hash, items}, index) => {
+        menuItems && menuItems.map(({heading, hash, items, active}, index) => {
           return (
             <React.Fragment key={index}>
               <Text
                 size={TextSize.tabMenu}
-                className={s.sideBarHeading}
+                className={classNames(s.sideBarHeading, active ? s.active : '')}
                 weight={TextWeight.semibold}
               >
                 <a href={hash}>{ heading }</a>

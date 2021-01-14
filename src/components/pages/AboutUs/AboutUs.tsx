@@ -8,7 +8,7 @@ import img1 from 'src/assets/images/about-content-1.png';
 import img2 from 'src/assets/images/about-content-2.png';
 import img3 from 'src/assets/images/about-content-3.png';
 import experts from 'src/assets/images/exeprts.png';
-import logo from 'src/assets/images/logo3.png';
+import logo from 'src/assets/images/logo3.svg';
 import team from 'src/assets/images/team.png';
 import VideoPoster from 'src/assets/images/video.png';
 import {Page} from 'src/components/common/Page';
@@ -31,10 +31,19 @@ import s from './AboutUs.scss';
 
 function Video() {
   return (
-    <video className={s.contentPageVideo} poster={VideoPoster}>
+    <video className={classNames(s.contentPageVideo)} poster={VideoPoster}>
       <source src='movie.mp4' type='video/mp4' />
       <source src='movie.ogg' type='video/ogg' />
     </video>
+  );
+}
+
+function AvatarLabel() {
+  return (
+    <svg width='14' height='19' viewBox='0 0 14 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M4 10H10V19L7 17.5L4 19V10Z' fill='#FF3B30' />
+      <circle cx='7' cy='7' r='7' fill='#FF3B30' />
+    </svg>
   );
 }
 
@@ -61,12 +70,12 @@ export const AboutUs: FC = () => {
                 <SideBar menuItems={sidebar} />
               </div>
               <div className='col-md-8'>
-                <div id='aboutProject' className={s.contentPage}>
-                  <div className={s.contentPageHeader}>
-                    <Text size={TextSize.subHeadline1}>О проекте</Text>
+                <div id='about' className={classNames(s.contentPage)}>
+                  <div className={classNames(s.contentPageHeader)}>
+                    <Text size={TextSize.h2}>О проекте</Text>
                   </div>
                   <Video />
-                  <Text className={s.contentPageTitle} size={TextSize.subHeadline1} weight={TextWeight.semibold}>Производство
+                  <Text className={classNames(s.contentPageTitle)} size={TextSize.subHeadline1} weight={TextWeight.semibold}>Производство
                     сборного железобетона</Text>
                   <Text className={s.contentPageText} size={TextSize.body1}>
                     Наиболее экономный путь – приобретение бЗависть от региона, площади и других моментов
@@ -157,7 +166,7 @@ export const AboutUs: FC = () => {
                 { /*About the borrower*/ }
                 <div id='about-borrower' className={s.contentPage}>
                   <div className={s.contentPageHeader}>
-                    <Text size={TextSize.subHeadline1}>О заемщике</Text>
+                    <Text size={TextSize.h2}>О заемщике</Text>
                   </div>
                   <Tabs
                     tabs={tabs}
@@ -169,7 +178,7 @@ export const AboutUs: FC = () => {
                 </div>
                 <div id='docs' className={s.contentPage}>
                   <div className={s.contentPageHeader}>
-                    <Text size={TextSize.subHeadline1}>Документы</Text>
+                    <Text size={TextSize.h2}>Документы</Text>
                   </div>
                   <a href='#' className={s.contentDocumentItem}>
                     <DocumentIcon />
@@ -183,10 +192,14 @@ export const AboutUs: FC = () => {
                 </div>
                 <div id='experts' className={s.contentPage}>
                   <div className={s.contentPageHeader}>
-                    <Text size={TextSize.subHeadline1}>Эксперты</Text>
+                    <Text size={TextSize.h2}>Эксперты</Text>
                   </div>
                   <div className={s.contentExpertsItem}>
-                    <img src={experts} alt='experts' width='61' />
+                    <div className={s.contentExpertsItemImage}>
+                      <img src={experts} alt='experts' width='60' height='60' />
+                      <AvatarLabel />
+                    </div>
+
                     <div className={s.contentExpertsItemText}>
                       <Text size={TextSize.body2} weight={TextWeight.semibold}>Орлов Александр Иванович</Text>
                       <Text size={TextSize.body1} weight={TextWeight.light}>Такой-то специалист. <br />
