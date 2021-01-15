@@ -27,14 +27,17 @@ export const useSaveBankDetailsApi = () => {
       preventNotifyOn400: true,
     });
 
-    if (!userRef.current) {
+    if (!userRef.current || !userRef.current.company) {
       return null;
     }
 
     setUser({
       user: {
         ...userRef.current,
-        bankDetails,
+        company: {
+          ...userRef.current.company,
+          bank_details: bankDetails,
+        },
       },
       status: RequestStatus.success,
       error: null,

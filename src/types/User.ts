@@ -34,7 +34,8 @@ export declare namespace User {
   export type Company = {
     ogrn: string,
     date_issue_ogrn: string,
-    document_registry_file: string,
+    document_registry_file: FilePrimitive,
+    bank_details: User.BankDetails | null,
   };
 }
 
@@ -44,9 +45,9 @@ export type User = {
   roles: Role[],
   passport: User.Passport | null,
   company: User.Company | null,
-  bankDetails: User.BankDetails | null,
   email: string,
   phone: string,
   is_approved_passport: boolean,
   is_selected_role: boolean,
+  isCompanyLoaded: boolean,
 }

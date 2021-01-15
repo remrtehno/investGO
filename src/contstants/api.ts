@@ -17,6 +17,7 @@ export const api = {
     uploadFile: () => '/file/upload',
   },
   company: {
+    get: () => '/company',
     save: () => '/company',
     saveBankDetails: () => '/company/bank-details',
   },

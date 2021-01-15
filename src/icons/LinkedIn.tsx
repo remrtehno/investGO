@@ -1,5 +1,7 @@
-import React, {FC} from 'react';
-import {SvgProps} from "src/types/common";
+import type {FC} from 'react';
+import React from 'react';
+
+import type {SvgProps} from 'src/types/common';
 
 export const LinkedIn: FC<SvgProps> = (props) => {
   return (
@@ -9,5 +11,5 @@ export const LinkedIn: FC<SvgProps> = (props) => {
       <path fillRule='evenodd' clipRule='evenodd' d='M9.78516 23.3511H12.6676V14.0845H9.78516V23.3511Z' fill='white' />
       <path fillRule='evenodd' clipRule='evenodd' d='M14.4688 14.0838H17.2293V15.3508H17.2687C17.6527 14.6221 18.5929 13.854 19.9942 13.854C22.9096 13.854 23.4484 15.7726 23.4484 18.2683V23.3504H20.5697V18.8439C20.5697 17.7694 20.5503 16.387 19.0724 16.387C17.574 16.387 17.3453 17.558 17.3453 18.7673V23.3504H14.4688V14.0838Z' fill='white' />
     </svg>
-  )
-}
+  );
+};

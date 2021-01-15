@@ -18,12 +18,29 @@ export const useGetUserApi = () => {
         method: 'GET',
       });
 
+      let company: User.Company | null = null;
+      let passport: User.Passport | null = null;
+
+      try {
+        company = await request<User.Company | null>(api.company.save(), {
+          method: 'GET',
+          showNotifyOnError: false,
+          preventNotifyOn400: true,
+        });
+      } catch (e) {}
+
+      try {
+        passport = await request<User.Passport | null>(api.passport.get(), {
+          method: 'GET',
+        });
+      } catch (e) {}
+
       setUser({
         user: newUser ? {
           ...newUser,
-          passport: user && user.id === newUser.id ? user.passport : null,
-          bankDetails: user && user.id === newUser.id ? user.bankDetails : null,
-          company: user && user.id === newUser.id ? user.company : null,
+          passport,
+          company,
+          isCompanyLoaded: false,
         } : null,
         status: RequestStatus.success,
         error: null,

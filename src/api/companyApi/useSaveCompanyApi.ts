@@ -10,7 +10,7 @@ import {RequestStatus} from 'src/types/common';
 import type {User} from 'src/types/User';
 
 export declare namespace useSaveCompanyApi {
-  export type Payload = User.Company;
+  export type Payload = Partial<User.Company>;
 }
 
 export const useSaveCompanyApi = () => {
@@ -24,7 +24,7 @@ export const useSaveCompanyApi = () => {
       body: JSON.stringify({
         ...payload,
         type: Role.ip,
-        document_registry_file: payload.document_registry_file[0],
+        document_registry_file: payload.document_registry_file && (payload.document_registry_file as any)[0],
       }),
       showNotifyOnError: false,
       preventNotifyOn400: true,

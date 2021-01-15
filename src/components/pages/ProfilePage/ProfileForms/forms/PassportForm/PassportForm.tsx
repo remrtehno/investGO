@@ -4,8 +4,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {useGetPassport} from 'src/api/passportApi/useGetPassport';
-import {useSavePassport} from 'src/api/passportApi/useSavePassport';
+import {useSavePassportApi} from 'src/api/passportApi/useSavePassportApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -28,8 +27,7 @@ export declare namespace PassportForm {
 }
 
 export const PassportForm: FC<PassportForm.Props> = (props) => {
-  const [, getPassportApi] = useGetPassport();
-  const [, savePassportApi] = useSavePassport();
+  const [, savePassportApi] = useSavePassportApi();
   const {user} = useRecoilValue(userAtom);
   const fields = usePassportFields();
   const formApiRef = useRef<Form.Api | null>(null);
@@ -46,12 +44,6 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
 
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    if (user && !user.passport) {
-      getPassportApi();
-    }
-  }, [user]);
 
   useEffect(() => {
     if (user && user.passport && !_.isEqual(user.passport, values)) {
@@ -93,7 +85,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         errors={errors}
         values={values}
         formApiRef={formApiRef}
-        disabled={Boolean(user && user.passport && user.passport.status !== ModerationStatus.waiting)}
+        disabled={Boolean(user && user.passport && user.passport.status !== ModerationStatus.declined)}
       >
         <FormRow>
           <Field className='col-6' name='fio' />
@@ -132,7 +124,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           </div>
         </FormRow>
         <FormActions>
-          { user && user.passport && user.passport.status === ModerationStatus.waiting ? (
+          { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
             <div className='col-3'>
               <Button
                 theme={ButtonTheme.black}

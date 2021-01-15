@@ -67,7 +67,7 @@ export const ProfilePage = withAuth(() => {
       id: ProfileFormType.requisitions,
       title: 'Реквизиты',
     } : null,
-  ]), []);
+  ]), [user]);
 
   return (
     <Page>
@@ -87,7 +87,7 @@ export const ProfilePage = withAuth(() => {
                 currentForm={currentForm}
                 forms={forms}
               />
-              { user && user.passport && user.passport.status === 'approved' ? (
+              { user && user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
                 <FormActions>
                   <div className='col-4'>
                     <Button

@@ -30,7 +30,10 @@ export const CompanyForm: FC<CompanyForm.Props> = (props) => {
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
-    ...user && user.bankDetails ? user.bankDetails : {},
+    ...user && user.company && user.company ? {
+      ...user.company,
+      document_registry_file: [user.company.document_registry_file],
+    } : {},
   } as Omit<User.Passport, 'serial' | 'number'> & { serialNumber: string });
 
   const initialValues = useMemo(() => getValuesFromUser(), [fields]);
@@ -41,7 +44,7 @@ export const CompanyForm: FC<CompanyForm.Props> = (props) => {
     if (user && user.passport && !_.isEqual(user.passport, values)) {
       setValues(getValuesFromUser());
     }
-  }, [user && user.bankDetails]);
+  }, [user && user.company]);
 
   const onSave = useCallback(() => {
     saveCompanyApi({

@@ -9,10 +9,10 @@ export function useClaims() {
 
   return useMemo(() => ({
     individualEntrepreneurForm: {
-      read: () => true || Boolean(user && user.roles.includes(Role.ip)),
+      read: () => Boolean(user && user.roles.includes(Role.ip)),
     },
     requisitionsForm: {
-      read: () => true || Boolean(user && user.roles.includes(Role.ip)),
+      read: () => Boolean(user && user.roles.includes(Role.borrower)),
     },
   }), [user]);
 }
