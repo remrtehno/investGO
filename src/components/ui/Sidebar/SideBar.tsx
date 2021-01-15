@@ -4,7 +4,7 @@ import React from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
-import {Color} from 'src/types/Color';
+import {Color} from 'src/contstants/Color';
 
 import s from './SideBar.scss';
 

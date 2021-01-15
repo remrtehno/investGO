@@ -16,8 +16,14 @@
   color: var(--gray4);
 }
 
-.moderated {
+.approved {
   color: var(--link);
+  display: flex;
+  align-items: center;
+}
+
+.declined {
+  color: var(--red);
   display: flex;
   align-items: center;
 }

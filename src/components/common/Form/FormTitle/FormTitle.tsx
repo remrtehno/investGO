@@ -3,6 +3,7 @@ import type {FC} from 'react';
 import React from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
+import {ModerationStatus} from 'src/contstants/ModerationStatus';
 
 import s from './FormTitle.scss';
 
@@ -14,28 +15,33 @@ function ModeratedIcon() {
   );
 }
 
-export enum FormStatus {
-  moderation = 'moderation',
-  moderated = 'moderated',
-}
-
 export declare namespace FormTitle {
   export type Props = {
-    status?: FormStatus | null,
+    status?: ModerationStatus | null,
   };
 }
 
 export const FormTitle: FC<FormTitle.Props> = (props) => {
   function renderStatus() {
     switch (props.status) {
-    case FormStatus.moderation:
+    case ModerationStatus.filled:
       return <Text className={cx(s.status, s.moderation)} size={TextSize.status}>Проверяется</Text>;
 
-    case FormStatus.moderated:
-      return (<Text className={cx(s.status, s.moderated)} size={TextSize.status}>
-        <ModeratedIcon />
-        Подтверждено
-      </Text>);
+    case ModerationStatus.approved:
+      return (
+        <Text className={cx(s.status, s.appreoved)} size={TextSize.status}>
+          <ModeratedIcon />
+          Подтверждено
+        </Text>
+      );
+
+    case ModerationStatus.declined:
+      return (
+        <Text className={cx(s.status, s.declined)} size={TextSize.status}>
+          <ModeratedIcon />
+          Отклонено
+        </Text>
+      );
 
     default:
       return null;

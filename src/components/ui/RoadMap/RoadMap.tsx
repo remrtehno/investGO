@@ -2,10 +2,9 @@ import classNames from 'classnames';
 import type {FC} from 'react';
 import React from 'react';
 
-import circle from 'src/assets/images/circle.png';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
-import {Color} from 'src/types/Color';
+import {Color} from 'src/contstants/Color';
 
 import s from './RoadMap.scss';
 

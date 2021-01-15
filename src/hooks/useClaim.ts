@@ -1,6 +1,7 @@
 import {useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
 
+import {Role} from 'src/contstants/Role';
 import {userAtom} from 'src/recoil/userAtom';
 
 export function useClaims() {
@@ -8,10 +9,10 @@ export function useClaims() {
 
   return useMemo(() => ({
     individualEntrepreneurForm: {
-      read: () => false || Boolean(user && user.roles.includes('individual')),
+      read: () => true || Boolean(user && user.roles.includes(Role.ip)),
     },
     requisitionsForm: {
-      read: () => false || Boolean(user && user.roles.includes('individual')),
+      read: () => true || Boolean(user && user.roles.includes(Role.ip)),
     },
   }), [user]);
 }

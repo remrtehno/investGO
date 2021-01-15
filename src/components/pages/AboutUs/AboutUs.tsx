@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import type {FC} from 'react';
-import React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 import banner from 'src/assets/images/about.png';
 import img1 from 'src/assets/images/about-content-1.png';
@@ -21,11 +20,11 @@ import {SideBar} from 'src/components/ui/Sidebar';
 import Tabs from 'src/components/ui/Tabs/Tabs';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
+import {Color} from 'src/contstants/Color';
 import {DocumentIcon} from 'src/icons/DocumentIcon';
 import {FacebookIcon} from 'src/icons/FacebookIcon';
 import {Instagram} from 'src/icons/InstagramIcon';
 import {LinkedIn} from 'src/icons/LinkedIn';
-import {Color} from 'src/types/Color';
 
 import s from './AboutUs.scss';
 

@@ -19,13 +19,14 @@ export declare namespace CalendarInput {
     value: string | null,
     label: string,
 
+    disabled?: boolean,
     error?: string | null,
     className?: string,
     name?: string | null,
   };
 }
 
-const CustomInput = ({value, onChange, name, label, error, ...inputProps}: any) => {
+const CustomInput = ({value, onChange, name, label, error, disabled, ...inputProps}: any) => {
   return (
     <Input
       containerProps={inputProps}
@@ -35,6 +36,7 @@ const CustomInput = ({value, onChange, name, label, error, ...inputProps}: any) 
       value={value}
       label={label}
       error={error}
+      disabled={disabled}
     />
   );
 };
@@ -57,7 +59,7 @@ export const CalendarInput: FC<CalendarInput.Props> = (props) => {
         name={name || undefined}
         onChange={(value: Date) => onChange(formatDate(value), name || null)}
         selected={value ? parseDate(value) : null}
-        customInput={<CustomInput name={name} label={label} error={error} />}
+        customInput={<CustomInput disabled={props.disabled} name={name} label={label} error={error} />}
         dateFormat='dd.MM.yyyy'
         showYearDropdown={true}
         yearDropdownItemNumber={30}

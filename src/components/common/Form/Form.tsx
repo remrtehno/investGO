@@ -43,6 +43,7 @@ export declare namespace Form {
     errors: Errors,
     onChange: OnChange,
 
+    disabled?: boolean,
     formApiRef?: MutableRefObject<Api | null>,
   };
 }
@@ -95,8 +96,8 @@ export function Form(props: Form.Props) {
   }
 
   useEffect(() => {
-    const newErrors = _.reduce(fieldsRef.current, (result: Form.Errors, field, name) => {
-      const error = validateField(valuesRef.current[name], name);
+    const newErrors = _.reduce(props.fields, (result: Form.Errors, field, name) => {
+      const error = validateField(props.values[name], name);
       if (error) {
         result[name] = error;
       }
@@ -104,10 +105,10 @@ export function Form(props: Form.Props) {
       return result;
     }, {});
 
-    if (!_.isEqual(newErrors, fieldsRef.current)) {
-      props.onChange(valuesRef.current, newErrors);
+    if (!_.isEqual(newErrors, props.fields)) {
+      props.onChange(props.values, newErrors);
     }
-  }, []);
+  }, [props.values, props.fields]);
 
   useEffect(() => {
     updateFormApi();
@@ -123,6 +124,7 @@ export function Form(props: Form.Props) {
 
       fields[field.name] = {
         ...field,
+        disabled: props.disabled || field.disabled,
         value,
         isValid: !props.errors[field.name],
         error: (props.errors[field.name] || null) as string | null,

@@ -4,8 +4,8 @@ import React, {useCallback, useRef, useState} from 'react';
 import InputMask from 'react-input-mask';
 
 import {Text, TextSize} from 'src/components/ui/Text';
+import {Color} from 'src/contstants/Color';
 import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
-import {Color} from 'src/types/Color';
 import type {DivProps} from 'src/types/common';
 
 import s from './Input.scss';
