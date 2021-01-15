@@ -14,4 +14,15 @@
 .BreadcrumbsListText {
   display: flex;
   align-items: center;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: var(--black);
+    svg path {
+      stroke: var(--black);
+    }
+  }
+  svg {
+    margin-right: 8px;
+  }
 }
