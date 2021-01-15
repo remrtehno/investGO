@@ -25,7 +25,7 @@ export const TabsContent:FC<TabsContent> = (props) => {
           </tr>
           <tr>
             <td><Text size={TextSize.body1} weight={TextWeight.semibold}>Юридический адрес:</Text></td>
-            <td><Text size={TextSize.body2} >Краснодарский крaай, Сочи, Лазаревский район, Лазаревское <br /> пос., Павлова, 75, оф. 155</Text></td>
+            <td><Text size={TextSize.body2} >Краснодарский крaай, Сочи, Лазаревский район, Лазаревское  пос., <br /> Павлова, 75, оф. 155</Text></td>
           </tr>
           <tr>
             <td><Text size={TextSize.body1} weight={TextWeight.semibold}>Фактический адрес:</Text></td>

@@ -1,7 +1,7 @@
 
 export const breadcrumbs = [
-  'Инвестиционные предложения',
-  'Завод ЖБИ',
+  {label: 'Инвестиционные предложения', link: '#'},
+  {label: 'Завод ЖБИ', link: '#'},
 ];
 
 export const sidebar = [{
@@ -26,21 +26,17 @@ export const sidebar = [{
     },
     {
       label: 'Дорожная карта',
-      hash: '#team',
+      hash: '#roadmap',
     },
     {
       label: 'Контакты',
-      hash: '#team',
-    },
-    {
-      label: 'Дополнительно',
-      hash: '#team',
+      hash: '#contacts',
     },
   ],
 },
 {
   heading: 'О заемщике',
-  hash: '#bout-the-borrower',
+  hash: '#about-borrower',
   items: [
     {
       label: 'Организация',

@@ -33,6 +33,14 @@
   z-index: 2;
 }
 
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  transform: translate(-55%, -50%);
+  background-color: var(--black);
+}
+
 .RoadMapItemDescription {
   position: absolute;
   left: 45px;
