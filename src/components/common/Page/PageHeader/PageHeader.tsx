@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
@@ -26,12 +26,18 @@ const LogoutIcon: FC<LogoutIcon.Props> = (props) => (
 
 export const PageHeader: FC = () => {
   const {user} = useRecoilValue(userAtom);
-  const [, logoutApi] = useSignOutApi();
+  const [, logoutApi, logoutState] = useSignOutApi();
   const history = useHistory();
 
   const logout = useCallback(() => {
     logoutApi();
   }, []);
+
+  useEffect(() => {
+    if (logoutState.isSuccess) {
+      history.push('/');
+    }
+  }, [logoutState.isSuccess]);
 
   return (
     <div className={s.pageHeader}>

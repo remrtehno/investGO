@@ -8,40 +8,45 @@ import {userAtom} from 'src/recoil/userAtom';
 import {RequestStatus} from 'src/types/common';
 import type {User} from 'src/types/User';
 
+export async function getUserApi(request: useApiRequest.Request): Promise<User | null> {
+  const user = await request(api.user.get(), {
+    method: 'GET',
+  });
+
+  let company: User.Company | null = null;
+  let passport: User.Passport | null = null;
+
+  try {
+    company = await request(api.company.save(), {
+      method: 'GET',
+      showNotifyOnError: false,
+      preventNotifyOn400: true,
+    });
+  } catch (e) {}
+
+  try {
+    passport = await request(api.passport.get(), {
+      method: 'GET',
+    });
+  } catch (e) {}
+
+  return user ? {
+    ...user,
+    passport,
+    company,
+    isCompanyLoaded: false,
+  } : null;
+}
+
 export const useGetUserApi = () => {
   const request = useApiRequest();
   const [{user}, setUser] = useRecoilState(userAtom);
 
   const [, getUser] = useApi<void, null>(async() => {
     try {
-      const newUser = await request<User | null>(api.user.get(), {
-        method: 'GET',
-      });
-
-      let company: User.Company | null = null;
-      let passport: User.Passport | null = null;
-
-      try {
-        company = await request<User.Company | null>(api.company.save(), {
-          method: 'GET',
-          showNotifyOnError: false,
-          preventNotifyOn400: true,
-        });
-      } catch (e) {}
-
-      try {
-        passport = await request<User.Passport | null>(api.passport.get(), {
-          method: 'GET',
-        });
-      } catch (e) {}
-
+      const newUser = await getUserApi(request);
       setUser({
-        user: newUser ? {
-          ...newUser,
-          passport,
-          company,
-          isCompanyLoaded: false,
-        } : null,
+        user: newUser,
         status: RequestStatus.success,
         error: null,
       });

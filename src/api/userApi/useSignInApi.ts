@@ -5,7 +5,8 @@ import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
 import {userAtom} from 'src/recoil/userAtom';
 import {RequestStatus} from 'src/types/common';
-import type {User} from 'src/types/User';
+
+import {getUserApi} from './useGetUserApi';
 
 export declare namespace useSignInApi {
   export type Payload = {
@@ -19,12 +20,14 @@ export const useSignInApi = () => {
   const setUser = useSetRecoilState(userAtom);
 
   return useApi<useSignInApi.Payload, null>(async(payload) => {
-    const user = await request<User | null>(api.user.signIn(), {
+    await request(api.user.signIn(), {
       method: 'POST',
       body: JSON.stringify(payload),
       showNotifyOnError: false,
       preventNotifyOn400: true,
     });
+
+    const user = await getUserApi(request);
 
     setUser({
       user,

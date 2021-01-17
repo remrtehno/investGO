@@ -8,11 +8,14 @@ export function useClaims() {
   const {user} = useRecoilValue(userAtom);
 
   return useMemo(() => ({
-    individualEntrepreneurForm: {
+    ipForm: {
       read: () => Boolean(user && user.roles.includes(Role.ip)),
     },
-    requisitionsForm: {
-      read: () => Boolean(user && user.roles.includes(Role.borrower)),
+    urForm: {
+      read: () => Boolean(user && user.roles.includes(Role.ur)),
+    },
+    bankDetailsForm: {
+      read: () => Boolean(user?.company && user?.roles.includes(Role.borrower)),
     },
   }), [user]);
 }

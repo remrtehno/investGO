@@ -1,8 +1,8 @@
 import type {FC} from 'react';
 
-import type {Form} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
 
-export type FieldProps<TField = Form.Field> = {
+export type FieldProps<TField extends FormField.BaseField> = {
   field: TField,
 }
 

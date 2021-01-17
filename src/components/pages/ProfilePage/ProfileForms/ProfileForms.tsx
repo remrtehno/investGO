@@ -8,17 +8,19 @@ import {usePageScroll} from 'src/hooks/usePageScroll';
 import {getElementPosition} from 'src/utils/getElementPosition';
 
 import {BankDetailsForm} from './forms/BankDetailsForm';
-import {CompanyForm} from './forms/CompanyForm';
+import {IpForm} from './forms/IpForm';
 import {PassportForm} from './forms/PassportForm';
 import {ProfileForm} from './forms/ProfileForm';
+import {UrForm} from './forms/UrForm';
 
 import s from './ProfileForms.scss';
 
 const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.profile]: ProfileForm,
   [ProfileFormType.passport]: PassportForm,
-  [ProfileFormType.requisitions]: BankDetailsForm,
-  [ProfileFormType.individualEntrepreneur]: CompanyForm,
+  [ProfileFormType.bankDetails]: BankDetailsForm,
+  [ProfileFormType.ip]: IpForm,
+  [ProfileFormType.ur]: UrForm,
 };
 
 export declare namespace ProfileForms {

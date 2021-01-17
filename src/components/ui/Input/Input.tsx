@@ -11,11 +11,13 @@ import type {DivProps} from 'src/types/common';
 import s from './Input.scss';
 
 export declare namespace Input {
+  export type OnChange = (value: string, name: string | null, e: ChangeEvent<HTMLInputElement>) => void;
+
   export type Props = {
     value: string,
-    label: string,
-    onChange(value: string, name: string | null, e: ChangeEvent<HTMLInputElement>): void,
+    onChange: OnChange,
 
+    label?: string,
     className?: string,
     containerProps?: DivProps,
     error?: string | null,
@@ -69,7 +71,7 @@ export const Input: FC<Input.Props> = (props) => {
     autoComplete: 'off',
     onFocus,
     onBlur,
-    className: cx(s.control, {[s.isControlVisible]: isControlVisible}),
+    className: cx(s.control, {[s.withLabel]: Boolean(props.label), [s.isControlVisible]: isControlVisible}),
     onChange,
     name: props.name || undefined,
     value: props.value || '',
@@ -87,13 +89,15 @@ export const Input: FC<Input.Props> = (props) => {
       })}
       onClick={onFocus}
     >
-      <Text
-        className={cx(s.label, {[s.isControlVisible]: isControlVisible})}
-        size={isControlVisible ? TextSize.caption1 : TextSize.body1}
-        color={isControlVisible ? null : Color.gray4}
-      >
-        { props.label }
-      </Text>
+      { props.label ? (
+        <Text
+          className={cx(s.label, {[s.isControlVisible]: isControlVisible})}
+          size={isControlVisible ? TextSize.caption1 : TextSize.body1}
+          color={isControlVisible ? null : Color.gray4}
+        >
+          { props.label }
+        </Text>
+      ) : null }
       { props.mask ? (
         <InputMask mask={props.mask} {...controlProps}>
           { (inputProps: any) => (

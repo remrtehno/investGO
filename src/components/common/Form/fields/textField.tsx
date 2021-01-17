@@ -25,7 +25,7 @@ export const TextField: FC<TextField.Props> = (props) => {
         label={field.label}
         name={field.name}
         error={field.isDirty ? field.error : null}
-        onChange={onChange || form.onChange}
+        onChange={onChange || form.onChange as any}
         disabled={field.disabled}
         regExp={field.regExp}
         mask={field.mask}

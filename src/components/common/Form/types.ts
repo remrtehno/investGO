@@ -6,7 +6,7 @@ import type {FieldType} from './Form';
 export declare namespace FormFieldModel {
   type BaseFieldModel = {
     name: string,
-    type: string,
+    type: Omit<string, FieldType>,
 
     disabled?: boolean,
     isHidden?: boolean,
@@ -14,6 +14,8 @@ export declare namespace FormFieldModel {
     toValue?(rawValue: any): any,
     fromValue?(value: any): any
   }
+
+  export type Custom = BaseFieldModel & Record<string, any>;
 
   export type Text = BaseFieldModel & Omit<Input.Props, 'value' | 'onChange'> & {
     type: FieldType.text,
@@ -44,16 +46,17 @@ export declare namespace FormFieldModel {
   }
 }
 
-export type FormFieldModel =
+export type FormFieldModel = (
   FormFieldModel.Text |
   FormFieldModel.Date |
   FormFieldModel.Number |
   FormFieldModel.FileArray |
   FormFieldModel.Password |
-  FormFieldModel.Phone;
+  FormFieldModel.Phone
+);
 
 export declare namespace FormField {
-  type BaseField = {
+  export type BaseField = {
     value: any,
     error: string | null,
     isValid: boolean,

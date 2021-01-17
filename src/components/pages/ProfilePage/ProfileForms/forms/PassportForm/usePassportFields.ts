@@ -3,9 +3,9 @@ import {useMemo} from 'react';
 
 import type {Form} from 'src/components/common/Form';
 import {FieldType} from 'src/components/common/Form/Form';
-import {minLength} from 'src/components/common/Form/validations/minLength';
-import {required} from 'src/components/common/Form/validations/required';
 import {parseDate} from 'src/utils/parseDate';
+import {minLength} from 'src/validations/minLength';
+import {required} from 'src/validations/required';
 
 function validateAge(value: string) {
   if (moment().diff(moment(parseDate(value)), 'years') < 18) {

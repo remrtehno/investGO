@@ -47,7 +47,6 @@ export type User = {
   company: User.Company | null,
   email: string,
   phone: string,
-  is_approved_passport: boolean,
   is_selected_role: boolean,
   isCompanyLoaded: boolean,
 }

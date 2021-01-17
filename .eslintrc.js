@@ -338,7 +338,7 @@ module.exports = {
     'object-shorthand': ['warn', 'always'],
     'prefer-arrow-callback': 'warn',
     'prefer-const': 'warn',
-    'prefer-destructuring': 'warn',
+    'prefer-destructuring': 'off',
     'prefer-numeric-literals': 'off',
     'prefer-rest-params': 'warn',
     'prefer-spread': 'warn',

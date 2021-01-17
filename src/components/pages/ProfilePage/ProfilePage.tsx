@@ -59,12 +59,16 @@ export const ProfilePage = withAuth(() => {
       id: ProfileFormType.passport,
       title: 'Паспорт',
     },
-    claims.individualEntrepreneurForm.read() ? {
-      id: ProfileFormType.individualEntrepreneur,
-      title: 'ИП',
+    claims.ipForm.read() ? {
+      id: ProfileFormType.ip,
+      title: 'Данные Индивидуального предпринимателя',
     } : null,
-    claims.requisitionsForm.read() ? {
-      id: ProfileFormType.requisitions,
+    claims.urForm.read() ? {
+      id: ProfileFormType.ur,
+      title: 'Данные юр. лица',
+    } : null,
+    claims.bankDetailsForm.read() ? {
+      id: ProfileFormType.bankDetails,
       title: 'Реквизиты',
     } : null,
   ]), [user]);

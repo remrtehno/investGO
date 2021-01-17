@@ -11,12 +11,12 @@ import {useUserCheckExists} from 'src/api/userApi/useUserCheckExists';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
-import {email} from 'src/components/common/Form/validations/email';
-import {required} from 'src/components/common/Form/validations/required';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {useLatestRef} from 'src/hooks/useLatestRef';
 import {userAtom} from 'src/recoil/userAtom';
+import {email} from 'src/validations/email';
+import {required} from 'src/validations/required';
 
 import {CheckEmailModal} from './CheckEmailModal';
 import s from './SignForm.scss';
@@ -127,7 +127,7 @@ export const SignForm: FC<SignForm.Props> = () => {
 
   useEffect(() => {
     if (user && signInState.isSuccess) {
-      if (!user.is_approved_passport) {
+      if (!user.passport) {
         history.push('/registration');
       } else {
         history.push('/');

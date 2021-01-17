@@ -4,6 +4,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
+import 'src/components/pages/ProfilePage/fields/phoneArrayField';
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
@@ -16,15 +17,15 @@ import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
-import s from './CompanyForm.scss';
-import {useCompanyFields} from './useCompanyFields';
+import s from './UrForm.scss';
+import {useUrFields} from './useUrFields';
 
-export declare namespace CompanyForm {
+export declare namespace UrForm {
   export type Props = ProfileForms.FormProps;
 }
 
-export const CompanyForm: FC<CompanyForm.Props> = (props) => {
-  const fields = useCompanyFields();
+export const UrForm: FC<UrForm.Props> = (props) => {
+  const fields = useUrFields();
   const {user} = useRecoilValue(userAtom);
   const [, saveCompanyApi] = useSaveCompanyApi();
 
@@ -70,8 +71,27 @@ export const CompanyForm: FC<CompanyForm.Props> = (props) => {
       >
         <FormTitle>{ props.form.title }</FormTitle>
         <FormRow>
+          <Field className='col-6' name='inn' />
+          <Field className='col-6' name='snils' />
+        </FormRow>
+        <FormRow>
+          <Field className='container col-12' name='name' />
+        </FormRow>
+        <FormRow>
+          <Field className='container col-12' name='place' />
+        </FormRow>
+        <FormRow>
+          <Field className='container col-12' name='postal_address' />
+        </FormRow>
+        <FormRow>
           <Field className='col-6' name='ogrn' />
           <Field className='col-6' name='date_issue_ogrn' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='email' />
+        </FormRow>
+        <FormRow>
+          <Field className='container col-12' name='phone' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='document_registry_file' />

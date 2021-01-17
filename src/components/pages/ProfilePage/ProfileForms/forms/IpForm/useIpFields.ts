@@ -2,9 +2,9 @@ import {useMemo} from 'react';
 
 import type {Form} from 'src/components/common/Form/Form';
 import {FieldType} from 'src/components/common/Form/Form';
-import {required} from 'src/components/common/Form/validations/required';
+import {required} from 'src/validations/required';
 
-export const useCompanyFields = () => {
+export const useIpFields = () => {
   return useMemo((): Form.FieldModels => {
     return {
       ogrn: {

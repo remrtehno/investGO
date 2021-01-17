@@ -7,12 +7,10 @@ import {useSendPhoneCode} from 'src/api/userApi/useSendPhoneCode';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
-import {maxLength} from 'src/components/common/Form/validations/maxLength';
-import {minLength} from 'src/components/common/Form/validations/minLength';
-import {required} from 'src/components/common/Form/validations/required';
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
+import {required} from 'src/validations/required';
 
 import s from './SmsForm.scss';
 
@@ -20,7 +18,8 @@ const fields: Form.FieldModels = {
   code: {
     name: 'code',
     type: FieldType.text,
-    validations: [required(), maxLength(5), minLength(5)],
+    mask: '99999',
+    validations: [required()],
     label: 'Введите код из СМС',
   },
 };
@@ -70,8 +69,8 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
       return;
     }
 
-    props.onConfirm();
     confirmPhoneState.resetValue();
+    props.onConfirm();
   }, [isConfirmed]);
 
   return (

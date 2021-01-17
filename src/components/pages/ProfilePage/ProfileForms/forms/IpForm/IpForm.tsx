@@ -4,7 +4,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {useSaveBankDetailsApi} from 'src/api/companyApi/useSaveBankDetailsApi';
+import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -12,25 +12,28 @@ import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
-import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
-import s from './BankDetailsForm.scss';
-import {useBankDetailsFields} from './useBankDetailsFields';
+import s from './IpForm.scss';
+import {useIpFields} from './useIpFields';
 
-export declare namespace BankDetailsForm {
+export declare namespace IpForm {
   export type Props = ProfileForms.FormProps;
 }
 
-export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
-  const fields = useBankDetailsFields();
+export const IpForm: FC<IpForm.Props> = (props) => {
+  const fields = useIpFields();
   const {user} = useRecoilValue(userAtom);
-  const [, saveBankDetailsApi] = useSaveBankDetailsApi();
+  const [, saveCompanyApi] = useSaveCompanyApi();
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
-    ...(user?.company?.bank_details || {}),
+    ...user && user.company && user.company ? {
+      ...user.company,
+      document_registry_file: [user.company.document_registry_file],
+    } : {},
   } as Omit<User.Passport, 'serial' | 'number'> & { serialNumber: string });
 
   const initialValues = useMemo(() => getValuesFromUser(), [fields]);
@@ -41,17 +44,13 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
     if (user && user.passport && !_.isEqual(user.passport, values)) {
       setValues(getValuesFromUser());
     }
-  }, [user?.company?.bank_details]);
+  }, [user && user.company]);
 
   const onSave = useCallback(() => {
-    saveBankDetailsApi({
-      account: values.account,
-      bank_name: values.bank_name,
-      bic: values.bic,
-      correspondent_account: values.correspondent_account,
-      inn: values.inn,
-      kpp: values.kpp,
-      owner_name: values.owner_name,
+    saveCompanyApi({
+      ogrn: values.ogrn,
+      date_issue_ogrn: values.date_issue_ogrn,
+      document_registry_file: values.document_registry_file,
     });
   }, [values]);
 
@@ -61,29 +60,21 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
   }, []);
 
   return (
-    <div ref={props.formRef} className={cx(s.BankDetailsForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.CompanyForm, 'container')}>
       <Form
         initialValues={initialValues}
+        fields={fields}
         errors={errors}
         values={values}
         onChange={onChange}
-        fields={fields}
       >
         <FormTitle>{ props.form.title }</FormTitle>
         <FormRow>
-          <Field className='col-12' name='bank_name' />
+          <Field className='col-6' name='ogrn' />
+          <Field className='col-6' name='date_issue_ogrn' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='account' />
-          <Field className='col-6' name='owner_name' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-6' name='bic' />
-          <Field className='col-6' name='correspondent_account' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-6' name='inn' />
-          <Field className='col-6' name='kpp' />
+          <Field className='col-12' name='document_registry_file' />
         </FormRow>
         <FormActions>
           <div className='col-3'>

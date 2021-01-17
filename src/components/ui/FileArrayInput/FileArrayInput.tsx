@@ -102,14 +102,16 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
       </div>
       <div {...getRootProps()} className={s.addButtonContainer}>
         { props.disabled || props.readonly ? null : <input {...getInputProps()} /> }
-        <Button
-          size={ButtonSize.m}
-          theme={ButtonTheme.light}
-          onClick={_.noop}
-        >
-          <AddButtonIcon />
-          <Text className={s.addButtonLabel} size={TextSize.body1}>Загрузить файл</Text>
-        </Button>
+        { props.disabled || props.readonly ? null : (
+          <Button
+            size={ButtonSize.m}
+            theme={ButtonTheme.light}
+            onClick={_.noop}
+          >
+            <AddButtonIcon />
+            <Text className={s.addButtonLabel} size={TextSize.body1}>Загрузить файл</Text>
+          </Button>
+        ) }
       </div>
     </div>
   );

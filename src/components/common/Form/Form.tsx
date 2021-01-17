@@ -29,7 +29,8 @@ export declare namespace Form {
   export type Model = {
     initialValues: Values,
     fields: FieldModels,
-    onChange(value: any, name: string): void
+    onChange(value: any, name: string): void,
+    onError(error: string, name: string): void,
   };
 
   export type Api = {
@@ -146,6 +147,12 @@ export function Form(props: Form.Props) {
   const model = useMemo((): Form.Model => ({
     fields: props.fields,
     initialValues: props.initialValues,
+    onError(error, name) {
+      onChangeRef.current(valuesRef.current, {
+        ...errorsRef.current,
+        [name]: error,
+      });
+    },
     onChange(value, name) {
       if (_.isEqual(value, valuesRef.current[name])) {
         return;
