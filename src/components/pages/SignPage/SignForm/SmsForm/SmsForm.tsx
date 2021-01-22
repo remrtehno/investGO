@@ -10,6 +10,7 @@ import {FieldType} from 'src/components/common/Form/Form';
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
+import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
 import s from './SmsForm.scss';
@@ -18,8 +19,8 @@ const fields: Form.FieldModels = {
   code: {
     name: 'code',
     type: FieldType.text,
-    mask: '99999',
-    validations: [required()],
+    mask: '9999',
+    validations: [required(), minLength(4)],
     label: 'Введите код из СМС',
   },
 };
@@ -56,7 +57,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
   }, [props.phone]);
 
   useEffect(() => {
-    if (!errors.code && values.code) {
+    if (!errors.code && values.code && !errors.code) {
       confirmPhoneCodeApi({
         confirm_code: values.code,
         phone: props.phone,

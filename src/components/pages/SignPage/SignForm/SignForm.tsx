@@ -135,21 +135,6 @@ export const SignForm: FC<SignForm.Props> = () => {
     }
   }, [signInState, user, history]);
 
-  useEffect(() => {
-    if (signUpState.isSuccess) {
-      setIsCheckEmailModalVisible(true);
-      setIsShowSmsForm(false);
-    }
-  }, [signUpState.isSuccess]);
-
-  useEffect(() => {
-    setIsShowSmsForm(false);
-  }, [signUpState.error]);
-
-  const signUp = useCallback(() => {
-    signUpApi(values);
-  }, [values]);
-
   const onContinue = useCallback(() => {
     if (isUserExists) {
       signInApi({
@@ -164,8 +149,14 @@ export const SignForm: FC<SignForm.Props> = () => {
       return;
     }
 
-    setIsShowSmsForm(true);
+    signUpApi(values);
   }, [isNeedShowPhone, isUserExists, values]);
+
+  useEffect(() => {
+    if (signUpState.isSuccess) {
+      setIsShowSmsForm(true);
+    }
+  }, [signUpState.isSuccess]);
 
   return (
     <Form
@@ -190,8 +181,15 @@ export const SignForm: FC<SignForm.Props> = () => {
         Продолжить
       </Button>
       { isShowSmsForm
-        ? <SmsForm onConfirm={signUp} phone={values.phone} />
-        : null }
+        ? (
+          <SmsForm
+            onConfirm={() => {
+              setIsShowSmsForm(false);
+              setIsCheckEmailModalVisible(true);
+            }}
+            phone={values.phone}
+          />
+        ) : null }
       { isCheckEmailModalVisible ? (
         <CheckEmailModal
           onClose={() => {

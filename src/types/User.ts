@@ -18,6 +18,7 @@ export declare namespace User {
     snils: string,
     subdivision_code: string,
     status: ModerationStatus,
+    phone_confirmed: boolean,
   }
 
   export type BankDetails = {
