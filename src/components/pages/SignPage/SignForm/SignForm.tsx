@@ -122,6 +122,10 @@ export const SignForm: FC<SignForm.Props> = () => {
       setErrors({...errors, password: 'Неверный пароль'});
     } else if (errorMessage === 'email_not_confirmed') {
       setErrors({...errors, email: 'Email не подтвержден'});
+    } else if (errorMessage === 'incorrect_password_format') {
+      setErrors({...errors, password: 'Неверный формат пароля'});
+    } else if (errorMessage === 'phone_already_taken') {
+      setErrors({...errors, phone: 'Пользователь с таким номером уже существует'});
     }
   }, [signInState.error, signUpState.error, isUserExists]);
 
