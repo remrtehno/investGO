@@ -5,6 +5,8 @@ import React, {createContext, useContext, useEffect, useMemo} from 'react';
 import {useLatestRef} from 'src/hooks/useLatestRef';
 import {useStateRef} from 'src/hooks/useStateRef';
 
+import {fieldsModel} from './fields/fieldsModel';
+
 import type {FormField, FormFieldModel} from './types';
 
 export enum FieldType {
@@ -70,10 +72,21 @@ export function Form(props: Form.Props) {
   const onChangeRef = useLatestRef(props.onChange);
   const valuesRef = useLatestRef(props.values);
   const errorsRef = useLatestRef(props.errors);
-  const fieldsRef = useLatestRef(props.fields);
+
+  const fields = useMemo(() => {
+    return _.reduce(props.fields, (result: Record<string, FormFieldModel>, field, key) => {
+      const fieldModel = fieldsModel.get(field.type);
+      if (!fieldModel || !fieldModel.transform) {
+        return result;
+      }
+      result[key] = fieldModel.transform(field);
+      return result;
+    }, {});
+  }, [props.fields]);
+  const fieldsRef = useLatestRef(fields);
 
   function validateField(value: any, name: string) {
-    const {validations, isHidden} = props.fields[name];
+    const {validations, isHidden} = formFields[name];
     if (!validations || isHidden) {
       return null;
     }
@@ -97,7 +110,7 @@ export function Form(props: Form.Props) {
   }
 
   useEffect(() => {
-    const newErrors = _.reduce(props.fields, (result: Form.Errors, field, name) => {
+    const newErrors = _.reduce(fields, (result: Form.Errors, field, name) => {
       const error = validateField(props.values[name], name);
       if (error) {
         result[name] = error;
@@ -106,17 +119,17 @@ export function Form(props: Form.Props) {
       return result;
     }, {});
 
-    if (!_.isEqual(newErrors, props.fields)) {
+    if (!_.isEqual(newErrors, fields)) {
       props.onChange(props.values, newErrors);
     }
-  }, [props.values, props.fields]);
+  }, [props.values, fields]);
 
   useEffect(() => {
     updateFormApi();
   }, [props.errors]);
 
-  const fields = useMemo(() => {
-    return _.reduce(props.fields, (fields: Form.Fields, field) => {
+  const formFields = useMemo(() => {
+    return _.reduce(fields, (fields: Form.Fields, field) => {
       let value = props.values[field.name] || null;
 
       if (field.toValue) {
@@ -138,14 +151,14 @@ export function Form(props: Form.Props) {
     }, {});
   }, [
     props.values,
-    props.fields,
+    fields,
     props.initialValues,
     props.errors,
     dirtyFields,
   ]);
 
   const model = useMemo((): Form.Model => ({
-    fields: props.fields,
+    fields,
     initialValues: props.initialValues,
     onError(error, name) {
       onChangeRef.current(valuesRef.current, {
@@ -171,7 +184,7 @@ export function Form(props: Form.Props) {
         delete newErrors[name];
       }
 
-      const {fromValue} = props.fields[name];
+      const {fromValue} = fields[name];
 
       const newValues = {...valuesRef.current, [name]: fromValue ? fromValue(value) : value};
 
@@ -184,11 +197,11 @@ export function Form(props: Form.Props) {
       valuesRef.current = newValues;
       updateFormApi();
     },
-  }), [props.fields, props.initialValues]);
+  }), [fields, props.initialValues]);
 
   return (
     <FormModelProvider value={model as Form.Model}>
-      <FormFieldsProvider value={fields as Form.Fields}>
+      <FormFieldsProvider value={formFields as Form.Fields}>
         { props.children }
       </FormFieldsProvider>
     </FormModelProvider>

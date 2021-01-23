@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import type {FC} from 'react';
 
 import type {FormField} from 'src/components/common/Form/types';
+import type {FormFieldModel} from 'src/components/common/Form/types';
 
 export type FieldProps<TField extends FormField.BaseField> = {
   field: TField,
@@ -8,6 +10,7 @@ export type FieldProps<TField extends FormField.BaseField> = {
 
 export type FieldModel = {
   type: string,
+  transform?(field: FormFieldModel): FormFieldModel,
   component: FC<any>,
 };
 
@@ -20,7 +23,10 @@ const models: Record<string, FieldModel> = {};
 
 export const fieldsModel: FieldsModel = {
   register(fieldModel) {
-    models[fieldModel.type] = fieldModel as any;
+    models[fieldModel.type] = {
+      ...fieldModel,
+      transform: fieldModel.transform || _.identity,
+    };
   },
   get(type) {
     return models[type] || null;

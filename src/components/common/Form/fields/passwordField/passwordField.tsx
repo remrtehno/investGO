@@ -7,6 +7,8 @@ import {TextField} from 'src/components/common/Form/fields/textField';
 import {FieldType} from 'src/components/common/Form/Form';
 import type {FormField} from 'src/components/common/Form/types';
 import type {SvgProps} from 'src/types/common';
+import {minLength} from 'src/validations/minLength';
+import {required} from 'src/validations/required';
 
 import s from './passwordField.scss';
 
@@ -43,8 +45,8 @@ export const passwordField: FC<FieldProps<FormField.Text>> = (props) => {
         isPassword={!isPassportVisible}
       />
       { isPassportVisible
-        ? <HideIcon className={s.icon} onClick={() => setIsPasswordVisible(false)} />
-        : <ShowIcon className={s.icon} onClick={() => setIsPasswordVisible(true)} />
+        ? <ShowIcon className={s.icon} onClick={() => setIsPasswordVisible(false)} />
+        : <HideIcon className={s.icon} onClick={() => setIsPasswordVisible(true)} />
       }
     </div>
   );
@@ -52,5 +54,37 @@ export const passwordField: FC<FieldProps<FormField.Text>> = (props) => {
 
 fieldsModel.register({
   type: FieldType.password,
+  transform(field) {
+    return {
+      ...field,
+      validations: [required(), minLength(8), (value: string) => {
+        if (!/[A-Z]/g.test(value)) {
+          return 'Обязательна заглавная буква';
+        }
+
+        value = value.replace(/[A-Z]/g, '');
+        value = value.replace(/[a-z]/g, '');
+
+        if (!/[0-9]/g.test(value)) {
+          return 'Обязательна цифра';
+        }
+
+        value = value.replace(/[0-9]/g, '');
+
+        const specialCharRegExp = /[!@#$%?^&*()_~+={}<>';:`|/"-]/g;
+        if (!specialCharRegExp.test(value)) {
+          return 'Обязателен специальный символ: !@#$%?^&*()_~+={}<>\';:`|/"-';
+        }
+
+        value = value.replace(specialCharRegExp, '');
+
+        if (value) {
+          return `Недопустимые символы: ${value}`;
+        }
+
+        return null;
+      }],
+    };
+  },
   component: passwordField,
 });

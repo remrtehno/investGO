@@ -64,7 +64,6 @@ export const SignForm: FC<SignForm.Props> = () => {
     password: {
       type: FieldType.password,
       name: 'password',
-      validations: [required()],
       label: 'Введите пароль',
       disabled: isNeedShowPhone,
     },
