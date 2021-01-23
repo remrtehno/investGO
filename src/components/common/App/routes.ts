@@ -2,6 +2,7 @@ import type {FC} from 'react';
 import type {RouteProps} from 'react-router';
 
 import {AboutUs} from 'src/components/pages/AboutUs';
+import {EmailConfirmationPage} from 'src/components/pages/EmailConfirmationPage';
 import {ProfilePage} from 'src/components/pages/ProfilePage';
 import {ProjectsPage} from 'src/components/pages/ProjectsPage';
 import {RegisterPage} from 'src/components/pages/RegisterPage';
@@ -30,6 +31,10 @@ export const routes: RouteInfo[] = [{
 }, {
   path: '/signin',
   Component: SignPage,
+  exact: true,
+}, {
+  path: '/email-confirmation',
+  Component: EmailConfirmationPage,
   exact: true,
 }, {
   path: '/',

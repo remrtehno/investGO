@@ -1,0 +1,21 @@
+.InfoPanel {
+  height: 96px;
+  border-radius: 4px;
+  display: flex;
+  padding: 24px 38px;
+  margin-bottom: 96px;
+
+  &.waiting {
+    background-color: var(--gray2);
+    border: 1px solid var(--black);
+  }
+
+  &.success {
+    background-color: lightgreen;
+    border: 1px solid darkgreen;
+  }
+}
+
+.icon {
+  margin-right: 18px;
+}

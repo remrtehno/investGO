@@ -15,6 +15,7 @@ export const api = {
   },
   common: {
     uploadFile: () => '/file/upload',
+    confirmEmail: () => '/user/email-confirm',
   },
   company: {
     get: () => '/company',

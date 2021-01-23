@@ -2,6 +2,7 @@ import type {FC} from 'react';
 import React, {useEffect} from 'react';
 import {BrowserRouter, Route, StaticRouter} from 'react-router-dom';
 import {RecoilRoot, useRecoilValue, useSetRecoilState} from 'recoil';
+import {QueryParamProvider} from 'use-query-params';
 
 import 'src/components/common/Form/fields/dateField';
 import 'src/components/common/Form/fields/fileArrayField';
@@ -35,17 +36,19 @@ const AppContent: FC = () => {
   }, [userStatus]);
 
   return (
-    <div>
-      { routes.map((route, index) => {
-        const {Component, ...routeProps} = route;
-        return (
-          <Route key={index} {...routeProps}>
-            <Component />
-          </Route>
-        );
-      }) }
-      <div id='modal-root' />
-    </div>
+    <QueryParamProvider ReactRouterRoute={Route}>
+      <div>
+        { routes.map((route, index) => {
+          const {Component, ...routeProps} = route;
+          return (
+            <Route key={index} {...routeProps}>
+              <Component />
+            </Route>
+          );
+        }) }
+        <div id='modal-root' />
+      </div>
+    </QueryParamProvider>
   );
 };
 
