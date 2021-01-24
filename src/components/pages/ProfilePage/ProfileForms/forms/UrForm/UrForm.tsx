@@ -4,7 +4,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import 'src/components/pages/ProfilePage/fields/phoneArrayField';
+import 'src/components/pages/ProfilePage/fields/PhoneArrayField';
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
@@ -71,11 +71,11 @@ export const UrForm: FC<UrForm.Props> = (props) => {
       >
         <FormTitle>{ props.form.title }</FormTitle>
         <FormRow>
-          <Field className='col-6' name='inn' />
-          <Field className='col-6' name='snils' />
+          <Field className='container col-12' name='name' />
         </FormRow>
         <FormRow>
-          <Field className='container col-12' name='name' />
+          <Field className='col-6' name='ogrn' />
+          <Field className='col-6' name='date_issue_ogrn' />
         </FormRow>
         <FormRow>
           <Field className='container col-12' name='place' />
@@ -84,8 +84,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <Field className='container col-12' name='postal_address' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='ogrn' />
-          <Field className='col-6' name='date_issue_ogrn' />
+          <Field className='col-12' name='inn' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='email' />
@@ -95,6 +94,13 @@ export const UrForm: FC<UrForm.Props> = (props) => {
         </FormRow>
         <FormRow>
           <Field className='col-12' name='document_registry_file' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='okved' />
+        </FormRow>
+        <FormTitle className={s.title}>Учредители</FormTitle>
+        <FormRow>
+          <Field className='col-12' name='founders' />
         </FormRow>
         <FormActions>
           <div className='col-3'>

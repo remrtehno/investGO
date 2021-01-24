@@ -1,5 +1,9 @@
+import type {FC} from 'react';
+
 import type {CalendarInput} from 'src/components/ui/CalendarInput';
 import type {Input} from 'src/components/ui/Input';
+
+import type {FieldProps} from './fields/fieldsModel';
 
 import type {FieldType} from './Form';
 
@@ -12,10 +16,9 @@ export declare namespace FormFieldModel {
     isHidden?: boolean,
     validations?: Array<(value: any, values: any) => string | null>,
     toValue?(rawValue: any): any,
-    fromValue?(value: any): any
+    fromValue?(value: any): any,
+    transform?(field: FormFieldModel): FormFieldModel,
   }
-
-  export type Custom = BaseFieldModel & Record<string, any>;
 
   export type Text = BaseFieldModel & Omit<Input.Props, 'value' | 'onChange'> & {
     type: FieldType.text,
@@ -38,11 +41,23 @@ export declare namespace FormFieldModel {
 
   export type FileArray = BaseFieldModel & {
     type: FieldType.fileArray,
+
+    label?: string,
   }
 
   export type Password = BaseFieldModel & {
     type: FieldType.password,
     label: string,
+  }
+
+  export type Custom = BaseFieldModel & {
+    type: FieldType.custom,
+    Field: FC<FieldProps<any>>,
+    options?: Record<string, any>,
+  }
+
+  export type Hidden = BaseFieldModel & {
+    type: FieldType.hidden,
   }
 }
 
@@ -52,11 +67,13 @@ export type FormFieldModel = (
   FormFieldModel.Number |
   FormFieldModel.FileArray |
   FormFieldModel.Password |
-  FormFieldModel.Phone
+  FormFieldModel.Phone |
+  FormFieldModel.Custom |
+  FormFieldModel.Hidden
 );
 
 export declare namespace FormField {
-  export type BaseField = {
+  export type BaseField = FormFieldModel.BaseFieldModel & {
     value: any,
     error: string | null,
     isValid: boolean,
@@ -69,6 +86,8 @@ export declare namespace FormField {
   export type Number = BaseField & FormFieldModel.Number;
   export type Phone = BaseField & FormFieldModel.Phone;
   export type FileArray = BaseField & FormFieldModel.FileArray;
+  export type Custom = BaseField & FormFieldModel.Custom;
+  export type Hidden = BaseField & FormFieldModel.Hidden;
 }
 
 export type FormField =
@@ -76,4 +95,6 @@ export type FormField =
   FormField.Date |
   FormField.Number |
   FormField.Phone |
-  FormField.FileArray;
+  FormField.FileArray |
+  FormField.Custom |
+  FormField.Hidden;

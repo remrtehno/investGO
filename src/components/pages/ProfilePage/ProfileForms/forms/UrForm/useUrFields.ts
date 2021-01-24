@@ -5,7 +5,9 @@ import {useRecoilValue} from 'recoil';
 
 import type {Form} from 'src/components/common/Form/Form';
 import {FieldType} from 'src/components/common/Form/Form';
-import {phoneArrayFieldType} from 'src/components/pages/ProfilePage/fields/phoneArrayField/phoneArrayField';
+import {FoundersField} from 'src/components/pages/ProfilePage/fields/FoundersField';
+import {OkvedField} from 'src/components/pages/ProfilePage/fields/OkvedField';
+import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
 import {Role} from 'src/contstants/Role';
 import {userAtom} from 'src/recoil/userAtom';
 import {parseDate} from 'src/utils/parseDate';
@@ -23,14 +25,6 @@ export const useUrFields = () => {
         type: FieldType.text,
         label: 'ИНН',
         mask: _.range(10).map(() => '9')
-          .join(''),
-        validations: [required()],
-      },
-      snils: {
-        name: 'snils',
-        type: FieldType.text,
-        label: 'СНИЛС',
-        mask: _.range(11).map(() => '9')
           .join(''),
         validations: [required()],
       },
@@ -59,7 +53,8 @@ export const useUrFields = () => {
         validations: [required(), email()],
       },
       phone: {
-        type: phoneArrayFieldType,
+        type: FieldType.custom,
+        Field: PhoneArrayField,
         name: 'phone',
         validations: [required()],
         label: 'Контактный номер телефона',
@@ -67,7 +62,7 @@ export const useUrFields = () => {
       ogrn: {
         name: 'ogrn',
         type: FieldType.text,
-        label: 'ОГРНИП',
+        label: 'ОГРН',
         mask: '999999999999999',
         validations: [required()],
       },
@@ -144,6 +139,16 @@ export const useUrFields = () => {
         type: FieldType.text,
         label: 'Адрес фактического проживания',
         validations: [required()],
+      },
+      okved: {
+        name: 'okved',
+        type: FieldType.custom,
+        Field: OkvedField,
+      },
+      founders: {
+        name: 'founders',
+        type: FieldType.custom,
+        Field: FoundersField,
       },
     };
   }, [user]);

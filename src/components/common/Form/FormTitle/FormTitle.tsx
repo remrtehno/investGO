@@ -18,6 +18,7 @@ function ModeratedIcon() {
 export declare namespace FormTitle {
   export type Props = {
     status?: ModerationStatus | null,
+    className?: string,
   };
 }
 
@@ -49,7 +50,7 @@ export const FormTitle: FC<FormTitle.Props> = (props) => {
   }
 
   return (
-    <div className={s.FormTitle}>
+    <div className={cx(s.FormTitle, props.className)}>
       <Text className={s.title} size={TextSize.h2}>{ props.children }</Text>
       { renderStatus() }
     </div>

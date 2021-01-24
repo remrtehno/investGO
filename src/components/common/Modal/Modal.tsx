@@ -3,6 +3,9 @@ import _ from 'lodash';
 import type {FC} from 'react';
 import React from 'react';
 
+import {Color} from 'src/contstants/Color';
+import {CloseIcon} from 'src/icons/CloseIcon';
+
 import s from './Modal.scss';
 import {ModalPortal} from './ModalPortal';
 
@@ -39,6 +42,17 @@ export const Modal: FC<Props> = (props) => {
           <div className={s.content}>
             { children }
           </div>
+          { props.onClose ? (
+            <CloseIcon
+              className={s.closeIcon}
+              color={Color.black}
+              onClick={() => {
+                if (props.onClose) {
+                  props.onClose();
+                }
+              }}
+            />
+          ) : null }
         </div>
       </div>
     </ModalPortal>

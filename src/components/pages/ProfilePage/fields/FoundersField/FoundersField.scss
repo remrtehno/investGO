@@ -1,0 +1,31 @@
+.FoundersField {
+  cursor: pointer;
+}
+
+.founder {
+  background-color: white;
+  margin-top: 28px;
+  padding: 30px 40px 0;
+  position: relative;
+
+  &:hover {
+    .removeFounderIcon {
+      display: block;
+    }
+  }
+}
+
+.removeFounderIcon {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.founderLabel {
+  margin-bottom: 40px;
+}
+
+.addFounderButton {
+  margin-top: 30px;
+}

@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {ChangeEvent, FC, FocusEventHandler} from 'react';
+import type {ChangeEvent, FC, FocusEventHandler, ReactNode} from 'react';
 import React, {useCallback, useRef, useState} from 'react';
 import InputMask from 'react-input-mask';
 
@@ -26,7 +26,7 @@ export declare namespace Input {
     regExp?: RegExp,
     isPassword?: boolean,
     mask?: string,
-    postfix?: string,
+    postfix?: ReactNode,
   };
 }
 
@@ -98,18 +98,25 @@ export const Input: FC<Input.Props> = (props) => {
           { props.label }
         </Text>
       ) : null }
-      { props.mask ? (
-        <InputMask mask={props.mask} {...controlProps}>
-          { (inputProps: any) => (
-            <input
-              {...inputProps}
-              ref={controlRef}
-            />
-          ) }
-        </InputMask>
-      )
-        : <input {...controlProps} ref={controlRef} />
-      }
+      <div className={s.controlContainer}>
+        { props.mask ? (
+          <InputMask mask={props.mask} {...controlProps}>
+            { (inputProps: any) => (
+              <input
+                {...inputProps}
+                ref={controlRef}
+              />
+            ) }
+          </InputMask>
+        )
+          : <input {...controlProps} ref={controlRef} />
+        }
+        { props.postfix ? (
+          <div className={s.postfix}>
+            { props.postfix }
+          </div>
+        ) : null }
+      </div>
       { props.error
         ? <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{ props.error }</Text>
         : null }

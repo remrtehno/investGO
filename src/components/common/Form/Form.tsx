@@ -10,12 +10,14 @@ import {fieldsModel} from './fields/fieldsModel';
 import type {FormField, FormFieldModel} from './types';
 
 export enum FieldType {
+  hidden = 'hidden',
   text = 'text',
   date = 'date',
   number = 'number',
   fileArray = 'fileArray',
   password = 'password',
   phone = 'phone',
+  custom = 'custom'
 }
 
 export declare namespace Form {
@@ -76,57 +78,19 @@ export function Form(props: Form.Props) {
   const fields = useMemo(() => {
     return _.reduce(props.fields, (result: Record<string, FormFieldModel>, field, key) => {
       const fieldModel = fieldsModel.get(field.type);
-      if (!fieldModel || !fieldModel.transform) {
-        return result;
+      let newField = field;
+      if (fieldModel && fieldModel.transform) {
+        newField = fieldModel.transform(field);
       }
-      result[key] = fieldModel.transform(field);
+      if (field.transform) {
+        newField = field.transform(result[key]);
+      }
+
+      result[key] = newField;
       return result;
     }, {});
   }, [props.fields]);
   const fieldsRef = useLatestRef(fields);
-
-  function validateField(value: any, name: string) {
-    const {validations, isHidden} = formFields[name];
-    if (!validations || isHidden) {
-      return null;
-    }
-    return validations.reduce((error: string | null, validation) => {
-      const values = {...valuesRef.current, [name]: value};
-      return error || validation(value, values);
-    }, null);
-  }
-
-  function updateFormApi() {
-    if (!props.formApiRef) {
-      return;
-    }
-
-    props.formApiRef.current = {
-      isValid: _.isEmpty(errorsRef.current),
-      submit() {
-        setDirtyFields(Object.keys(fieldsRef.current));
-      },
-    };
-  }
-
-  useEffect(() => {
-    const newErrors = _.reduce(fields, (result: Form.Errors, field, name) => {
-      const error = validateField(props.values[name], name);
-      if (error) {
-        result[name] = error;
-      }
-
-      return result;
-    }, {});
-
-    if (!_.isEqual(newErrors, fields)) {
-      props.onChange(props.values, newErrors);
-    }
-  }, [props.values, fields]);
-
-  useEffect(() => {
-    updateFormApi();
-  }, [props.errors]);
 
   const formFields = useMemo(() => {
     return _.reduce(fields, (fields: Form.Fields, field) => {
@@ -156,6 +120,53 @@ export function Form(props: Form.Props) {
     props.errors,
     dirtyFields,
   ]);
+
+  function validateField(value: any, name: string) {
+    const {validations, isHidden} = formFields[name];
+    if (!validations || isHidden) {
+      return null;
+    }
+    return validations.reduce((error: string | null, validation) => {
+      const values = {...valuesRef.current, [name]: value};
+      return error || validation(value, values);
+    }, null);
+  }
+
+  function updateFormApi() {
+    if (!props.formApiRef) {
+      return;
+    }
+
+    props.formApiRef.current = {
+      isValid: _.isEmpty(errorsRef.current),
+      submit() {
+        setDirtyFields(Object.keys(fieldsRef.current));
+      },
+    };
+  }
+
+  useEffect(() => {
+    const newErrors = _.reduce(fields, (result: Form.Errors, field, name) => {
+      if (!formFields[name]) {
+        console.error(`Missing field ${name}`);
+        return result;
+      }
+      const error = validateField(props.values[name], name);
+      if (error) {
+        result[name] = error;
+      }
+
+      return result;
+    }, {});
+
+    if (!_.isEqual(newErrors, errorsRef.current)) {
+      props.onChange(props.values, newErrors);
+    }
+  }, [props.values, fields, formFields]);
+
+  useEffect(() => {
+    updateFormApi();
+  }, [props.errors]);
 
   const model = useMemo((): Form.Model => ({
     fields,
@@ -200,8 +211,8 @@ export function Form(props: Form.Props) {
   }), [fields, props.initialValues]);
 
   return (
-    <FormModelProvider value={model as Form.Model}>
-      <FormFieldsProvider value={formFields as Form.Fields}>
+    <FormModelProvider value={model}>
+      <FormFieldsProvider value={formFields}>
         { props.children }
       </FormFieldsProvider>
     </FormModelProvider>
