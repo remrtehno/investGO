@@ -15,7 +15,11 @@ import {email} from 'src/validations/email';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
-export const useUrFields = () => {
+type Options = {
+  isSameAddress: boolean
+}
+
+export const useUrFields = ({isSameAddress}: Options) => {
   const {user} = useRecoilValue(userAtom);
 
   return useMemo((): Form.FieldModels => {
@@ -79,17 +83,17 @@ export const useUrFields = () => {
       director_fio: {
         name: 'director_fio',
         type: FieldType.text,
-        label: 'ФИО',
+        label: 'ФИО руководителя',
         validations: [required()],
       },
       director_date_of_birth: {
-        name: 'director_fio',
+        name: 'director_date_of_birth',
         type: FieldType.date,
-        label: 'Дата рождения',
+        label: 'Дата рождения руководителя',
         validations: [required()],
       },
-      director_serial: {
-        name: 'director_serial',
+      director_serialNumber: {
+        name: 'director_serialNumber',
         type: FieldType.text,
         label: 'Серия / номер паспорта',
         mask: '9999 999999',
@@ -105,7 +109,9 @@ export const useUrFields = () => {
         type: FieldType.text,
         mask: '999999',
         label: 'Код подразделения',
-        validations: [required()],
+        validations: [required(), (value) => {
+          return value.replace(/_/g, '').length === 6 ? null : 'Обязательное поле';
+        }],
       },
       director_date_of_issue: {
         name: 'director_date_of_issue',
@@ -131,7 +137,7 @@ export const useUrFields = () => {
       director_place_of_register: {
         name: 'director_place_of_register',
         type: FieldType.text,
-        label: 'Адрес регистрации',
+        label: 'Адрес регистрации руководителя',
         validations: [required()],
       },
       director_place_of_residence: {
@@ -139,6 +145,7 @@ export const useUrFields = () => {
         type: FieldType.text,
         label: 'Адрес фактического проживания',
         validations: [required()],
+        disabled: isSameAddress,
       },
       okved: {
         name: 'okved',
@@ -150,6 +157,12 @@ export const useUrFields = () => {
         type: FieldType.custom,
         Field: FoundersField,
       },
+      date_director_set: {
+        name: 'date_director_set',
+        type: FieldType.date,
+        label: 'Дата назначения (избрания) руководителя',
+        validations: [required()],
+      },
     };
-  }, [user]);
+  }, [user, isSameAddress]);
 };

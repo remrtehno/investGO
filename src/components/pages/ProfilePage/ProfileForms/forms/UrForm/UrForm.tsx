@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {Fragment, useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import 'src/components/pages/ProfilePage/fields/PhoneArrayField';
@@ -14,6 +14,8 @@ import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {CheckBox} from 'src/components/ui/CheckBox';
+import {useLatestRef} from 'src/hooks/useLatestRef';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
@@ -25,9 +27,11 @@ export declare namespace UrForm {
 }
 
 export const UrForm: FC<UrForm.Props> = (props) => {
-  const fields = useUrFields();
   const {user} = useRecoilValue(userAtom);
   const [, saveCompanyApi] = useSaveCompanyApi();
+  const [isDirector, setIsDirector] = useState(true);
+  const [isSameAddress, setIsSameAddress] = useState(true);
+  const fields = useUrFields({isSameAddress});
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -40,6 +44,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   const initialValues = useMemo(() => getValuesFromUser(), [fields]);
   const [values, setValues] = useState<Form.Values>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
+  const valuesRef = useLatestRef(values);
 
   useEffect(() => {
     if (user && user.passport && !_.isEqual(user.passport, values)) {
@@ -54,6 +59,17 @@ export const UrForm: FC<UrForm.Props> = (props) => {
       document_registry_file: values.document_registry_file,
     });
   }, [values]);
+
+  useEffect(() => {
+    if (!isSameAddress) {
+      return;
+    }
+
+    setValues({
+      ...valuesRef.current,
+      director_place_of_residence: valuesRef.current.director_place_of_register,
+    });
+  }, [values.director_place_of_register, isSameAddress]);
 
   const onChange: Form.OnChange = useCallback((values, errors) => {
     setValues(values);
@@ -91,6 +107,44 @@ export const UrForm: FC<UrForm.Props> = (props) => {
         </FormRow>
         <FormRow>
           <Field className='container col-12' name='phone' />
+        </FormRow>
+        <CheckBox
+          value={isDirector}
+          onChange={() => setIsDirector(!isDirector)}
+          label='Я являюсь руководителем компании'
+        />
+        { isDirector ? (
+          <Fragment>
+            <FormRow>
+              <Field className='col-6' name='director_fio' />
+              <Field className='col-6' name='director_date_of_birth' />
+            </FormRow>
+            <FormRow>
+              <Field className='col-12' name='director_place_of_register' />
+            </FormRow>
+            <FormRow>
+              <CheckBox
+                className='col-12'
+                label='Совпадает с адресом фактического проживания'
+                onChange={() => setIsSameAddress(!isSameAddress)}
+                value={isSameAddress}
+              />
+            </FormRow>
+            <FormRow>
+              <Field className='col-12' name='director_place_of_residence' />
+            </FormRow>
+            <FormRow>
+              <Field className='col-6' name='director_serialNumber' />
+              <Field className='col-3' name='director_subdivision_code' />
+              <Field className='col-3' name='director_date_of_issue' />
+            </FormRow>
+            <FormRow>
+              <Field className='col-12' name='director_authority' />
+            </FormRow>
+          </Fragment>
+        ) : null }
+        <FormRow>
+          <Field className='col-6' name='date_director_set' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='document_registry_file' />

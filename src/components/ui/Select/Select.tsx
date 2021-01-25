@@ -8,7 +8,7 @@ import s from './Select.scss';
 
 export declare namespace Select {
   export type Props = {
-    onChange(value: string | null, name: string | null): void,
+    onChange(value: string | null, option: Option | null, name: string | null): void,
     value: string | Option | null,
 
     isAsync?: boolean,
@@ -21,7 +21,8 @@ export declare namespace Select {
     isClearable?: boolean,
     isSearchable?: boolean,
     loadOptions?: LoadOptions,
-    cacheOptions?: boolean
+    cacheOptions?: boolean,
+    noOptionsMessage?(opts: { inputValue: string }): string | null,
   };
 
   export type LoadOptions = (inputValue: string) => Promise<Option[]>;
@@ -37,6 +38,10 @@ export const Select: FC<Select.Props> = (props) => {
   const [options, setOptions] = useState<Select.Option[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const noOptionsMessage = useMemo(() => {
+    return props.noOptionsMessage || (() => 'Ничего не найдено');
+  }, []);
+
   const value = useMemo(() => {
     if (_.isString(props.value)) {
       if (!props.options) {
@@ -49,8 +54,8 @@ export const Select: FC<Select.Props> = (props) => {
   }, [props.value]);
 
   const onChange = useCallback((newValue: Select.Option | null) => {
-    props.onChange(newValue ? newValue.value : null, props.name || null);
-  }, []);
+    props.onChange(newValue ? newValue.value : null, newValue, props.name || null);
+  }, [props.onChange]);
 
   useEffect(() => {
     const loadOptions = async() => {
@@ -85,7 +90,7 @@ export const Select: FC<Select.Props> = (props) => {
       onChange={onChange as any}
       isClearable={props.isClearable == null ? true : props.isClearable}
       classNamePrefix='select'
-      noOptionsMessage={() => 'Ничего не найдено'}
+      noOptionsMessage={noOptionsMessage}
     />
   );
 };
