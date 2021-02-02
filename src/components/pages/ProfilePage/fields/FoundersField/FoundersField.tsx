@@ -98,10 +98,6 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
 
   return (
     <div className={s.FoundersField}>
-      <Text size={TextSize.body2}>
-        Укажите сведения о лицах, имеющих право распоряжаться не менее чем 10% голосов в высшем органе
-        управления юридического лица, если таким лицом является корпорация.
-      </Text>
       { renderFounders() }
       <div className='row'>
         <div className='col-4'>

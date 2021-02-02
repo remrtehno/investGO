@@ -13,16 +13,16 @@ import type {FilePrimitive} from 'src/types/FilePrimitive';
 import {downloadFile} from 'src/utils/downloadFile';
 
 import {AddButtonIcon} from './AddButtonIcon';
-import s from './FileArrayInput.scss';
+import s from './FileInput.scss';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
   ({ isNew: true, original_name: string, id: string });
 
-export declare namespace FileArrayInput {
+export declare namespace FileInput {
   export type Props = {
-    files: FilePrimitive[],
-    onChange(files: FilePrimitive[], name: string | null): void,
+    file: FilePrimitive | null,
+    onChange(file: FilePrimitive | null, name: string | null): void,
 
     name?: string | null,
     disabled?: boolean,
@@ -30,28 +30,38 @@ export declare namespace FileArrayInput {
   }
 }
 
-export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
+export const FileInput: FC<FileInput.Props> = (props) => {
   const [uploadedFile, uploadFileApi, uploadApi] = useUploadFileApi();
 
-  function getFilesFromProps() {
-    return (props.files || []).map((file): Value => ({
-      ...file,
+  function getFileFromProps(): Value | null {
+    if (!props.file) {
+      return null;
+    }
+
+    return {
+      ...props.file,
       isNew: false,
-    }));
+    }
   }
 
-  const [files, setFiles] = useState(getFilesFromProps());
+  const [file, setFile] = useState(getFileFromProps());
 
   useEffect(() => {
-    setFiles(getFilesFromProps());
-  }, [props.files]);
+    setFile(getFileFromProps());
+  }, [props.file]);
 
   useEffect(() => {
     if (uploadedFile) {
       uploadApi.resetValue();
-      props.onChange(files.map((file) => (file.isNew ? uploadedFile : _.omit(file, 'isNew'))), props.name || null);
+
+      if (!file) {
+        props.onChange(null, props.name || null);
+        return;
+      }
+
+      props.onChange(file.isNew ? uploadedFile : _.omit(file, 'isNew'), props.name || null);
     }
-  }, [uploadedFile, props.onChange, files, props.name]);
+  }, [uploadedFile, props.onChange, file, props.name]);
 
   const {getRootProps, getInputProps} = useDropzone({
     accept: 'image/*',
@@ -60,23 +70,20 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
     onDrop(acceptedFiles: File[]) {
       if (acceptedFiles.length) {
         const [file] = acceptedFiles;
-        setFiles([
-          ...files,
-          {
-            isNew: true,
-            id: _.uniqueId('__'),
-            original_name: file.name,
-          },
-        ]);
+        setFile({
+          isNew: true,
+          id: _.uniqueId('__'),
+          original_name: file.name,
+        });
         uploadFileApi({file});
       }
     },
   });
 
   return (
-    <div className={cx('container', s.FileArrayInput)}>
+    <div className={cx('container p-0', s.FileArrayInput)}>
       <div className={cx(s.files, 'row')}>
-        { files.map((file) => (
+        { file ? (
           <div
             className={cx(s.file, 'col-6')}
             key={file.id}
@@ -92,16 +99,16 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
             <div className={s.fileLabel}>{ file.original_name }</div>
             <div className={s.deleteFile}>
               <CloseIcon color='black' onClick={(e) => {
-                setFiles(files.filter((f) => file.id !== f.id));
+                setFile(null);
                 e.preventDefault();
                 e.stopPropagation();
               }} />
             </div>
           </div>
-        )) }
+        ) : null }
       </div>
       { props.disabled || props.readonly ? null : (
-        <div {...getRootProps()} className={s.addButtonContainer} style={{ marginTop: files.length ? 32 : 0 }}>
+        <div {...getRootProps()} className={s.addButtonContainer} style={{ marginTop: file ? 32 : 0 }}>
           <input {...getInputProps()} />
           <Button
             size={ButtonSize.m}

@@ -6,8 +6,10 @@ import {QueryParamProvider} from 'use-query-params';
 
 import 'src/components/common/Form/fields/dateField';
 import 'src/components/common/Form/fields/fileArrayField';
+import 'src/components/common/Form/fields/fileField';
 import 'src/components/common/Form/fields/numberField';
 import 'src/components/common/Form/fields/textField';
+import 'src/components/common/Form/fields/textAreaField';
 import 'src/components/common/Form/fields/passwordField';
 import 'src/components/common/Form/fields/phoneField';
 import 'src/libs/bootstrap/bootstrap-grid.css';

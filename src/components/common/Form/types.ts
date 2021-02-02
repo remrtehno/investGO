@@ -6,11 +6,11 @@ import type {Input} from 'src/components/ui/Input';
 import type {FieldProps} from './fields/fieldsModel';
 
 import type {FieldType} from './Form';
+import {TextArea as TextAreaComponent} from 'src/components/ui/TextArea';
 
 export declare namespace FormFieldModel {
   type BaseFieldModel = {
     name: string,
-    type: Omit<string, FieldType>,
 
     disabled?: boolean,
     isHidden?: boolean,
@@ -23,6 +23,10 @@ export declare namespace FormFieldModel {
   export type Text = BaseFieldModel & Omit<Input.Props, 'value' | 'onChange'> & {
     type: FieldType.text,
   };
+
+  export type TextArea = BaseFieldModel & Omit<TextAreaComponent.Props, 'value' | 'onChange'> & {
+    type: FieldType.textArea
+  }
 
   export type Date = BaseFieldModel & CalendarInput.CalendarProps & {
     type: FieldType.date,
@@ -45,6 +49,12 @@ export declare namespace FormFieldModel {
     label?: string,
   }
 
+  export type File = BaseFieldModel & {
+    type: FieldType.file,
+
+    label?: string,
+  }
+
   export type Password = BaseFieldModel & {
     type: FieldType.password,
     label: string,
@@ -63,9 +73,11 @@ export declare namespace FormFieldModel {
 
 export type FormFieldModel = (
   FormFieldModel.Text |
+  FormFieldModel.TextArea |
   FormFieldModel.Date |
   FormFieldModel.Number |
   FormFieldModel.FileArray |
+  FormFieldModel.File |
   FormFieldModel.Password |
   FormFieldModel.Phone |
   FormFieldModel.Custom |
@@ -82,19 +94,23 @@ export declare namespace FormField {
   };
 
   export type Text = BaseField & FormFieldModel.Text;
+  export type TextArea = BaseField & FormFieldModel.TextArea;
   export type Date = BaseField & FormFieldModel.Date;
   export type Number = BaseField & FormFieldModel.Number;
   export type Phone = BaseField & FormFieldModel.Phone;
   export type FileArray = BaseField & FormFieldModel.FileArray;
+  export type File = BaseField & FormFieldModel.File;
   export type Custom = BaseField & FormFieldModel.Custom;
   export type Hidden = BaseField & FormFieldModel.Hidden;
 }
 
 export type FormField =
   FormField.Text |
+  FormField.TextArea |
   FormField.Date |
   FormField.Number |
   FormField.Phone |
   FormField.FileArray |
+  FormField.File |
   FormField.Custom |
   FormField.Hidden;

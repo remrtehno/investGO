@@ -21,6 +21,7 @@ import type {User} from 'src/types/User';
 
 import s from './UrForm.scss';
 import {useUrFields} from './useUrFields';
+import {Text, TextSize} from 'src/components/ui/Text';
 
 export declare namespace UrForm {
   export type Props = ProfileForms.FormProps;
@@ -37,7 +38,8 @@ export const UrForm: FC<UrForm.Props> = (props) => {
     ...getDefaultFieldValues(fields),
     ...user && user.company && user.company ? {
       ...user.company,
-      document_registry_file: [user.company.document_registry_file],
+      document_registry_file: user.company.document_registry_file,
+      email: user.company.emails[0]
     } : {},
   } as Omit<User.Passport, 'serial' | 'number'> & { serialNumber: string });
 
@@ -57,6 +59,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
       ogrn: values.ogrn,
       date_issue_ogrn: values.date_issue_ogrn,
       document_registry_file: values.document_registry_file,
+      emails: [values.email],
     });
   }, [values]);
 
@@ -85,7 +88,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
         values={values}
         onChange={onChange}
       >
-        <FormTitle>{ props.form.title }</FormTitle>
+        <FormTitle style={{ marginTop: 60 }}>{ props.form.title }</FormTitle>
         <FormRow>
           <Field className='container col-12' name='name' />
         </FormRow>
@@ -108,12 +111,16 @@ export const UrForm: FC<UrForm.Props> = (props) => {
         <FormRow>
           <Field className='container col-12' name='phone' />
         </FormRow>
-        <CheckBox
-          value={isDirector}
-          onChange={() => setIsDirector(!isDirector)}
-          label='Я являюсь руководителем компании'
-        />
-        { isDirector ? (
+        <FormRow>
+          <div className='col-12'>
+            <CheckBox
+              value={isDirector}
+              onChange={() => setIsDirector(!isDirector)}
+              label='Я являюсь руководителем компании'
+            />
+          </div>
+        </FormRow>
+        { isDirector ? null : (
           <Fragment>
             <FormRow>
               <Field className='col-6' name='director_fio' />
@@ -142,20 +149,69 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               <Field className='col-12' name='director_authority' />
             </FormRow>
           </Fragment>
-        ) : null }
+        ) }
         <FormRow>
           <Field className='col-6' name='date_director_set' />
         </FormRow>
         <FormRow>
-          <Field className='col-12' name='document_registry_file' />
+          <div className='col-12'>
+            <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
+            <Text size={TextSize.body0} className={s.fieldDescription}>
+              Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
+            </Text>
+            <Field name='document_registry_file' />
+          </div>
         </FormRow>
         <FormRow>
-          <Field className='col-12' name='okved' />
+          <div className='col-12'>
+            <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица</Text>
+            <div className={s.fieldDescription}>
+              Загрузите копию устава юридического лица
+            </div>
+            <Field name='document_rule_file' />
+          </div>
         </FormRow>
-        <FormTitle className={s.title}>Учредители</FormTitle>
         <FormRow>
-          <Field className='col-12' name='founders' />
+          <div className='col-12'>
+            <Text size={TextSize.subHeadline1} className={s.title}>Документ о полномочиях </Text>
+            <Text size={TextSize.body0} className={s.fieldDescription}>
+              Копия документа, удостоверяющего личность физического лица – руководителя (первая страница и страница с адресом регистрации по месту жительства);
+            </Text>
+            <Field name='document_director_approved_file' />
+          </div>
         </FormRow>
+
+        <Text size={TextSize.subHeadline1} className={s.title}>Учредители</Text>
+        <FormRow>
+          <div className='col-12'>
+            <Text size={TextSize.body0} className={s.fieldDescription}>
+              Укажите сведения о лицах, имеющих право распоряжаться не менее чем 10% голосов в высшем органе
+              управления юридического лица, если таким лицом является корпорация.
+            </Text>
+            <Field name='founders' />
+          </div>
+        </FormRow>
+
+        <Text size={TextSize.subHeadline1} className={s.title}>Деятельность</Text>
+        <FormRow>
+          <div className='col-12'>
+            <Text size={TextSize.body0} className={s.fieldDescription}>
+              Укажите основные виды деятельности.
+            </Text>
+            <Field name='okved' />
+          </div>
+        </FormRow>
+
+        <Text size={TextSize.subHeadline1} className={s.title}>Дополнительные сведения</Text>
+        <FormRow>
+          <div className='col-12'>
+            <Text size={TextSize.body0} className={s.fieldDescription}>
+              Укажите сведения о фактах (событиях, действиях), которые могут оказать существенное влияние на исполнение лицом, привлекающим инвестиции, обязательств перед инвесторами.
+            </Text>
+            <Field name='additional_info' />
+          </div>
+        </FormRow>
+
         <FormActions>
           <div className='col-3'>
             <Button

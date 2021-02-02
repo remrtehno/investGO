@@ -112,7 +112,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         <FormRow>
           <div className='col-12'>
             <div className={s.documentsTitme}>
-              <Text size={TextSize.subHeadline1}>
+              <Text size={TextSize.subHeadline1} style={{ marginTop: 20, marginBottom: 8 }}>
                 Загрузите документы
               </Text>
               <div>
@@ -123,8 +123,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <Field name='personal_data_documents' />
           </div>
         </FormRow>
-        <FormActions>
-          { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
+        { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
+          <FormActions>
             <div className='col-3'>
               <Button
                 theme={ButtonTheme.black}
@@ -132,8 +132,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
                 onClick={onContinue}
               >Продолжить</Button>
             </div>
-          ) : null }
-        </FormActions>
+          </FormActions>
+        ) : null }
       </Form>
     );
   }

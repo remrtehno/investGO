@@ -19,12 +19,15 @@ export const useSaveCompanyApi = () => {
   const userRef = useLatestRef(user);
 
   return useApi<useSaveCompanyApi.Payload, null>(async(payload) => {
+    if (!userRef.current) {
+      return null;
+    }
+
     const company = await request<User.Company | null>(api.company.save(), {
       method: 'POST',
       body: JSON.stringify({
         ...payload,
-        type: Role.ip,
-        document_registry_file: payload.document_registry_file && (payload.document_registry_file as any)[0],
+        type: userRef.current.roles.includes(Role.ip) ? Role.ip : Role.ur,
       }),
       showNotifyOnError: false,
       preventNotifyOn400: true,

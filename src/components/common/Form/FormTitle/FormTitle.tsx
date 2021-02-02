@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {FC} from 'react';
+import type {CSSProperties, FC} from 'react';
 import React from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
@@ -19,6 +19,7 @@ export declare namespace FormTitle {
   export type Props = {
     status?: ModerationStatus | null,
     className?: string,
+    style?: CSSProperties,
   };
 }
 
@@ -50,7 +51,7 @@ export const FormTitle: FC<FormTitle.Props> = (props) => {
   }
 
   return (
-    <div className={cx(s.FormTitle, props.className)}>
+    <div style={props.style} className={cx(s.FormTitle, props.className)}>
       <Text className={s.title} size={TextSize.h2}>{ props.children }</Text>
       { renderStatus() }
     </div>

@@ -12,9 +12,11 @@ import type {FormField, FormFieldModel} from './types';
 export enum FieldType {
   hidden = 'hidden',
   text = 'text',
+  textArea = 'textArea',
   date = 'date',
   number = 'number',
   fileArray = 'fileArray',
+  file = 'file',
   password = 'password',
   phone = 'phone',
   custom = 'custom'

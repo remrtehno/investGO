@@ -10,7 +10,6 @@ import s from './Modal.scss';
 import {ModalPortal} from './ModalPortal';
 
 type Props = {
-    isOpen?: boolean,
     hardClose?: boolean,
     className?: string,
     title?: string,

@@ -12,6 +12,7 @@ export enum TextSize {
   h2 = 'h2',
   h3 = 'h3',
   subHeadline1 = 'subHeadline1',
+  body0 = 'body0',
   body1 = 'body1',
   body2 = 'body2',
   caption1 = 'caption1',
@@ -42,7 +43,12 @@ export const Text: FC<Text.Props> = (props) => {
     [s[`color_${props.color}`]]: props.color,
   }, props.className);
 
-  const style = useMemo((): CSSProperties => ({fontWeight: props.weight}), [props.weight]);
+  const style = useMemo((): CSSProperties => {
+    return {
+      fontWeight: props.weight,
+      ...props.style,
+    };
+  }, [props.weight]);
 
   return (
     <div

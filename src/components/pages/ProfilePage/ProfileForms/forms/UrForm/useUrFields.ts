@@ -8,7 +8,6 @@ import {FieldType} from 'src/components/common/Form/Form';
 import {FoundersField} from 'src/components/pages/ProfilePage/fields/FoundersField';
 import {OkvedField} from 'src/components/pages/ProfilePage/fields/OkvedField';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
-import {Role} from 'src/contstants/Role';
 import {userAtom} from 'src/recoil/userAtom';
 import {parseDate} from 'src/utils/parseDate';
 import {email} from 'src/validations/email';
@@ -23,13 +22,16 @@ export const useUrFields = ({isSameAddress}: Options) => {
   const {user} = useRecoilValue(userAtom);
 
   return useMemo((): Form.FieldModels => {
+    if (!user) {
+      return {};
+    }
+
     return {
       inn: {
         name: 'inn',
         type: FieldType.text,
         label: 'ИНН',
-        mask: _.range(10).map(() => '9')
-          .join(''),
+        mask: _.range(10).map(() => '9').join(''),
         validations: [required()],
       },
       name: {
@@ -67,7 +69,7 @@ export const useUrFields = ({isSameAddress}: Options) => {
         name: 'ogrn',
         type: FieldType.text,
         label: 'ОГРН',
-        mask: '999999999999999',
+        mask: _.range(13).map(() => '9').join(''),
         validations: [required()],
       },
       date_issue_ogrn: {
@@ -77,8 +79,15 @@ export const useUrFields = ({isSameAddress}: Options) => {
       },
       document_registry_file: {
         name: 'document_registry_file',
-        type: FieldType.fileArray,
-        isHidden: !user?.roles.includes(Role.ip),
+        type: FieldType.file,
+      },
+      document_rule_file: {
+        name: 'document_rule_file',
+        type: FieldType.file,
+      },
+      document_director_approved_file: {
+        name: 'document_director_approved_file',
+        type: FieldType.file,
       },
       director_fio: {
         name: 'director_fio',
@@ -163,6 +172,11 @@ export const useUrFields = ({isSameAddress}: Options) => {
         label: 'Дата назначения (избрания) руководителя',
         validations: [required()],
       },
+      additional_info: {
+        name: 'additional_info',
+        type: FieldType.textArea,
+        placeholder: 'Дополнительные сведения',
+      }
     };
   }, [user, isSameAddress]);
 };
