@@ -15,10 +15,11 @@ import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
 type Options = {
-  isSameAddress: boolean
+  isSameAddress: boolean,
+  isDirector: boolean
 }
 
-export const useUrFields = ({isSameAddress}: Options) => {
+export const useUrFields = ({isSameAddress, isDirector}: Options) => {
   const {user} = useRecoilValue(userAtom);
 
   return useMemo((): Form.FieldModels => {
@@ -94,12 +95,14 @@ export const useUrFields = ({isSameAddress}: Options) => {
         type: FieldType.text,
         label: 'ФИО руководителя',
         validations: [required()],
+        isHidden: isDirector
       },
       director_date_of_birth: {
         name: 'director_date_of_birth',
         type: FieldType.date,
         label: 'Дата рождения руководителя',
         validations: [required()],
+        isHidden: isDirector
       },
       director_serialNumber: {
         name: 'director_serialNumber',
@@ -112,11 +115,13 @@ export const useUrFields = ({isSameAddress}: Options) => {
           }
           return 'Обязательное поле';
         }],
+        isHidden: isDirector
       },
       director_personal_data_documents: {
         name: 'director_personal_data_documents',
         type: FieldType.fileArray,
         validations: [required()],
+        isHidden: isDirector
       },
       director_subdivision_code: {
         name: 'director_subdivision_code',
@@ -126,6 +131,7 @@ export const useUrFields = ({isSameAddress}: Options) => {
         validations: [required(), (value) => {
           return value.replace(/_/g, '').length === 6 ? null : 'Обязательное поле';
         }],
+        isHidden: isDirector
       },
       director_date_of_issue: {
         name: 'director_date_of_issue',
@@ -141,22 +147,26 @@ export const useUrFields = ({isSameAddress}: Options) => {
           }
           return null;
         }],
+        isHidden: isDirector
       },
       director_authority: {
         name: 'director_authority',
         type: FieldType.text,
+        isHidden: isDirector,
         label: 'Кем выдан',
         validations: [required(), minLength(6)],
       },
       director_place_of_register: {
         name: 'director_place_of_register',
         type: FieldType.text,
+        isHidden: isDirector,
         label: 'Адрес регистрации руководителя',
         validations: [required()],
       },
       director_place_of_residence: {
         name: 'director_place_of_residence',
         type: FieldType.text,
+        isHidden: isDirector,
         label: 'Адрес фактического проживания',
         validations: [required()],
         disabled: isSameAddress,

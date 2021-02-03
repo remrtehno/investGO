@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {FC} from 'react';
+import type {CSSProperties, FC} from 'react';
 import React, {useCallback} from 'react';
 
 import s from './Button.scss';
@@ -24,6 +24,7 @@ export declare namespace Button {
 
     className?: string,
     disabled?: boolean,
+    style?: CSSProperties
   };
 }
 
@@ -45,7 +46,7 @@ export const Button: FC<Button.Props> = (props) => {
   }, [props.onClick, props.disabled]);
 
   return (
-    <button className={className} onClick={onClick}>
+    <button style={props.style} className={className} onClick={onClick}>
       { props.children }
     </button>
   );

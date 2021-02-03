@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
-import React, {Fragment, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {Fragment, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import 'src/components/pages/ProfilePage/fields/PhoneArrayField';
@@ -32,8 +32,9 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   const [, saveCompanyApi] = useSaveCompanyApi();
   const [isDirector, setIsDirector] = useState(true);
   const [isSameAddress, setIsSameAddress] = useState(true);
-  const fields = useUrFields({isSameAddress});
+  const fields = useUrFields({isSameAddress, isDirector});
   const [checkBoxes, setCheckBoxes] = useState([false, false, false]);
+  const formApiRef = useRef<Form.Api | null>(null);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -49,6 +50,8 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   const [errors, setErrors] = useState<Form.Errors>({});
   const valuesRef = useLatestRef(values);
 
+  console.log(errors);
+
   useEffect(() => {
     if (user && user.passport && !_.isEqual(user.passport, values)) {
       setValues(getValuesFromUser());
@@ -56,6 +59,19 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   }, [user && user.company]);
 
   const onSave = useCallback(() => {
+    if (!formApiRef.current) {
+      return;
+    }
+
+    formApiRef.current.submit();
+    if (!formApiRef.current.isValid) {
+      return;
+    }
+
+    if (checkBoxes.find((value) => !value)) {
+      return;
+    }
+
     const {
       email,
       director_authority,
@@ -81,7 +97,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           percent: Number(founder.percent)
         }
       }),
-      director: {
+      director: isDirector ? null : {
         authority: director_authority,
         date_of_birth: director_date_of_birth,
         date_of_issue: director_date_of_issue,
@@ -96,7 +112,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
     } as any;
 
     saveCompanyApi(payload);
-  }, [values]);
+  }, [values, isDirector]);
 
   useEffect(() => {
     if (!isSameAddress) {
@@ -122,6 +138,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
         errors={errors}
         values={values}
         onChange={onChange}
+        formApiRef={formApiRef}
       >
         <FormTitle style={{ marginTop: 60 }}>{ props.form.title }</FormTitle>
         <FormRow>

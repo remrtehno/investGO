@@ -102,6 +102,7 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
       <div className='row'>
         <div className='col-4'>
           <Button
+            style={{ marginTop: founders.length ? 30 : 0 }}
             className={s.addFounderButton}
             size={ButtonSize.m}
             theme={ButtonTheme.light}
