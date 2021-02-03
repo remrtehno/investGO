@@ -42,15 +42,15 @@ function userFields(): Form.FieldModels {
         return null;
       }],
     },
-    passport_page_photo: {
-      type: FieldType.fileArray,
-      name: 'passport_page_photo',
+    passport_page_photo_file: {
+      type: FieldType.file,
+      name: 'passport_page_photo_file',
       label: 'Паспорт: страница с фотографией',
       validations: [required()],
     },
-    passport_page_registration: {
-      type: FieldType.fileArray,
-      name: 'passport_page_registration',
+    passport_page_registration_file: {
+      type: FieldType.file,
+      name: 'passport_page_registration_file',
       label: 'Паспорт: страница с регистрацией',
       validations: [required()],
     },
@@ -115,8 +115,8 @@ export const FounderModal: FC<FounderModal.Props> = (props) => {
             <Field name='name' className={cx('col-12', s.field)} />
             <Field name='serialNumber' className={cx('col-12', s.field)} />
             <Field name='percent' className={cx('col-12', s.field)} />
-            <Field name='passport_page_photo' className={cx('col-12', s.field)} />
-            <Field name='passport_page_registration' className={cx('col-12', s.field)} />
+            <Field name='passport_page_photo_file' className={cx('col-12', s.field)} />
+            <Field name='passport_page_registration_file' className={cx('col-12', s.field)} />
           </div>
         </div>
         <div className='row justify-content-center'>

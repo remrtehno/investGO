@@ -33,6 +33,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   const [isDirector, setIsDirector] = useState(true);
   const [isSameAddress, setIsSameAddress] = useState(true);
   const fields = useUrFields({isSameAddress});
+  const [checkBoxes, setCheckBoxes] = useState([false, false, false]);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -55,12 +56,46 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   }, [user && user.company]);
 
   const onSave = useCallback(() => {
-    saveCompanyApi({
-      ogrn: values.ogrn,
-      date_issue_ogrn: values.date_issue_ogrn,
-      document_registry_file: values.document_registry_file,
-      emails: [values.email],
-    });
+    const {
+      email,
+      director_authority,
+      director_date_of_birth,
+      director_date_of_issue,
+      director_fio,
+      director_serialNumber,
+      director_personal_data_documents,
+      director_place_of_register,
+      director_place_of_residence,
+      director_subdivision_code,
+      founders,
+      ...saveValues
+    } = values;
+
+    const payload: any = {
+      ...saveValues,
+      emails: [email],
+      user_is_director: isDirector,
+      founders: founders.map((founder: any) => {
+        return {
+          ...founder,
+          percent: Number(founder.percent)
+        }
+      }),
+      director: {
+        authority: director_authority,
+        date_of_birth: director_date_of_birth,
+        date_of_issue: director_date_of_issue,
+        fio: director_fio,
+        number: director_serialNumber.slice(-6),
+        serial: director_serialNumber.slice(0, 4),
+        personal_data_documents: director_personal_data_documents,
+        place_of_register: director_place_of_register,
+        place_of_residence: director_place_of_residence,
+        subdivision_code: director_subdivision_code,
+      },
+    } as any;
+
+    saveCompanyApi(payload);
   }, [values]);
 
   useEffect(() => {
@@ -109,7 +144,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <Field className='col-12' name='email' />
         </FormRow>
         <FormRow>
-          <Field className='container col-12' name='phone' />
+          <Field className='container col-12' name='phones' />
         </FormRow>
         <FormRow>
           <div className='col-12'>
@@ -147,6 +182,20 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             </FormRow>
             <FormRow>
               <Field className='col-12' name='director_authority' />
+            </FormRow>
+            <FormRow>
+              <div className='col-12'>
+                <div className={s.documentsTitle}>
+                  <Text size={TextSize.subHeadline1} style={{ marginTop: 20, marginBottom: 8 }}>
+                    Загрузите документы
+                  </Text>
+                  <div>
+                    — Копию документа, удостоверяющего личность физического лица (лицевая сторона, а также страница
+                    с адресом регистрации по месту жительства).
+                  </div>
+                </div>
+                <Field name='director_personal_data_documents' />
+              </div>
             </FormRow>
           </Fragment>
         ) }
@@ -209,6 +258,40 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               Укажите сведения о фактах (событиях, действиях), которые могут оказать существенное влияние на исполнение лицом, привлекающим инвестиции, обязательств перед инвесторами.
             </Text>
             <Field name='additional_info' />
+          </div>
+        </FormRow>
+
+        <FormRow>
+          <div className='col-12'>
+            <CheckBox
+              style={{ marginBottom: 18 }}
+              value={checkBoxes[0]}
+              onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
+              label={(
+                <Text size={TextSize.body0}>
+                  Предоставленные данные юридического лица верны.
+                </Text>
+              )}
+            />
+            <CheckBox
+              style={{ marginBottom: 18 }}
+              value={checkBoxes[1]}
+              onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
+              label={(
+                <Text size={TextSize.body0}>
+                  Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>политики конфиденциальности</a>.
+                </Text>
+              )}
+            />
+            <CheckBox
+              value={checkBoxes[2]}
+              onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
+              label={(
+                <Text size={TextSize.body0}>
+                  Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
+                </Text>
+              )}
+            />
           </div>
         </FormRow>
 

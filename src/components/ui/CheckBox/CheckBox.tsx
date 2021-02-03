@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {FC} from 'react';
+import type {CSSProperties, FC, ReactNode} from 'react';
 import React, {useCallback} from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
@@ -11,10 +11,11 @@ export declare namespace CheckBox {
   export type Props = {
     value: boolean,
     onChange(value: boolean, name: string | null): void,
-    label: string,
+    label: ReactNode,
 
     name?: string | null,
     className?: string,
+    style?: CSSProperties
   };
 }
 
@@ -33,7 +34,7 @@ export const CheckBox: FC<CheckBox.Props> = (props) => {
   }, [props.onChange, props.value, props.name]);
 
   return (
-    <div className={cx(s.CheckBox, props.className)} onClick={toggleValue}>
+    <div style={props.style} className={cx(s.CheckBox, props.className)} onClick={toggleValue}>
       <div className={cx(s.toggle, {[s.checked]: props.value})}>
         <CheckIcon className={s.icon} />
       </div>

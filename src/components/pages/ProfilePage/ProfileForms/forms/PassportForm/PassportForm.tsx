@@ -66,7 +66,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
       return;
     }
 
-    const serial = values.serialNumber.slice(0, 4);
+    const serial = values.serialNumber;
     const number = values.serialNumber.slice(-6);
 
     savePassportApi({
@@ -111,7 +111,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         </FormRow>
         <FormRow>
           <div className='col-12'>
-            <div className={s.documentsTitme}>
+            <div className={s.documentsTitle}>
               <Text size={TextSize.subHeadline1} style={{ marginTop: 20, marginBottom: 8 }}>
                 Загрузите документы
               </Text>

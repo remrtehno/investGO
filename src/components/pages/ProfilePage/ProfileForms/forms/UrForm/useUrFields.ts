@@ -58,10 +58,10 @@ export const useUrFields = ({isSameAddress}: Options) => {
         label: 'Email',
         validations: [required(), email()],
       },
-      phone: {
+      phones: {
         type: FieldType.custom,
         Field: PhoneArrayField,
-        name: 'phone',
+        name: 'phones',
         validations: [required()],
         label: 'Контактный номер телефона',
       } as any,
@@ -112,6 +112,11 @@ export const useUrFields = ({isSameAddress}: Options) => {
           }
           return 'Обязательное поле';
         }],
+      },
+      director_personal_data_documents: {
+        name: 'director_personal_data_documents',
+        type: FieldType.fileArray,
+        validations: [required()],
       },
       director_subdivision_code: {
         name: 'director_subdivision_code',

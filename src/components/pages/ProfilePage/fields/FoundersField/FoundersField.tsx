@@ -21,7 +21,7 @@ export declare namespace FoundersField {
     name: string,
     passport_number: string,
     passport_page_photo: FilePrimitive[],
-    passport_page_registration: FilePrimitive[],
+    passport_page_registration_file: FilePrimitive[],
     passport_serial: string,
     percent: number
   }
