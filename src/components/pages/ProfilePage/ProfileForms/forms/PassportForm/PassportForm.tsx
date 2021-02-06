@@ -19,8 +19,8 @@ import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
 import s from './PassportForm.scss';
-import {TimeIcon} from './TimeIcon';
 import {usePassportFields} from './usePassportFields';
+import {ModerationInfo} from 'src/components/common/ModerationInfo';
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
@@ -61,7 +61,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
       return;
     }
 
-    const serial = values.serialNumber;
+    const serial = values.serialNumber.slice(0, 4);
     const number = values.serialNumber.slice(-6);
 
     savePassportApi({
@@ -135,12 +135,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
 
   function renderModerationInfo() {
     return (
-      <div className={s.moderationInfo}>
-        <TimeIcon className={s.moderationIcon} />
-        <Text size={TextSize.body2}>
-          Ожидайте. Ваши данные в обработке. Это может занять до 15 минут. Вы получите СМС после ее завершения проверки.
-        </Text>
-      </div>
+      <ModerationInfo/>
     );
   }
 

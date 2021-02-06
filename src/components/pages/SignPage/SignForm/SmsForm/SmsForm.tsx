@@ -33,6 +33,7 @@ export declare namespace SmsForm {
   export type Props = {
     phone: string,
     onConfirm(): void,
+    onClose(): void,
   };
 
   export type Values = {
@@ -72,10 +73,14 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
 
     confirmPhoneState.resetValue();
     props.onConfirm();
+    props.onClose();
   }, [isConfirmed]);
 
   return (
-    <Modal>
+    <Modal
+      allowClose={true}
+      onClose={() => props.onClose()}
+    >
       <Text className={s.title} size={TextSize.subHeadline1}>Код подтверждения</Text>
       <Form
         initialValues={initialValues}

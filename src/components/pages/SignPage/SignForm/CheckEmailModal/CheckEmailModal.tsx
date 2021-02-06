@@ -1,5 +1,6 @@
 import type {FC} from 'react';
 import React from 'react';
+import _ from 'lodash';
 
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
@@ -14,7 +15,11 @@ export declare namespace CheckEmailModal {
 }
 
 export const CheckEmailModal: FC<CheckEmailModal.Props> = (props) => (
-  <Modal className={s.CheckEmailModal}>
+  <Modal
+    allowClose={true}
+    className={s.CheckEmailModal}
+    onClose={_.noop}
+  >
     <Text className={s.message} size={TextSize.body1}>
       Письмо с подтверждением email отправлено на вашу почту.
     </Text>

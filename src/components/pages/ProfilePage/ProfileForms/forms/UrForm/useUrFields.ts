@@ -13,6 +13,7 @@ import {parseDate} from 'src/utils/parseDate';
 import {email} from 'src/validations/email';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
+import {Role} from 'src/contstants/Role';
 
 type Options = {
   isSameAddress: boolean,
@@ -89,6 +90,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
       document_director_approved_file: {
         name: 'document_director_approved_file',
         type: FieldType.file,
+        isHidden: !user.roles.includes(Role.borrower)
       },
       director_fio: {
         name: 'director_fio',
@@ -175,11 +177,13 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'okved',
         type: FieldType.custom,
         Field: OkvedField,
+        isHidden: !user.roles.includes(Role.borrower)
       },
       founders: {
         name: 'founders',
         type: FieldType.custom,
         Field: FoundersField,
+        isHidden: !user.roles.includes(Role.borrower)
       },
       date_director_set: {
         name: 'date_director_set',
@@ -191,6 +195,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'additional_info',
         type: FieldType.textArea,
         placeholder: 'Дополнительные сведения',
+        isHidden: !user.roles.includes(Role.borrower)
       }
     };
   }, [user, isSameAddress]);

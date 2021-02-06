@@ -35,7 +35,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   const [isDirector, setIsDirector] = useState(true);
   const [isSameAddress, setIsSameAddress] = useState(true);
   const fields = useUrFields({isSameAddress, isDirector});
-  const [checkBoxes, setCheckBoxes] = useState([false, false, false]);
+  const [checkBoxes, setCheckBoxes] = useState(user?.company ? [true, true, true] : [false, false, false]);
   const formApiRef = useRef<Form.Api | null>(null);
 
   const getValuesFromUser = () => ({
@@ -251,7 +251,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           </FormRow>
           <FormRow>
             <div className='col-12'>
-              <Text size={TextSize.subHeadline1} className={s.title}>Документ о полномочиях </Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Документ о полномочиях</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
                 Копия документа, удостоверяющего личность физического лица – руководителя (первая страница и страница с адресом регистрации по месту жительства);
               </Text>
@@ -259,36 +259,48 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             </div>
           </FormRow>
 
-          <Text size={TextSize.subHeadline1} className={s.title}>Учредители</Text>
-          <FormRow>
-            <div className='col-12'>
-              <Text size={TextSize.body0} className={s.fieldDescription}>
-                Укажите сведения о лицах, имеющих право распоряжаться не менее чем 10% голосов в высшем органе
-                управления юридического лица, если таким лицом является корпорация.
-              </Text>
-              <Field name='founders' />
-            </div>
-          </FormRow>
+          { fields.founders.isHidden ? null : (
+            <Fragment>
+              <Text size={TextSize.subHeadline1} className={s.title}>Учредители</Text>
+              <FormRow>
+                <div className='col-12'>
+                  <Text size={TextSize.body0} className={s.fieldDescription}>
+                    Укажите сведения о лицах, имеющих право распоряжаться не менее чем 10% голосов в высшем органе
+                    управления юридического лица, если таким лицом является корпорация.
+                  </Text>
+                  <Field name='founders' />
+                </div>
+              </FormRow>
+            </Fragment>
+          ) }
 
-          <Text size={TextSize.subHeadline1} className={s.title}>Деятельность</Text>
-          <FormRow>
-            <div className='col-12'>
-              <Text size={TextSize.body0} className={s.fieldDescription}>
-                Укажите основные виды деятельности.
-              </Text>
-              <Field name='okved' />
-            </div>
-          </FormRow>
+          { fields.okved.isHidden ? null : (
+            <Fragment>
+              <Text size={TextSize.subHeadline1} className={s.title}>Деятельность</Text>
+              <FormRow>
+                <div className='col-12'>
+                  <Text size={TextSize.body0} className={s.fieldDescription}>
+                    Укажите основные виды деятельности.
+                  </Text>
+                  <Field name='okved' />
+                </div>
+              </FormRow>
+            </Fragment>
+          ) }
 
-          <Text size={TextSize.subHeadline1} className={s.title}>Дополнительные сведения</Text>
-          <FormRow>
-            <div className='col-12'>
-              <Text size={TextSize.body0} className={s.fieldDescription}>
-                Укажите сведения о фактах (событиях, действиях), которые могут оказать существенное влияние на исполнение лицом, привлекающим инвестиции, обязательств перед инвесторами.
-              </Text>
-              <Field name='additional_info' />
-            </div>
-          </FormRow>
+          { fields.additional_info.isHidden ? null : (
+            <Fragment>
+              <Text size={TextSize.subHeadline1} className={s.title}>Дополнительные сведения</Text>
+              <FormRow>
+                <div className='col-12'>
+                  <Text size={TextSize.body0} className={s.fieldDescription}>
+                    Укажите сведения о фактах (событиях, действиях), которые могут оказать существенное влияние на исполнение лицом, привлекающим инвестиции, обязательств перед инвесторами.
+                  </Text>
+                  <Field name='additional_info' />
+                </div>
+              </FormRow>
+            </Fragment>
+          ) }
 
           <FormRow>
             <div className='col-12'>

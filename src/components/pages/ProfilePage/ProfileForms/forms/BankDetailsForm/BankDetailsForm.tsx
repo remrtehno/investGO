@@ -18,6 +18,7 @@ import type {User} from 'src/types/User';
 
 import s from './BankDetailsForm.scss';
 import {useBankDetailsFields} from './useBankDetailsFields';
+import {SmsForm} from 'src/components/pages/SignPage/SignForm/SmsForm';
 
 export declare namespace BankDetailsForm {
   export type Props = ProfileForms.FormProps;
@@ -27,6 +28,7 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
   const fields = useBankDetailsFields();
   const {user} = useRecoilValue(userAtom);
   const [, saveBankDetailsApi] = useSaveBankDetailsApi();
+  const [isSmsFormOpened, setIsSmsFormOpened]  = useState(false);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -61,6 +63,10 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
     setErrors(errors);
   }, []);
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <div ref={props.formRef} className={cx(s.BankDetailsForm, 'container')}>
       <Form
@@ -91,11 +97,18 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}
-              onClick={onSave}
+              onClick={() => setIsSmsFormOpened(true)}
             >Сохранить</Button>
           </div>
         </FormActions>
       </Form>
+      { isSmsFormOpened ? (
+        <SmsForm
+          phone={user.phone}
+          onClose={() => setIsSmsFormOpened(false)}
+          onConfirm={onSave}
+        />
+      ) : null }
     </div>
   );
 };

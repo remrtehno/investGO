@@ -14,8 +14,8 @@ type Props = {
     className?: string,
     title?: string,
     hideHeader?: boolean,
-    onClose?(): void,
-    allowClose?: boolean,
+    onClose(): void,
+    allowClose: boolean,
     isFullscreen?: boolean,
 };
 
@@ -41,7 +41,7 @@ export const Modal: FC<Props> = (props) => {
           <div className={s.content}>
             { children }
           </div>
-          { props.onClose ? (
+          { props.allowClose ? (
             <CloseIcon
               className={s.closeIcon}
               color={Color.black}

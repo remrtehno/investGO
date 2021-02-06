@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useState} from 'react';
+import _ from 'lodash';
 
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
@@ -32,7 +33,11 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
   }
 
   return (
-    <Modal className={s.SelectRolesModal}>
+    <Modal
+      allowClose={true}
+      className={s.SelectRolesModal}
+      onClose={() => _.noop}
+    >
       <Text className={s.title} size={TextSize.body2}>{ getTitle() }</Text>
       { props.roles.map((role) => {
         return (

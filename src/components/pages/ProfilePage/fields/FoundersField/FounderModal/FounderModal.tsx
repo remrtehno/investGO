@@ -93,7 +93,10 @@ export const FounderModal: FC<FounderModal.Props> = (props) => {
   const [values, setValues] = useState<Form.Values>(initialValues);
 
   return (
-    <Modal onClose={props.onClose}>
+    <Modal
+      allowClose={true}
+      onClose={props.onClose}
+    >
       <Form
         initialValues={initialValues}
         values={values}
