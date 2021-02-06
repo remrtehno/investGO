@@ -74,7 +74,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   });
 
   return (
-    <div className={cx('container', s.FileArrayInput)}>
+    <div className={cx('container p-0', s.FileArrayInput)}>
       <div className={cx(s.files, 'row')}>
         { files.map((file) => (
           <div
@@ -90,13 +90,15 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
           >
             <FileImgIcon className={s.fileIcon} />
             <div className={s.fileLabel}>{ file.original_name }</div>
-            <div className={s.deleteFile}>
-              <CloseIcon color='black' onClick={(e) => {
-                setFiles(files.filter((f) => file.id !== f.id));
-                e.preventDefault();
-                e.stopPropagation();
-              }} />
-            </div>
+            { props.disabled || props.readonly ? null : (
+              <div className={s.deleteFile}>
+                <CloseIcon color='black' onClick={(e) => {
+                  setFiles(files.filter((f) => file.id !== f.id));
+                  e.preventDefault();
+                  e.stopPropagation();
+                }} />
+              </div>
+            ) }
           </div>
         )) }
       </div>
