@@ -21,7 +21,7 @@ export const useSaveBankDetailsApi = () => {
 
   return useApi<useSaveBankDetailsApi.Payload, null>(async(payload) => {
     const bankDetails = await request<User.BankDetails | null>(api.company.saveBankDetails(), {
-      method: 'POST',
+      method: payload.id ? 'PUT' :  'POST',
       body: JSON.stringify(payload),
       showNotifyOnError: false,
       preventNotifyOn400: true,

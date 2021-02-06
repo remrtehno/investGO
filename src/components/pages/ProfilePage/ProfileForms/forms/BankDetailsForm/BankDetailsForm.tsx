@@ -45,6 +45,7 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
 
   const onSave = useCallback(() => {
     saveBankDetailsApi({
+      id: values.id,
       account: values.account,
       bank_name: values.bank_name,
       bic: values.bic,

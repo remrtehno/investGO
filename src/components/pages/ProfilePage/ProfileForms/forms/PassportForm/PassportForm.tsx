@@ -61,11 +61,6 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
       return;
     }
 
-    formApiRef.current.submit();
-    if (!formApiRef.current.isValid) {
-      return;
-    }
-
     const serial = values.serialNumber;
     const number = values.serialNumber.slice(-6);
 
@@ -154,7 +149,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
       return null;
     }
 
-    if (!user.passport || user.passport.status !== 'filled') {
+    if (user.passport?.status !== 'filled') {
       return renderForm();
     }
 
@@ -163,7 +158,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
 
   return (
     <div ref={props.formRef} className={cx(s.PassportForm, 'container')}>
-      <FormTitle status={user && user.passport ? user.passport.status : null}>{ props.form.title }</FormTitle>
+      <FormTitle status={user?.passport?.status}>{ props.form.title }</FormTitle>
       { renderContent() }
     </div>
   );

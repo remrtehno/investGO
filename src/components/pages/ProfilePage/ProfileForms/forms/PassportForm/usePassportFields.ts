@@ -97,5 +97,9 @@ export const usePassportFields = () => useMemo((): Form.FieldModels => ({
     label: 'ИНН (при наличии)',
     validations: [required()],
   },
+  personal_data_documents: {
+    name: 'personal_data_documents',
+    type: FieldType.fileArray,
+  }
 
 }), []);

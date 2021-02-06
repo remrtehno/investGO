@@ -7,6 +7,10 @@ import {required} from 'src/validations/required';
 
 export const useBankDetailsFields = () => {
   return useMemo((): Form.FieldModels => ({
+    id: {
+      name: 'id',
+      type: FieldType.hidden,
+    },
     bank_name: {
       name: 'bank_name',
       type: FieldType.text,

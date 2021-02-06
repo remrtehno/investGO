@@ -24,7 +24,7 @@ export const useSaveCompanyApi = () => {
     }
 
     const company = await request<User.Company | null>(api.company.save(), {
-      method: 'POST',
+      method: payload.id ? 'PUT' : 'POST',
       body: JSON.stringify({
         ...payload,
         type: userRef.current.roles.includes(Role.ip) ? Role.ip : Role.ur,

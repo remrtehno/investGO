@@ -22,6 +22,7 @@ export declare namespace User {
   }
 
   export type BankDetails = {
+    id: string | null,
     account: string,
     bank_name: string,
     bic: string,
@@ -33,11 +34,13 @@ export declare namespace User {
   }
 
   export type Company = {
+    id: string | null,
     ogrn: string,
     date_issue_ogrn: string,
     document_registry_file: FilePrimitive,
     bank_details: User.BankDetails | null,
     emails: string[],
+    status: ModerationStatus
   };
 }
 
