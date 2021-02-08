@@ -1,20 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const hamburger = document.querySelector('.hamburger');
+  const hamburger = document.querySelectorAll('.hamburger');
   const overlay = document.querySelector('.overlay');
   const pageHeader = document.querySelector('.page-header');
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    overlay.classList.toggle('open');
-    pageHeader.classList.toggle('open');
-    document.body.classList.toggle('overflow');
+  hamburger.forEach(el => {
+    el.addEventListener('click', () => {
+      el.classList.toggle('open');
+      overlay.classList.toggle('open');
+      pageHeader.classList.toggle('open');
+      document.body.classList.toggle('overflow');
+  
+      overlay.addEventListener('click', () => {
+        el.classList.remove('open');
+        overlay.classList.remove('open');
+        pageHeader.classList.remove('open');
+        document.body.classList.remove('overflow');
+      });
+  });
 
-    overlay.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      overlay.classList.remove('open');
-      pageHeader.classList.remove('open');
-      document.body.classList.remove('overflow');
-    });
   });
 
   class Accordion  {
@@ -38,17 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if(window.innerWidth <= 767) {
     new Accordion({accordionEl:'.docBtn'});
   }
-  const phoneMask = document.querySelectorAll('input[type="tel"]');
-  phoneMask.forEach(element => {
-    IMask(element, {
-      mask: '+{7} (000) 000-00-00'
+  var rangeSlider = document.querySelector(".slider-range");
+
+  if(rangeSlider) {
+
+    noUiSlider.create(rangeSlider, {
+      start: [50],
+      connect: [true, false],
+      step: 1,
+      range: {
+        min: [1000],
+        max: [10000000]
+      }
     });
-  });
-  phoneMask[0].addEventListener('click', function() {
-    if(this.value.length === 0) {
-      this.value = '+7'
-    }
-  })
+
+    var rangeSliderValueElement = document.querySelector(".slider-range-value");
+
+    rangeSlider.noUiSlider.on("update", function(values, handle) {
+      rangeSliderValueElement.value = values[handle] + ' ₽';
+    });
+  }
+
+
 });
 $(document).ready(function () {
   $('.accordionBtn').on('click', function() {
@@ -67,8 +81,6 @@ $(document).ready(function () {
     // e.preventDefault();
     valLength(3, '.formSendName');
     valLength(17, '.formSendTel');
-
-
   });
 
   $('.formSendName').on('keypress', function() {
@@ -84,5 +96,55 @@ $(document).ready(function () {
       } else if($(window).scrollTop() < 250) {
         $('.page-header--second').removeClass('open');
       }
+  });
+  $.mask.definitions.q = "[1,2,3,4,5,6,9]";
+  $('input[type="tel"]').mask('+7 (q99) 999-99-99');
+
+
+
+  $('.card').on('click', function() {
+    $(this).toggleClass('open');
+    $('.card__back').parent('.card').removeClass('open');
+  });
+
+  $('select').niceSelect();
+
+
+});
+
+
+$(document).ready(function () {
+  function topOffset(x) {
+    var scrollTop = $(window).scrollTop(),
+      elementOffset = x.offset().top,
+      distance = (elementOffset - scrollTop);
+    return distance;
+  };
+  var count = ($('.scrollytrigger').length);
+
+  sectionsPadding = $('.scrollytitle').height();
+  // $('.scrollysections').css("margin-bottom", sectionsPadding);
+
+  for (step = 0; step < count; step++) {
+    $('.scrollytrigger').eq(step).addClass(step + "b");
+    $('.scrollytitle').eq(step).addClass(step + "t");
+  };
+
+  $(window).on('scroll', function () {
+    for (step = 0; step < count; step++) {
+      var trigger = $('.' + step + 'b'),
+        title = $('.' + step + 't'),
+        scrollTop = $(window).scrollTop(),
+        elementOffset = trigger.offset().top,
+        distance = (elementOffset - scrollTop);
+      var offset = 98 + title.height() + 16;
+      if (distance < (topOffset(title) + 16)) {
+        $('.scrollytrigger').removeClass('scrollyactive');
+        trigger.addClass('scrollyactive');
+        $('.scrollytitle').removeClass('scrollyactive');
+        title.addClass('scrollyactive');
+      }
+      offset = title.height();
+    };
   });
 });

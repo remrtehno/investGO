@@ -58,7 +58,11 @@ export const UrForm: FC<UrForm.Props> = (props) => {
     }
   }, [user && user.company]);
 
+  console.log('Render', values);
+
   const onSave = useCallback(() => {
+    console.log('Submit', values);
+
     if (!formApiRef.current) {
       return;
     }
