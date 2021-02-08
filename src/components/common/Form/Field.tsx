@@ -54,9 +54,6 @@ export const Field: FC<Field.Props> = (props) => {
     form.onChange(value, field.name);
   }, [field]);
 
-  if (field.name === 'founders') {
-    debugger;
-  }
   if (field.isHidden) {
     return null;
   }

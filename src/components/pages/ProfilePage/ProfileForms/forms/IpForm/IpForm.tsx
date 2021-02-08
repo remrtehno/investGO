@@ -36,7 +36,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
     ...getDefaultFieldValues(fields),
     ...user && user.company && user.company ? {
       ...user.company,
-      document_registry_file: [user.company.document_registry_file],
+      email: user.company.emails && user.company.emails[0]
     } : {},
   } as Omit<User.Passport, 'serial' | 'number'> & { serialNumber: string });
 
@@ -66,6 +66,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
     }
 
     saveCompanyApi({
+      id: values.id,
       ogrn: values.ogrn,
       date_issue_ogrn: values.date_issue_ogrn,
       document_registry_file: values.document_registry_file,

@@ -26,8 +26,6 @@ export const ModalPortal: FC = (props) => {
     };
   }, []);
 
-  console.log('TEST', elRef.current, rootRef.current);
-
   if (!elRef.current) {
     return null;
   }

@@ -65,6 +65,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
 
     formApiRef.current.submit();
     if (!formApiRef.current.isValid) {
+      console.error('Validation errors', errors);
       return;
     }
 
@@ -113,7 +114,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
     } as any;
 
     saveCompanyApi(payload);
-  }, [values, isDirector]);
+  }, [values, isDirector, errors]);
 
   useEffect(() => {
     if (!isSameAddress) {
