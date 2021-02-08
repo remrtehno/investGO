@@ -11,6 +11,8 @@ import {PhoneInput} from 'src/components/ui/PhoneInput';
 import {Color} from 'src/contstants/Color';
 import {CloseIcon} from 'src/icons/CloseIcon';
 import {phone as validatePhone} from 'src/validations/phone';
+import {InfoPanel} from 'src/components/common/InfoPanel';
+import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 
 export declare namespace PhoneArrayField {
   type PhoneArrayField = Omit<FormField.Text, 'type' | 'regExp' | 'mask'> & {
@@ -26,42 +28,51 @@ export const PhoneArrayField: FC<PhoneArrayField.Props> = (props) => {
   const value: string[] = field.value || [];
 
   return (
-    <div className='row' style={{marginBottom: -20}}>
-      { value.map((phone, index) => {
-        return (
-          <div key={index} className='col-6' style={{marginBottom: 20}}>
-            <PhoneInput
-              {..._.omit(props, 'field')}
-              value={phone}
-              label={field.label}
-              error={validatePhone()(phone)}
-              disabled={field.disabled}
-              onChange={(newPhone) => {
-                form.onChange(value.map((p, i) => (i === index ? newPhone : p)), field.name);
-              }}
-              postfix={
-                <CloseIcon
-                  style={{zIndex: 10, cursor: 'pointer'}}
-                  color={Color.black}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    form.onChange(value.filter((p, i) => i !== index), field.name);
-                  }}
-                />
-              }
-            />
+    <div>
+      { field.error ? (
+        <div className='row' style={{ marginBottom: 20 }}>
+          <div className='col-12'>
+            <InfoPanel style={{ marginTop: 28 }} isBorderless={true} theme={InfoPanelTheme.error}>{field.error}</InfoPanel>
           </div>
-        );
-      }) }
-      <div className='col-6' style={{marginBottom: 20}}>
-        <Button
-          theme={ButtonTheme.light}
-          size={ButtonSize.m}
-          onClick={() => {
-            form.onChange([...value, ''], field.name);
-          }}
-        >Добавить номер телефона</Button>
+        </div>
+      ) : null }
+      <div className='row' style={{marginBottom: -20}}>
+        { value.map((phone, index) => {
+          return (
+            <div key={index} className='col-6' style={{marginBottom: 20}}>
+              <PhoneInput
+                {..._.omit(props, 'field')}
+                value={phone}
+                label={field.label}
+                error={validatePhone()(phone)}
+                disabled={field.disabled}
+                onChange={(newPhone) => {
+                  form.onChange(value.map((p, i) => (i === index ? newPhone : p)), field.name);
+                }}
+                postfix={
+                  <CloseIcon
+                    style={{zIndex: 10, cursor: 'pointer'}}
+                    color={Color.black}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      form.onChange(value.filter((p, i) => i !== index), field.name);
+                    }}
+                  />
+                }
+              />
+            </div>
+          );
+        }) }
+        <div className='col-6' style={{marginBottom: 20}}>
+          <Button
+            theme={ButtonTheme.light}
+            size={ButtonSize.m}
+            onClick={() => {
+              form.onChange([...value, ''], field.name);
+            }}
+          >Добавить номер телефона</Button>
+        </div>
       </div>
     </div>
   );

@@ -100,6 +100,7 @@ export const usePassportFields = () => useMemo((): Form.FieldModels => ({
   personal_data_documents: {
     name: 'personal_data_documents',
     type: FieldType.fileArray,
+    validations: [required()]
   }
 
 }), []);

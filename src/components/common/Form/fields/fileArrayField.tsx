@@ -23,6 +23,7 @@ export const FileArrayField: FC<FileArrayField.Props> = (props) => {
       name={field.name}
       onChange={form.onChange}
       disabled={field.disabled}
+      error={field.error}
     />
   );
 };

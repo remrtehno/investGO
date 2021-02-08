@@ -61,6 +61,11 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
       return;
     }
 
+    formApiRef.current.submit();
+    if (!formApiRef.current.isValid) {
+      return;
+    }
+
     const serial = values.serialNumber.slice(0, 4);
     const number = values.serialNumber.slice(-6);
 

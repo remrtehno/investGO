@@ -62,6 +62,7 @@ export const OkvedField: FC<OkvedField.Props> = (props) => {
         loadOptions={loadOptions}
         isClearable={true}
         value={null}
+        error={field.error}
         onChange={(newValue, option) => {
           if (!option || value.find(({cod}) => option.value === cod)) {
             return;

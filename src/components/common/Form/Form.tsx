@@ -107,7 +107,7 @@ export function Form(props: Form.Props) {
         disabled: props.disabled || field.disabled,
         value,
         isValid: !props.errors[field.name],
-        error: (props.errors[field.name] || null) as string | null,
+        error: ((dirtyFields.includes(field.name) && props.errors[field.name]) || null) as string | null,
         isDirty: dirtyFields.includes(field.name),
         isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name]),
       } as any;

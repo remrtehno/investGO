@@ -14,6 +14,8 @@ import type {FilePrimitive} from 'src/types/FilePrimitive';
 
 import {FounderModal} from './FounderModal';
 import s from './FoundersField.scss';
+import {InfoPanel} from 'src/components/common/InfoPanel';
+import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 
 export declare namespace FoundersField {
   export type Founder = {
@@ -23,7 +25,7 @@ export declare namespace FoundersField {
     passport_page_photo: FilePrimitive[],
     passport_page_registration_file: FilePrimitive[],
     passport_serial: string,
-    percent: number
+    percent: number,
   }
 
   type Field = Omit<FormField.BaseField, 'value'> & {
@@ -98,11 +100,18 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
 
   return (
     <div className={s.FoundersField}>
+      { field.error ? (
+        <div className='row'>
+          <div className='col-12'>
+            <InfoPanel style={{ marginTop: 28 }} isBorderless={true} theme={InfoPanelTheme.error}>{field.error}</InfoPanel>
+          </div>
+        </div>
+      ) : null }
       { renderFounders() }
       <div className='row'>
         <div className='col-4'>
           <Button
-            style={{ marginTop: founders.length ? 30 : 0 }}
+            style={{ marginTop: 28 }}
             className={s.addFounderButton}
             size={ButtonSize.m}
             theme={ButtonTheme.light}

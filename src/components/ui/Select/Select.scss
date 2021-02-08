@@ -11,6 +11,15 @@
     box-shadow: none;
   }
 
+  &.withError {
+    :global(.select__control),
+    :global(.select__control):hover,
+    :global(.select__control--is-focused),
+    :global(.select__control--is-focused):hover {
+      border-color: var(--red);
+    }
+  }
+
   :global(.select__indicators) {
     display: none;
   }

@@ -119,11 +119,11 @@ export const FounderModal: FC<FounderModal.Props> = (props) => {
             <Field name='serialNumber' className={cx('col-12', s.field)} />
             <Field name='percent' className={cx('col-12', s.field)} />
             <div className={cx('col-12', s.field)}>
-              <Text style={{ marginBottom: 12 }} size={TextSize.subHeadline1} className={s.title}>Страница пасспорта с фотографией</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Страница пасспорта с фотографией</Text>
               <Field name='passport_page_photo_file' />
             </div>
             <div className={cx('col-12', s.field)}>
-              <Text style={{ marginBottom: 12 }} size={TextSize.subHeadline1} className={s.title}>Страница пасспорта с регистрацией</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Страница пасспорта с регистрацией</Text>
               <Field name='passport_page_registration_file' />
             </div>
           </div>

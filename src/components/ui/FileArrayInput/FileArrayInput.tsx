@@ -14,6 +14,8 @@ import {downloadFile} from 'src/utils/downloadFile';
 
 import {AddButtonIcon} from './AddButtonIcon';
 import s from './FileArrayInput.scss';
+import {InfoPanel} from 'src/components/common/InfoPanel';
+import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
@@ -27,6 +29,7 @@ export declare namespace FileArrayInput {
     name?: string | null,
     disabled?: boolean,
     readonly?: boolean,
+    error?: string | null
   }
 }
 
@@ -75,6 +78,13 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
 
   return (
     <div className={cx('container p-0', s.FileArrayInput)}>
+      { props.error ? (
+        <div className='row'>
+          <div className='col-12'>
+            <InfoPanel style={{ marginTop: 32 }} isBorderless={true} theme={InfoPanelTheme.error}>{props.error}</InfoPanel>
+          </div>
+        </div>
+        ) : null }
       <div className={cx(s.files, 'row')}>
         { files.map((file) => (
           <div
@@ -103,7 +113,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
         )) }
       </div>
       { props.disabled || props.readonly ? null : (
-        <div {...getRootProps()} className={s.addButtonContainer} style={{ marginTop: files.length ? 32 : 0 }}>
+        <div {...getRootProps()} className={s.addButtonContainer} style={{ marginTop: 32 }}>
           <input {...getInputProps()} />
           <Button
             size={ButtonSize.m}

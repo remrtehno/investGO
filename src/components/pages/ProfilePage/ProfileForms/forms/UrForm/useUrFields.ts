@@ -78,19 +78,23 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'date_issue_ogrn',
         type: FieldType.date,
         label: 'Дата приссвоения ОГРНИП',
+        validations: [required()],
       },
       document_registry_file: {
         name: 'document_registry_file',
         type: FieldType.file,
+        validations: [required()],
       },
       document_rule_file: {
         name: 'document_rule_file',
         type: FieldType.file,
+        validations: [required()],
       },
       document_director_approved_file: {
         name: 'document_director_approved_file',
         type: FieldType.file,
-        isHidden: !user.roles.includes(Role.borrower)
+        isHidden: !user.roles.includes(Role.borrower),
+        validations: [required()],
       },
       director_fio: {
         name: 'director_fio',
@@ -123,7 +127,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'director_personal_data_documents',
         type: FieldType.fileArray,
         validations: [required()],
-        isHidden: isDirector
+        isHidden: isDirector,
       },
       director_subdivision_code: {
         name: 'director_subdivision_code',
@@ -177,13 +181,15 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'okved',
         type: FieldType.custom,
         Field: OkvedField,
-        isHidden: !user.roles.includes(Role.borrower)
+        isHidden: !user.roles.includes(Role.borrower),
+        validations: [required()],
       },
       founders: {
         name: 'founders',
         type: FieldType.custom,
         Field: FoundersField,
-        isHidden: !user.roles.includes(Role.borrower)
+        isHidden: !user.roles.includes(Role.borrower),
+        validations: [required()],
       },
       date_director_set: {
         name: 'date_director_set',
