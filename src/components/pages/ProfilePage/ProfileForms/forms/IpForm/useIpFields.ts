@@ -19,7 +19,7 @@ export const useIpFields = () => {
       date_issue_ogrn: {
         name: 'date_issue_ogrn',
         type: FieldType.date,
-        label: 'Дата приссвоения ОГРНИП',
+        label: 'Дата присвоения ОГРНИП',
         validations: [required()],
       },
       document_registry_file: {

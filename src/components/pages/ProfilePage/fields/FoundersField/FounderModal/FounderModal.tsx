@@ -26,7 +26,7 @@ function userFields(): Form.FieldModels {
     name: {
       type: FieldType.text,
       name: 'name',
-      label: 'Генеральный директор',
+      label: 'Учредитель',
       validations: [required()],
     },
     serialNumber: {
@@ -59,7 +59,11 @@ function userFields(): Form.FieldModels {
       label: 'Доля владения',
       name: 'percent',
       isInteger: false,
-      validations: [required(), minValue(0), maxValue(100)],
+      validations: [
+        required(),
+        minValue(1, true, 'Минимальное значение 1%'),
+        maxValue(100, true, 'Максимальное значение 100%')
+      ],
     },
   };
 }
@@ -119,11 +123,11 @@ export const FounderModal: FC<FounderModal.Props> = (props) => {
             <Field name='serialNumber' className={cx('col-12', s.field)} />
             <Field name='percent' className={cx('col-12', s.field)} />
             <div className={cx('col-12', s.field)}>
-              <Text size={TextSize.subHeadline1} className={s.title}>Страница пасспорта с фотографией</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Страница паспорта с фотографией</Text>
               <Field name='passport_page_photo_file' />
             </div>
             <div className={cx('col-12', s.field)}>
-              <Text size={TextSize.subHeadline1} className={s.title}>Страница пасспорта с регистрацией</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Страница паспорта с регистрацией</Text>
               <Field name='passport_page_registration_file' />
             </div>
           </div>

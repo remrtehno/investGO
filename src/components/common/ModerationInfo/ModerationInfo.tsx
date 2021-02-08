@@ -9,7 +9,7 @@ export const ModerationInfo: FC = () => {
     <div className={s.ModerationInfo}>
       <TimeIcon className={s.moderationIcon} />
       <Text size={TextSize.body2}>
-        Ожидайте. Ваши данные в обработке. Это может занять до 15 минут. Вы получите СМС после ее завершения проверки.
+        Ваши данные отправлены на проверку. Информация о статусе проверки будет отправлена на ваш электронный адрес.
       </Text>
     </div>
   )

@@ -57,7 +57,7 @@ export const ProfilePage = withAuth(() => {
     },
     {
       id: ProfileFormType.passport,
-      title: 'Паспорт',
+      title: 'Личные данные',
     },
     claims.ipForm.read() ? {
       id: ProfileFormType.ip,
@@ -65,7 +65,7 @@ export const ProfilePage = withAuth(() => {
     } : null,
     claims.urForm.read() ? {
       id: ProfileFormType.ur,
-      title: 'Данные юр. лица',
+      title: 'Юридическое лицо',
     } : null,
     claims.bankDetailsForm.read() ? {
       id: ProfileFormType.bankDetails,
