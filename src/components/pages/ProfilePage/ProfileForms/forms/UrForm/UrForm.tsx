@@ -189,7 +189,11 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               />
             </div>
           </FormRow>
-          { isDirector ? null : (
+          { isDirector ? (
+            <FormRow>
+              <Field className='col-6' name='date_director_set' />
+            </FormRow>
+          ) : (
             <Fragment>
               <FormRow>
                 <Field className='col-6' name='director_fio' />
@@ -218,6 +222,9 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 <Field className='col-12' name='director_authority' />
               </FormRow>
               <FormRow>
+                <Field className='col-6' name='date_director_set' />
+              </FormRow>
+              <FormRow>
                 <div className='col-12'>
                   <div className={s.documentsTitle}>
                     <Text size={TextSize.subHeadline1} style={{ marginTop: 20, marginBottom: 8 }}>
@@ -233,9 +240,6 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               </FormRow>
             </Fragment>
           ) }
-          <FormRow>
-            <Field className='col-6' name='date_director_set' />
-          </FormRow>
           <FormRow>
             <div className='col-12'>
               <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
@@ -258,7 +262,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <div className='col-12'>
               <Text size={TextSize.subHeadline1} className={s.title}>Документ о полномочиях</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
-                Копия документа, удостоверяющего личность физического лица – руководителя (первая страница и страница с адресом регистрации по месту жительства);
+                Копии документов, подтверждающих полномочия руководителя.
               </Text>
               <Field name='document_director_approved_file' />
             </div>

@@ -55,7 +55,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         validations: [required()],
       },
       email: {
-        name: 'email',
+        name: 'email (адрес электронной почты)',
         type: FieldType.text,
         label: 'Email',
         validations: [required(), email()],
@@ -77,7 +77,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
       date_issue_ogrn: {
         name: 'date_issue_ogrn',
         type: FieldType.date,
-        label: 'Дата присвоения ОГРНИП',
+        label: 'Дата присвоения ОГРН',
         validations: [required()],
       },
       document_registry_file: {
@@ -173,7 +173,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'director_place_of_residence',
         type: FieldType.text,
         isHidden: isDirector,
-        label: 'Адрес фактического проживания',
+        label: 'Адрес фактического проживания руководителя',
         validations: [required()],
         disabled: isSameAddress,
       },
@@ -204,5 +204,5 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         isHidden: !user.roles.includes(Role.borrower)
       }
     };
-  }, [user, isSameAddress]);
+  }, [user, isDirector, isSameAddress]);
 };

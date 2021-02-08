@@ -16,11 +16,20 @@ export function useClaims() {
       read: () => Boolean(user && user.roles.includes(Role.ur)),
     },
     bankDetailsForm: {
-      read: () => Boolean(
-        user?.company &&
-        user?.company?.status !== ModerationStatus.filled  &&
-        user?.company?.status !== ModerationStatus.waiting  &&
-        user?.roles.includes(Role.borrower)),
+      read: () => {
+        if (user && user.company) {
+          console.log(Boolean(
+            user?.company &&
+            user?.company?.status !== ModerationStatus.filled  &&
+            user?.company?.status !== ModerationStatus.waiting  &&
+            user?.roles.includes(Role.borrower)));
+        }
+        return Boolean(
+          user?.company &&
+          user?.company?.status !== ModerationStatus.filled  &&
+          user?.company?.status !== ModerationStatus.waiting  &&
+          user?.roles.includes(Role.borrower));
+      },
     },
   }), [user]);
 }

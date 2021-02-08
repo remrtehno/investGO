@@ -20,6 +20,8 @@ import s from './IpForm.scss';
 import {useIpFields} from './useIpFields';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {CheckBox} from 'src/components/ui/CheckBox';
+import {ModerationInfo} from 'src/components/common/ModerationInfo';
+import {ModerationStatus} from 'src/contstants/ModerationStatus';
 
 export declare namespace IpForm {
   export type Props = ProfileForms.FormProps;
@@ -81,79 +83,87 @@ export const IpForm: FC<IpForm.Props> = (props) => {
     setErrors(errors);
   }, []);
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <div ref={props.formRef} className={cx(s.CompanyForm, 'container')}>
-      <Form
-        formApiRef={formApiRef}
-        initialValues={initialValues}
-        fields={fields}
-        errors={errors}
-        values={values}
-        onChange={onChange}
-      >
-        <FormTitle>{ props.form.title }</FormTitle>
-        <FormRow>
-          <Field className='col-6' name='ogrn' />
-          <Field className='col-6' name='date_issue_ogrn' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='email' />
-        </FormRow>
-        <FormRow>
-          <Field className='container col-12' name='phones' />
-        </FormRow>
-        <FormRow>
-          <div className='col-12'>
-            <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
-            <Text size={TextSize.body0} className={s.fieldDescription}>
-              Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
-            </Text>
-            <Field name='document_registry_file' />
-          </div>
-        </FormRow>
-        <FormRow>
-          <div className='col-12'>
-            <CheckBox
-              style={{ marginBottom: 18 }}
-              value={checkBoxes[0]}
-              onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
-              label={(
-                <Text size={TextSize.body0}>
-                  Предоставленные данные юридического лица верны.
-                </Text>
-              )}
-            />
-            <CheckBox
-              style={{ marginBottom: 18 }}
-              value={checkBoxes[1]}
-              onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
-              label={(
-                <Text size={TextSize.body0}>
-                  Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>политики конфиденциальности</a>.
-                </Text>
-              )}
-            />
-            <CheckBox
-              value={checkBoxes[2]}
-              onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
-              label={(
-                <Text size={TextSize.body0}>
-                  Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
-                </Text>
-              )}
-            />
-          </div>
-        </FormRow>
-        <FormActions>
-          <div className='col-3'>
-            <Button
-              theme={ButtonTheme.black}
-              size={ButtonSize.m}
-              onClick={onSave}
-            >Сохранить</Button>
-          </div>
-        </FormActions>
-      </Form>
+      { user.company?.status === ModerationStatus.waiting || user.company?.status === ModerationStatus.filled ? (
+        <ModerationInfo/>
+      ) : (
+        <Form
+          formApiRef={formApiRef}
+          initialValues={initialValues}
+          fields={fields}
+          errors={errors}
+          values={values}
+          onChange={onChange}
+        >
+          <FormTitle>{ props.form.title }</FormTitle>
+          <FormRow>
+            <Field className='col-6' name='ogrn' />
+            <Field className='col-6' name='date_issue_ogrn' />
+          </FormRow>
+          <FormRow>
+            <Field className='col-12' name='email' />
+          </FormRow>
+          <FormRow>
+            <Field className='container col-12' name='phones' />
+          </FormRow>
+          <FormRow>
+            <div className='col-12'>
+              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
+              <Text size={TextSize.body0} className={s.fieldDescription}>
+                Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
+              </Text>
+              <Field name='document_registry_file' />
+            </div>
+          </FormRow>
+          <FormRow>
+            <div className='col-12'>
+              <CheckBox
+                style={{ marginBottom: 18 }}
+                value={checkBoxes[0]}
+                onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
+                label={(
+                  <Text size={TextSize.body0}>
+                    Предоставленные данные юридического лица верны.
+                  </Text>
+                )}
+              />
+              <CheckBox
+                style={{ marginBottom: 18 }}
+                value={checkBoxes[1]}
+                onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
+                label={(
+                  <Text size={TextSize.body0}>
+                    Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>политики конфиденциальности</a>.
+                  </Text>
+                )}
+              />
+              <CheckBox
+                value={checkBoxes[2]}
+                onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
+                label={(
+                  <Text size={TextSize.body0}>
+                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
+                  </Text>
+                )}
+              />
+            </div>
+          </FormRow>
+          <FormActions>
+            <div className='col-3'>
+              <Button
+                theme={ButtonTheme.black}
+                size={ButtonSize.m}
+                onClick={onSave}
+              >Сохранить</Button>
+            </div>
+          </FormActions>
+        </Form>
+      )}
     </div>
   );
 };
