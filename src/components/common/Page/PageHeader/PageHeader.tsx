@@ -42,7 +42,7 @@ export const PageHeader: FC = () => {
   return (
     <div className={s.pageHeader}>
       <div className={cx('container', s.container)}>
-        <LogoIcon className={s.logo} onClick={() => history.push('/')} />
+        <LogoIcon className={s.logo} onClick={() => window.location.href = '/'} />
         { user ? (
           <div className={s.userContainer}>
             <Text size={TextSize.tabMenu} weight={TextWeight.bold}>{ user.email }</Text>

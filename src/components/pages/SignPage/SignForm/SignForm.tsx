@@ -194,7 +194,7 @@ export const SignForm: FC<SignForm.Props> = () => {
       { isCheckEmailModalVisible ? (
         <CheckEmailModal
           onClose={() => {
-            window.location.pathname = '/';
+            window.location.reload();
           }}
         />
       ) : null }
