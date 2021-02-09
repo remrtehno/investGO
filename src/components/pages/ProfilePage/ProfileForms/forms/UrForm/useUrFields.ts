@@ -55,9 +55,9 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         validations: [required()],
       },
       email: {
-        name: 'email (адрес электронной почты)',
+        name: 'email',
         type: FieldType.text,
-        label: 'Email',
+        label: 'Email (адрес электронной почты)',
         validations: [required(), email()],
       },
       phones: {
