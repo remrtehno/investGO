@@ -242,7 +242,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           ) }
           <FormRow>
             <div className='col-12'>
-              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из ЕГРЮЛ</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
                 Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
               </Text>
