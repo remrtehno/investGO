@@ -30,7 +30,7 @@ export const useIpFields = () => {
       email: {
         name: 'email',
         type: FieldType.text,
-        label: 'Email',
+        label: 'Адрес электронной почты',
         validations: [required(), email()],
       },
       phones: {

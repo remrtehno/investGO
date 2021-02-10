@@ -244,14 +244,15 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <div className='col-12'>
               <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из ЕГРЮЛ</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
-                Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
+                Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за
+                  тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе).
               </Text>
               <Field name='document_registry_file' />
             </div>
           </FormRow>
           <FormRow>
             <div className='col-12'>
-              <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица.</Text>
               <div className={s.fieldDescription}>
                 Загрузите копию устава юридического лица
               </div>
@@ -329,7 +330,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>политики конфиденциальности</a>.
+                    Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>Политики конфиденциальности</a>.
                   </Text>
                 )}
               />
