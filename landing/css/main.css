@@ -2873,6 +2873,37 @@ iframe {
   margin: 0 auto;
   margin-top: 56px;
 }
+
+.agreement__text {
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
+  color: #7F7F7F;
+  max-width: 740px;
+  margin: 0 auto;
+  margin-top: 22px;
+}
+
+.agreement__text a {
+  color: #000000;
+  transition: .3s
+}
+
+.agreement__text a:hover {
+  color: var(--red)
+}
+
+ul.inline-list {
+  display: flex;
+  margin: 0; /* Обнуляем значение отступов */
+}
+
+ul.inline-list li {
+  display: inline; /* Отображать как строчный элемент */
+  margin-right: 25px; /* Отступ слева */
+  padding: 3px; /* Поля вокруг текста */
+}
+
 @media(max-width: 991px) {
   .calc {
     padding-top: 60px;
