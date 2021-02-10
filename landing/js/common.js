@@ -61,7 +61,54 @@ document.addEventListener('DOMContentLoaded', () => {
       rangeSliderValueElement.value = values[handle] + ' ₽';
     });
   }
+  class Mmodal {
+    constructor(options = {}) {
+      const {
+        open = '.contacts__btn',
+        modal = '.modal',
+        close = '.modalClose',
+      } = options;
 
+      this.open = open;
+      this.modal = modal;
+      this.close = close;
+      this.init();
+    }
+    
+    toggleModal() {  
+      const modal = document.querySelector(this.modal);
+      const open = document.querySelectorAll(this.open);
+      
+      open.forEach(elem => {
+        elem.addEventListener('click', (e) => {
+          e.preventDefault();
+          modal.classList.add('modal--open');
+          modal.setAttribute('tabindex', '-1');
+
+          modal.addEventListener('animationend', () => {
+            modal.firstElementChild.classList.add('modal__content--open');
+          });
+
+          modal.addEventListener('click', event => {
+            const target = event.target;
+            if(target.closest(this.close) || target.closest(this.modal) && !target.closest('.modal__content')) {
+              modal.firstElementChild.classList.remove('modal__content--open');
+              modal.classList.remove('modal--open');
+              modal.removeAttribute('tabindex');
+            }
+          });
+
+        });
+
+      });
+    }
+
+    init() {
+      this.toggleModal();
+    }
+  }
+
+  new Mmodal();
 
 });
 $(document).ready(function () {
