@@ -252,9 +252,9 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           </FormRow>
           <FormRow>
             <div className='col-12'>
-              <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица.</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица</Text>
               <div className={s.fieldDescription}>
-                Загрузите копию устава юридического лица
+                Загрузите копию устава юридического лица.
               </div>
               <Field name='document_rule_file' />
             </div>
@@ -339,7 +339,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
+                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».
                   </Text>
                 )}
               />

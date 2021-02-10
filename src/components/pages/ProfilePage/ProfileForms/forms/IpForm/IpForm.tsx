@@ -148,7 +148,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
+                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».
                   </Text>
                 )}
               />
