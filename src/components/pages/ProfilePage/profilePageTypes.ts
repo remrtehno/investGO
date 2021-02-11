@@ -3,5 +3,6 @@ export enum ProfileFormType {
   passport = 'passport',
   ip = 'ip',
   ur = 'ur',
+  fl = 'fl',
   bankDetails = 'bankDetails',
 }

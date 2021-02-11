@@ -24,6 +24,7 @@ import {useUrFields} from './useUrFields';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {ModerationInfo} from 'src/components/common/ModerationInfo';
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 
 export declare namespace UrForm {
   export type Props = ProfileForms.FormProps;
@@ -329,7 +330,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>политики конфиденциальности</a>.
+                    Я даю согласие на передачу и обработку введенных данных в рамках <a onClick={(e) => e.stopPropagation()} href='#'>политики конфиденциальности</a>.
                   </Text>
                 )}
               />
@@ -354,6 +355,9 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               >Сохранить</Button>
             </div>
           </FormActions>
+          { !user.sign_document.length && user.company && user.company.status === ModerationStatus.approved ? (
+            <AcceptRules/>
+          ) : null }
         </Form>
       ) }
     </div>

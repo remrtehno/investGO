@@ -71,6 +71,10 @@ export const ProfilePage = withAuth(() => {
       id: ProfileFormType.bankDetails,
       title: 'Реквизиты',
     } : null,
+    user?.roles.includes(Role.fl) ? {
+      id: ProfileFormType.fl,
+      title: 'Данные физ. лица'
+    } : null
   ]), [user]);
 
   return (

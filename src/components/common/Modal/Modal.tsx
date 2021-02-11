@@ -10,13 +10,14 @@ import s from './Modal.scss';
 import {ModalPortal} from './ModalPortal';
 
 type Props = {
-    hardClose?: boolean,
-    className?: string,
-    title?: string,
-    hideHeader?: boolean,
-    onClose(): void,
-    allowClose: boolean,
-    isFullscreen?: boolean,
+  hardClose?: boolean,
+  className?: string,
+  title?: string,
+  hideHeader?: boolean,
+  onClose(): void,
+  allowClose: boolean,
+  isFullscreen?: boolean,
+  width?: number,
 };
 
 export const Modal: FC<Props> = (props) => {
@@ -26,6 +27,7 @@ export const Modal: FC<Props> = (props) => {
     onClose = _.noop,
     children,
     allowClose = true,
+    width,
   } = props;
 
   return (
@@ -36,6 +38,7 @@ export const Modal: FC<Props> = (props) => {
       >
         <div
           className={s.container}
+          style={{ minWidth: width }}
           onClick={(e) => e.stopPropagation()}
         >
           <div className={s.content}>

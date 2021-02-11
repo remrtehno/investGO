@@ -54,4 +54,5 @@ export type User = {
   phone: string,
   is_selected_role: boolean,
   isCompanyLoaded: boolean,
+  sign_document: string[]
 }

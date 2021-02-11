@@ -14,6 +14,9 @@ import {ProfileForm} from './forms/ProfileForm';
 import {UrForm} from './forms/UrForm';
 
 import s from './ProfileForms.scss';
+import {useRecoilValue} from 'recoil';
+import {userAtom} from 'src/recoil/userAtom';
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 
 const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.profile]: ProfileForm,
@@ -21,6 +24,17 @@ const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.bankDetails]: BankDetailsForm,
   [ProfileFormType.ip]: IpForm,
   [ProfileFormType.ur]: UrForm,
+  [ProfileFormType.fl]: () => {
+    const {user} = useRecoilValue(userAtom);
+
+    if (!user || !user.sign_document || user.sign_document.length) {
+      return null;
+    }
+
+    return (
+      <AcceptRules/>
+    );
+  }
 };
 
 export declare namespace ProfileForms {

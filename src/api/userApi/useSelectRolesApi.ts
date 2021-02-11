@@ -4,10 +4,10 @@ import {api} from 'src/contstants/api';
 import type {Role} from 'src/contstants/Role';
 import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
-import {useLatestRef} from 'src/hooks/useLatestRef';
 import {userAtom} from 'src/recoil/userAtom';
 import {RequestStatus} from 'src/types/common';
 import type {User} from 'src/types/User';
+import {getUserApi} from 'src/api/userApi/useGetUserApi';
 
 export declare namespace useSignInApi {
   export type Payload = {
@@ -18,11 +18,10 @@ export declare namespace useSignInApi {
 
 export const useSelectRolesApi = () => {
   const request = useApiRequest();
-  const [{user}, setUser] = useRecoilState(userAtom);
-  const userRef = useLatestRef(user);
+  const [, setUser] = useRecoilState(userAtom);
 
   return useApi<useSignInApi.Payload, null>(async(payload) => {
-    const newUser = await request<User>(api.user.selectRoles(), {
+    await request<User>(api.user.selectRoles(), {
       method: 'PUT',
       body: JSON.stringify({
         role: payload.mainRole,
@@ -32,16 +31,10 @@ export const useSelectRolesApi = () => {
       preventNotifyOn400: true,
     });
 
-    if (!userRef.current) {
-      return null;
-    }
+    const user = await getUserApi(request);
 
     setUser({
-      user: {
-        ...newUser,
-        passport: userRef.current.passport,
-        company: userRef.current.company,
-      },
+      user,
       status: RequestStatus.success,
       error: null,
     });

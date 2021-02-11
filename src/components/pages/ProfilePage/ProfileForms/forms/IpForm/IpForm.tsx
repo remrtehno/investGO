@@ -22,6 +22,7 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {ModerationInfo} from 'src/components/common/ModerationInfo';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 
 export declare namespace IpForm {
   export type Props = ProfileForms.FormProps;
@@ -162,6 +163,9 @@ export const IpForm: FC<IpForm.Props> = (props) => {
               >Сохранить</Button>
             </div>
           </FormActions>
+          { !user.sign_document.length && user.company && user.company.status === ModerationStatus.approved ? (
+            <AcceptRules/>
+          ) : null }
         </Form>
       )}
     </div>
