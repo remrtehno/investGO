@@ -57,7 +57,7 @@
               <a href="/borrower" class="current">Заемщикам</a>
             </li>
           </ul>
-          <a href="tel:+7 (895) 748-75-69" class="phone link-reset">+7 (895) 748-75-69</a>
+          <!--<a href="tel:+7 (895) 748-75-69" class="phone link-reset">+7 (895) 748-75-69</a>-->
           <a href="/signin" class="btn btn--130 link-reset">
             Войти
           </a>
@@ -92,7 +92,7 @@
               <a href="/borrower">Заемщикам</a>
             </li>
           </ul>
-          <a href="tel:+7 (895) 748-75-69" class="phone link-reset">+7 (895) 748-75-69</a>
+          <!--<a href="tel:+7 (895) 748-75-69" class="phone link-reset">+7 (895) 748-75-69</a>-->
           <a href="/signin" class="btn btn--130 link-reset">
             Войти
           </a>
@@ -402,7 +402,7 @@
 
       </div>
     </section>
-    <section class="calc">
+    <section class="calc" style="display: none;">
       <div class="container">
         <div class="steps__block-wrap">
           <div class="calc__container">
@@ -456,7 +456,7 @@
                   <span>Сумма переплаты %</span>
                   <strong>117 000.00 ₽</strong>
                 </div>
-                <button type="button" class="btn-reset btn btn--red">
+                <button type="button" class="btn-reset btn btn--red" onclick="document.location = '/signin'">
                   Привлечь инвестиции
                 </button>
               </div>
@@ -503,6 +503,9 @@
             <button class="btn contacts__btn btn--200 btn--center btn--big btn-reset" type="submit">
               Отправить
             </button>
+            <p class="agreement__text">
+              Нажимая кнопку "Отправить", Вы подтверждаете, что ознакомлены и согласны с <a href="#" onclick="return false;">Политикой конфиденциальности</a>
+            </p>
           </form>
 
         </div>
@@ -541,22 +544,19 @@
             <h3 class="footer-title">
               InvestGO
             </h3>
-            <ul class="footer-list footer-list__wrap list-reset">
+            <ul class="footer-list footer-list__wrap list-reset inline-list">
               <li>
-                <a href="#">О платформе</a>
+                <a href="#">О&nbspплатформе</a>
               </li>
               <li>
-                <a href="/investor">Инвестру</a>
+                <a href="/investor">Инвестору</a>
               </li>
               <li>
                 <a href="/borrower">Заемщику</a>
               </li>
-              <li>
-                <a href="#">Партнерам</a>
-              </li>
             </ul>
           </div>
-          <div class="footer__col">
+          <div class="footer__col" style="display:none;">
             <h3 class="footer-title docBtn">
               Документы
             </h3>
@@ -575,7 +575,7 @@
               </li>
             </ul>
           </div>
-          <div class="footer__col">
+          <div class="footer__col" style="display:none;">
             <h3 class="footer-title">
               Информация
             </h3>
@@ -592,7 +592,7 @@
             </ul>
           </div>
           <div class="footer__col">
-            <a href="tel:+7 495 369 00 48" class="footer-tel">+7 495 369 00 48</a>
+            <!--<a href="tel:+7 495 369 00 48" class="footer-tel">+7 495 369 00 48</a>-->
           </div>
         </div>
 
@@ -604,12 +604,13 @@
           <small>© 2021 InvestGo</small>
           <div class="bottom-links">
             <a href="/privacy">Пользовательское соглашение</a>
-            <a href="/privacy">Пользовательское соглашение</a>
+            <a href="#" onclick="return false;">Политика конфиденциальности</a>
           </div>
         </div>
         <p class="footer-text">
-          Осуществляет деятельность в соответствии с Федеральным законом от 02. 08.2019 N 259-ФЗ “О привлечении
-          инвестиций с использованием инвестиционных платформ”
+          Осуществляет деятельность в соответствии с Федеральным законом от 02.08.2019 N 259-ФЗ "О привлечении инвестиций
+          с использованием инвестиционных платформ и о внесении изменений в отдельные законодательные акты Российской
+          Федерации"
         </p>
         <p class="footer-text">
           ООО “Инвест Гоу” зарегистрировано в реестре Банка России под #____ в качестве Оператора инвестиционной
@@ -625,7 +626,29 @@
     </div>
   </footer>
   <div class="overlay"></div>
-
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal__content">
+      <button type="button" class="modal__close modalClose" aria-label="Close modal">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8225 8.18354C15.5859 7.94691 15.2036 7.94691 14.967 8.18354L12 11.1445L9.03299 8.17747C8.79636 7.94084 8.41411 7.94084 8.17747 8.17747C7.94084 8.41411 7.94084 8.79636 8.17747 9.03299L11.1445 12L8.17747 14.967C7.94084 15.2036 7.94084 15.5859 8.17747 15.8225C8.41411 16.0592 8.79636 16.0592 9.03299 15.8225L12 12.8555L14.967 15.8225C15.2036 16.0592 15.5859 16.0592 15.8225 15.8225C16.0592 15.5859 16.0592 15.2036 15.8225 14.967L12.8555 12L15.8225 9.03299C16.0531 8.80243 16.0531 8.41411 15.8225 8.18354Z" fill="black"/>
+        </svg>
+      </button>
+      <div class="modal__body">
+        <svg width="42" height="43" viewBox="0 0 42 43" fill="none">
+          <path d="M1 21.5C1 10.4543 9.95431 1.5 21 1.5C32.0457 1.5 41 10.4543 41 21.5C41 32.5457 32.0457 41.5 21 41.5C9.95431 41.5 1 32.5457 1 21.5Z" fill="white"/>
+          <path d="M18.9949 26.0729L12.0449 19.1229L9.67822 21.4729L18.9949 30.7895L28.9949 20.7895L33.9949 15.7901L31.6449 13.4401L27.8199 17.2562L18.9949 26.0729Z" fill="black"/>
+          <path d="M21 40.5C10.5066 40.5 2 31.9934 2 21.5H0C0 33.098 9.40202 42.5 21 42.5V40.5ZM40 21.5C40 31.9934 31.4934 40.5 21 40.5V42.5C32.598 42.5 42 33.098 42 21.5H40ZM21 2.5C31.4934 2.5 40 11.0066 40 21.5H42C42 9.90202 32.598 0.5 21 0.5V2.5ZM21 0.5C9.40202 0.5 0 9.90202 0 21.5H2C2 11.0066 10.5066 2.5 21 2.5V0.5Z" fill="black"/>
+        </svg>
+        <p>
+          Ваше обращение отправлено. <br>
+          Мы свяжемся с вами в ближайшее время.
+        </p>
+        <button class="btn btn--100 btn-reset modalClose" type="button">
+          Ок
+        </button>
+      </div>
+    </div>
+  </div>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="/landing/js/scripts.min.js"></script>

@@ -243,9 +243,10 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           ) }
           <FormRow>
             <div className='col-12'>
-              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из ЕГРЮЛ</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
-                Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
+                Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за
+                  тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе).
               </Text>
               <Field name='document_registry_file' />
             </div>
@@ -254,7 +255,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <div className='col-12'>
               <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица</Text>
               <div className={s.fieldDescription}>
-                Загрузите копию устава юридического лица
+                Загрузите копию устава юридического лица.
               </div>
               <Field name='document_rule_file' />
             </div>
@@ -330,7 +331,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Я даю согласие на передачу и обработку введенных данных в рамках <a onClick={(e) => e.stopPropagation()} href='#'>политики конфиденциальности</a>.
+                    Я даю согласие на передачу и обработку введенных данных в рамках <a onClick={(e) => e.stopPropagation()} href='#'>Политики конфиденциальности</a>.
                   </Text>
                 )}
               />
@@ -339,7 +340,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
+                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».
                   </Text>
                 )}
               />

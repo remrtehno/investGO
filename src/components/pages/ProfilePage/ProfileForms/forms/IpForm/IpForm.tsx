@@ -101,7 +101,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           values={values}
           onChange={onChange}
         >
-          <FormTitle>{ props.form.title }</FormTitle>
+          <FormTitle>{ props.form.longTitle }</FormTitle>
           <FormRow>
             <Field className='col-6' name='ogrn' />
             <Field className='col-6' name='date_issue_ogrn' />
@@ -114,9 +114,10 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           </FormRow>
           <FormRow>
             <div className='col-12'>
-              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из егрюл</Text>
+              <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из ЕГРИП</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
-                Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе);
+                  Выписка или копия выписки из единого государственного реестра индивидуальных предпринимателей,
+                  выданной не ранее чем за тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе).
               </Text>
               <Field name='document_registry_file' />
             </div>
@@ -129,7 +130,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Предоставленные данные юридического лица верны.
+                    Предоставленные данные индивидуального предпринимателя верны.
                   </Text>
                 )}
               />
@@ -139,7 +140,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>политики конфиденциальности</a>.
+                    Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>Политики конфиденциальности</a>.
                   </Text>
                 )}
               />
@@ -148,7 +149,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях»
+                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».
                   </Text>
                 )}
               />
