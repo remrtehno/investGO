@@ -1,3 +1,12 @@
 .PassportForm {
   margin-top: 60px;
 }
+.link {
+  color: black;
+  text-decoration: underline;
+
+  &:visited,
+  &:hover {
+    color: black;
+  }
+}

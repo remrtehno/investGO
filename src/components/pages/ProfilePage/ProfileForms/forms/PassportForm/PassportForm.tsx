@@ -21,6 +21,7 @@ import type {User} from 'src/types/User';
 import s from './PassportForm.scss';
 import {usePassportFields} from './usePassportFields';
 import {ModerationInfo} from 'src/components/common/ModerationInfo';
+import {CheckBox} from 'src/components/ui/CheckBox';
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
@@ -31,6 +32,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = usePassportFields();
   const formApiRef = useRef<Form.Api | null>(null);
+  const [checkBoxes, setCheckBoxes] = useState([false, false, false]);
 
   const getValuesFromPassport = () => ({
     ...getDefaultFieldValues(fields),
@@ -123,6 +125,31 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <Field name='personal_data_documents' />
           </div>
         </FormRow>
+        { user && (!user.passport || user.passport.status !== ModerationStatus.approved) ? (
+          <div>
+            <CheckBox
+              style={{ marginBottom: 20 }}
+              value={checkBoxes[0]}
+              onChange={(checked) => setCheckBoxes([checked, checkBoxes[1], checkBoxes[2]])}
+              label={
+                'Предоставленные личные данные физического лица верны.'
+              }/>
+            <CheckBox
+              style={{ marginBottom: 20 }}
+              value={checkBoxes[1]}
+              onChange={(checked) => setCheckBoxes([checkBoxes[0], checked, checkBoxes[2]])}
+              label={
+                'Я даю согласие на передачу и обработку персональных данных.'
+              }/>
+            <CheckBox
+              style={{ marginBottom: 20 }}
+              value={checkBoxes[2]}
+              onChange={(checked) => setCheckBoxes([checkBoxes[0], checkBoxes[1], checked])}
+              label={
+                <div>Я ознакомился с условиями <a className={s.link} href='#'>Правил</a> и всех приложений к ним.</div>
+              }/>
+          </div>
+        ) : null }
         { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
           <FormActions>
             <div className='col-3'>

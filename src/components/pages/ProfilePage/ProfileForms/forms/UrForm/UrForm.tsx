@@ -356,7 +356,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               >Сохранить</Button>
             </div>
           </FormActions>
-          { !user.sign_document.length && user.company && user.company.status === ModerationStatus.approved ? (
+          { user.company && user.company.status === ModerationStatus.approved ? (
             <AcceptRules/>
           ) : null }
         </Form>

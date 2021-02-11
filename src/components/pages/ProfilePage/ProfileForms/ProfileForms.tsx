@@ -27,7 +27,7 @@ const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.fl]: () => {
     const {user} = useRecoilValue(userAtom);
 
-    if (!user || !user.sign_document || user.sign_document.length) {
+    if (!user || !user.sign_document) {
       return null;
     }
 

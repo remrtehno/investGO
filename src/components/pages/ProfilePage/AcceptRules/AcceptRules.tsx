@@ -69,29 +69,31 @@ export function AcceptRules(props: AcceptRules.Props) {
               }/>
             { user.roles.includes(Role.borrower) ? (
               <CheckBox
-                style={{ marginBottom: 20 }}
-                value={checkBoxes[2]}
-                onChange={(checked) => setCheckBoxes([checkBoxes[0], checkBoxes[1], checked])}
-                label={
-                  <Text size={TextSize.body0}>Принимаю условия <a onClick={(e) => e.stopPropagation()} className={s.link} href='#'>Декларации о рисках</a>.</Text>
-                }/>
+              style={{ marginBottom: 20 }}
+              value={checkBoxes[2]}
+              onChange={(checked) => setCheckBoxes([checkBoxes[0], checkBoxes[1], checked])}
+              label={
+                <Text size={TextSize.body0}>Принимаю условия <a onClick={(e) => e.stopPropagation()} className={s.link} href='#'>Декларации о рисках</a>.</Text>
+              }/>
             ) : null }
           </div>
-          <div className='row justify-content-center' style={{ paddingBottom: 22 }}>
-            <Button
-              disabled={(() => {
-                if (!checkBoxes[0] || !checkBoxes[1]) {
-                  return true;
-                }
+          { user.sign_document.length ? null : (
+            <div className='row justify-content-center' style={{ paddingBottom: 20 }}>
+              <Button
+                disabled={(() => {
+                  if (!checkBoxes[0] || !checkBoxes[1]) {
+                    return true;
+                  }
 
-                return user.roles.includes(Role.borrower) && !checkBoxes[2];
-              })()}
-              className='col-6'
-              size={ButtonSize.m}
-              onClick={() => setIsModalOpened(true)}
-              theme={ButtonTheme.black}
-            >Присоединиться к правилам</Button>
-          </div>
+                  return user.roles.includes(Role.borrower) && !checkBoxes[2];
+                })()}
+                className='col-6'
+                size={ButtonSize.m}
+                onClick={() => setIsModalOpened(true)}
+                theme={ButtonTheme.black}
+              >Присоединиться к правилам</Button>
+            </div>
+          ) }
         </div>
       </div>
       { isModalOpened ? (

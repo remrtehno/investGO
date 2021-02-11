@@ -101,7 +101,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           values={values}
           onChange={onChange}
         >
-          <FormTitle>{ props.form.longTitle }</FormTitle>
+          <FormTitle>{ props.form.title }</FormTitle>
           <FormRow>
             <Field className='col-6' name='ogrn' />
             <Field className='col-6' name='date_issue_ogrn' />
@@ -164,7 +164,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
               >Сохранить</Button>
             </div>
           </FormActions>
-          { !user.sign_document.length && user.company && user.company.status === ModerationStatus.approved ? (
+          { user.company && user.company.status === ModerationStatus.approved ? (
             <AcceptRules/>
           ) : null }
         </Form>
