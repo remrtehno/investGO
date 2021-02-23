@@ -1,0 +1,53 @@
+.transform__col img {
+    filter: drop-shadow(0px 11px 15px rgba(0, 0, 0, 0.05));
+    margin-top: 20px;
+}
+
+.transform__col lottie-player {
+    position: absolute;
+    z-index: -1;
+    width: 950px !important;
+    top: -50px;
+    right: 0;
+}
+
+/* investor */
+
+.top-block--1 {
+    background-image: none !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.top-block--1 lottie-player {
+    position: absolute;
+    width: 120%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.top-block--1 lottie-player ~ div {
+    position: relative;
+}
+/* borrower */
+.top-block--2 {
+    background-image: none !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.top-block--2 lottie-player ~ div {
+    position: relative;
+}
+
+.top-block--2 lottie-player {
+    position: absolute;
+    width: 2000px;
+    height: 100%;
+    left: 50%;
+    right: 0;
+    top: 0;
+    transform: translateX(-50%);
+}

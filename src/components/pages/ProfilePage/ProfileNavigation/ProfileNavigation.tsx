@@ -39,6 +39,7 @@ export const ProfileNavigation: FC<ProfileNavigation.Props> = (props) => {
     return {
       position: 'fixed',
       top: 40,
+      maxWidth: '182px',
     };
   }, [pos, scrollTop]);
 

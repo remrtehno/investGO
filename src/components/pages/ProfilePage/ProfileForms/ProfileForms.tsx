@@ -1,10 +1,14 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useEffect, useRef} from 'react';
+import {useRecoilValue} from 'recoil';
 
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
+import {SignDocuments} from 'src/components/pages/ProfilePage/ProfileForms/forms/SignDocuments';
 import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
 import {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
 import {usePageScroll} from 'src/hooks/usePageScroll';
+import {userAtom} from 'src/recoil/userAtom';
 import {getElementPosition} from 'src/utils/getElementPosition';
 
 import {BankDetailsForm} from './forms/BankDetailsForm';
@@ -14,9 +18,6 @@ import {ProfileForm} from './forms/ProfileForm';
 import {UrForm} from './forms/UrForm';
 
 import s from './ProfileForms.scss';
-import {useRecoilValue} from 'recoil';
-import {userAtom} from 'src/recoil/userAtom';
-import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 
 const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.profile]: ProfileForm,
@@ -32,9 +33,10 @@ const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
     }
 
     return (
-      <AcceptRules/>
+      <AcceptRules />
     );
-  }
+  },
+  [ProfileFormType.signDocuments]: SignDocuments,
 };
 
 export declare namespace ProfileForms {

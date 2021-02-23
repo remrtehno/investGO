@@ -5,7 +5,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
-import {useUserSignDocuments} from 'src/api/userApi/useUserSignDocuments';
+import { useUserDocuments } from 'src/api/userApi/useUserDocuments';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -13,11 +13,13 @@ import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import {ModerationInfo} from 'src/components/common/ModerationInfo';
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
+import {roleLabels} from 'src/contstants/rolesLabels';
 import {DocumentIcon} from 'src/icons/DocumentIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
@@ -33,6 +35,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
   const fields = useIpFields();
   const {user} = useRecoilValue(userAtom);
   const [, saveCompanyApi] = useSaveCompanyApi();
+  const [documents] = useUserDocuments();
   const [checkBoxes, setCheckBoxes] = useState(user?.company ? [true, true, true] : [false, false, false]);
   const formApiRef = useRef<Form.Api | null>(null);
 
@@ -89,6 +92,11 @@ export const IpForm: FC<IpForm.Props> = (props) => {
     return null;
   }
 
+
+  console.log(documents);
+  
+
+  
   return (
     <div ref={props.formRef} className={cx(s.CompanyForm, 'container')}>
       { user.company?.status === ModerationStatus.waiting || user.company?.status === ModerationStatus.filled ? (
@@ -165,6 +173,28 @@ export const IpForm: FC<IpForm.Props> = (props) => {
             >Сохранить</Button>
           </div>
         </FormActions>
+        <Text size={TextSize.h2}>Договоры присоединения</Text>
+        { user.company && user.company.status === ModerationStatus.approved ? (
+          <div className='row'>
+            { user.sign_document.length
+              ? user.sign_document.map((typeDoc) => {
+                if (typeDoc === 'borrower_accession_agreement') {
+                  return (<div className={cx(s.joinDocs, 'col-sm-6')}>
+                    <DocumentIcon />
+                    Договор на оказание Оператором Платформы услуг по содействию
+                    в инвестировании
+                  </div>);
+                }
+                if (typeDoc === 'investor_accession_agreement') {
+                  return (<div className={cx(s.joinDocs, 'col-sm-6')}>
+                    <DocumentIcon />
+                    Договор на оказание Оператором Платформы услуг по содействию
+                    в инвестировании
+                  </div>);
+                }
+              }) : null }
+          </div>
+        ) : null }
       </Form>
       ) }
     </div>

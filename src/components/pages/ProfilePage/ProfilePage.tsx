@@ -69,6 +69,10 @@ export const ProfilePage = withAuth(() => {
       title: 'Юридическое лицо',
     } : null,
     claims.bankDetailsForm.read() ? {
+      id: ProfileFormType.signDocuments,
+      title: 'Договоры присоединения',
+    } : null,
+    claims.bankDetailsForm.read() ? {
       id: ProfileFormType.bankDetails,
       title: 'Реквизиты',
     } : null,

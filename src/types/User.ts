@@ -42,6 +42,23 @@ export declare namespace User {
     emails: string[],
     status: ModerationStatus
   };
+
+  export type SignDocuments = {
+    company: Company,
+    created_at: string,
+    file: {
+      id: string,
+      user_id: string,
+      url: string,
+      original_name: string,
+      size: 0
+    }
+    num: number
+    status: string,
+    type: string,
+    updated_at: string,
+    uuid: string,
+  }
 }
 
 export type User = {

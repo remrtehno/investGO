@@ -5,4 +5,5 @@ export enum ProfileFormType {
   ur = 'ur',
   fl = 'fl',
   bankDetails = 'bankDetails',
+  signDocuments = 'signDocuments'
 }

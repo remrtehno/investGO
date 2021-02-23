@@ -95,6 +95,7 @@
     "copy-webpack-plugin": "6.4.1",
     "postcss-loader": "^4.1.0",
     "react-input-mask": "^2.0.4",
+    "react-lottie-player": "^1.2.0",
     "remove": "^0.1.5"
   },
   "browserslist": [

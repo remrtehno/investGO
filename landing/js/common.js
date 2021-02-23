@@ -195,3 +195,7 @@ $(document).ready(function () {
     };
   });
 });
+
+
+const player = document.querySelector("lottie-player");
+player.load(player.getAttribute('src'));

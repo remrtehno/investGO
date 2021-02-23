@@ -28,7 +28,7 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
   const fields = useBankDetailsFields();
   const {user} = useRecoilValue(userAtom);
   const [, saveBankDetailsApi] = useSaveBankDetailsApi();
-  const [isSmsFormOpened, setIsSmsFormOpened]  = useState(false);
+  const [isSmsFormOpened, setIsSmsFormOpened] = useState(false);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
