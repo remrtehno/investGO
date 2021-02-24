@@ -12,12 +12,10 @@
 }
 
 .transform__col lottie-player {
-    /*position: absolute;*/
     z-index: -1;
     width: 106% !important;
-    top: -50px;
     margin-left: -6%;
-    right: 0;
+    height: auto;
 }
 
 /* investor */
