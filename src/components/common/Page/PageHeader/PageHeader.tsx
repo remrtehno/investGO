@@ -24,7 +24,13 @@ const LogoutIcon: FC<LogoutIcon.Props> = (props) => (
   </svg>
 );
 
-export const PageHeader: FC = () => {
+declare namespace PageHeader {
+  export type Props = {
+    isBigLogo?: boolean,
+  }
+}
+
+export const PageHeader: FC<PageHeader.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const [, logoutApi, logoutState] = useSignOutApi();
   const history = useHistory();
@@ -42,7 +48,7 @@ export const PageHeader: FC = () => {
   return (
     <div className={s.pageHeader}>
       <div className={cx('container', s.container)}>
-        <LogoIcon className={s.logo} onClick={() => window.location.href = '/'} />
+        <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
         { user ? (
           <div className={s.userContainer}>
             <Text size={TextSize.tabMenu} weight={TextWeight.bold}>{ user.email }</Text>
