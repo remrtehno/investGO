@@ -6,7 +6,7 @@
   grid-template-columns: 55px 1fr;
   &:hover {
     text-decoration: none;
-    color: inherit;
+    color: var(--red);
   }
 }
 
