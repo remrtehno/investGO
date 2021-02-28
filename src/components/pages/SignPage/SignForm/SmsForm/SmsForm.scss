@@ -1,9 +1,38 @@
+.modal {
+  [class*='container'] {
+    max-width: 440px;
+    min-width: auto;
+    width: 100%;
+  }
+}
 .title {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+}
+
+.field {
+  padding-top: 16px;
+}
+
+.sendCode {
+  span {
+    color: var(--black);
+  }
+  button {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+  }
 }
 
 .resendContainer {
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+.resend {
+  padding: 8px 25px !important;
+  min-height: 40px !important;
+  width: auto;
+  font-weight: 600;
 }

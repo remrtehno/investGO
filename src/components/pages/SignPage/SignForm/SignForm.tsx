@@ -189,6 +189,7 @@ export const SignForm: FC<SignForm.Props> = () => {
             onConfirm={() => setIsCheckEmailModalVisible(true)}
             onClose={() => setIsShowSmsForm(false)}
             phone={values.phone}
+            isUserExists={isUserExists}
           />
         ) : null }
       { isCheckEmailModalVisible ? (
@@ -198,6 +199,7 @@ export const SignForm: FC<SignForm.Props> = () => {
           }}
         />
       ) : null }
+
     </Form>
   );
 };

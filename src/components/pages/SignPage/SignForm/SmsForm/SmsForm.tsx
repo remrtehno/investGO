@@ -14,6 +14,8 @@ import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
 import s from './SmsForm.scss';
+import {Color} from "src/contstants/Color";
+import {TextWeight} from "src/components/ui/Text/Text";
 
 const fields: Form.FieldModels = {
   code: {
@@ -32,6 +34,7 @@ const initialValues: SmsForm.Values = {
 export declare namespace SmsForm {
   export type Props = {
     phone: string,
+    isUserExists?: boolean,
     onConfirm(): void,
     onClose(): void,
   };
@@ -78,10 +81,22 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
 
   return (
     <Modal
+      className={s.modal}
       allowClose={true}
       onClose={() => props.onClose()}
     >
-      <Text className={s.title} size={TextSize.subHeadline1}>Код подтверждения</Text>
+      <Text className={s.title} size={TextSize.subHeadline1}>
+        {props.isUserExists ? 'Подтверждение входа' : 'Код подтверждения'}
+      </Text>
+      {!props.isUserExists ? (
+        <Text
+          className={s.sendCode}
+          color={Color.label}
+          size={TextSize.body1}
+          weight={TextWeight.normal}
+        >На номер <span>{props.phone}</span> отправлен код
+          подтверждения. <button onClick={() => props.onClose()}>Изменить номер</button></Text>
+      ) : null}
       <Form
         initialValues={initialValues}
         values={values}
@@ -90,7 +105,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
         onChange={onChange}
         formApiRef={formApiRef}
       >
-        <Field className={s.field} name='code' />
+        <Field className={s.field} name='code'/>
       </Form>
       <div className={s.resendContainer}>
         <Button

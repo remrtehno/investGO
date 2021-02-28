@@ -360,7 +360,7 @@ iframe {
 .transform__row {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 105px
+  padding-bottom: 50px
 }
 
 .transform__col {
