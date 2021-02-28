@@ -3,10 +3,10 @@ import React from 'react';
 import _ from 'lodash';
 
 import {Modal} from 'src/components/common/Modal/Modal';
-import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 
 import s from './CheckEmailModal.scss';
+import {EmailSendedIcon} from "src/icons/EmailSended";
 
 export declare namespace CheckEmailModal {
   export type Props = {
@@ -20,13 +20,10 @@ export const CheckEmailModal: FC<CheckEmailModal.Props> = (props) => (
     className={s.CheckEmailModal}
     onClose={_.noop}
   >
+    <EmailSendedIcon/>
     <Text className={s.message} size={TextSize.body1}>
-      Письмо с подтверждением email отправлено на вашу почту.
+      Письмо с подтверждением email отправлено на вашу почту. <br/>
+      Пройдите по ссылке из письма для активизации вашего аккаунта.
     </Text>
-    <Button
-      size={ButtonSize.m}
-      theme={ButtonTheme.black}
-      onClick={props.onClose}
-    >Ок</Button>
   </Modal>
 );
