@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState} from "react";
+import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState, useEffect} from "react";
 import {Color} from "../../../types/Color";
 import {useOnClickOutside} from "../../../hooks/useOnClickOutside";
 import {DivProps} from "../../../types/common";
@@ -22,6 +22,7 @@ export declare namespace Input {
     isPassword?: boolean,
     mask?: string,
     postfix?: string,
+    hasAutofocus?: boolean,
   };
 }
 
@@ -33,6 +34,11 @@ export const Input: FC<Input.Props> = (props) => {
   useOnClickOutside(inputRef, () => {
     setIsFocused(false);
   });
+
+  useEffect(() => {
+    console.log("Input mount", props)
+    if (props.hasAutofocus) controlRef.current.focus()
+  }, [])
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;

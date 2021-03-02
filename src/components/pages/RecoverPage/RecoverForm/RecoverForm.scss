@@ -1,0 +1,21 @@
+.field {
+  margin-bottom: 0px;
+}
+
+.title {
+  margin-bottom: 32px;
+
+  .selected {
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--black);
+  }
+}
+
+.continueButton {
+  margin-top: 20px;
+}
+
+.subLink {
+  margin-top: 40px;
+  text-align: center;
+}

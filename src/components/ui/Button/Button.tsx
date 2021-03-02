@@ -18,8 +18,8 @@ export declare namespace Button {
   export type Props = {
     size: ButtonSize,
     theme: ButtonTheme,
-    onClick(): void,
 
+    onClick?(): void,
     className?: string,
     disabled?: boolean,
   };
@@ -39,7 +39,7 @@ export const Button: FC<Button.Props> = (props) => {
       return;
     }
 
-    props.onClick();
+    if (props.onClick) props.onClick();
   }, [props.onClick, props.disabled]);
 
   return (

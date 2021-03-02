@@ -17,6 +17,7 @@ export declare namespace Form {
   export type FieldModel = FormFieldModel;
   export type Field = FormField;
   export type OnChange = (values: any, errors: Errors) => void
+  export type OnSubmit = (event: any) => void
   export type Values = Record<string, any>;
   export type Errors<TValues extends Values = Values> = Partial<Record<keyof TValues, string>>;
   export type Fields = Record<string, Field>;
@@ -26,7 +27,7 @@ export declare namespace Form {
   export type Model = {
     initialValues: Values,
     fields: FieldModels,
-    onChange(value: any, name: string): void
+    onChange(value: any, name: string): void,
   };
 
   export type Api = {
@@ -38,7 +39,8 @@ export declare namespace Form {
     values: Values,
     errors: Errors,
     onChange: OnChange,
-
+    
+    onSubmit?: OnSubmit,
     formApiRef?: MutableRefObject<Api | null>,
   };
 }
@@ -155,14 +157,23 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
         errorsRef.current = newErrors;
         valuesRef.current = newValues;
         updateFormApi();
-      }
+      },
     };
   }, [props.fields, props.initialValues]);
+
+  function handleSubmit(event: any) {
+    if (props.onSubmit && props.formApiRef.current.isValid) {
+      props.onSubmit(event)
+    }
+    event.preventDefault()
+  }
 
   return (
     <FormModelProvider value={model as Form.Model}>
       <FormFieldsProvider value={fields as Form.Fields}>
-        {props.children}
+        <form onSubmit={handleSubmit}>
+          {props.children}
+        </form>
       </FormFieldsProvider>
     </FormModelProvider>
   )
