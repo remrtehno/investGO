@@ -192,7 +192,7 @@ export const SignForm: FC<SignForm.Props> = () => {
             isUserExists={isUserExists}
           />
         ) : null }
-      { !isCheckEmailModalVisible ? (
+      { isCheckEmailModalVisible ? (
         <CheckEmailModal
           onClose={() => {
             window.location.reload();
