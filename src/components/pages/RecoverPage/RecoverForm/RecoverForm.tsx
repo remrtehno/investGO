@@ -1,4 +1,3 @@
-import cx from "classnames";
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
 import { useHistory } from "react-router-dom";
 import _ from 'lodash';
@@ -10,7 +9,7 @@ import {email} from "../../../common/Form/validations/email";
 import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
 import {usePasswordResetRequestApi} from "../../../../api/userApi/usePasswordResetRequestApi"
 import s from "./RecoverForm.scss"
-import {ResetEmailModal} from "./ResetEmailModal";
+import {PasswordResetModal} from "./PasswordResetModal";
 
 
 export declare namespace RecoverForm {
@@ -31,7 +30,7 @@ export const RecoverForm: FC = () => {
   const [errors, setErrors] = useState<Form.Errors>({});
   const formApiRef = useRef<Form.Api | null>(null);
   const [, passwordResetRequestApi, passwordResetRequestState] = usePasswordResetRequestApi();
-  const [isResetEmailModalVisible, setIsResetEmailModalVisible] = useState(false);
+  const [isPasswordResetModalVisible, setIsPasswordResetModalVisible] = useState(false);
   const history = useHistory();
 
   const recoverFields = useMemo((): Form.FieldModels => {
@@ -59,7 +58,7 @@ export const RecoverForm: FC = () => {
 
   useEffect(() => {
     if (passwordResetRequestState.isSuccess) {
-      setIsResetEmailModalVisible(true)
+      setIsPasswordResetModalVisible(true)
     }
   }, [passwordResetRequestState.isSuccess])
 
@@ -101,10 +100,11 @@ export const RecoverForm: FC = () => {
       >
         Отправить ссылку на почту
       </Button>
-      <div className={s.subLink} onClick={()=>{setIsResetEmailModalVisible(true)}}>Вернуться назад {values.email}</div>
-      {isResetEmailModalVisible ? (
-        <ResetEmailModal
+      <div className={s.subLink} onClick={()=>{setIsPasswordResetModalVisible(true)}}>Вернуться назад</div>
+      {isPasswordResetModalVisible ? (
+        <PasswordResetModal
           onClose={handleModalClose}
+          text="На вашу почту отправлена ссылка для восстановления пароля"
         />
       ) : null}
     </Form>

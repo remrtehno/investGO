@@ -4,6 +4,7 @@ import {RegisterPage} from "../../pages/RegisterPage";
 import {ProfilePage} from "../../pages/ProfilePage";
 import {SignPage} from "../../pages/SignPage";
 import {RecoverPage} from "../../pages/RecoverPage";
+import { PasswordResetPage } from "src/components/pages/PasswordResetPage";
 
 export type RouteInfo = RouteProps & {
   Component: FC
@@ -37,7 +38,7 @@ export const routes: RouteInfo[] = [
   },
   {
     path: '/password-reset',
-    Component: RecoverPage,
+    Component: PasswordResetPage,
     exact: true,
   },
 ];

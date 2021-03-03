@@ -2,20 +2,21 @@ import React, {FC} from 'react';
 import Modal from "../../../../common/Modal/Modal";
 import {Button, ButtonSize, ButtonTheme} from "../../../../ui/Button/Button";
 import {Text, TextSize} from "../../../../ui/Text";
-import s from './ResetEmailModal.scss';
+import s from './PasswordResetModal.scss';
 
-export declare namespace ResetEmailModal {
+export declare namespace PasswordResetModal {
   export type Props = {
     onClose(): void,
+    text?: string
   };
 }
 
-export const ResetEmailModal: FC<ResetEmailModal.Props> = (props) => {
+export const PasswordResetModal: FC<PasswordResetModal.Props> = (props) => {
   return (
-    <Modal className={s.ResetEmailModal}>
+    <Modal className={s.PasswordResetModal}>
       <div className={s.inner}>
         <Text className={s.message} size={TextSize.body2}>
-          На вашу почту отправлена ссылка для восстановления пароля
+          {props.text}
         </Text>
         <div className={s.buttonPlace}>
           <Button
