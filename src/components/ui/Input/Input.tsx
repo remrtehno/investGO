@@ -36,7 +36,6 @@ export const Input: FC<Input.Props> = (props) => {
   });
 
   useEffect(() => {
-    console.log("Input mount", props)
     if (props.hasAutofocus) controlRef.current.focus()
   }, [])
 

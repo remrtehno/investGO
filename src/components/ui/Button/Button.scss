@@ -5,6 +5,11 @@
   align-items: center;
   justify-content: center;
 
+  &.size_s {
+    height: 40px;
+    padding: 10px;
+  }
+
   &.size_m {
     height: 60px;
     padding: 18px;

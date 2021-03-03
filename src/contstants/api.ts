@@ -7,6 +7,7 @@ export const api = {
     get: () => '/user',
     sendPhoneCode: () => '/user/phone-send-code',
     confirmPhoneCode: () => '/user/phone-confirm',
+    passwordResetRequest: () => '/user/password-reset-request',
   },
   passport: {
     get: () => '/passport',

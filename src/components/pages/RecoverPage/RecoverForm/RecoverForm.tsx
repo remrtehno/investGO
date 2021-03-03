@@ -1,12 +1,17 @@
 import cx from "classnames";
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import { useHistory } from "react-router-dom";
+import _ from 'lodash';
 import {Form} from "../../../common/Form";
 import {FieldType} from "../../../common/Form/Form";
 import {Field} from "../../../common/Form/Field";
 import {required} from "../../../common/Form/validations/required";
 import {email} from "../../../common/Form/validations/email";
 import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
+import {usePasswordResetRequestApi} from "../../../../api/userApi/usePasswordResetRequestApi"
 import s from "./RecoverForm.scss"
+import {ResetEmailModal} from "./ResetEmailModal";
+
 
 export declare namespace RecoverForm {
   export type RecoverValues = {
@@ -25,6 +30,9 @@ export const RecoverForm: FC = () => {
   const [values, setValues] = useState<RecoverForm.RecoverValues>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
   const formApiRef = useRef<Form.Api | null>(null);
+  const [, passwordResetRequestApi, passwordResetRequestState] = usePasswordResetRequestApi();
+  const [isResetEmailModalVisible, setIsResetEmailModalVisible] = useState(false);
+  const history = useHistory();
 
   const recoverFields = useMemo((): Form.FieldModels => {
     return {
@@ -37,17 +45,41 @@ export const RecoverForm: FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const error = passwordResetRequestState.error
+    const errorMessage = _.get(error, '[0].message')
+    if (!error || !errorMessage) return
+    if (errorMessage === "invalid_email") {
+      setErrors({...errors, email: 'Невалидный email'})
+    }
+    if (errorMessage === "user_not_found") {
+      setErrors({...errors, email: 'Неверный email'})
+    }
+  }, [passwordResetRequestState.error])
+
+  useEffect(() => {
+    if (passwordResetRequestState.isSuccess) {
+      setIsResetEmailModalVisible(true)
+    }
+  }, [passwordResetRequestState.isSuccess])
+
   const onChange = useCallback((values: RecoverForm.RecoverValues, errors: Form.Errors) => {
-    setValues(values);
-    setErrors(errors);
-  }, []);
+    setValues(values)
+    setErrors(errors)
+  }, [])
 
   const onSubmit = useCallback(() => {
     submit()
-  }, []);
+  }, [values])
 
   const submit = () => {
-    
+    passwordResetRequestApi({
+      email: values.email
+    })
+  }
+
+  const handleModalClose = () => {
+    history.push("/signin");
   }
 
   return (
@@ -69,7 +101,12 @@ export const RecoverForm: FC = () => {
       >
         Отправить ссылку на почту
       </Button>
-      <div className={s.subLink}>Вернуться назад</div>
+      <div className={s.subLink} onClick={()=>{setIsResetEmailModalVisible(true)}}>Вернуться назад {values.email}</div>
+      {isResetEmailModalVisible ? (
+        <ResetEmailModal
+          onClose={handleModalClose}
+        />
+      ) : null}
     </Form>
   )
 };
