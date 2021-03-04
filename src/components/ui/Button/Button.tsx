@@ -1,5 +1,7 @@
-import cx from "classnames";
-import React, {FC, useCallback} from "react";
+import cx from 'classnames';
+import type {CSSProperties, FC} from 'react';
+import React, {useCallback} from 'react';
+
 import s from './Button.scss';
 
 export enum ButtonSize {
@@ -18,10 +20,11 @@ export declare namespace Button {
   export type Props = {
     size: ButtonSize,
     theme: ButtonTheme,
-
+    
     onClick?(): void,
     className?: string,
     disabled?: boolean,
+    style?: CSSProperties
   };
 }
 
@@ -31,7 +34,7 @@ export const Button: FC<Button.Props> = (props) => {
     s[`size_${props.size}`],
     s[`theme_${props.theme}`],
     props.disabled ? s.disabled : null,
-    props.className,
+    props.className
   );
 
   const onClick = useCallback(() => {
@@ -39,12 +42,12 @@ export const Button: FC<Button.Props> = (props) => {
       return;
     }
 
-    if (props.onClick) props.onClick();
+    props.onClick();
   }, [props.onClick, props.disabled]);
 
   return (
-    <button className={className} onClick={onClick}>
-      {props.children}
+    <button style={props.style} className={className} onClick={onClick}>
+      { props.children }
     </button>
-  )
+  );
 };

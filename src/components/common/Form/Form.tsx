@@ -1,23 +1,32 @@
-import React, {createContext, MutableRefObject, ReactNode, useContext, useEffect, useMemo} from "react";
 import _ from 'lodash';
-import {useLatestRef} from "../../../hooks/useLatestRef";
-import {useStateRef} from "../../../hooks/useStateRef";
-import {FormField, FormFieldModel} from "./types";
+import type {MutableRefObject, ReactNode} from 'react';
+import React, {createContext, useContext, useEffect, useMemo} from 'react';
+
+import {useLatestRef} from 'src/hooks/useLatestRef';
+import {useStateRef} from 'src/hooks/useStateRef';
+
+import {fieldsModel} from './fields/fieldsModel';
+
+import type {FormField, FormFieldModel} from './types';
 
 export enum FieldType {
+  hidden = 'hidden',
   text = 'text',
+  textArea = 'textArea',
   date = 'date',
   number = 'number',
   fileArray = 'fileArray',
+  file = 'file',
   password = 'password',
   phone = 'phone',
+  custom = 'custom'
 }
 
 export declare namespace Form {
   export type FieldModel = FormFieldModel;
   export type Field = FormField;
   export type OnChange = (values: any, errors: Errors) => void
-  export type OnSubmit = (event: any) => void
+  export type OnSubmit = () => void
   export type Values = Record<string, any>;
   export type Errors<TValues extends Values = Values> = Partial<Record<keyof TValues, string>>;
   export type Fields = Record<string, Field>;
@@ -28,10 +37,12 @@ export declare namespace Form {
     initialValues: Values,
     fields: FieldModels,
     onChange(value: any, name: string): void,
+    onError(error: string, name: string): void,
   };
 
   export type Api = {
-    isValid: boolean
+    isValid: boolean,
+    submit(): void,
   }
 
   export type Props = Pick<Model, 'initialValues' | 'fields'> & {
@@ -41,6 +52,7 @@ export declare namespace Form {
     onChange: OnChange,
     
     onSubmit?: OnSubmit,
+    disabled?: boolean,
     formApiRef?: MutableRefObject<Api | null>,
   };
 }
@@ -52,34 +64,76 @@ const formFieldsContext = createContext<Record<string, Form.Field>>({});
 const FormFieldsProvider = formFieldsContext.Provider;
 
 
-export const useFormModel = () => {
-  return useContext(formModelContext) as Form.Model;
-};
+export const useFormModel = () => useContext(formModelContext) as Form.Model;
 
-export const useFormFields = () => {
-  return useContext(formFieldsContext);
-};
+export const useFormFields = () => useContext(formFieldsContext);
 
 export const useFormField = (name: string) => {
   const fields = useFormFields();
   return fields[name] || null;
 };
 
-export function Form<TValues extends Form.Values = Form.Values>(props: Form.Props) {
-  const [dirtyFieldsRef, setDirtyFields] = useStateRef<string[]>([]);
+export function Form(props: Form.Props) {
+  const [dirtyFields, setDirtyFields, dirtyFieldsRef] = useStateRef<string[]>([]);
   const onChangeRef = useLatestRef(props.onChange);
   const valuesRef = useLatestRef(props.values);
   const errorsRef = useLatestRef(props.errors);
 
+  const fields = useMemo(() => {
+    return _.reduce(props.fields, (result: Record<string, FormFieldModel>, field, key) => {
+      const fieldModel = fieldsModel.get(field.type);
+      let newField = field;
+      if (fieldModel && fieldModel.transform) {
+        newField = fieldModel.transform(field);
+      }
+      if (field.transform) {
+        newField = field.transform(result[key]);
+      }
+
+      result[key] = newField;
+      return result;
+    }, {});
+  }, [props.fields]);
+  const fieldsRef = useLatestRef(fields);
+
+  const formFields = useMemo(() => {
+    return _.reduce(fields, (fields: Form.Fields, field) => {
+      let value = props.values[field.name] || null;
+
+      if (field.toValue) {
+        value = field.toValue(value);
+      }
+
+      fields[field.name] = {
+        ...field,
+        disabled: props.disabled || field.disabled,
+        value,
+        isValid: !props.errors[field.name],
+        error: ((dirtyFields.includes(field.name) && props.errors[field.name]) || null) as string | null,
+        isDirty: dirtyFields.includes(field.name),
+        isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name]),
+      } as any;
+
+
+      return fields;
+    }, {});
+  }, [
+    props.values,
+    fields,
+    props.initialValues,
+    props.errors,
+    dirtyFields,
+  ]);
+
   function validateField(value: any, name: string) {
-    const { validations, isHidden } = props.fields[name];
+    const {validations, isHidden} = formFields[name];
     if (!validations || isHidden) {
       return null;
-    } else {
-      return validations.reduce((error: string | null, validation) => {
-        return error || validation(value, { ...valuesRef.current, [name]: value });
-      }, null);
     }
+    return validations.reduce((error: string | null, validation) => {
+      const values = {...valuesRef.current, [name]: value};
+      return error || validation(value, values);
+    }, null);
   }
 
   function updateFormApi() {
@@ -89,92 +143,91 @@ export function Form<TValues extends Form.Values = Form.Values>(props: Form.Prop
 
     props.formApiRef.current = {
       isValid: _.isEmpty(errorsRef.current),
+      submit() {
+        setDirtyFields(Object.keys(fieldsRef.current));
+      },
     };
   }
+
+  useEffect(() => {
+    const newErrors = _.reduce(fields, (result: Form.Errors, field, name) => {
+      if (!formFields[name]) {
+        console.error(`Missing field ${name}`);
+        return result;
+      }
+      const error = validateField(props.values[name], name);
+      if (error) {
+        result[name] = error;
+      }
+
+      return result;
+    }, {});
+
+    if (!_.isEqual(newErrors, errorsRef.current)) {
+      props.onChange(props.values, newErrors);
+    }
+  }, [props.values, fields, formFields]);
 
   useEffect(() => {
     updateFormApi();
   }, [props.errors]);
 
-  const fields = useMemo(() => {
-    return _.reduce(props.fields, (fields: Form.Fields, field) => {
-      let value = props.values[field.name] || null;
-
-      if (field.toValue) {
-        value = field.toValue(value);
+  const model = useMemo((): Form.Model => ({
+    fields,
+    initialValues: props.initialValues,
+    onError(error, name) {
+      onChangeRef.current(valuesRef.current, {
+        ...errorsRef.current,
+        [name]: error,
+      });
+    },
+    onChange(value, name) {
+      if (_.isEqual(value, valuesRef.current[name])) {
+        return;
       }
 
-      fields[field.name] = {
-        ...field,
-        value,
-        isValid: !props.errors[field.name],
-        error: (props.errors[field.name] || null) as string | null,
-        isDirty: dirtyFieldsRef.current.includes(field.name),
-        isChanged: !_.isEqual(props.initialValues[field.name], props.values[field.name]),
-      } as any;
+      if (!dirtyFieldsRef.current.includes(name)) {
+        setDirtyFields([...dirtyFieldsRef.current, name]);
+      }
 
+      const error = validateField(value, name);
+      const newErrors = {...errorsRef.current};
 
-      return fields;
-    }, {});
-  }, [
-    props.values,
-    props.fields,
-    props.initialValues,
-    props.errors,
-  ]);
+      if (error) {
+        newErrors[name] = error;
+      } else {
+        delete newErrors[name];
+      }
 
-  const model = useMemo((): Form.Model => {
-    return {
-      fields: props.fields,
-      initialValues: props.initialValues,
-      onChange(value, name) {
-        if (_.isEqual(value, valuesRef.current[name])) {
-          return;
-        }
+      const {fromValue} = fields[name];
 
-        if (!dirtyFieldsRef.current.includes(name)) {
-          setDirtyFields([...dirtyFieldsRef.current, name]);
-        }
+      const newValues = {...valuesRef.current, [name]: fromValue ? fromValue(value) : value};
 
-        const error = validateField(value, name);
-        const newErrors = { ...errorsRef.current };
+      onChangeRef.current(
+        newValues,
+        newErrors
+      );
 
-        if (error) {
-          newErrors[name] = error;
-        } else {
-          delete newErrors[name];
-        }
-
-        const { fromValue } = props.fields[name];
-
-        const newValues = { ...valuesRef.current, [name]: fromValue ? fromValue(value) : value };
-
-        onChangeRef.current(
-          newValues,
-          newErrors
-        );
-
-        errorsRef.current = newErrors;
-        valuesRef.current = newValues;
-        updateFormApi();
-      },
-    };
-  }, [props.fields, props.initialValues]);
+      errorsRef.current = newErrors;
+      valuesRef.current = newValues;
+      updateFormApi();
+    },
+  }), [fields, props.initialValues]);
 
   function handleSubmit(event: any) {
     if (props.onSubmit && props.formApiRef.current.isValid) {
-      props.onSubmit(event)
+      props.onSubmit()
     }
     event.preventDefault()
   }
 
   return (
-    <FormModelProvider value={model as Form.Model}>
-      <FormFieldsProvider value={fields as Form.Fields}>
+    <FormModelProvider value={model}>
+      <FormFieldsProvider value={formFields}>
         <form onSubmit={handleSubmit}>
           {props.children}
         </form>
       </FormFieldsProvider>
     </FormModelProvider>
-  )
+  );
 }

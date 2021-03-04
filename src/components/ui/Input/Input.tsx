@@ -1,18 +1,23 @@
 import cx from 'classnames';
-import React, {ChangeEvent, FC, FocusEventHandler, useCallback, useRef, useState, useEffect} from "react";
-import {Color} from "../../../types/Color";
-import {useOnClickOutside} from "../../../hooks/useOnClickOutside";
-import {DivProps} from "../../../types/common";
-import {Text, TextSize} from "../Text";
-import s from './Input.scss';
+import type {ChangeEvent, FC, FocusEventHandler, ReactNode} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import InputMask from 'react-input-mask';
 
+import {Text, TextSize} from 'src/components/ui/Text';
+import {Color} from 'src/contstants/Color';
+import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
+import type {DivProps} from 'src/types/common';
+
+import s from './Input.scss';
+
 export declare namespace Input {
+  export type OnChange = (value: string, name: string | null, e: ChangeEvent<HTMLInputElement>) => void;
+
   export type Props = {
     value: string,
-    label: string,
-    onChange(value: string, name: string | null, e: ChangeEvent<HTMLInputElement>): void,
+    onChange: OnChange,
 
+    label?: string,
     className?: string,
     containerProps?: DivProps,
     error?: string | null,
@@ -21,8 +26,7 @@ export declare namespace Input {
     regExp?: RegExp,
     isPassword?: boolean,
     mask?: string,
-    postfix?: string,
-    hasAutofocus?: boolean,
+    postfix?: ReactNode,
   };
 }
 
@@ -35,12 +39,8 @@ export const Input: FC<Input.Props> = (props) => {
     setIsFocused(false);
   });
 
-  useEffect(() => {
-    if (props.hasAutofocus) controlRef.current.focus()
-  }, [])
-
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+    const {value} = e.currentTarget;
 
     if (props.regExp && !props.regExp.test(value)) {
       return;
@@ -60,7 +60,7 @@ export const Input: FC<Input.Props> = (props) => {
     }
   }, [props.disabled]);
 
-  const onBlur: FocusEventHandler<HTMLInputElement> = useCallback((e) => {
+  const onBlur: FocusEventHandler<HTMLInputElement> = useCallback(() => {
     setIsFocused(false);
   }, []);
 
@@ -71,7 +71,7 @@ export const Input: FC<Input.Props> = (props) => {
     autoComplete: 'off',
     onFocus,
     onBlur,
-    className: cx(s.control, { [s.isControlVisible]: isControlVisible }),
+    className: cx(s.control, {[s.withLabel]: Boolean(props.label), [s.isControlVisible]: isControlVisible}),
     onChange,
     name: props.name || undefined,
     value: props.value || '',
@@ -85,34 +85,41 @@ export const Input: FC<Input.Props> = (props) => {
       className={cx(s.input, props.className, {
         [s.withError]: props.error,
         [s.focused]: isFocused,
-        [s.disabled]: props.disabled
+        [s.disabled]: props.disabled,
       })}
       onClick={onFocus}
     >
-      <Text
-        className={cx(s.label, { [s.isControlVisible]: isControlVisible })}
-        size={isControlVisible ? TextSize.caption1 : TextSize.body1}
-        color={isControlVisible ? null : Color.gray4}
-      >
-        {props.label}
-      </Text>
-      { props.mask ? (
-        <InputMask mask={props.mask} {...controlProps}>
-          {(inputProps: any) => {
-            return (
+      { props.label ? (
+        <Text
+          className={cx(s.label, {[s.isControlVisible]: isControlVisible})}
+          size={isControlVisible ? TextSize.caption1 : TextSize.body1}
+          color={isControlVisible ? null : Color.gray4}
+        >
+          { props.label }
+        </Text>
+      ) : null }
+      <div className={s.controlContainer}>
+        { props.mask ? (
+          <InputMask mask={props.mask} {...controlProps}>
+            { (inputProps: any) => (
               <input
                 {...inputProps}
                 ref={controlRef}
               />
-            )
-          }}
-        </InputMask>
-      ) : (
-        <input {...controlProps} ref={controlRef}/>
-      ) }
-      { props.error ? (
-        <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{props.error}</Text>
-      ) : null }
+            ) }
+          </InputMask>
+        )
+          : <input {...controlProps} ref={controlRef} />
+        }
+        { props.postfix ? (
+          <div className={s.postfix}>
+            { props.postfix }
+          </div>
+        ) : null }
+      </div>
+      { props.error
+        ? <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{ props.error }</Text>
+        : null }
     </div>
-  )
+  );
 };

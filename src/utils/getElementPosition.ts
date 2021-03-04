@@ -5,6 +5,6 @@ export function getElementPosition(el: Element) {
 
   return {
     top: rect.top + scrollTop,
-    left: rect.left + scrollLeft
+    left: rect.left + scrollLeft,
   };
 }

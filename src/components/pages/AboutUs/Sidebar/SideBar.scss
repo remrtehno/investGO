@@ -1,0 +1,36 @@
+@mixin links() {
+  a {
+    color: inherit;
+    &:hover {
+      text-decoration: none;
+      color: var(--red);
+    }
+  }
+}
+
+.sideBar {
+  position: sticky;
+  top: 50px;
+  @include links;
+}
+
+.active {
+  a {
+    color: var(--black);
+  }
+}
+
+.sideBarUl {
+  padding: 0;
+  list-style: none;
+}
+
+.sideBarHeading {
+  font-size: 14px !important;
+  margin-bottom: 20px;
+}
+
+.sideBarLinks {
+  font-size: 14px !important;
+  margin-bottom: 20px;
+}

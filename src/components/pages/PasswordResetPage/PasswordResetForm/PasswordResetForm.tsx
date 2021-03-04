@@ -4,8 +4,9 @@ import _ from 'lodash';
 import {Form} from "../../../common/Form";
 import {FieldType} from "../../../common/Form/Form";
 import {Field} from "../../../common/Form/Field";
-import {required} from "../../../common/Form/validations/required";
-import {minLength} from "../../../common/Form/validations/minLength";
+import {email} from 'src/validations/email';
+import {required} from 'src/validations/required';
+import {minLength} from "src/validations/minLength";
 import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
 import {Text, TextSize} from "../../../ui/Text";
 import {usePasswordResetApi} from "../../../../api/userApi/usePasswordResetApi"

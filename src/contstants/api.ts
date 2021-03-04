@@ -7,6 +7,8 @@ export const api = {
     get: () => '/user',
     sendPhoneCode: () => '/user/phone-send-code',
     confirmPhoneCode: () => '/user/phone-confirm',
+    selectRoles: () => '/user/roles',
+    sugnDocuments: () => '/user/documents',
     passwordResetRequest: () => '/user/password-reset-request',
     passwordReset: () => '/user/password-reset',
   },
@@ -16,5 +18,12 @@ export const api = {
   },
   common: {
     uploadFile: () => '/file/upload',
-  }
+    confirmEmail: () => '/user/email-confirm',
+    okved: () => '/okved',
+  },
+  company: {
+    get: () => '/company',
+    save: () => '/company',
+    saveBankDetails: () => '/company/bank-details',
+  },
 };

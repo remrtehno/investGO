@@ -1,0 +1,25 @@
+.Tabs {
+  display: flex;
+  margin: 0 -20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+
+.TabsItem {
+  border-bottom: 2px solid transparent;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  color: var(--label);
+  &:hover {
+    color: var(--black);
+    //border-color: var(--black);
+  }
+}
+
+.TabsItemActive {
+  color: var(--black);
+  border-bottom: 2px solid var(--black);
+}

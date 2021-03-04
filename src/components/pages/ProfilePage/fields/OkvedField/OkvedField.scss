@@ -1,0 +1,39 @@
+.OkvedField {
+  &:hover {
+    .name {
+      color: var(--black);
+    }
+
+    .removeIconContainer {
+      display: block;
+    }
+  }
+}
+
+.name {
+  color: var(--label);
+}
+
+.items {
+  padding: 18px;
+  background-color: var(--white);
+  margin-top: 20px;
+}
+
+.item {
+  margin-bottom: 18px;
+  min-height: 27px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.removeIconContainer {
+  text-align: right;
+  display: none;
+}
+
+.removeIcon {
+  cursor: pointer;
+}

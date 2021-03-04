@@ -1,15 +1,17 @@
+import _ from 'lodash';
 import React from 'react';
-import {Button, ButtonSize, ButtonTheme} from "./Button";
 
+import {Button, ButtonSize, ButtonTheme} from './Button';
+
+// eslint-disable-next-line
 export default {
   component: Button,
-  title: 'Common/ui'
+  title: 'Common/ui',
 };
 
-export const ButtonsStory = () => {
-  return (
-    <Button size={ButtonSize.m} theme={ButtonTheme.black}/>
-  )
-};
-
-ButtonsStory.story = { name: 'Buttons' };
+export const ButtonsStory = () => (<Button
+  size={ButtonSize.m}
+  theme={ButtonTheme.black}
+  onClick={_.noop}
+/>);
+ButtonsStory.story = {name: 'Buttons'};

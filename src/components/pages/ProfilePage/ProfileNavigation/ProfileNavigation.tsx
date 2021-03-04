@@ -1,12 +1,15 @@
 import cx from 'classnames';
-import React, {CSSProperties, FC, useMemo, useRef} from "react";
-import {usePageScroll} from "../../../../hooks/usePageScroll";
-import {usePosition} from "../../../../hooks/usePosition";
-import {Color} from "../../../../types/Color";
-import {Text, TextSize} from "../../../ui/Text";
-import {TextWeight} from "../../../ui/Text/Text";
-import {ProfilePage} from "../ProfilePage";
-import {ProfileFormType} from "../profilePageTypes";
+import type {CSSProperties, FC} from 'react';
+import React, {useMemo, useRef} from 'react';
+
+import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
+import type {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {TextWeight} from 'src/components/ui/Text/Text';
+import {Color} from 'src/contstants/Color';
+import {usePageScroll} from 'src/hooks/usePageScroll';
+import {usePosition} from 'src/hooks/usePosition';
+
 import s from './ProfileNavigation.scss';
 
 export declare namespace ProfileNavigation {
@@ -20,7 +23,7 @@ export declare namespace ProfileNavigation {
 }
 
 export const ProfileNavigation: FC<ProfileNavigation.Props> = (props) => {
-  const { scrollTop } = usePageScroll();
+  const {scrollTop} = usePageScroll();
   const ref = useRef<HTMLDivElement | null>(null);
   const pos = usePosition(ref);
 
@@ -35,14 +38,15 @@ export const ProfileNavigation: FC<ProfileNavigation.Props> = (props) => {
 
     return {
       position: 'fixed',
-      top: 40
-    }
+      top: 40,
+      maxWidth: '182px',
+    };
   }, [pos, scrollTop]);
 
   return (
     <div ref={ref} className={cx(s.navigation, props.className)}>
       <div style={style}>
-        {props.forms.map((form) => {
+        { props.forms.map((form) => {
           const isActive = props.currentForm === form.id;
           return (
             <Text
@@ -50,16 +54,16 @@ export const ProfileNavigation: FC<ProfileNavigation.Props> = (props) => {
               size={TextSize.body1}
               color={isActive ? Color.black : Color.label}
               key={form.id}
-              className={cx(s.link, { [s.active]: isActive })}
+              className={cx(s.link, {[s.active]: isActive})}
               onClick={() => {
                 props.onChangeCurrentForm(form.id);
               }}
             >
-              {form.title}
+              { form.title }
             </Text>
-          )
-        })}
+          );
+        }) }
       </div>
     </div>
-  )
+  );
 };

@@ -1,6 +1,6 @@
 import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
+import {useApi} from "../../hooks/useApi";
+import {useApiRequest} from "../../hooks/useApiRequest";
 
 export declare namespace usePasswordResetRequestApi {
   export type Payload = {

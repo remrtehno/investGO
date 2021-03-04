@@ -1,5 +1,5 @@
-import {useGetUserApi} from "../api/userApi/useGetUserApi";
-import {useSignInApi} from "../api/userApi/useSignInApi";
+import {useGetUserApi} from 'src/api/userApi/useGetUserApi';
+import {useSignInApi} from 'src/api/userApi/useSignInApi';
 
 export declare namespace useUserApi {
   export type Api = {
@@ -15,5 +15,5 @@ export function useUserApi(): useUserApi.Api {
   return {
     sign: signApi,
     get: getUserApi,
-  }
+  };
 }

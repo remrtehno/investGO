@@ -1,5 +1,6 @@
 import {stringify} from 'query-string';
-import {config} from "../config";
+
+import {config} from 'src/config';
 
 export type Options = Omit<RequestInit, 'body'> & {
     showNotifyOnError?: boolean,
@@ -8,69 +9,83 @@ export type Options = Omit<RequestInit, 'body'> & {
     body?: Record<string, any> | string
 }
 
-const useApiRequest = () => {
-    return async <TResponse = any>(url: string, options: Options): Promise<TResponse> => {
-        const {showNotifyOnError = true, preventNotifyOn400, ...requestOptions} = options;
-        const user = null;
+export declare namespace useApiRequest {
+  export type Request<TResponse = any> = (url: string, options: Options) => Promise<TResponse>
+}
 
-        const body = options.body ? (
-            typeof options.body === 'string' ? options.body : JSON.stringify(options.body)
-        ) : undefined;
+export const useApiRequest = () => {
+  return async <TResponse = any>(url: string, options: Options): Promise<TResponse> => {
+    const {showNotifyOnError = true, preventNotifyOn400, ...requestOptions} = options;
+    const user = null;
 
-        const query = options.query ? stringify(options.query, {
-            skipNull: true,
-            skipEmptyString: true,
-        }) : undefined;
+    function getBody() {
+      if (!options.body) {
+        return undefined;
+      }
 
-        try {
-            requestOptions.mode = 'cors';
-            requestOptions.credentials = 'include';
-            requestOptions.headers = {
-                'Content-Type': 'application/json',
-            };
+      return typeof options.body === 'string' ? options.body : JSON.stringify(options.body);
+    }
+
+    const body = getBody();
+
+    const query = options.query ? stringify(options.query, {
+      skipNull: true,
+      skipEmptyString: true,
+    }) : undefined;
+
+    try {
+      requestOptions.mode = 'cors';
+      requestOptions.credentials = 'include';
+      requestOptions.headers = {
+        'Content-Type': 'application/json',
+      };
 
 
-            const response = await fetch(`${config.apiBase}${url}${query ? `?${query}` : ''}`, {
-                ...requestOptions,
-                body
-            });
+      const response = await fetch(`${config.apiBase}${url}${query ? `?${query}` : ''}`, {
+        ...requestOptions,
+        body,
+      });
 
-            if (!user && response.status === 403) {
-                // showErrorNotify(
-                //     intlCommon('sessionExpired'),
-                //     intlCommon('signInAgain'),
-                // );
-            }
+      if (!user && response.status === 403) {
+        /*
+         * showErrorNotify(
+         *     intlCommon('sessionExpired'),
+         *     intlCommon('signInAgain'),
+         * );
+         */
+      }
 
-            const responseJSON = await response.json();
+      const responseJSON = await response.json();
 
-            if (!responseJSON.status) {
-                throw new Error('Incorrect API response');
-            }
+      if (!responseJSON.status) {
+        throw new Error('Incorrect API response');
+      }
 
-            if (response.status === 400 && showNotifyOnError && !preventNotifyOn400) {
-                // showErrorNotify(
-                //     intlCommon('error'),
-                //     intlError(_get(responseJSON, 'result.0.message', 'error')),
-                // );
-            }
+      if (response.status === 400 && showNotifyOnError && !preventNotifyOn400) {
+        /*
+         * showErrorNotify(
+         *     intlCommon('error'),
+         *     intlError(_get(responseJSON, 'result.0.message', 'error')),
+         * );
+         */
+      }
 
-            if (responseJSON.status !== 'ok') {
-                throw responseJSON.result;
-            }
+      if (responseJSON.status !== 'ok') {
+        throw responseJSON.result;
+      }
 
-            return responseJSON.result;
-        } catch (err) {
-            if (err.stack && showNotifyOnError) {
-                // showErrorNotify(
-                //     intlCommon('error'),
-                //     intlError('something_wrong')
-                // );
-            }
+      return responseJSON.result;
+    } catch (err) {
+      if (err.stack && showNotifyOnError) {
+        /*
+         * showErrorNotify(
+         *     intlCommon('error'),
+         *     intlError('something_wrong')
+         * );
+         */
+      }
 
-            throw err;
-        }
-    };
+      throw err;
+    }
+  };
 };
-
-export default useApiRequest;

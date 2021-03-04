@@ -1,0 +1,50 @@
+.RoadMap {
+
+}
+
+.RoadMapItem {
+  padding-left: 45px;
+  position: relative;
+  margin-bottom: 65px;
+  height: 28px;
+  &.active {
+
+  }
+  &.afterActive:not(.active) {
+    opacity: .6;
+  }
+  &:not(:first-child):before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    width: 1px;
+    height: 95px;
+    background-color: black;
+    bottom: 10px;
+    z-index: 1;
+  }
+}
+
+.RoadMapItemImg {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  transform: translate(-55%, -50%);
+  background-color: var(--black);
+}
+
+.RoadMapItemDescription {
+  position: absolute;
+  left: 45px;
+  top: 100%;
+  max-height: 70px;
+  overflow: hidden;
+}

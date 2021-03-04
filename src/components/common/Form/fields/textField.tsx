@@ -1,8 +1,12 @@
-import React, {FC} from "react";
-import {Input} from "../../../ui/Input";
-import {FieldType, useFormModel} from "../Form";
-import {FormField} from "../types";
-import {FieldProps, fieldsModel} from "./fieldsModel";
+import type {FC} from 'react';
+import React from 'react';
+
+import {FieldType, useFormModel} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+import {Input} from 'src/components/ui/Input';
+
+import type {FieldProps} from './fieldsModel';
+import {fieldsModel} from './fieldsModel';
 
 export declare namespace TextField {
   export type Props = FieldProps<FormField.Text> & Pick<Input.Props, 'regExp' | 'isPassword'> & {
@@ -11,7 +15,7 @@ export declare namespace TextField {
 }
 
 export const TextField: FC<TextField.Props> = (props) => {
-  const { field, onChange, ...inputProps } = props;
+  const {field, onChange, ...inputProps} = props;
   const form = useFormModel();
 
   return (
@@ -21,14 +25,14 @@ export const TextField: FC<TextField.Props> = (props) => {
         label={field.label}
         name={field.name}
         error={field.isDirty ? field.error : null}
-        onChange={onChange || form.onChange}
+        onChange={onChange || form.onChange as any}
         disabled={field.disabled}
         regExp={field.regExp}
         mask={field.mask}
         {...inputProps}
       />
     </div>
-  )
+  );
 };
 
 fieldsModel.register({

@@ -1,0 +1,12 @@
+.joinDocs {
+  color: inherit;
+  padding-top: 25px;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: 55px 1fr;
+  &:hover {
+    text-decoration: none;
+    color: var(--red);
+  }
+}
+

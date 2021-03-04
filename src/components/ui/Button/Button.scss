@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 15px;
+  transition: .3s;
 
   &.size_s {
     height: 40px;
@@ -11,7 +13,7 @@
   }
 
   &.size_m {
-    height: 60px;
+    min-height: 60px;
     padding: 18px;
   }
 
@@ -19,11 +21,21 @@
     background-color: var(--black);
     border-color: #123;
     color: var(--white);
+    &:hover {
+      box-shadow: 0 0 0 5px var(--gray4);
+    }
   }
 
   &.theme_light {
     background-color: var(--gray2);
     border: none;
+    &:hover {
+      color: var(--white);
+      background-color: var(--black);
+      svg path {
+        stroke: var(--white);
+      }
+    }
   }
 
   &.disabled {

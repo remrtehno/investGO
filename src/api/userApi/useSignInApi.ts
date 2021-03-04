@@ -1,10 +1,12 @@
-import {useSetRecoilState} from "recoil";
-import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
-import {userAtom} from "../../recoil/userAtom";
-import {RequestStatus} from "../../types/common";
-import {User} from "../../types/User";
+import {useSetRecoilState} from 'recoil';
+
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
+import {userAtom} from 'src/recoil/userAtom';
+import {RequestStatus} from 'src/types/common';
+
+import {getUserApi} from './useGetUserApi';
 
 export declare namespace useSignInApi {
   export type Payload = {
@@ -17,13 +19,15 @@ export const useSignInApi = () => {
   const request = useApiRequest();
   const setUser = useSetRecoilState(userAtom);
 
-  return useApi<useSignInApi.Payload, null>(async (payload) => {
-    const user = await request<User | null>(api.user.signIn(), {
+  return useApi<useSignInApi.Payload, null>(async(payload) => {
+    await request(api.user.signIn(), {
       method: 'POST',
       body: JSON.stringify(payload),
       showNotifyOnError: false,
       preventNotifyOn400: true,
     });
+
+    const user = await getUserApi(request);
 
     setUser({
       user,
@@ -32,7 +36,6 @@ export const useSignInApi = () => {
     });
 
     return null;
-
   }, null);
 };
 

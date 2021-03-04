@@ -1,8 +1,9 @@
-import {FilePrimitive} from "./FilePrimitive";
+import type {ModerationStatus} from 'src/contstants/ModerationStatus';
+import type {Role} from 'src/contstants/Role';
+
+import type {FilePrimitive} from './FilePrimitive';
 
 export declare namespace User {
-  export type Role = 'user' | 'admin' | 'individual';
-
   export type Passport = {
     authority: string,
     date_of_birth: string,
@@ -16,17 +17,59 @@ export declare namespace User {
     serial: string,
     snils: string,
     subdivision_code: string,
-    is_approved: boolean,
+    status: ModerationStatus,
+    phone_confirmed: boolean,
+  }
+
+  export type BankDetails = {
+    id: string | null,
+    account: string,
+    bank_name: string,
+    bic: string,
+    company_id: string,
+    correspondent_account: string,
+    inn: string,
+    kpp: string,
+    owner_name: string
+  }
+
+  export type Company = {
+    id: string | null,
+    ogrn: string,
+    date_issue_ogrn: string,
+    document_registry_file: FilePrimitive,
+    bank_details: User.BankDetails | null,
+    emails: string[],
+    status: ModerationStatus
+  };
+
+  export type SignDocuments = {
+    company: Company,
+    created_at: string,
+    file: {
+      id: string,
+      user_id: string,
+      url: string,
+      original_name: string,
+      size: 0
+    }
+    num: number
+    status: string,
+    type: string,
+    updated_at: string,
+    uuid: string,
   }
 }
 
 export type User = {
   id: string,
   login: string,
-  roles: User.Role[],
+  roles: Role[],
   passport: User.Passport | null,
-  email: string,
+  company: User.Company | null,
+  email: string[],
   phone: string,
-  is_approved_passport: boolean,
   is_selected_role: boolean,
+  isCompanyLoaded: boolean,
+  sign_document: string[]
 }

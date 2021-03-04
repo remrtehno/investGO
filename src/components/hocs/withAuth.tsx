@@ -1,9 +1,11 @@
-import React, {FC} from "react";
-import {useRecoilValue} from "recoil";
-import {isPageInitAtom} from "../../recoil/isPageInitAtom";
-import {userAtom} from "../../recoil/userAtom";
-import {isLoaded} from "../../utils/isLoaded";
-import {SignPage} from "../pages/SignPage";
+import type {FC} from 'react';
+import React from 'react';
+import {useRecoilValue} from 'recoil';
+
+import {SignPage} from 'src/components/pages/SignPage';
+import {isPageInitAtom} from 'src/recoil/isPageInitAtom';
+import {userAtom} from 'src/recoil/userAtom';
+import {isLoaded} from 'src/utils/isLoaded';
 
 export declare namespace withAuth {
   export type Props<TProps> = TProps & {
@@ -13,9 +15,9 @@ export declare namespace withAuth {
 
 export function withAuth<TProps>(Component: FC<TProps>): FC<withAuth.Props<TProps>> {
   return (props) => {
-    const { user, status } = useRecoilValue(userAtom);
+    const {user, status} = useRecoilValue(userAtom);
     const isPageInit = useRecoilValue(isPageInitAtom);
-    const { checkAuth = true } = props;
+    const {checkAuth = true} = props;
 
     if (checkAuth && !user) {
       if (!isPageInit || !isLoaded(status)) {
@@ -23,12 +25,12 @@ export function withAuth<TProps>(Component: FC<TProps>): FC<withAuth.Props<TProp
       }
 
       return (
-        <SignPage/>
+        <SignPage />
       );
     }
 
     return (
-      <Component {...props}/>
+      <Component {...props} />
     );
-  }
+  };
 }

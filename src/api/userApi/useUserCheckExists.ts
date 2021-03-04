@@ -1,6 +1,6 @@
-import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
 
 export declare namespace useUserCheckExists {
   export type Payload = {
@@ -15,7 +15,7 @@ export declare namespace useUserCheckExists {
 export const useUserCheckExists = () => {
   const request = useApiRequest();
 
-  return useApi<useUserCheckExists.Payload, boolean>(async (payload) => {
+  return useApi<useUserCheckExists.Payload, boolean>(async(payload) => {
     const response = await request<useUserCheckExists.Response>(api.user.checkExists(), {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -24,7 +24,6 @@ export const useUserCheckExists = () => {
     });
 
     return response.exists;
-
   }, false);
 };
 

@@ -1,53 +1,37 @@
-import React, {FC, useCallback, useMemo} from "react";
-import {FieldType, useFormModel} from "../Form";
-import {FormField} from "../types";
-import {FieldProps, fieldsModel} from "./fieldsModel";
-import {TextField} from "./textField";
+import _ from 'lodash';
+import type {FC} from 'react';
+import React, {useMemo} from 'react';
 
-function fromValue(value: string) {
-  if (!value) {
-    return null;
-  }
-  return value.replace(/-/g, '');
-}
+import {FieldType, useFormModel} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+import {PhoneInput} from 'src/components/ui/PhoneInput';
+import {phone} from 'src/validations/phone';
 
-function toValue(v: string) {
-  if (!v) {
-    return null;
-  }
-  return `${v.slice(0, 2)}-${v.slice(2, 5)}-${v.slice(5, 8)}-${v.slice(8, 10)}-${v.slice(-2)}`
-}
+import type {FieldProps} from './fieldsModel';
+import {fieldsModel} from './fieldsModel';
 
-export const PhoneField: FC<FieldProps<FormField.Number>> = (props) => {
+
+export const PhoneField: FC<FieldProps<FormField.Phone>> = (props) => {
   const form = useFormModel();
 
-  const field = useMemo((): FormField.Text => {
-    return {
-      ...props.field,
-      type: FieldType.text,
-      mask: '+7-999-999-99-99',
-      value: toValue(props.field.value),
-      validations: [...(props.field.validations || []), (value) => {
-        if (!value) {
-          return null;
-        }
-
-        const rawValue = fromValue(value);
-        return rawValue && rawValue.length === 12 ? null : 'Некорректный телефон';
-      }]
-    };
-  }, [props.field]);
-
-  const handleChange = useCallback((value: string, name: string) => {
-    form.onChange(fromValue(value), name)
-  }, []);
+  const field = useMemo((): FormField.Text => ({
+    ...props.field,
+    type: FieldType.text,
+    validations: [phone(), ...(props.field.validations || [])],
+  }), [props.field]);
 
   return (
-    <TextField
-      field={field}
-      onChange={handleChange}
+    <PhoneInput
+      value={field.value}
+      label={field.label}
+      name={field.name}
+      error={field.isDirty ? field.error : null}
+      disabled={field.disabled}
+      regExp={field.regExp}
+      onChange={form.onChange as any}
+      {..._.omit(props, 'field')}
     />
-  )
+  );
 };
 
 fieldsModel.register({

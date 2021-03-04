@@ -1,0 +1,24 @@
+.Navigation {
+  background: var(--white);
+  display: flex;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+}
+
+.NavigationContainer {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+}
+
+.NavigationItem {
+
+  a {
+    color: var(--black);
+  }
+
+  & + & {
+    margin-left: 35px;
+  }
+}

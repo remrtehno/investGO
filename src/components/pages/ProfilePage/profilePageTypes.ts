@@ -1,6 +1,9 @@
 export enum ProfileFormType {
   profile = 'profile',
   passport = 'passport',
-  individualEntrepreneur = 'individualEntrepreneur',
-  requisitions = 'requisitions',
+  ip = 'ip',
+  ur = 'ur',
+  fl = 'fl',
+  bankDetails = 'bankDetails',
+  signDocuments = 'signDocuments'
 }

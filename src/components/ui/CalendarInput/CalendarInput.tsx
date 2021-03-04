@@ -1,44 +1,69 @@
-import React, {FC} from 'react';
-import {Input} from "../Input";
-import s from './CalendarInput.scss';
 import cx from 'classnames';
-import DatePicker from "react-datepicker";
-import moment from 'moment';
+import type {FC} from 'react';
+import React from 'react';
+import type {ReactDatePickerProps} from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 
-import "src/libs/react-datepicker/react-datepicker.css";
+import 'src/libs/react-datepicker/react-datepicker.css';
+import {Input} from 'src/components/ui/Input';
+import {formatDate} from 'src/utils/formatDate';
+import {parseDate} from 'src/utils/parseDate';
+
+import s from './CalendarInput.scss';
 
 export declare namespace CalendarInput {
-  export type Props = {
+  export type CalendarProps = Omit<ReactDatePickerProps, 'onChange' | 'name'>;
+
+  export type Props = CalendarProps & {
     onChange(value: string | null, name: string | null): void
     value: string | null,
     label: string,
 
+    disabled?: boolean,
+    error?: string | null,
     className?: string,
     name?: string | null,
   };
 }
 
+const CustomInput = ({value, onChange, name, label, error, disabled, ...inputProps}: any) => {
+  return (
+    <Input
+      containerProps={inputProps}
+      name={name}
+      onChange={(newValue, name, e) => onChange(e)}
+      mask='99.99.9999'
+      value={value}
+      label={label}
+      error={error}
+      disabled={disabled}
+    />
+  );
+};
+
 export const CalendarInput: FC<CalendarInput.Props> = (props) => {
-  const CustomInput = ({ value, onChange, ...inputProps }: any) => {
-    return (
-      <Input
-        containerProps={inputProps}
-        name={props.name}
-        onChange={(value, name, e) => onChange(e)}
-        value={value}
-        label={props.label}
-      />
-    );
-  };
+  const {
+    className,
+    name,
+    error,
+    label,
+    value,
+    onChange,
+    ...calendarProps
+  } = props;
 
   return (
-    <div className={cx(s.CalendarInput, props.className)}>
+    <div className={cx(s.CalendarInput, className)}>
       <DatePicker
-        name={props.name || undefined}
-        onChange={(value: Date) => props.onChange(moment(value).format('YYYY-MM-DD'), props.name || null)}
-        selected={props.value ? moment(props.value, 'YYYY-MM-DD').toDate() : null}
-        customInput={<CustomInput/>}
+        {...calendarProps}
+        name={name || undefined}
+        onChange={(value: Date) => onChange(formatDate(value), name || null)}
+        selected={value ? parseDate(value) : null}
+        customInput={<CustomInput disabled={props.disabled} name={name} label={label} error={error} />}
         dateFormat='dd.MM.yyyy'
+        showYearDropdown={true}
+        yearDropdownItemNumber={30}
+        scrollableYearDropdown={true}
       />
     </div>
   );

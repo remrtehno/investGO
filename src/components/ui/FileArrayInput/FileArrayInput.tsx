@@ -1,17 +1,25 @@
-import React, {FC, useEffect, useState} from "react";
-import {useDropzone} from "react-dropzone";
-import {useUploadFileApi} from "../../../api/common/useUploadFileApi";
-import {FileImgIcon} from "../../../icons/files/FileImgIcon";
-import {FilePrimitive} from "../../../types/FilePrimitive";
-import {Button, ButtonSize, ButtonTheme} from "../Button/Button";
-import {Text, TextSize} from "../Text";
-import s from './FileArrayInput.scss';
-import _ from 'lodash';
 import cx from 'classnames';
+import _ from 'lodash';
+import type {FC} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useDropzone} from 'react-dropzone';
+
+import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {CloseIcon} from 'src/icons/CloseIcon';
+import {FileImgIcon} from 'src/icons/files/FileImgIcon';
+import type {FilePrimitive} from 'src/types/FilePrimitive';
+import {downloadFile} from 'src/utils/downloadFile';
+
+import {AddButtonIcon} from './AddButtonIcon';
+import s from './FileArrayInput.scss';
+import {InfoPanel} from 'src/components/common/InfoPanel';
+import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
-  ({ isNew: true, original_name: string });
+  ({ isNew: true, original_name: string, id: string });
 
 export declare namespace FileArrayInput {
   export type Props = {
@@ -21,28 +29,18 @@ export declare namespace FileArrayInput {
     name?: string | null,
     disabled?: boolean,
     readonly?: boolean,
+    error?: string | null
   }
-}
-
-const AddButtonIcon = () => {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0.714844 7H13.4762" stroke="black" strokeWidth="2"/>
-      <path d="M7.09375 13.3809L7.09375 0.619507" stroke="black" strokeWidth="2"/>
-    </svg>
-  );
 }
 
 export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   const [uploadedFile, uploadFileApi, uploadApi] = useUploadFileApi();
 
   function getFilesFromProps() {
-    return (props.files || []).map((file): Value => {
-      return {
-        ...file,
-        isNew: false
-      };
-    });
+    return (props.files || []).map((file): Value => ({
+      ...file,
+      isNew: false,
+    }));
   }
 
   const [files, setFiles] = useState(getFilesFromProps());
@@ -54,11 +52,9 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   useEffect(() => {
     if (uploadedFile) {
       uploadApi.resetValue();
-      props.onChange(files.map((file) => {
-        return file.isNew ? uploadedFile : _.omit(file, 'isNew')
-      }), props.name || null)
+      props.onChange(files.map((file) => (file.isNew ? uploadedFile : _.omit(file, 'isNew'))), props.name || null);
     }
-  }, [uploadedFile, props.onChange, files, props.name])
+  }, [uploadedFile, props.onChange, files, props.name]);
 
   const {getRootProps, getInputProps} = useDropzone({
     accept: 'image/*',
@@ -66,42 +62,69 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
     maxSize: 10485760, // 10MB,
     onDrop(acceptedFiles: File[]) {
       if (acceptedFiles.length) {
-        const file = acceptedFiles[0];
+        const [file] = acceptedFiles;
         setFiles([
           ...files,
           {
             isNew: true,
+            id: _.uniqueId('__'),
             original_name: file.name,
-          }
-        ])
-        uploadFileApi({file });
+          },
+        ]);
+        uploadFileApi({file});
       }
-    }
+    },
   });
 
   return (
-    <div className={cx('container', s.FileArrayInput)}>
+    <div className={cx('container p-0', s.FileArrayInput)}>
+      { props.error ? (
+        <div className='row'>
+          <div className='col-12'>
+            <InfoPanel style={{ marginTop: 32 }} isBorderless={true} theme={InfoPanelTheme.error}>{props.error}</InfoPanel>
+          </div>
+        </div>
+        ) : null }
       <div className={cx(s.files, 'row')}>
-        {files.map((file, index) => {
-          return (
-            <div className={cx(s.file, 'col-6')} key={file.isNew ? index : file.id}>
-              <FileImgIcon className={s.fileIcon}/>
-              <div className={s.fileLabel}>{file.original_name}</div>
-            </div>
-          );
-        })}
+        { files.map((file) => (
+          <div
+            className={cx(s.file, 'col-6')}
+            key={file.id}
+            onClick={() => {
+              if (file.isNew) {
+                return;
+              }
+
+              downloadFile(file.url);
+            }}
+          >
+            <FileImgIcon className={s.fileIcon} />
+            <div className={s.fileLabel}>{ file.original_name }</div>
+            { props.disabled || props.readonly ? null : (
+              <div className={s.deleteFile}>
+                <CloseIcon color='black' onClick={(e) => {
+                  setFiles(files.filter((f) => file.id !== f.id));
+                  e.preventDefault();
+                  e.stopPropagation();
+                }} />
+              </div>
+            ) }
+          </div>
+        )) }
       </div>
-      <div {...getRootProps()} className={s.addButtonContainer}>
-        { props.disabled || props.readonly ? null : (<input {...getInputProps()}/>) }
-        <Button
-          size={ButtonSize.m}
-          theme={ButtonTheme.light}
-          onClick={_.noop}
-        >
-          <AddButtonIcon/>
-          <Text className={s.addButtonLabel} size={TextSize.body1}>Загрузить файл</Text>
-        </Button>
-      </div>
+      { props.disabled || props.readonly ? null : (
+        <div {...getRootProps()} className={s.addButtonContainer} style={{ marginTop: 32 }}>
+          <input {...getInputProps()} />
+          <Button
+            size={ButtonSize.m}
+            theme={ButtonTheme.light}
+            onClick={_.noop}
+          >
+            <AddButtonIcon />
+            <Text className={s.addButtonLabel} size={TextSize.body1}>Загрузить файл</Text>
+          </Button>
+        </div>
+      ) }
     </div>
-  )
+  );
 };

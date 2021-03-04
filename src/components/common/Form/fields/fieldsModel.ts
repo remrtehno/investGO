@@ -1,12 +1,18 @@
-import {FC} from "react";
-import {Form} from "../Form";
+import _ from 'lodash';
+import type {FC} from 'react';
 
-export type FieldProps<TField = Form.Field> = {
+import type {FieldType} from 'src/components/common/Form/Form';
+import type {FormField} from 'src/components/common/Form/types';
+import type {FormFieldModel} from 'src/components/common/Form/types';
+
+export type FieldProps<TField extends FormField.BaseField> = {
   field: TField,
+  onChange(value: any): void,
 }
 
 export type FieldModel = {
-  type: string,
+  type: FieldType,
+  transform?(field: FormFieldModel): FormFieldModel,
   component: FC<any>,
 };
 
@@ -19,9 +25,12 @@ const models: Record<string, FieldModel> = {};
 
 export const fieldsModel: FieldsModel = {
   register(fieldModel) {
-    models[fieldModel.type] = fieldModel as any;
+    models[fieldModel.type] = {
+      ...fieldModel,
+      transform: fieldModel.transform || _.identity,
+    };
   },
   get(type) {
     return models[type] || null;
-  }
+  },
 };

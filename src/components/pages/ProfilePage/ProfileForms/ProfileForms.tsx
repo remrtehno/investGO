@@ -1,20 +1,42 @@
-import React, {FC, useEffect, useRef} from "react";
-import {usePageScroll} from "../../../../hooks/usePageScroll";
-import {getElementPosition} from "../../../../utils/getElementPosition";
-import {ProfilePage} from "../ProfilePage";
-import {ProfileFormType} from "../profilePageTypes";
-import {IndividualEntrepreneurForm} from "./forms/IndividualEntrepreneurForm";
-import {PassportForm} from "./forms/PassportForm";
-import {ProfileForm} from "./forms/ProfileForm";
-import {RequisitionsForm} from "./forms/RequisitionsForm";
-import s from './ProfileForms.scss';
 import cx from 'classnames';
+import type {FC} from 'react';
+import React, {useEffect, useRef} from 'react';
+import {useRecoilValue} from 'recoil';
+
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
+import {SignDocuments} from 'src/components/pages/ProfilePage/ProfileForms/forms/SignDocuments';
+import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
+import {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
+import {usePageScroll} from 'src/hooks/usePageScroll';
+import {userAtom} from 'src/recoil/userAtom';
+import {getElementPosition} from 'src/utils/getElementPosition';
+
+import {BankDetailsForm} from './forms/BankDetailsForm';
+import {IpForm} from './forms/IpForm';
+import {PassportForm} from './forms/PassportForm';
+import {ProfileForm} from './forms/ProfileForm';
+import {UrForm} from './forms/UrForm';
+
+import s from './ProfileForms.scss';
 
 const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.profile]: ProfileForm,
   [ProfileFormType.passport]: PassportForm,
-  [ProfileFormType.requisitions]: RequisitionsForm,
-  [ProfileFormType.individualEntrepreneur]: IndividualEntrepreneurForm,
+  [ProfileFormType.bankDetails]: BankDetailsForm,
+  [ProfileFormType.ip]: IpForm,
+  [ProfileFormType.ur]: UrForm,
+  [ProfileFormType.fl]: () => {
+    const {user} = useRecoilValue(userAtom);
+
+    if (!user || !user.sign_document) {
+      return null;
+    }
+
+    return (
+      <AcceptRules />
+    );
+  },
+  [ProfileFormType.signDocuments]: SignDocuments,
 };
 
 export declare namespace ProfileForms {
@@ -33,7 +55,7 @@ export declare namespace ProfileForms {
 }
 
 export const ProfileForms: FC<ProfileForms.Props> = (props) => {
-  const { scrollTop } = usePageScroll();
+  const {scrollTop} = usePageScroll();
   const formsRef = useRef<Record<string, HTMLDivElement | null>>({});
   const prevFormRef = useRef<ProfileFormType | null>(null);
   const preventHandleScrollRef = useRef(false);
@@ -52,19 +74,18 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
         return;
       }
 
-      const { top } = getElementPosition(el);
-      const pos = Math.abs(top + el.offsetHeight / 2);
+      const {top} = getElementPosition(el);
+      const pos = Math.abs(top + (el.offsetHeight / 2));
 
       if (!newCurrentForm || newCurrentForm.pos > pos) {
         newCurrentForm = {
           id: form.id,
-          pos
+          pos,
         };
-        return;
       }
     });
 
-    const formId = newCurrentForm && (newCurrentForm as any).id
+    const formId = newCurrentForm && (newCurrentForm as any).id;
     if (formId && formId !== prevFormRef.current) {
       props.onChangeCurrentForm(formId);
       prevFormRef.current = formId;
@@ -85,7 +106,7 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
 
   return (
     <div className={cx(s.ProfileForms, props.className)}>
-      {props.forms.map((form) => {
+      { props.forms.map((form) => {
         const Form = forms[form.id];
 
         return (
@@ -97,7 +118,7 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
             }}
           />
         );
-      })}
+      }) }
     </div>
-  )
+  );
 };

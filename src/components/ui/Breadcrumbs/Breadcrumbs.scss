@@ -1,0 +1,28 @@
+.Breadcrumbs {
+  display: flex;
+  flex-flow: wrap;
+  color: var(--label);
+  padding: 0;
+  list-style: none;
+  margin-bottom: 60px;
+}
+
+.BreadcrumbsList {
+  margin-right: 10px;
+}
+
+.BreadcrumbsListText {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: var(--black);
+    svg path {
+      stroke: var(--black);
+    }
+  }
+  svg {
+    margin-right: 8px;
+  }
+}

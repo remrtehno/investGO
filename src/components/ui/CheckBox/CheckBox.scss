@@ -1,0 +1,42 @@
+.CheckBox {
+  display: flex;
+  cursor: pointer;
+
+  .toggle {
+    background-color: var(--white);
+    border: 1px solid var(--gray2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    min-height: 20px;
+    position: relative;
+    top: 1px;
+
+    .icon {
+      display: none;
+    }
+
+    &.checked {
+      background-color: var(--black);
+
+      .icon {
+        display: block;
+      }
+    }
+  }
+
+  &:hover {
+    .toggle,
+    .toggle.checked {
+      border-color: var(--black);
+    }
+  }
+
+  .label {
+    margin-left: 8px;
+  }
+}

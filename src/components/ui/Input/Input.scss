@@ -19,7 +19,22 @@
 
   &.disabled {
     background-color: var(--gray2);
+
+    .control {
+      background-color: var(--gray2);
+    }
   }
+}
+
+.postfix {
+  z-index: 1;
+}
+
+.controlContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .label {
@@ -40,14 +55,19 @@
   outline: none;
   height: 0;
   width: 100%;
-  transition: height 0.15s ease-out;
   margin-top: 0;
   padding: 0;
   font-size: 16px;
+  flex: 1;
 
   &.isControlVisible {
+    height: 100%;
+  }
+
+  &.withLabel.isControlVisible {
     height: auto;
     margin-top: 18px;
+    transition: height 0.15s ease-out;
   }
 }
 

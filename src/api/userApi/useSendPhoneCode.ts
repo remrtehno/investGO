@@ -1,6 +1,6 @@
-import {api} from "../../contstants/api";
-import useApi from "../../hooks/useApi";
-import useApiRequest from "../../hooks/useApiRequest";
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
 
 export declare namespace useSendPhoneCode {
   export type Payload = {
@@ -13,7 +13,7 @@ export declare namespace useSendPhoneCode {
 export const useSendPhoneCode = () => {
   const request = useApiRequest();
 
-  return useApi<useSendPhoneCode.Payload, null>(async (payload) => {
+  return useApi<useSendPhoneCode.Payload, null>(async(payload) => {
     await request(api.user.sendPhoneCode(), {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -22,7 +22,6 @@ export const useSendPhoneCode = () => {
     });
 
     return null;
-
   }, null);
 };
 

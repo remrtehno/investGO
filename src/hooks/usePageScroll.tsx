@@ -1,11 +1,13 @@
-import React, {createContext, FC, MutableRefObject, useCallback, useContext, useMemo} from "react";
-import useScroll from "./useScroll";
 import _ from 'lodash';
+import type {FC, MutableRefObject} from 'react';
+import React, {createContext, useCallback, useContext, useMemo} from 'react';
 
-const context = createContext<{ scrollTop: number, setScrollTop(pos: number): void }>({
-  scrollTop: 0, setScrollTop: _.noop
+import {useScroll} from './useScroll';
+
+const context = createContext<{scrollTop: number, setScrollTop(pos: number): void}>({
+  scrollTop: 0, setScrollTop: _.noop,
 });
-const Provider = context.Provider;
+const {Provider} = context;
 
 export declare namespace PagePositionProvider {
   export type Props = {
@@ -24,16 +26,14 @@ export const PageScrollProvider: FC<PagePositionProvider.Props> = (props) => {
     props.pageRef.current.scrollTo(0, newPos);
   }, []);
 
-  const value = useMemo(() => {
-    return { scrollTop, setScrollTop };
-  }, [scrollTop, setScrollTop]);
+  const value = useMemo(() => ({scrollTop, setScrollTop}), [scrollTop, setScrollTop]);
 
   return (
     <Provider value={value}>
-      {props.children}
+      { props.children }
     </Provider>
-  )
-}
+  );
+};
 
 export function usePageScroll() {
   return useContext(context);

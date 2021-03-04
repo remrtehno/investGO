@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Input} from "./Input";
 
+import {Input} from './Input';
+
+// eslint-disable-next-line
 export default {
   component: Input,
-  title: 'Common/ui'
+  title: 'Common/ui',
 };
 
 export const InputsStory = () => {
@@ -13,9 +15,9 @@ export const InputsStory = () => {
     <Input
       label='Test label'
       value={value}
-      onChange={(value) => setValue(value)}
+      onChange={(newValue) => setValue(newValue)}
     />
-  )
+  );
 };
 
-InputsStory.story = { name: 'Inputs' };
+InputsStory.story = {name: 'Inputs'};

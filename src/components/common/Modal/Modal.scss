@@ -18,6 +18,13 @@
     }
 }
 
+.closeIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
 .content {
     box-sizing: border-box;
     padding: 40px;

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import Modal from "../../../../common/Modal/Modal";
+import {Modal} from "../../../../common/Modal/Modal";
 import {Button, ButtonSize, ButtonTheme} from "../../../../ui/Button/Button";
 import {Text, TextSize} from "../../../../ui/Text";
 import s from './PasswordResetModal.scss';
@@ -13,7 +13,7 @@ export declare namespace PasswordResetModal {
 
 export const PasswordResetModal: FC<PasswordResetModal.Props> = (props) => {
   return (
-    <Modal className={s.PasswordResetModal}>
+    <Modal className={s.PasswordResetModal} allowClose={true} onClose={()=> {}}>
       <div className={s.inner}>
         <Text className={s.message} size={TextSize.body2}>
           {props.text}

@@ -4,8 +4,8 @@ import _ from 'lodash';
 import {Form} from "../../../common/Form";
 import {FieldType} from "../../../common/Form/Form";
 import {Field} from "../../../common/Form/Field";
-import {required} from "../../../common/Form/validations/required";
-import {email} from "../../../common/Form/validations/email";
+import {email} from 'src/validations/email';
+import {required} from 'src/validations/required';
 import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
 import {usePasswordResetRequestApi} from "../../../../api/userApi/usePasswordResetRequestApi"
 import s from "./RecoverForm.scss"

@@ -1,0 +1,44 @@
+.Select {
+  :global(.select__control),
+  :global(.select__control):hover {
+    height: 60px;
+    border: 1px solid var(--gray2);
+  }
+
+  :global(.select__control--is-focused),
+  :global(.select__control--is-focused):hover {
+    border-color: var(--black);
+    box-shadow: none;
+  }
+
+  &.withError {
+    :global(.select__control),
+    :global(.select__control):hover,
+    :global(.select__control--is-focused),
+    :global(.select__control--is-focused):hover {
+      border-color: var(--red);
+    }
+  }
+
+  :global(.select__indicators) {
+    display: none;
+  }
+
+  :global(.select__value-container) {
+    padding: 8px 16px;
+  }
+
+  :global(.select__placeholder) {
+    color: var(--gray4);
+    font-family: "Open Sans";
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  :global(.select__single-value) {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+  }
+}

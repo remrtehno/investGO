@@ -1,11 +1,15 @@
 import cx from 'classnames';
-import React, {FC, useRef} from 'react';
-import {PageScrollProvider} from "../../../hooks/usePageScroll";
+import type {FC} from 'react';
+import React, {useRef} from 'react';
+
+import {PageScrollProvider} from 'src/hooks/usePageScroll';
+
 import s from './Page.scss';
-import {PageHeader} from "./PageHeader";
+import {PageHeader} from './PageHeader';
 
 type Props = {
   className?: string,
+  isBigLogo?: boolean,
 }
 
 export const Page: FC<Props> = (props) => {
@@ -14,8 +18,8 @@ export const Page: FC<Props> = (props) => {
   return (
     <PageScrollProvider pageRef={ref}>
       <div ref={ref} className={cx(s.page, props.className)}>
-        <PageHeader/>
-        <div className={s.content}>{props.children}</div>
+        <PageHeader isBigLogo={props.isBigLogo} />
+        <div className={cx(s.content, props.isBigLogo ? s.isBigLogoContent : null )}>{ props.children }</div>
       </div>
     </PageScrollProvider>
   );
