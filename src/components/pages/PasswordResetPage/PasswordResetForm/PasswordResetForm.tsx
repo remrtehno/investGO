@@ -129,6 +129,7 @@ export const PasswordResetForm: FC = () => {
         <PasswordResetModal
           onClose={handleModalClose}
           text="Пароль успешно изменен."
+          icon="account"
         />
       ) : null}
     </Form>
