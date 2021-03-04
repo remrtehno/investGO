@@ -42,7 +42,7 @@ export const Button: FC<Button.Props> = (props) => {
       return;
     }
 
-    props.onClick();
+    if (props.onClick) props.onClick();
   }, [props.onClick, props.disabled]);
 
   return (

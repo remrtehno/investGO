@@ -10,6 +10,7 @@ import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
 import {usePasswordResetRequestApi} from "../../../../api/userApi/usePasswordResetRequestApi"
 import s from "./RecoverForm.scss"
 import {PasswordResetModal} from "./PasswordResetModal";
+import { errorMessages } from "src/translations/errorMessages";
 
 
 export declare namespace RecoverForm {
@@ -100,7 +101,7 @@ export const RecoverForm: FC = () => {
       >
         Отправить ссылку на почту
       </Button>
-      <div className={s.subLink} onClick={()=>{setIsPasswordResetModalVisible(true)}}>
+      <div className={s.subLink} onClick={()=>{setErrors({email: "!!!"})}}>
         <Link to="/signin">Вернуться назад</Link>
       </div>
       {isPasswordResetModalVisible ? (

@@ -166,7 +166,7 @@ export function Form(props: Form.Props) {
     if (!_.isEqual(newErrors, errorsRef.current)) {
       props.onChange(props.values, newErrors);
     }
-  }, [props.values, fields, formFields]);
+  }, [props.values, fields]);
 
   useEffect(() => {
     updateFormApi();
