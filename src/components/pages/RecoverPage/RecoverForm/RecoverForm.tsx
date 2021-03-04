@@ -1,5 +1,5 @@
 import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import _ from 'lodash';
 import {Form} from "../../../common/Form";
 import {FieldType} from "../../../common/Form/Form";
@@ -100,7 +100,9 @@ export const RecoverForm: FC = () => {
       >
         Отправить ссылку на почту
       </Button>
-      <div className={s.subLink} onClick={()=>{setIsPasswordResetModalVisible(true)}}>Вернуться назад</div>
+      <div className={s.subLink} onClick={()=>{setIsPasswordResetModalVisible(true)}}>
+        <Link to="/signin">Вернуться назад</Link>
+      </div>
       {isPasswordResetModalVisible ? (
         <PasswordResetModal
           onClose={handleModalClose}

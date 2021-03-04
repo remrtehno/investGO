@@ -2,7 +2,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useSignInApi} from 'src/api/userApi/useSignInApi';
@@ -183,6 +183,9 @@ export const SignForm: FC<SignForm.Props> = () => {
       >
         Продолжить
       </Button>
+      <div className={s.subLink}>
+        <Link to="/recover">Восстановить пароль</Link>
+      </div>
       { isShowSmsForm
         ? (
           <SmsForm

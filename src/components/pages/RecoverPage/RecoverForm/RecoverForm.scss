@@ -18,4 +18,13 @@
 .subLink {
   margin-top: 40px;
   text-align: center;
+
+  a {
+    text-decoration: none;
+    color: var(--label);
+    
+    &:hover {
+      color: var(--black)
+    }
+  }
 }

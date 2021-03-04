@@ -14,3 +14,17 @@
 .continueButton {
   margin-top: 40px;
 }
+
+.subLink {
+  margin-top: 34px;
+  color: var(--label);
+
+  a {
+    color: var(--label);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--black)
+    }
+  }
+}

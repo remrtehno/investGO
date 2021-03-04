@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import _ from "lodash"
 import {Modal} from "../../../../common/Modal/Modal";
 import {Button, ButtonSize, ButtonTheme} from "../../../../ui/Button/Button";
 import {Text, TextSize} from "../../../../ui/Text";
@@ -13,7 +14,7 @@ export declare namespace PasswordResetModal {
 
 export const PasswordResetModal: FC<PasswordResetModal.Props> = (props) => {
   return (
-    <Modal className={s.PasswordResetModal} allowClose={true} onClose={()=> {}}>
+    <Modal className={s.PasswordResetModal} allowClose={false} onClose={_.noop}>
       <div className={s.inner}>
         <Text className={s.message} size={TextSize.body2}>
           {props.text}
