@@ -12,7 +12,7 @@ export declare namespace PasswordResetModal {
   export type Props = {
     onClose(): void,
     text?: string,
-    icon?: string
+    icon?: "email" | "account"
   };
 }
 

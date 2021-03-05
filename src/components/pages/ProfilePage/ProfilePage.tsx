@@ -61,7 +61,7 @@ export const ProfilePage = withAuth(() => {
     },
     claims.ipForm.read() ? {
       id: ProfileFormType.ip,
-      title: 'Данные ИП',
+      title: 'Данные индивидуального предпринимателя',
       longTitle: 'Данные индивидуального предпринимателя',
     } : null,
     claims.urForm.read() ? {
