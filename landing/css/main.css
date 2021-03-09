@@ -3360,7 +3360,7 @@ ul.inline-list li {
   content: ' ';
   height: 24px;
   width: 24px;
-  background: url(../img/doc.png);
+  background: url(../img/doc.svg);
   background-position: center center;
   background-repeat: no-repeat;
   position: absolute;
@@ -3384,7 +3384,7 @@ ul.inline-list li {
   color: #FF3B30;
 }
 .documents-item__text a:hover .documents-item__icon:after {
-  background: url(../img/doc-1.png);
+  background: url(../img/doc-1.svg);
 }
 .documents-item__right {
   flex: 0 0 145px;
@@ -3403,7 +3403,7 @@ ul.inline-list li {
   display: block;
   width: 12px;
   height: 10px;
-  background: url(../img/burger-sm.png);
+  background: url(../img/burger-sm.svg);
   background-position: -4px -6px;
   background-repeat: no-repeat;
 }
@@ -3418,9 +3418,8 @@ ul.inline-list li {
   padding-bottom: 14px;
 }
 .documents-item__bottom-inner {
-  border-top: 1px solid #EEEEF0;
-  border-bottom: 1px solid #EEEEF0;
   padding-left: 68px;
+  padding-right: 40px;
 }
 .documents-item__bottom-inner a {
   color: #000;
@@ -3428,7 +3427,7 @@ ul.inline-list li {
   transition: .3s;
   display: block;
   padding: 12px 0;
-  border-bottom: 1px solid #EEEEF0;
+  border-bottom: 1px solid #F2F2F2;
 }
 .documents-item__bottom-inner a:hover {
   color: #FF3B30;
