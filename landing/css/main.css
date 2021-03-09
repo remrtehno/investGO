@@ -3353,15 +3353,8 @@ ul.inline-list li {
 .documents-item__icon {
   flex: 0 0 68px;
   display: inline-block;
-  /* width: 64px; */
   height: 20px;
-  
-  /* vertical-align: middle; */
   position: relative;
-
-  /* -webkit-mask-image: url(../img/doc.svg);
-  mask-image: url(../img/doc.svg);
-  background-color: #000; */
 }
 .documents-item__icon:after {
   content: ' ';
@@ -3377,6 +3370,7 @@ ul.inline-list li {
 }
 .documents-item__text {
   flex: 1 1 90%;
+  padding-right: 300px;
 }
 .documents-item__text a {
   color: #000;
@@ -3442,7 +3436,6 @@ ul.inline-list li {
 .documents-item__bottom-inner a:last-child {
   border-bottom: none
 }
-.documents-item {}
 
 .tabs {}
 .tabs__header {
@@ -3471,7 +3464,6 @@ ul.inline-list li {
   border-color: #FF3B30;
 } 
 .tabs__item {
-  /* display: none; */
   position: absolute;
   top: 0;
   left: 0;
@@ -3485,8 +3477,3 @@ ul.inline-list li {
   position: relative;
   transition: height .3s linear;
 }
-.tabs {}
-.tabs {}
-.tabs {}
-.tabs {}
-.tabs {}
