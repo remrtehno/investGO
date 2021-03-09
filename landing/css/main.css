@@ -3327,7 +3327,7 @@ ul.inline-list li {
 .documents {
   background: #F8F9FA;
   padding-top: 95px;
-  padding-bottom: 95px;
+  padding-bottom: 100px;
 }
 .documents-list {
   list-style: none;
@@ -3339,11 +3339,10 @@ ul.inline-list li {
   font-size: 15px;
   border-radius: 3px;
   background-color: #fff;
+  transition: box-shadow .3s;
 }
 .documents-item:hover {
-  box-shadow: 0px 3px 4px 0px #000000 1%;
-  box-shadow: 0px 3px 5px 0px #000000 3%;
-  box-shadow: 0px 1px 8px 0px #000000 2%;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, .01), 0px 3px 5px 0px rgba(0, 0, 0, .03), 0px 1px 8px 0px rgba(0, 0, 0, .02);
 }
 .documents-item__top {
   display: flex;
@@ -3385,6 +3384,7 @@ ul.inline-list li {
 }
 .documents-item__text a:hover .documents-item__icon:after {
   background: url(../img/doc-1.svg);
+  background-position: center 49%;
 }
 .documents-item__right {
   flex: 0 0 145px;
@@ -3474,5 +3474,5 @@ ul.inline-list li {
 }
 .tabs__content {
   position: relative;
-  transition: height .3s linear;
+  transition: height .27s linear;
 }

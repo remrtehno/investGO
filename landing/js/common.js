@@ -198,11 +198,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $.each($('.tabs'), function (i, el) {
-    console.log('!!!', el);
-    let height = $(el).find('.tabs__item.active').height()
-    $(el).find('.tabs__content').css({height: height})
-  });
   $('.tabs__head').on('click', function() {
     
     let target = $(this).data('target');
@@ -210,15 +205,22 @@ $(document).ready(function () {
     let items = tabs.find('.tabs__item').not(target);
     let heads = tabs.find('.tabs__head');
     let content = tabs.find('.tabs__content');
+    let activeTab = items.filter('.active');
+    let activeTabHeight = activeTab.height();
     let targetHeight = $(target).height();
 
-    console.log('height', targetHeight)
-
-    content.css({height: targetHeight});
+    content.css({'height': activeTabHeight});
+    
     heads.removeClass("active")
     $(this).addClass('active');
     items.removeClass('active').fadeOut()
     $(target).addClass('active').fadeIn();
+    setTimeout(() => {
+      content.css({'height': targetHeight});  
+    }, 40);
+    setTimeout(() => {
+      content.css({'height': 'auto'});  
+    }, 320);
   });
 });
 
