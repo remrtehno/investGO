@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Mmodal();
 
 });
+
 $(document).ready(function () {
   $('.accordionBtn').on('click', function() {
     $(this).toggleClass('open');
@@ -193,6 +194,31 @@ $(document).ready(function () {
       }
       offset = title.height();
     };
+  });
+});
+
+$(document).ready(function () {
+  $.each($('.tabs'), function (i, el) {
+    console.log('!!!', el);
+    let height = $(el).find('.tabs__item.active').height()
+    $(el).find('.tabs__content').css({height: height})
+  });
+  $('.tabs__head').on('click', function() {
+    
+    let target = $(this).data('target');
+    let tabs = $(this).closest('.tabs');
+    let items = tabs.find('.tabs__item').not(target);
+    let heads = tabs.find('.tabs__head');
+    let content = tabs.find('.tabs__content');
+    let targetHeight = $(target).height();
+
+    console.log('height', targetHeight)
+
+    content.css({height: targetHeight});
+    heads.removeClass("active")
+    $(this).addClass('active');
+    items.removeClass('active').fadeOut()
+    $(target).addClass('active').fadeIn();
   });
 });
 
