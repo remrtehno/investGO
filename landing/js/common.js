@@ -222,6 +222,18 @@ $(document).ready(function () {
       content.css({'height': 'auto'});  
     }, 320);
   });
+
+  if (window.location.pathname === '/documents/disclosure') {
+    let tabs = $('.tabs');
+    let disclosureTab = tabs.find('.tabs-item-1');
+    let activeTab = tabs.find('.tabs__item.active');
+    let activeTabHead = tabs.find('.tabs__head.active');
+    let dTabHead = tabs.find('.tabs__head').not('.active');
+    activeTab.removeClass('active').css({display: 'none'});
+    disclosureTab.addClass('active').css({display: 'block'});
+    activeTabHead.removeClass('active');
+    dTabHead.addClass('active');
+  }
 });
 
 

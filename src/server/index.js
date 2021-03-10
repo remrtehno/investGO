@@ -115,6 +115,22 @@ app.get('/documents', async (req, res, next) => {
   next();
 });
 
+app.get('/documents/disclosure', async (req, res, next) => {
+  const response = await fetch(`https://testing.investgo.ru/api/user`, {
+    headers: {
+      Cookie: req.headers.Cookie
+    }
+  })
+    .then((res) => res.json());
+
+  if (response.status === 'error') {
+    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/documents.html'));
+    return;
+  }
+
+  next();
+});
+
 app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 
 app.listen(PORT, () => {

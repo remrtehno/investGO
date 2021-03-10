@@ -119,6 +119,22 @@ app.get('/documents', async (req, res, next) => {
   next();
 });
 
+app.get('/documents/disclosure', async (req, res, next) => {
+  const response = await fetch(`https://testing.investgo.ru/api/user`, {
+    headers: {
+      Cookie: req.headers.Cookie
+    }
+  })
+    .then((res) => res.json());
+
+  if (response.status === 'error') {
+    res.sendFile(path.resolve(process.cwd(), 'build/landing/documents.html'));
+    return;
+  }
+
+  next();
+});
+
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
   webpackDevMiddleware(multiCompiler, {

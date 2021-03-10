@@ -1220,7 +1220,7 @@ iframe {
 
 .footer__row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: minmax(1fr, max-content) repeat(3, 1fr);
   gap: 20px
 }
 
