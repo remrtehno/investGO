@@ -22,7 +22,7 @@ type Props = {
 
 export const Modal: FC<Props> = (props) => {
   const {
-    hardClose,
+    hardClose = true,
     className,
     onClose = _.noop,
     children,
