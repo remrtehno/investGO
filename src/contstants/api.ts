@@ -8,7 +8,7 @@ export const api = {
     sendPhoneCode: () => '/user/phone-send-code',
     confirmPhoneCode: () => '/user/phone-confirm',
     selectRoles: () => '/user/roles',
-    sugnDocuments: () => '/user/documents',
+    documents: () => '/user/documents',
     passwordResetRequest: () => '/user/password-reset-request',
     passwordReset: () => '/user/password-reset',
   },
@@ -26,4 +26,7 @@ export const api = {
     save: () => '/company',
     saveBankDetails: () => '/company/bank-details',
   },
+  sms: {
+    sign: () => '/sms-sign'
+  }
 };

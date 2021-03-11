@@ -18,7 +18,7 @@ import type {User} from 'src/types/User';
 
 import s from './BankDetailsForm.scss';
 import {useBankDetailsFields} from './useBankDetailsFields';
-import {SmsForm} from 'src/components/pages/SignPage/SignForm/SmsForm';
+import {SmsForm} from 'src/components/pages/SignPage/SignForm/SigninSmsForm';
 
 export declare namespace BankDetailsForm {
   export type Props = ProfileForms.FormProps;

@@ -5,7 +5,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
-import {useUserSignDocuments} from 'src/api/userApi/useUserSignDocuments';
+import {useUserSignDocuments} from 'src/api/userApi/useUserDocuments';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';

@@ -77,7 +77,7 @@ export function AcceptRules(props: AcceptRules.Props) {
               }/>
             ) : null }
           </div>
-          { user.sign_document.length ? null : (
+          
             <div className='row justify-content-center' style={{ paddingBottom: 20 }}>
               <Button
                 disabled={(() => {
@@ -93,7 +93,7 @@ export function AcceptRules(props: AcceptRules.Props) {
                 theme={ButtonTheme.black}
               >Присоединиться к правилам</Button>
             </div>
-          ) }
+          
         </div>
       </div>
       { isModalOpened ? (

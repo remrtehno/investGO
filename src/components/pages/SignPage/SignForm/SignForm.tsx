@@ -20,7 +20,7 @@ import {required} from 'src/validations/required';
 
 import {CheckEmailModal} from './CheckEmailModal';
 import s from './SignForm.scss';
-import {SmsForm} from './SmsForm';
+import {SmsForm} from './SigninSmsForm';
 
 export declare namespace SignForm {
   export type SignValues = {

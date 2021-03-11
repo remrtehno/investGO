@@ -2,7 +2,7 @@ import cx from 'classnames';
 import React, {FC, useEffect} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {useUserSignDocuments} from 'src/api/userApi/useUserSignDocuments';
+import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {DocumentIcon} from 'src/icons/DocumentIcon';
@@ -16,7 +16,7 @@ export declare namespace SignDocumentsForm {
 }
 
 export const SignDocuments: FC<SignDocumentsForm.Props> = (props) => {
-  const [signDocuments, getSignDocuments] = useUserSignDocuments();
+  const [signDocuments, getSignDocuments] = useUserDocuments();
   const {user} = useRecoilValue(userAtom);
 
   useEffect(() => {

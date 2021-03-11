@@ -1,14 +1,17 @@
 import React, {CSSProperties, FC, useState} from 'react';
+import _ from 'lodash'
 import {Text, TextSize} from 'src/components/ui/Text';
 import s from '../AcceptRules.scss';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import {SmsForm} from 'src/components/pages/SignPage/SignForm/SmsForm';
+import {SmsForm} from 'src/components/common/SmsForm';
 import {useRecoilValue} from 'recoil';
 import {userAtom} from 'src/recoil/userAtom';
+import {documentsAtom} from 'src/recoil/documentsAtom';
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Role} from 'src/contstants/Role';
 import cx from 'classnames';
 import {useSignDocs} from 'src/api/userApi/useSignDocs';
+import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
 
 const DocIcon: FC<{ style: CSSProperties }> = (props) => {
   return (
@@ -29,8 +32,24 @@ export declare namespace AcceptRulesModal {
 
 export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   const { user } = useRecoilValue(userAtom);
+  const { documents } = useRecoilValue(documentsAtom);
   const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
   const [, signDocsApi] = useSignDocs();
+  const [, smsSignApi] = useSmsSignApi();
+
+  function handleButtonClick() {
+    setIsSmsModalOpened(true);
+    console.log("click", user, documents);
+    let docType = "investor_accession_agreement"
+    // if (user.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
+    const docToSign = _.find(documents, (doc: {type: string, uuid: string}): boolean => { 
+      return doc.type === docType;
+    });
+    smsSignApi({
+      entity_id: docToSign.uuid,
+      entity_type: docToSign.type
+    })
+  }
 
   if (!user) {
     return null;
@@ -72,7 +91,7 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
             className='col-4'
             size={ButtonSize.m}
             theme={ButtonTheme.black}
-            onClick={() => setIsSmsModalOpened(true)}
+            onClick={handleButtonClick}
           >Подписать</Button>
         </div>
         { isSmsModalOpened ? (
@@ -83,6 +102,9 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
               signDocsApi({code: parseInt(code)});
             }}
             onClose={() => setIsSmsModalOpened(false)}
+            onCodeEnter={(code: string) => {
+              signDocsApi({code: parseInt(code)});
+            }}
           />
         ) : null }
       </div>
