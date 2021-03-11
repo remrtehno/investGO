@@ -35,7 +35,7 @@ export declare namespace SmsForm {
   export type Props = {
     phone: string,
     isUserExists?: boolean,
-    onConfirm(): void,
+    onConfirm(code?: string): void,
     onClose(): void,
   };
 
@@ -75,7 +75,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
     }
 
     confirmPhoneState.resetValue();
-    props.onConfirm();
+    props.onConfirm(values.code);
     props.onClose();
   }, [isConfirmed]);
 

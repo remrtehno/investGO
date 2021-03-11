@@ -10,15 +10,17 @@ import {useLatestRef} from 'src/hooks/useLatestRef';
 import {Role} from 'src/contstants/Role';
 
 export declare namespace useSignInApi {
-  export type Payload = void
+  export type Payload = {
+    code: number
+  }
 }
 
-export const useSignDocs = () => {
+export const useSignDocs = (code?: string) => {
   const request = useApiRequest();
   const [{user}, setUser] = useRecoilState(userAtom);
   const userRef = useLatestRef(user);
 
-  return useApi<useSignInApi.Payload, null>(async(payload) => {
+  return useApi<useSignInApi.Payload, null>(async(payload: useSignInApi.Payload) => {
     if (!userRef.current) {
       return null;
     }
@@ -28,6 +30,7 @@ export const useSignDocs = () => {
         method: 'POST',
         showNotifyOnError: false,
         preventNotifyOn400: true,
+        body: JSON.stringify(payload),
       });
     }
 
@@ -36,6 +39,7 @@ export const useSignDocs = () => {
         method: 'POST',
         showNotifyOnError: false,
         preventNotifyOn400: true,
+        body: JSON.stringify(payload),
       });
     }
 

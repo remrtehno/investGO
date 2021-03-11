@@ -78,9 +78,9 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
         { isSmsModalOpened ? (
           <SmsForm
             phone={user.phone}
-            onConfirm={() => {
+            onConfirm={(code: string) => {
               setIsSmsModalOpened(false);
-              signDocsApi();
+              signDocsApi({code: parseInt(code)});
             }}
             onClose={() => setIsSmsModalOpened(false)}
           />

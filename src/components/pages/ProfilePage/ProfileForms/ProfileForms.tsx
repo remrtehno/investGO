@@ -119,6 +119,7 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
           />
         );
       }) }
+      <AcceptRules />
     </div>
   );
 };
