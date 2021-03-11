@@ -287,7 +287,11 @@ iframe {
   font-size: 13px;
   line-height: 18px;
   text-decoration: none;
-  color: #000
+  color: #000;
+  transition: color .3s;
+}
+.nav__list a:hover {
+  color: #FF3B30;
 }
 
 .phone {
@@ -1908,9 +1912,9 @@ iframe {
     display: inline-block;
   }
 }
-.second-page .page-header:not(.page-header--second) {
+/* .second-page .page-header:not(.page-header--second) {
   padding-top: 20px;
-}
+} */
 .second-page .page-header ul {
   height: 100%;
 }
@@ -1927,7 +1931,7 @@ iframe {
   border-bottom-right-radius: 5px;
 }
 .top-block {
-  margin-top: -70px;
+  margin-top: -90px;
   padding-top: 70px;
   background: #eee;
   padding-bottom: 180px;
