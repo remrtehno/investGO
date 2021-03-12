@@ -37,11 +37,17 @@
     top: 0;
 }
 
+.invest-animation-bg {
+    margin-left: 55px;
+}
+.main-picture-invest {
+    margin-bottom: -90px;
+}
 
 @media (min-width: 992px) {
     .main-picture-invest {
         margin-top: -70px;
-        margin-bottom: -90px;
+
     }
 }
 
