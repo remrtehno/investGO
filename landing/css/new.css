@@ -49,7 +49,7 @@
     position: relative;
 }
 
-.top-block--2 lottie-player {
+.top-block--2 > lottie-player {
     position: absolute;
     width: 2000px;
     height: 100%;
