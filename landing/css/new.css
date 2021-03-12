@@ -28,11 +28,12 @@
 
 .top-block--1 > lottie-player {
     position: absolute;
-    width: 120%;
+    width: 2250px;
     height: 100%;
-    left: 0;
+    left: 50%;
     right: 0;
     top: 0;
+    transform: translateX(-50%);
 }
 
 .main-picture-invest {
@@ -55,7 +56,7 @@
 
 .top-block--2 > lottie-player {
     position: absolute;
-    width: 2000px;
+    width: 2250px;
     height: 100%;
     left: 50%;
     right: 0;
