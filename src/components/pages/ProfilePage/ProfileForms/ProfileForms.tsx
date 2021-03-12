@@ -122,7 +122,10 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
           />
         );
       }) }
-      { user?.company && user?.company.status === ModerationStatus.approved && user?.roles.includes(Role.ip) ? (
+      { user?.company && 
+        user?.company.status === ModerationStatus.approved && 
+        user?.company?.bank_details &&
+        user?.roles.includes(Role.ip) ? (
         <AcceptRules/>
       ) : null }
     </div>
