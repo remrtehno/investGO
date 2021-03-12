@@ -62,7 +62,6 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
   const prevFormRef = useRef<ProfileFormType | null>(null);
   const preventHandleScrollRef = useRef(false);
   const {user} = useRecoilValue(userAtom);
-  console.log("ProfileForms", user);
 
   useEffect(() => {
     if (preventHandleScrollRef.current) {

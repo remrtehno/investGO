@@ -24,7 +24,6 @@ export const useSignDocs = (code?: string) => {
     if (!userRef.current) {
       return null;
     }
-    console.log("useSignDocs", payload)
 
     if (userRef.current.roles.includes(Role.borrower)) {
       await request('/borrower/accession-agreement/sign', {

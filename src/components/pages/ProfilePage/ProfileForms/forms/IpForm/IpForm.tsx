@@ -61,7 +61,6 @@ export const IpForm: FC<IpForm.Props> = (props) => {
 
     formApiRef.current.submit();
     if (!formApiRef.current.isValid) {
-      console.log(errors);
       return;
     }
 

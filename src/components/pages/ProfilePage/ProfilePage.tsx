@@ -51,7 +51,6 @@ export const ProfilePage = withAuth(() => {
   }, [selectRolesStatus.isSuccess]);
 
   function handleSelectRolesApply(selectedRoles: []) {
-    console.log('rolesApply', {mainRole, roles: selectedRoles} )
     selectRolesApi({mainRole, roles: selectedRoles});
   }
 

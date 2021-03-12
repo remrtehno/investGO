@@ -17,7 +17,6 @@ export const useUserDocuments = () => {
       preventNotifyOn400: true,
     });
 
-    console.log("useUserDocuments", docs)
     setDocuments({
       documents: docs,
       status: RequestStatus.success,

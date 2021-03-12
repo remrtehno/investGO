@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC, useState} from 'react';
+import React, {CSSProperties, FC, useEffect, useState} from 'react';
 import _ from 'lodash'
 import {Text, TextSize} from 'src/components/ui/Text';
 import s from '../AcceptRules.scss';
@@ -34,22 +34,32 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   const { user } = useRecoilValue(userAtom);
   const { documents } = useRecoilValue(documentsAtom);
   const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
-  const [, signDocsApi] = useSignDocs();
+  const [, signDocsApi, signDocsApiResult] = useSignDocs();
   const [, smsSignApi] = useSmsSignApi();
 
   function handleButtonClick() {
     setIsSmsModalOpened(true);
-    console.log("click", user, documents);
     let docType = "investor_accession_agreement"
-    if (user.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
+    if (user?.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
     const docToSign = _.find(documents, (doc: {type: string, uuid: string}): boolean => { 
       return doc.type === docType;
     });
+    if (!docToSign) return;
     smsSignApi({
       entity_id: docToSign.uuid,
       entity_type: docToSign.type
     })
   }
+
+  useEffect(() => {
+    console.log("signDocsApiResult.isSuccess", signDocsApiResult)
+    setIsSmsModalOpened(false);
+    props.onClose();
+  }, [signDocsApiResult.isSuccess])
+
+  useEffect(() => {
+    setIsSmsModalOpened(false);
+  }, [signDocsApiResult.error])
 
   if (!user) {
     return null;
