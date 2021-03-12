@@ -26,13 +26,17 @@
     overflow: hidden;
 }
 
-.top-block--1 lottie-player {
+.top-block--1 > lottie-player {
     position: absolute;
     width: 120%;
     height: 100%;
     left: 0;
     right: 0;
     top: 0;
+}
+
+.main-picture-invest {
+    margin-top: -70px;
 }
 
 .top-block--1 lottie-player ~ div {
