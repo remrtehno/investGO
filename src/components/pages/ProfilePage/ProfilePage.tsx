@@ -50,6 +50,11 @@ export const ProfilePage = withAuth(() => {
     }
   }, [selectRolesStatus.isSuccess]);
 
+  function handleSelectRolesApply(selectedRoles: []) {
+    console.log('rolesApply', {mainRole, roles: selectedRoles} )
+    selectRolesApi({mainRole, roles: selectedRoles});
+  }
+
   const forms = useMemo((): ProfilePage.FormInfo[] => _.compact([
     {
       id: ProfileFormType.profile,
@@ -125,9 +130,7 @@ export const ProfilePage = withAuth(() => {
                   </div>
                   { isSelectRolesModalOpened ? (
                     <SelectRolesModal
-                      onApply={() => {
-                        selectRolesApi({mainRole, roles});
-                      }}
+                      onApply={handleSelectRolesApply}
                       onClose={() => setSelectRolesModalOpened(false)}
                       mainRole={mainRole}
                       roles={roles}

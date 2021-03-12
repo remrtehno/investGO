@@ -41,7 +41,7 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
     setIsSmsModalOpened(true);
     console.log("click", user, documents);
     let docType = "investor_accession_agreement"
-    // if (user.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
+    if (user.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
     const docToSign = _.find(documents, (doc: {type: string, uuid: string}): boolean => { 
       return doc.type === docType;
     });

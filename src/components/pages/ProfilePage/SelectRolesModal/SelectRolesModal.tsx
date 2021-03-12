@@ -39,9 +39,10 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
       onClose={() => _.noop}
     >
       <Text className={s.title} size={TextSize.body2}>{ getTitle() }</Text>
-      { props.roles.map((role) => {
+      { props.roles.map((role, i) => {
         return (
           <CheckBox
+            key={i}
             value={values.includes(role)}
             name={role}
             label={roleLabels[role]}
@@ -63,7 +64,7 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
               className={s.action}
               size={ButtonSize.m}
               theme={ButtonTheme.black}
-              onClick={() => props.onApply()}
+              onClick={() => props.onApply(values)}
             >Продолжить</Button>
           </div>
           <div className='col-6'>

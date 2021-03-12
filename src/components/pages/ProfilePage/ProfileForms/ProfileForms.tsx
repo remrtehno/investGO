@@ -9,6 +9,8 @@ import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
 import {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
 import {usePageScroll} from 'src/hooks/usePageScroll';
 import {userAtom} from 'src/recoil/userAtom';
+import {ModerationStatus} from 'src/contstants/ModerationStatus';
+import {Role} from 'src/contstants/Role';
 import {getElementPosition} from 'src/utils/getElementPosition';
 
 import {BankDetailsForm} from './forms/BankDetailsForm';
@@ -59,6 +61,8 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
   const formsRef = useRef<Record<string, HTMLDivElement | null>>({});
   const prevFormRef = useRef<ProfileFormType | null>(null);
   const preventHandleScrollRef = useRef(false);
+  const {user} = useRecoilValue(userAtom);
+  console.log("ProfileForms", user);
 
   useEffect(() => {
     if (preventHandleScrollRef.current) {
@@ -119,7 +123,9 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
           />
         );
       }) }
-      <AcceptRules />
+      { user?.company && user?.company.status === ModerationStatus.approved && user?.roles.includes(Role.ip) ? (
+        <AcceptRules/>
+      ) : null }
     </div>
   );
 };
