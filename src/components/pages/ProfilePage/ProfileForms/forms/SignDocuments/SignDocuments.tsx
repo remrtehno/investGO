@@ -23,7 +23,7 @@ export const SignDocuments: FC<SignDocumentsForm.Props> = (props) => {
     getSignDocuments(null);
   }, []);
 
-  if (!user) {
+  if (!user || !signDocuments?.length) {
     return null;
   }
 

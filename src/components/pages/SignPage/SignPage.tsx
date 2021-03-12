@@ -20,6 +20,7 @@ export const SignPage: FC = () => {
     }
   }, [user]);
 
+
   return (
     <Page isBigLogo={true} className={s.page}>
       <div className='container'>

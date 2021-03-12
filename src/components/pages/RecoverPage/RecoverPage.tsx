@@ -6,7 +6,7 @@ import s from "./RecoverPage.scss"
 
 export const RecoverPage: FC = () => {
   return (
-    <Page>
+    <Page isBigLogo={true} className={s.page}>
       <div className='container'>
         <div className={cx(s.formContainer, 'row justify-content-center align-items-center')}>
           <div className='col-4'>

@@ -9,18 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
       overlay.classList.toggle('open');
       pageHeader.classList.toggle('open');
       document.body.classList.toggle('overflow');
-  
+
       overlay.addEventListener('click', () => {
         el.classList.remove('open');
         overlay.classList.remove('open');
         pageHeader.classList.remove('open');
         document.body.classList.remove('overflow');
       });
-  });
+    });
 
   });
 
-  class Accordion  {
+  class Accordion {
     constructor(options = {}) {
       const {
         accordionEl = '.accordionBtn',
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.accordionEl = accordionEl;
       this.init();
     }
+
     init() {
       const accordionBtn = document.querySelectorAll(this.accordionEl);
       accordionBtn.forEach((element, index, arr) => {
@@ -38,12 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if(window.innerWidth <= 767) {
-    new Accordion({accordionEl:'.docBtn'});
+  if (window.innerWidth <= 767) {
+    new Accordion({accordionEl: '.docBtn'});
   }
   var rangeSlider = document.querySelector(".slider-range");
 
-  if(rangeSlider) {
+  if (rangeSlider) {
 
     noUiSlider.create(rangeSlider, {
       start: [50],
@@ -57,10 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     var rangeSliderValueElement = document.querySelector(".slider-range-value");
 
-    rangeSlider.noUiSlider.on("update", function(values, handle) {
+    rangeSlider.noUiSlider.on("update", function (values, handle) {
       rangeSliderValueElement.value = values[handle] + ' ₽';
     });
   }
+
   class Mmodal {
     constructor(options = {}) {
       const {
@@ -74,11 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
       this.close = close;
       this.init();
     }
-    
-    toggleModal() {  
+
+    toggleModal() {
       const modal = document.querySelector(this.modal);
       const open = document.querySelectorAll(this.open);
-      
+
       open.forEach(elem => {
         elem.addEventListener('click', (e) => {
           e.preventDefault();
@@ -91,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           modal.addEventListener('click', event => {
             const target = event.target;
-            if(target.closest(this.close) || target.closest(this.modal) && !target.closest('.modal__content')) {
+            if (target.closest(this.close) || target.closest(this.modal) && !target.closest('.modal__content')) {
               modal.firstElementChild.classList.remove('modal__content--open');
               modal.classList.remove('modal--open');
               modal.removeAttribute('tabindex');
@@ -113,44 +115,44 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 $(document).ready(function () {
-  $('.accordionBtn').on('click', function() {
+  $('.accordionBtn').on('click', function () {
     $(this).toggleClass('open');
     $(this).next().slideToggle();
   });
 
   function valLength(count, el) {
-    if($(el).val().length < count) {
+    if ($(el).val().length < count) {
       $(el).addClass('invalid');
     } else {
       $(el).removeClass('invalid');
     }
   }
-  $('.formSend').on('submit', function(e) {
+
+  $('.formSend').on('submit', function (e) {
     // e.preventDefault();
     valLength(3, '.formSendName');
     valLength(17, '.formSendTel');
   });
 
-  $('.formSendName').on('keypress', function() {
+  $('.formSendName').on('keypress', function () {
     valLength(3, '.formSendName');
   });
-  $('.formSendTel').on('keypress', function() {
+  $('.formSendTel').on('keypress', function () {
     valLength(17, '.formSendTel');
   });
 
-    $(window).scroll(function() {
-      if ($(window).scrollTop() > 250) {
-        $('.page-header--second').addClass('open');
-      } else if($(window).scrollTop() < 250) {
-        $('.page-header--second').removeClass('open');
-      }
+  $(window).scroll(function () {
+    if ($(window).scrollTop() > 250) {
+      $('.page-header--second').addClass('open');
+    } else if ($(window).scrollTop() < 250) {
+      $('.page-header--second').removeClass('open');
+    }
   });
   $.mask.definitions.q = "[1,2,3,4,5,6,9]";
   $('input[type="tel"]').mask('+7 (q99) 999-99-99');
 
 
-
-  $('.card').on('click', function() {
+  $('.card').on('click', function () {
     $(this).toggleClass('open');
     $('.card__back').parent('.card').removeClass('open');
   });
@@ -164,7 +166,7 @@ $(document).ready(function () {
 $(document).ready(function () {
   function topOffset(x) {
     var scrollTop = $(window).scrollTop(),
-      elementOffset = x.offset().top,
+      elementOffset = x.offset()?.top,
       distance = (elementOffset - scrollTop);
     return distance;
   };
@@ -176,7 +178,8 @@ $(document).ready(function () {
   for (step = 0; step < count; step++) {
     $('.scrollytrigger').eq(step).addClass(step + "b");
     $('.scrollytitle').eq(step).addClass(step + "t");
-  };
+  }
+  ;
 
   $(window).on('scroll', function () {
     for (step = 0; step < count; step++) {
@@ -193,13 +196,14 @@ $(document).ready(function () {
         title.addClass('scrollyactive');
       }
       offset = title.height();
-    };
+    }
+    ;
   });
 });
 
 $(document).ready(function () {
-  $('.tabs__head').on('click', function() {
-    
+  $('.tabs__head').on('click', function () {
+
     let target = $(this).data('target');
     let tabs = $(this).closest('.tabs');
     let items = tabs.find('.tabs__item').not(target);
@@ -210,16 +214,16 @@ $(document).ready(function () {
     let targetHeight = $(target).height();
 
     content.css({'height': activeTabHeight});
-    
+
     heads.removeClass("active")
     $(this).addClass('active');
     items.removeClass('active').fadeOut()
     $(target).addClass('active').fadeIn();
     setTimeout(() => {
-      content.css({'height': targetHeight});  
+      content.css({'height': targetHeight});
     }, 40);
     setTimeout(() => {
-      content.css({'height': 'auto'});  
+      content.css({'height': 'auto'});
     }, 320);
   });
 
@@ -238,4 +242,8 @@ $(document).ready(function () {
 
 
 const player = document.querySelector("lottie-player");
-player.load(player.getAttribute('src'));
+player.load(player.getAttribute('src'), {
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid meet'
+  }
+});
