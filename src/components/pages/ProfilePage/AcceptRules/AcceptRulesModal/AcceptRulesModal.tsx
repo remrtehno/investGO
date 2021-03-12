@@ -54,7 +54,6 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   useEffect(() => {
     console.log("signDocsApiResult.isSuccess", signDocsApiResult)
     setIsSmsModalOpened(false);
-    props.onClose();
   }, [signDocsApiResult.isSuccess])
 
   useEffect(() => {
