@@ -69,7 +69,7 @@
 .top-block--2 > lottie-player {
     position: absolute;
     width: 2000px;
-    height: 100%;
+    height: auto;
     left: 50%;
     right: 0;
     top: 0;
