@@ -55,8 +55,11 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
   }, [props.phone]);
 
   useEffect(() => {
-    if (!errors.code && values.code && values.code.length === 4) {
-      props.onCodeEnter(values.code);
+    if (!errors.code && values.code) {
+      const codeInt = parseInt(values.code);
+      if (codeInt && codeInt.toString().length === 4) {
+        props.onCodeEnter(values.code);
+      }
     }
   }, [errors.code, props.phone, values.code]);
 

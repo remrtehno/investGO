@@ -28,5 +28,11 @@ export const api = {
   },
   sms: {
     sign: () => '/sms-sign'
+  },
+  borrower: {
+    accessionAgreement: () => '/borrower/accession-agreement'
+  },
+  investor: {
+    accessionAgreement: () => '/investor/accession-agreement'
   }
 };

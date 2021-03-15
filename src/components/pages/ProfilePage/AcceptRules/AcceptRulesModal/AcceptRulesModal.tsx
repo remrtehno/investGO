@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC, useEffect, useState} from 'react';
+import React, {CSSProperties, FC, useEffect, useMemo, useState} from 'react';
 import _ from 'lodash'
 import {Text, TextSize} from 'src/components/ui/Text';
 import s from '../AcceptRules.scss';
@@ -12,7 +12,10 @@ import {Role} from 'src/contstants/Role';
 import cx from 'classnames';
 import {useSignDocs} from 'src/api/userApi/useSignDocs';
 import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
+import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import { User } from 'src/types/User';
+import { useBorrowerAccessionAgreementApi } from 'src/api/userApi/useBorrowerAccessionAgreement';
+import { useInvestorAccessionAgreementApi } from 'src/api/userApi/useInvestorAccessionAgreement';
 
 const DocIcon: FC<{ style: CSSProperties }> = (props) => {
   return (
@@ -37,29 +40,85 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
   const [, signDocsApi, signDocsApiResult] = useSignDocs();
   const [, smsSignApi] = useSmsSignApi();
+  const [, borrowerAccessionAgreementApi, borrowerAccessionAgreementApiResult] = useBorrowerAccessionAgreementApi();
+  const [, investorAccessionAgreementApi, investorAccessionAgreementApiResult] = useInvestorAccessionAgreementApi();
+  const [borrowerDocLoading, setBorrowerDocLoading] = useState(false);
+  const [investorDocLoading, setInvestorDocLoading] = useState(false);
+  const [, getSignDocuments] = useUserDocuments();
+
+  const borrowerAccessionAgreement = useMemo(() => {
+    return _.find(documents, (doc: User.SignDocuments): boolean => { 
+      return doc.type === "borrower_accession_agreement";
+    })
+  }, [documents]) 
+
+  const investorAccessionAgreement = useMemo(() => {
+    return _.find(documents, (doc: User.SignDocuments): boolean => { 
+      return doc.type === "investor_accession_agreement";
+    })
+  }, [documents]) 
+
+  useEffect(() => {
+    if (user?.roles.includes(Role.borrower) && !borrowerAccessionAgreement) {
+      borrowerAccessionAgreementApi(null)
+      setTimeout(() => {
+        setBorrowerDocLoading(true)
+      }, 10);
+    }
+  }, [])
+
+  useEffect(() => {
+    if (user?.roles.includes(Role.investor) && !investorAccessionAgreement) {
+      investorAccessionAgreementApi(null)
+      setTimeout(() => {
+        setInvestorDocLoading(true)
+      }, 10);
+    }
+  }, [])
+
+  useEffect(() => {
+    if (borrowerAccessionAgreementApiResult.isSuccess) {
+      getSignDocuments(null);
+      setBorrowerDocLoading(false)
+    }
+  }, [borrowerAccessionAgreementApiResult.isSuccess])
+
+  useEffect(() => {
+    if (investorAccessionAgreementApiResult.isSuccess) {
+      setInvestorDocLoading(false)
+      getSignDocuments(null);
+    }
+  }, [investorAccessionAgreementApiResult.isSuccess])
 
   function handleButtonClick() {
     setIsSmsModalOpened(true);
-    let docType = "investor_accession_agreement"
-    if (user?.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
-    const docToSign = _.find(documents, (doc: User.SignDocuments): boolean => { 
-      return doc.type === docType;
-    });
-    if (!docToSign) return;
-    smsSignApi({
-      entity_id: docToSign.uuid,
-      entity_type: docToSign.type
-    })
+    if (user?.roles.includes(Role.borrower)) {
+      smsSignApi({
+        entity_id: borrowerAccessionAgreement?.uuid as string,
+        entity_type: borrowerAccessionAgreement?.type as string
+      })
+    } 
+    if (user?.roles.includes(Role.investor)) {
+      smsSignApi({
+        entity_id: investorAccessionAgreement?.uuid as string,
+        entity_type: investorAccessionAgreement?.type as string
+      })
+    } 
   }
 
   useEffect(() => {
-    console.log("signDocsApiResult.isSuccess", signDocsApiResult)
     setIsSmsModalOpened(false);
   }, [signDocsApiResult.isSuccess])
 
   useEffect(() => {
     setIsSmsModalOpened(false);
   }, [signDocsApiResult.error])
+
+  const isButtonDisabled = useMemo(():boolean => {
+    if (user?.roles.includes(Role.investor) && !investorAccessionAgreement) return true;
+    if (user?.roles.includes(Role.borrower) && !borrowerAccessionAgreement) return true;
+    return false;
+  }, [documents])
 
   if (!user) {
     return null;
@@ -73,9 +132,15 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
           профиле, и нажмите кнопку  "Подписать".
         </Text>
         <div className='row'>
-          { user.roles.includes(Role.borrower) ? (
+          { user.roles.includes(Role.borrower) && (borrowerDocLoading || !borrowerAccessionAgreement) ? (
+            <span style={{ display: 'flex' }} className={cx('col-6', s.link)}>
+              <DocIcon style={{ minWidth: 35, marginRight: 20 }}/>
+              <Text size={TextSize.body2}>Подождите, документ формируется...</Text>
+            </span>
+          ) : null }
+          { user.roles.includes(Role.borrower) && !borrowerDocLoading && borrowerAccessionAgreement ? (
             <a
-              href='/api/borrower/accession-agreement'
+              href={borrowerAccessionAgreement?.file.url}
               target='_blank'
               style={{ display: 'flex', textDecoration: 'none' }}
               className={cx('col-6', s.link)}
@@ -84,9 +149,15 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
               <Text size={TextSize.body2}>Договор на оказание Оператором Платформы услуг по привлечению инвестиций</Text>
             </a>
           ) : null }
-          { user.roles.includes(Role.investor) ? (
+          { user.roles.includes(Role.investor) && (investorDocLoading || !investorAccessionAgreement) ? (
+            <span style={{ display: 'flex' }} className={cx('col-6', s.link)}>
+              <DocIcon style={{ minWidth: 35, marginRight: 20 }}/>
+              <Text size={TextSize.body2}>Подождите, документ формируется...</Text>
+            </span>
+          ) : null }
+          { user.roles.includes(Role.investor) && !investorDocLoading && investorAccessionAgreement ? (
             <a
-              href='/api/investor/accession-agreement'
+              href={investorAccessionAgreement?.file.url}
               target='_blank'
               style={{ display: 'flex', textDecoration: 'none' }}
               className={cx('col-6', s.link)}
@@ -102,6 +173,7 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
             size={ButtonSize.m}
             theme={ButtonTheme.black}
             onClick={handleButtonClick}
+            disabled={isButtonDisabled}
           >Подписать</Button>
         </div>
         { isSmsModalOpened ? (

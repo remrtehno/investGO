@@ -12,6 +12,7 @@ import {userAtom} from 'src/recoil/userAtom';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {Role} from 'src/contstants/Role';
 import {getElementPosition} from 'src/utils/getElementPosition';
+import { useIsRegistrationComplete } from 'src/hooks/useIsRegistrationComplete';
 
 import {BankDetailsForm} from './forms/BankDetailsForm';
 import {IpForm} from './forms/IpForm';
@@ -62,6 +63,7 @@ export const ProfileForms: FC<ProfileForms.Props> = (props) => {
   const prevFormRef = useRef<ProfileFormType | null>(null);
   const preventHandleScrollRef = useRef(false);
   const {user} = useRecoilValue(userAtom);
+  const isRegistrationComplete = useIsRegistrationComplete();
 
   useEffect(() => {
     if (preventHandleScrollRef.current) {
