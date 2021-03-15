@@ -12,6 +12,7 @@ import {Role} from 'src/contstants/Role';
 import cx from 'classnames';
 import {useSignDocs} from 'src/api/userApi/useSignDocs';
 import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
+import { User } from 'src/types/User';
 
 const DocIcon: FC<{ style: CSSProperties }> = (props) => {
   return (
@@ -41,7 +42,7 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
     setIsSmsModalOpened(true);
     let docType = "investor_accession_agreement"
     if (user?.roles.includes(Role.borrower)) docType = "borrower_accession_agreement"
-    const docToSign = _.find(documents, (doc: {type: string, uuid: string}): boolean => { 
+    const docToSign = _.find(documents, (doc: User.SignDocuments): boolean => { 
       return doc.type === docType;
     });
     if (!docToSign) return;

@@ -9,6 +9,7 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
 import {LogoIcon} from 'src/icons/LogoIcon';
 import {userAtom} from 'src/recoil/userAtom';
+import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete'
 
 import s from './PageHeader.scss';
 
@@ -34,6 +35,7 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const [, logoutApi, logoutState] = useSignOutApi();
   const history = useHistory();
+  const isRegistrationComplete = useIsRegistrationComplete();
 
   const logout = useCallback(() => {
     logoutApi();
@@ -49,6 +51,12 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
     <div className={s.pageHeader}>
       <div className={cx('container', s.container)}>
         <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
+        <div className={s.space}></div>
+        { user && isRegistrationComplete ? (
+          <div className={s.menuContainer}>
+            Заемщику
+          </div>
+        ) : null }
         { user ? (
           <div className={s.userContainer}>
             <Text size={TextSize.tabMenu} weight={TextWeight.bold}>{ user.email }</Text>

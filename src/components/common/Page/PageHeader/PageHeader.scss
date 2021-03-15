@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.space {
+  flex: 1 1 90%;
+}
+
 .userContainer {
   display: flex;
   align-items: center;
@@ -28,4 +32,11 @@
 }
 .isBiglogoutIcon {
 
+}
+
+.menuContainer {
+  padding-right: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 2em;
 }
