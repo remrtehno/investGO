@@ -9,12 +9,15 @@ import {RegisterPage} from 'src/components/pages/RegisterPage';
 import {SignPage} from 'src/components/pages/SignPage';
 import {RecoverPage} from "../../pages/RecoverPage";
 import {PasswordResetPage} from "src/components/pages/PasswordResetPage";
+import {InvestorPage} from 'src/components/pages/InvestorPage';
+import {BorrowerPage} from 'src/components/pages/BorrowerPage';
 
 export type RouteInfo = RouteProps & {
   Component: FC
 }
 
-export const routes: RouteInfo[] = [{
+export const routes: RouteInfo[] = [
+{
   path: '/about',
   Component: AboutUs,
   exact: true,
@@ -50,4 +53,15 @@ export const routes: RouteInfo[] = [{
   path: '/password-reset',
   Component: PasswordResetPage,
   exact: true,
-}];
+},
+{
+  path: '/investor-dasboard',
+  Component: InvestorPage,
+  exact: true,
+},
+{
+  path: '/borrower-dasboard',
+  Component: BorrowerPage,
+  exact: true,
+},
+];
