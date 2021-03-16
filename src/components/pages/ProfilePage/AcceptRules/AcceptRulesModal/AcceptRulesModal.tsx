@@ -59,7 +59,8 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   }, [documents]) 
 
   useEffect(() => {
-    if (user?.roles.includes(Role.borrower) && !borrowerAccessionAgreement) {
+    // if (user?.roles.includes(Role.borrower) && !borrowerAccessionAgreement) {
+    if (user?.roles.includes(Role.borrower)) {
       borrowerAccessionAgreementApi(null)
       setTimeout(() => {
         setBorrowerDocLoading(true)
@@ -68,7 +69,8 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   }, [])
 
   useEffect(() => {
-    if (user?.roles.includes(Role.investor) && !investorAccessionAgreement) {
+    // if (user?.roles.includes(Role.investor) && !investorAccessionAgreement) {
+    if (user?.roles.includes(Role.investor)) {
       investorAccessionAgreementApi(null)
       setTimeout(() => {
         setInvestorDocLoading(true)
@@ -89,6 +91,12 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
       getSignDocuments(null);
     }
   }, [investorAccessionAgreementApiResult.isSuccess])
+
+  const isButtonDisabled = useMemo(():boolean => {
+    if (user?.roles.includes(Role.investor) && !investorAccessionAgreement) return true;
+    if (user?.roles.includes(Role.borrower) && !borrowerAccessionAgreement) return true;
+    return false;
+  }, [documents])
 
   function handleButtonClick() {
     setIsSmsModalOpened(true);
@@ -114,12 +122,6 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
     setIsSmsModalOpened(false);
   }, [signDocsApiResult.error])
 
-  const isButtonDisabled = useMemo(():boolean => {
-    if (user?.roles.includes(Role.investor) && !investorAccessionAgreement) return true;
-    if (user?.roles.includes(Role.borrower) && !borrowerAccessionAgreement) return true;
-    return false;
-  }, [documents])
-
   if (!user) {
     return null;
   }
@@ -140,7 +142,7 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
           ) : null }
           { user.roles.includes(Role.borrower) && !borrowerDocLoading && borrowerAccessionAgreement ? (
             <a
-              href={borrowerAccessionAgreement?.file.url}
+              href={borrowerAccessionAgreement?.file?.url}
               target='_blank'
               style={{ display: 'flex', textDecoration: 'none' }}
               className={cx('col-6', s.link)}
@@ -157,7 +159,7 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
           ) : null }
           { user.roles.includes(Role.investor) && !investorDocLoading && investorAccessionAgreement ? (
             <a
-              href={investorAccessionAgreement?.file.url}
+              href={investorAccessionAgreement?.file?.url}
               target='_blank'
               style={{ display: 'flex', textDecoration: 'none' }}
               className={cx('col-6', s.link)}
