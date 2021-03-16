@@ -1,13 +1,13 @@
 import {useRecoilState} from 'recoil';
 
+import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
+import {useLatestRef} from 'src/hooks/useLatestRef';
 import {userAtom} from 'src/recoil/userAtom';
 import {RequestStatus} from 'src/types/common';
 
 import {getUserApi} from './useGetUserApi';
-import {useLatestRef} from 'src/hooks/useLatestRef';
-import {Role} from 'src/contstants/Role';
 
 export declare namespace useSignInApi {
   export type Payload = {
@@ -15,33 +15,31 @@ export declare namespace useSignInApi {
   }
 }
 
-export const useSignDocs = (code?: string) => {
+export const useSignDocs = (type?: string) => {
   const request = useApiRequest();
   const [{user}, setUser] = useRecoilState(userAtom);
   const userRef = useLatestRef(user);
+  const [, getSignDocuments] = useUserDocuments();
 
   return useApi<useSignInApi.Payload, null>(async(payload: useSignInApi.Payload) => {
     if (!userRef.current) {
       return null;
     }
 
-    if (userRef.current.roles.includes(Role.borrower)) {
-      await request('/borrower/accession-agreement/sign', {
-        method: 'POST',
-        showNotifyOnError: false,
-        preventNotifyOn400: true,
-        body: JSON.stringify(payload),
-      });
+    let url = '/investor/accession-agreement/sign';
+
+    if (type === 'borrower_accession_agreement') {
+      url = '/borrower/accession-agreement/sign';
     }
 
-    if (userRef.current.roles.includes(Role.investor)) {
-      await request('/investor/accession-agreement/sign', {
-        method: 'POST',
-        showNotifyOnError: false,
-        preventNotifyOn400: true,
-        body: JSON.stringify(payload),
-      });
-    }
+    await request(url, {
+      method: 'POST',
+      showNotifyOnError: false,
+      preventNotifyOn400: true,
+      body: JSON.stringify(payload),
+    });
+
+    getSignDocuments(null);
 
     const user = await getUserApi(request);
 

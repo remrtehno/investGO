@@ -36,8 +36,7 @@ export const SignDocuments: FC<SignDocumentsForm.Props> = (props) => {
             if (item.type === 'borrower_accession_agreement') {
               return (<a href={item.file.url} key={item.file.id} className={cx(s.joinDocs, 'col-sm-6')}>
                 <DocumentIcon />
-                Договор на оказание Оператором Платформы услуг по содействию
-                в инвестировании
+                Договор на оказание Оператором Платформы услуг по привлечению инвестиций
               </a>);
             }
             if (item.type === 'investor_accession_agreement') {

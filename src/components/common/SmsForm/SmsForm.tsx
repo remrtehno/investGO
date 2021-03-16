@@ -29,11 +29,11 @@ const initialValues: SmsForm.Values = {
 
 export declare namespace SmsForm {
   export type Props = {
-    phone: string,
-    isUserExists?: boolean,
-    onConfirm(code?: string): void,
+    error: string,
+    onConfirm?(code?: string): void,
     onClose(): void,
     onCodeEnter(code: string): void,
+    onCodeResend(): void,
   };
 
   export type Values = {
@@ -52,16 +52,17 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
   }, []);
 
   useEffect(() => {
-  }, [props.phone]);
+    setErrors({code: props.error});
+  }, [props.error]);
 
   useEffect(() => {
     if (!errors.code && values.code) {
-      const codeInt = parseInt(values.code);
-      if (codeInt && codeInt.toString().length === 4) {
+      const codeStripped = values.code.split('_').join('');
+      if (codeStripped.length === 4) {
         props.onCodeEnter(values.code);
       }
     }
-  }, [errors.code, props.phone, values.code]);
+  }, [errors.code, values.code]);
 
   return (
     <Modal
@@ -87,7 +88,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
           className={s.resend}
           theme={ButtonTheme.black}
           size={ButtonSize.m}
-          onClick={_.noop}
+          onClick={props.onCodeResend}
         >Отправить повторно</Button>
       </div>
     </Modal>

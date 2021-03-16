@@ -228,7 +228,7 @@ module.exports = {
     }],
     'keyword-spacing': ['warn'],
     'line-comment-position': 'off',
-    'linebreak-style': ['warn', 'unix'],
+    // 'linebreak-style': ['warn', 'unix'],
     'lines-around-comment': 'off',
     'lines-between-class-members': ['warn'],
     'max-depth': ['warn', 3],
