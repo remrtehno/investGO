@@ -11,11 +11,25 @@
   cursor: pointer;
   display: inline-block;
   margin-bottom: 49px;
+  transition: color .3s;
+
+  &:hover {
+    color: var(--black);
+  }
 
   & > svg {
     display: inline-block;
     margin-right: -5px;
     transform: translateY(1px);
+
+    & * {
+      stroke: var(--label);
+      transition: stroke .3s;
+    }
+  }
+
+  &:hover > svg * {
+    stroke: var(--black);
   }
 }
 
