@@ -8,14 +8,15 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {Page} from 'src/components/common/Page';
 import {withAuth} from 'src/components/hocs/withAuth';
 import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
+import {AcceptRulesStep} from 'src/components/pages/ProfilePage/AcceptRulesStep';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {Role} from 'src/contstants/Role';
 import {useClaims} from 'src/hooks/useClaim';
+import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
+import {ProfileSteps, uiAtom} from 'src/recoil/uiAtom';
 import {userAtom} from 'src/recoil/userAtom';
-import {AcceptRulesStep} from 'src/components/pages/ProfilePage/AcceptRulesStep';
 
-import {ProfileStep} from './ProfileHeader/ProfileHeader';
 import {ProfileNavigation} from './ProfileNavigation/ProfileNavigation';
 
 import {ProfileForms} from './ProfileForms';
@@ -32,14 +33,15 @@ export declare namespace ProfilePage {
 }
 
 export const ProfilePage = withAuth(() => {
-  const [step, setStep] = useState(ProfileStep.profile);
+  const {user} = useRecoilValue(userAtom);
+  const {profileStep} = useRecoilValue(uiAtom);
   const [currentForm, setCurrentForm] = useState(ProfileFormType.profile);
   const claims = useClaims();
   const [isSelectRolesModalOpened, setSelectRolesModalOpened] = useState(false);
   const [mainRole, setMainRole] = useState<Role>(Role.fl);
   const [roles, setRoles] = useState<Role[]>([]);
-  const {user} = useRecoilValue(userAtom);
   const [, selectRolesApi, selectRolesStatus] = useSelectRolesApi();
+  const isRegistrationComplete = useIsRegistrationComplete();
 
   const onContinueAs = useCallback((mainRole: Role, roles: Role[]) => {
     setMainRole(mainRole);
@@ -61,16 +63,12 @@ export const ProfilePage = withAuth(() => {
     if (user?.company
     && user?.company.status === ModerationStatus.approved
     && user?.company?.bank_details
-    && user?.roles.includes(Role.ip)) {
+    && user?.roles.includes(Role.ip)
+    && !isRegistrationComplete) {
       return true;
     }
     return false;
   }, [user]);
-
-  function handleAcceptRulesSubmit() {
-    console.log('submit');
-    setStep(ProfileStep.rules);
-  }
 
   const forms = useMemo((): ProfilePage.FormInfo[] => _.compact([
     {
@@ -107,9 +105,9 @@ export const ProfilePage = withAuth(() => {
   return (
     <Page>
       <div className={s.profilePage}>
-        <ProfileHeader activeStep={step} />
+        <ProfileHeader activeStep={profileStep} />
         <div className={cx(s.content, 'container')}>
-          { step === ProfileStep.profile ? (
+          { profileStep === ProfileSteps.profile ? (
             <div className='row'>
               <ProfileNavigation
                 className='col-2'
@@ -157,13 +155,13 @@ export const ProfilePage = withAuth(() => {
                   </FormActions>
                 ) : null }
                 { hasAcceptRules ? (
-                  <AcceptRules onSubmit={handleAcceptRulesSubmit} />
+                  <AcceptRules />
                 ) : null }
               </div>
             </div>
           ) : null }
-          { step === ProfileStep.rules ? (
-            <AcceptRulesStep onReturn={() => setStep(ProfileStep.profile)} />
+          { profileStep === ProfileSteps.rules ? (
+            <AcceptRulesStep />
           ) : null }
         </div>
       </div>

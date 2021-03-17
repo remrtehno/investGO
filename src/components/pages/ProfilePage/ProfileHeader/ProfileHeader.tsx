@@ -3,38 +3,32 @@ import React from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Color} from 'src/contstants/Color';
+import {ProfileSteps} from 'src/recoil/uiAtom';
 
 import s from './ProfileHeader.scss';
 
-export enum ProfileStep {
-  profile = 'profile',
-  rules = 'rules',
-  account = 'account',
-  access = 'access'
-}
-
 type Step = {
-  id: ProfileStep,
+  id: ProfileSteps,
   label: string
 }
 
 const steps: Step[] = [{
-  id: ProfileStep.profile,
+  id: ProfileSteps.profile,
   label: 'Заполните профиль',
 }, {
-  id: ProfileStep.rules,
+  id: ProfileSteps.rules,
   label: 'Присоединитесь к правилам',
 }, {
-  id: ProfileStep.account,
+  id: ProfileSteps.account,
   label: 'Пополните счет',
 }, {
-  id: ProfileStep.access,
+  id: ProfileSteps.access,
   label: 'Получите полный доступ к возможностям платформы',
 }];
 
 export declare namespace ProfileHeader {
   export type Props = {
-    activeStep: ProfileStep
+    activeStep: ProfileSteps
   }
 }
 
