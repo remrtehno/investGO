@@ -6,6 +6,7 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {AcceptRulesDocument} from 'src/components/pages/ProfilePage/AcceptRulesStep/AcceptRulesDocument';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Role} from 'src/contstants/Role';
+import {BackArrowIcon} from 'src/icons/BackArrowIcon';
 import {documentsAtom} from 'src/recoil/documentsAtom';
 import {ProfileSteps, uiAtom} from 'src/recoil/uiAtom';
 import {userAtom} from 'src/recoil/userAtom';
@@ -46,7 +47,10 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
   return (
     <div className={s.wrapper}>
       <div>
-        <span className={s.backLink} onClick={back}>назад</span>
+        <span className={s.backLink} onClick={back}>
+          <BackArrowIcon />
+          назад
+        </span>
         <div className={s.title}>Присоединение к правилам</div>
         <Text className={s.text} size={TextSize.body2}>
           Ознакомьтесь с документами, сформированными на основе данных, указанных в вашем
