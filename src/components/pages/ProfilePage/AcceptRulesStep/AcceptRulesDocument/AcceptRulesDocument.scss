@@ -1,0 +1,16 @@
+.docButton {
+  margin-top: 40px;
+  & button {
+    max-width: 162px;
+  }
+}
+
+.link {
+  color: black;
+  text-decoration: underline;
+
+  &:visited,
+  &:hover {
+    color: black;
+  }
+}

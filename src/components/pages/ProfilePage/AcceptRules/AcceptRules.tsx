@@ -8,16 +8,18 @@ import {Color} from 'src/contstants/Color';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import s from './AcceptRules.scss';
-import {AcceptRulesModal} from 'src/components/pages/ProfilePage/AcceptRules/AcceptRulesModal';
+
 
 export declare namespace AcceptRules {
-  export type Props = {};
+  export type Props = {
+    onSubmit?(): void
+  };
 }
 
 export function AcceptRules(props: AcceptRules.Props) {
   const { user } = useRecoilValue(userAtom);
   const [checkBoxes, setCheckBoxes] = useState([false, false, false]);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  // const [isModalOpened, setIsModalOpened] = useState(false);
 
   if (!user) {
     return null;
@@ -89,16 +91,12 @@ export function AcceptRules(props: AcceptRules.Props) {
                 })()}
                 className='col-6'
                 size={ButtonSize.m}
-                onClick={() => setIsModalOpened(true)}
+                onClick={props.onSubmit}
                 theme={ButtonTheme.black}
               >Присоединиться к правилам</Button>
             </div>
-          
         </div>
       </div>
-      { isModalOpened ? (
-        <AcceptRulesModal onClose={() => setIsModalOpened(false)} />
-      ) : null }
     </div>
   );
 }

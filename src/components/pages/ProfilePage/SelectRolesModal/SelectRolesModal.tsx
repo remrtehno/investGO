@@ -16,7 +16,7 @@ export declare namespace SelectRolesModal {
   export type Props = {
     mainRole: Role | null,
     roles: Role[],
-    onApply(): void,
+    onApply(selectedRoles: Role[]): void,
     onClose(): void,
   };
 }

@@ -1,0 +1,24 @@
+.wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.backLink {
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--label);
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 49px;
+}
+
+.title {
+  font-size: 34px;
+  line-height: 36px;
+  letter-spacing: -0.4px;
+  margin-bottom: 24px;
+}
+
+.text {
+  margin-bottom: 60px;
+}

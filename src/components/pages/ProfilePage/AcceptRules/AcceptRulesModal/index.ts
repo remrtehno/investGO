@@ -1,1 +1,0 @@
-export {AcceptRulesModal} from './AcceptRulesModal';

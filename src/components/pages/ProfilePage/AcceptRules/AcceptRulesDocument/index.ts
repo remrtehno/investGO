@@ -1,1 +1,0 @@
-export {AcceptRulesDocument} from './AcceptRulesDocument'

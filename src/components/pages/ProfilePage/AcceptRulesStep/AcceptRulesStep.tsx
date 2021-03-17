@@ -3,23 +3,22 @@ import type {FC} from 'react';
 import React, {useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {Modal} from 'src/components/common/Modal/Modal';
-import {AcceptRulesDocument} from 'src/components/pages/ProfilePage/AcceptRules/AcceptRulesDocument';
+import {AcceptRulesDocument} from 'src/components/pages/ProfilePage/AcceptRulesStep/AcceptRulesDocument';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Role} from 'src/contstants/Role';
 import {documentsAtom} from 'src/recoil/documentsAtom';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
-import s from '../AcceptRules.scss';
+import s from './AcceptRulesStep.scss';
 
-export declare namespace AcceptRulesModal {
+export declare namespace AcceptRulesStep {
   export type Props = {
-    onClose(): void,
+    onReturn(): void
   };
 }
 
-export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
+export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const {documents} = useRecoilValue(documentsAtom);
 
@@ -40,10 +39,11 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
   }
 
   return (
-    <Modal width={700} allowClose={true} onClose={props.onClose}>
-      <div className='container'>
-        <div className={s.modalTitle}>Присоединение к правилам</div>
-        <Text style={{marginBottom: 60}} size={TextSize.body2}>
+    <div className={s.wrapper}>
+      <div>
+        <span className={s.backLink} onClick={props.onReturn}>назад</span>
+        <div className={s.title}>Присоединение к правилам</div>
+        <Text className={s.text} size={TextSize.body2}>
           Ознакомьтесь с документами, сформированными на основе данных, указанных в вашем
           профиле, и нажмите кнопку  "Подписать".
         </Text>
@@ -64,6 +64,6 @@ export const AcceptRulesModal: FC<AcceptRulesModal.Props> = (props) => {
           ) : null }
         </div>
       </div>
-    </Modal>
+    </div>
   );
 };

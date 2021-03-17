@@ -7,10 +7,13 @@ import {useSelectRolesApi} from 'src/api/userApi/useSelectRolesApi';
 import {FormActions} from 'src/components/common/Form/FormActions';
 import {Page} from 'src/components/common/Page';
 import {withAuth} from 'src/components/hocs/withAuth';
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {Role} from 'src/contstants/Role';
 import {useClaims} from 'src/hooks/useClaim';
 import {userAtom} from 'src/recoil/userAtom';
+import {AcceptRulesStep} from 'src/components/pages/ProfilePage/AcceptRulesStep';
 
 import {ProfileStep} from './ProfileHeader/ProfileHeader';
 import {ProfileNavigation} from './ProfileNavigation/ProfileNavigation';
@@ -29,7 +32,7 @@ export declare namespace ProfilePage {
 }
 
 export const ProfilePage = withAuth(() => {
-  const step = ProfileStep.profile;
+  const [step, setStep] = useState(ProfileStep.profile);
   const [currentForm, setCurrentForm] = useState(ProfileFormType.profile);
   const claims = useClaims();
   const [isSelectRolesModalOpened, setSelectRolesModalOpened] = useState(false);
@@ -52,6 +55,21 @@ export const ProfilePage = withAuth(() => {
 
   function handleSelectRolesApply(selectedRoles: []) {
     selectRolesApi({mainRole, roles: selectedRoles});
+  }
+
+  const hasAcceptRules = useMemo(() => {
+    if (user?.company
+    && user?.company.status === ModerationStatus.approved
+    && user?.company?.bank_details
+    && user?.roles.includes(Role.ip)) {
+      return true;
+    }
+    return false;
+  }, [user]);
+
+  function handleAcceptRulesSubmit() {
+    console.log('submit');
+    setStep(ProfileStep.rules);
   }
 
   const forms = useMemo((): ProfilePage.FormInfo[] => _.compact([
@@ -82,8 +100,8 @@ export const ProfilePage = withAuth(() => {
     } : null,
     user?.roles.includes(Role.fl) ? {
       id: ProfileFormType.fl,
-      title: 'Данные физ. лица'
-    } : null
+      title: 'Данные физ. лица',
+    } : null,
   ]), [user]);
 
   return (
@@ -91,54 +109,62 @@ export const ProfilePage = withAuth(() => {
       <div className={s.profilePage}>
         <ProfileHeader activeStep={step} />
         <div className={cx(s.content, 'container')}>
-          <div className='row'>
-            <ProfileNavigation
-              className='col-2'
-              forms={forms}
-              currentForm={currentForm}
-              onChangeCurrentForm={setCurrentForm}
-            />
-            <div className='col-8'>
-              <ProfileForms
-                onChangeCurrentForm={setCurrentForm}
-                currentForm={currentForm}
+          { step === ProfileStep.profile ? (
+            <div className='row'>
+              <ProfileNavigation
+                className='col-2'
                 forms={forms}
+                currentForm={currentForm}
+                onChangeCurrentForm={setCurrentForm}
               />
-              { user && user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
-                <FormActions>
-                  <div className='col-4'>
-                    <Button
-                      theme={ButtonTheme.black}
-                      size={ButtonSize.m}
-                      onClick={() => onContinueAs(Role.fl, [Role.investor])}
-                    >Продолжить как физ.&nbsp;лицо</Button>
-                  </div>
-                  <div className='col-4'>
-                    <Button
-                      theme={ButtonTheme.black}
-                      size={ButtonSize.m}
-                      onClick={() => onContinueAs(Role.ip, [Role.investor, Role.borrower])}
-                    >Продолжить как ИП</Button>
-                  </div>
-                  <div className='col-4'>
-                    <Button
-                      theme={ButtonTheme.black}
-                      size={ButtonSize.m}
-                      onClick={() => onContinueAs(Role.ur, [Role.investor, Role.borrower])}
-                    >Продолжить как юр.&nbsp;лицо</Button>
-                  </div>
-                  { isSelectRolesModalOpened ? (
-                    <SelectRolesModal
-                      onApply={handleSelectRolesApply}
-                      onClose={() => setSelectRolesModalOpened(false)}
-                      mainRole={mainRole}
-                      roles={roles}
-                    />
-                  ) : null }
-                </FormActions>
-              ) : null }
+              <div className='col-8'>
+                <ProfileForms
+                  onChangeCurrentForm={setCurrentForm}
+                  currentForm={currentForm}
+                  forms={forms}
+                />
+                { user && user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
+                  <FormActions>
+                    <div className='col-4'>
+                      <Button
+                        theme={ButtonTheme.black}
+                        size={ButtonSize.m}
+                        onClick={() => onContinueAs(Role.fl, [Role.investor])}
+                      >Продолжить как физ.&nbsp;лицо</Button>
+                    </div>
+                    <div className='col-4'>
+                      <Button
+                        theme={ButtonTheme.black}
+                        size={ButtonSize.m}
+                        onClick={() => onContinueAs(Role.ip, [Role.investor, Role.borrower])}
+                      >Продолжить как ИП</Button>
+                    </div>
+                    <div className='col-4'>
+                      <Button
+                        theme={ButtonTheme.black}
+                        size={ButtonSize.m}
+                        onClick={() => onContinueAs(Role.ur, [Role.investor, Role.borrower])}
+                      >Продолжить как юр.&nbsp;лицо</Button>
+                    </div>
+                    { isSelectRolesModalOpened ? (
+                      <SelectRolesModal
+                        onApply={handleSelectRolesApply}
+                        onClose={() => setSelectRolesModalOpened(false)}
+                        mainRole={mainRole}
+                        roles={roles}
+                      />
+                    ) : null }
+                  </FormActions>
+                ) : null }
+                { hasAcceptRules ? (
+                  <AcceptRules onSubmit={handleAcceptRulesSubmit} />
+                ) : null }
+              </div>
             </div>
-          </div>
+          ) : null }
+          { step === ProfileStep.rules ? (
+            <AcceptRulesStep onReturn={() => setStep(ProfileStep.profile)} />
+          ) : null }
         </div>
       </div>
     </Page>

@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import type {CSSProperties, FC} from 'react';
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
 import {useBorrowerAccessionAgreementApi} from 'src/api/userApi/useBorrowerAccessionAgreement';
@@ -8,10 +8,11 @@ import {useInvestorAccessionAgreementApi} from 'src/api/userApi/useInvestorAcces
 import {useSignDocs} from 'src/api/userApi/useSignDocs';
 import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import {SmsForm} from 'src/components/common/SmsForm';
-import s from 'src/components/pages/ProfilePage/AcceptRules/AcceptRules.scss';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import type {User} from 'src/types/User';
+
+import s from './AcceptRulesDocument.scss';
 
 const DocIcon: FC<{ style: CSSProperties }> = (props) => {
   return (
@@ -98,21 +99,21 @@ export const AcceptRulesDocument: FC<AcceptRulesDocument.Props> = (props) => {
         className={cx(s.link)}
       >
         <DocIcon style={{minWidth: 35, marginRight: 20}} />
-        { !loading && props.document &&
-          <Text size={TextSize.body2}>
+        { !loading && props.document
+          && <Text size={TextSize.body2}>
             { props.name }
           </Text>
         }
-        { (loading || !props.document) &&
-          <Text size={TextSize.body2}>Подождите, документ формируется...</Text>
+        { (loading || !props.document)
+          && <Text size={TextSize.body2}>Подождите, документ формируется...</Text>
         }
       </a>
       <div className={s.docButton}>
-        { !loading && props.document?.status === 'signed' &&
-          <span>Документ подписан</span>
+        { !loading && props.document?.status === 'signed'
+          && <span>Документ подписан</span>
         }
-        { !loading && props.document?.status !== 'signed' &&
-          <Button
+        { !loading && props.document?.status !== 'signed'
+          && <Button
             className='col-4'
             size={ButtonSize.m}
             theme={ButtonTheme.black}
