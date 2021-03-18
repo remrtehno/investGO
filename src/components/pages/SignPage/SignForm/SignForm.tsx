@@ -2,12 +2,13 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {useHistory, Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useSignInApi} from 'src/api/userApi/useSignInApi';
 import {useSignUpApi} from 'src/api/userApi/useSignUpApi';
 import {useUserCheckExists} from 'src/api/userApi/useUserCheckExists';
+import {RoutePaths} from 'src/components/common/App/routes';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
@@ -184,7 +185,7 @@ export const SignForm: FC<SignForm.Props> = () => {
         Продолжить
       </Button>
       <div className={s.subLink}>
-        <Link to="/recover">Восстановить пароль</Link>
+        <Link to={RoutePaths.recover}>Восстановить пароль</Link>
       </div>
       { isShowSmsForm
         ? (

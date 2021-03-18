@@ -4,6 +4,7 @@ import React, {useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
+import {RoutePaths} from 'src/components/common/App/routes';
 import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
 
@@ -36,7 +37,7 @@ export const HeaderMenu: FC<HeaderMenu.Props> = (props) => {
         { isOpened
           && <CSSTransition timeout={400} classNames='header-menu-transition'>
             <div className={s.menu} ref={menuRef}>
-              <Link to='ttt'>Инвестору</Link>
+              <Link to={RoutePaths.investorDasboard}>Инвестору</Link>
             </div>
           </CSSTransition>
         }
