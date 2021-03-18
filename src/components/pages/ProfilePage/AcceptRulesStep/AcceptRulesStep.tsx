@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import type {FC} from 'react';
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 
 import {AcceptRulesDocument} from 'src/components/pages/ProfilePage/AcceptRulesStep/AcceptRulesDocument';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Role} from 'src/contstants/Role';
+import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
 import {BackArrowIcon} from 'src/icons/BackArrowIcon';
 import {documentsAtom} from 'src/recoil/documentsAtom';
 import {ProfileSteps, uiAtom} from 'src/recoil/uiAtom';
@@ -23,6 +24,7 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const {documents} = useRecoilValue(documentsAtom);
   const [, setProfileStep] = useRecoilState(uiAtom);
+  const isRegistrationComplete = useIsRegistrationComplete();
 
   const borrowerAccessionAgreement = useMemo(() => {
     return _.find(documents, (doc: User.SignDocuments): boolean => {
@@ -39,6 +41,12 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
   function back() {
     setProfileStep({profileStep: ProfileSteps.profile});
   }
+
+  useEffect(() => {
+    if (isRegistrationComplete) {
+      back();
+    }
+  }, [documents]);
 
   if (!user) {
     return null;
