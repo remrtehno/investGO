@@ -26,8 +26,8 @@ export enum RoutePaths {
   home = '/',
   recover = '/recover',
   passwordReset = '/password-reset',
-  investorDasboard = '/investor-dasboard',
-  borrowerDasboard = '/borrower-dasboard',
+  investorDashboard = '/investor-dashboard',
+  borrowerDashboard = '/borrower-dashboard',
 }
 
 export const routes: RouteInfo[] = [
@@ -69,12 +69,12 @@ export const routes: RouteInfo[] = [
     exact: true,
   },
   {
-    path: RoutePaths.investorDasboard,
+    path: RoutePaths.investorDashboard,
     Component: InvestorPage,
     exact: true,
   },
   {
-    path: RoutePaths.borrowerDasboard,
+    path: RoutePaths.borrowerDashboard,
     Component: BorrowerPage,
     exact: true,
   },

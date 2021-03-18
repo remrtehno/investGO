@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
@@ -28,19 +27,19 @@ export const HeaderMenu: FC<HeaderMenu.Props> = (props) => {
   });
 
   return (
-    <div className={cx(s.menuContainer, 'global')}>
+    <div className={s.menuContainer} ref={menuRef}>
       <span className={s.menuTrigger} onClick={toggle}>
         Заемщику
         <DropDownIcon />
       </span>
       <TransitionGroup>
-        { isOpened
-          && <CSSTransition timeout={400} classNames='header-menu-transition'>
-            <div className={s.menu} ref={menuRef}>
-              <Link to={RoutePaths.investorDasboard}>Инвестору</Link>
+        { isOpened ? (
+          <CSSTransition timeout={400} classNames='header-menu-transition'>
+            <div className={s.menu}>
+              <Link to={RoutePaths.investorDashboard}>Инвестору</Link>
             </div>
           </CSSTransition>
-        }
+        ) : null }
       </TransitionGroup>
     </div>
   );
