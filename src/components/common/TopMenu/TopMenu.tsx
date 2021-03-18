@@ -31,7 +31,7 @@ export const TopMenu: FC<TopMenu.Props> = (props) => {
                   exact={true}
                   to={item.to}
                 >
-                  { item?.text }
+                  { item.text }
                 </NavLink>
               </li>
             );
