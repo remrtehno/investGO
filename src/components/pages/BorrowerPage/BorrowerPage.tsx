@@ -9,7 +9,7 @@ export declare namespace BorrowerPage {
 export const BorrowerPage = withAuth(() => {
   return (
     <Page>
-      <div className={s.borrowerPage}></div>
+      <div className={s.borrowerPage} />
     </Page>
   );
 });

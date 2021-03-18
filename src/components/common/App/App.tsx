@@ -21,14 +21,17 @@ import {userAtom} from 'src/recoil/userAtom';
 import {RequestStatus} from 'src/types/common';
 
 import {routes} from './routes';
+import { useUserDocuments } from 'src/api/userApi/useUserDocuments';
 
 const AppContent: FC = () => {
   const userApi = useUserApi();
+  const [, getSignDocuments] = useUserDocuments();
   const {status: userStatus} = useRecoilValue(userAtom);
   const setIsPageInit = useSetRecoilState(isPageInitAtom);
 
   useEffect(() => {
     userApi.get();
+    getSignDocuments(null);
   }, []);
 
   useEffect(() => {
