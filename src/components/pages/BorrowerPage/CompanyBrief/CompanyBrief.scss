@@ -1,0 +1,38 @@
+.companyBrief {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 6px;
+  height: 90px;
+}
+
+.logo {
+  padding: 0 18px;
+}
+
+.img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid var(--gray2);
+}
+
+.name {
+  flex: 1 1 60%; 
+  font-size: 13px;
+}
+
+.buttons {
+  padding: 18px 0;
+}
+
+.button1 {
+  margin: 0 20px 0 25px;
+  width: 140px;
+}
+
+.button2 {
+  margin: 0 25px 0 0;
+  width: 204px;
+}

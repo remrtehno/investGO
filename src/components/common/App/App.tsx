@@ -14,7 +14,7 @@ import 'src/components/common/Form/fields/passwordField';
 import 'src/components/common/Form/fields/phoneField';
 import 'src/libs/bootstrap/bootstrap-grid.css';
 import 'src/libs/bootstrap/bootstrap-reboot.css';
-import 'src/theme/colors.css';
+import 'src/theme/theme.css';
 import {useUserApi} from 'src/hooks/useUser';
 import {isPageInitAtom} from 'src/recoil/isPageInitAtom';
 import {userAtom} from 'src/recoil/userAtom';

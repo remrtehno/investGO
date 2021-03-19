@@ -74,22 +74,3 @@
     }
   }
 }
-
-:global {
-  .header-menu-transition-enter {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-  .header-menu-transition-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .header-menu-transition-exit {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .header-menu-transition-exit-active {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-}

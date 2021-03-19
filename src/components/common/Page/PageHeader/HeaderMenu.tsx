@@ -34,7 +34,7 @@ export const HeaderMenu: FC<HeaderMenu.Props> = (props) => {
       </span>
       <TransitionGroup>
         { isOpened ? (
-          <CSSTransition timeout={400} classNames='header-menu-transition'>
+          <CSSTransition timeout={400} classNames='popup-menu-transition'>
             <div className={s.menu}>
               <Link to={RoutePaths.investorDashboard}>Инвестору</Link>
             </div>
