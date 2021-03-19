@@ -93,6 +93,7 @@
   "dependencies": {
     "@types/react-input-mask": "^3.0.0",
     "copy-webpack-plugin": "6.4.1",
+    "path-to-regexp": "1.7.0",
     "postcss-loader": "^4.1.0",
     "react-input-mask": "^2.0.4",
     "react-lottie-player": "^1.2.0",
