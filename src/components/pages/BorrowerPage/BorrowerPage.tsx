@@ -12,6 +12,7 @@ import s from './BorrowerPage.scss';
 import {useRecoilValue} from 'recoil';
 import { userAtom } from 'src/recoil/userAtom';
 import { CompanyBrief } from './CompanyBrief';
+import { Loans } from './Loans';
 
 export declare namespace BorrowerPage {
 }
@@ -56,6 +57,10 @@ export const BorrowerPage = withAuth(() => {
                 <CompanyBrief company={company} />
               </section>
             ) : null }
+            <section className={s.section}>
+              <Text size={TextSize.h2} className={s.sectionTitle}>Займы</Text>
+              <Loans />
+            </section>
           </div>
         </div>
       </div>
