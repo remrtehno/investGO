@@ -27,12 +27,13 @@ export const api = {
     saveBankDetails: () => '/company/bank-details',
   },
   sms: {
-    sign: () => '/sms-sign'
+    sign: () => '/sms-sign',
   },
   borrower: {
-    accessionAgreement: () => '/borrower/accession-agreement'
+    accessionAgreement: () => '/borrower/accession-agreement',
+    loanRequest: () => '/borrower/loan-request',
   },
   investor: {
-    accessionAgreement: () => '/investor/accession-agreement'
-  }
+    accessionAgreement: () => '/investor/accession-agreement',
+  },
 };

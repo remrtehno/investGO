@@ -1,18 +1,19 @@
-import cx from 'classnames';
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
+import {useRecoilValue} from 'recoil';
 
+import {useGetLoans} from 'src/api/borrowerApi/useGetLoansApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
 import {TopMenu} from 'src/components/common/TopMenu';
 import {withAuth} from 'src/components/hocs/withAuth';
-import {Text, TextSize} from 'src/components/ui/Text';
-
 import {AccountInfo} from 'src/components/pages/BorrowerPage/AccountInfo';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {loansAtom} from 'src/recoil/loansAtom';
+import {userAtom} from 'src/recoil/userAtom';
+
 import s from './BorrowerPage.scss';
-import {useRecoilValue} from 'recoil';
-import { userAtom } from 'src/recoil/userAtom';
-import { CompanyBrief } from './CompanyBrief';
-import { Loans } from './Loans';
+import {CompanyBrief} from './CompanyBrief';
+import {Loans} from './Loans';
 
 export declare namespace BorrowerPage {
 }
@@ -20,6 +21,12 @@ export declare namespace BorrowerPage {
 export const BorrowerPage = withAuth(() => {
   const {user} = useRecoilValue(userAtom);
   const company = user?.company;
+  const [, getLoans] = useGetLoans();
+  const {loans} = useRecoilValue(loansAtom);
+
+  useEffect(() => {
+    getLoans(null);
+  }, []);
 
   const menuItems = useMemo(() => {
     return (
@@ -51,16 +58,18 @@ export const BorrowerPage = withAuth(() => {
               <div className={s.accountNum}>№586920</div>
               <AccountInfo />
             </section>
-            {company ? (
+            { company ? (
               <section className={s.section}>
                 <Text size={TextSize.h2} className={s.sectionTitle}>Моя компания</Text>
                 <CompanyBrief company={company} />
               </section>
             ) : null }
-            <section className={s.section}>
-              <Text size={TextSize.h2} className={s.sectionTitle}>Займы</Text>
-              <Loans />
-            </section>
+            { loans && loans.length ? (
+              <section className={s.section}>
+                <Text size={TextSize.h2} className={s.sectionTitle}>Займы</Text>
+                <Loans />
+              </section>
+            ) : null }
           </div>
         </div>
       </div>
