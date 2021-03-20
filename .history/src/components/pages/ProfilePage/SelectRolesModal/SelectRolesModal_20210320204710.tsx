@@ -33,7 +33,7 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
 
   return (
     <Modal
-      width={440}
+      width=
       allowClose={true}
       className={s.SelectRolesModal}
       onClose={() => props.onClose()}

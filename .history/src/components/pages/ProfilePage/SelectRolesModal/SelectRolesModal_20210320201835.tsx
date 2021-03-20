@@ -33,7 +33,6 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
 
   return (
     <Modal
-      width={440}
       allowClose={true}
       className={s.SelectRolesModal}
       onClose={() => props.onClose()}
@@ -59,13 +58,21 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
       }) }
       <div className={cx('container', 'p-0', s.actions)}>
         <div className='row'>
-          <div className='col-12'>
+          <div className='col-6'>
             <Button
               className={s.action}
               size={ButtonSize.m}
               theme={ButtonTheme.black}
               onClick={() => props.onApply(values)}
             >Продолжить</Button>
+          </div>
+          <div className='col-6'>
+            <Button
+              className={s.action}
+              size={ButtonSize.m}
+              theme={ButtonTheme.light}
+              onClick={() => props.onClose()}
+            >Назад</Button>
           </div>
         </div>
       </div>
