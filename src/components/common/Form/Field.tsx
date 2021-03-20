@@ -4,10 +4,12 @@ import React, {useCallback} from 'react';
 import {fieldsModel} from './fields/fieldsModel';
 
 import {FieldType, useFormField, useFormModel} from './Form';
+import s from './Form.scss'
 
 export declare namespace Field {
   export type Props = {
     name: string,
+    extraValue?: string | null,
 
     className?: string,
   };
@@ -64,6 +66,7 @@ export const Field: FC<Field.Props> = (props) => {
         field={field}
         onChange={onChange}
       />
+      <span className={s.extraValue}>{props.extraValue}</span>
     </div>
   );
 };

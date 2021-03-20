@@ -11,8 +11,10 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import {ModerationInfo} from 'src/components/common/ModerationInfo';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {userAtom} from 'src/recoil/userAtom';
@@ -20,8 +22,6 @@ import type {User} from 'src/types/User';
 
 import s from './PassportForm.scss';
 import {usePassportFields} from './usePassportFields';
-import {ModerationInfo} from 'src/components/common/ModerationInfo';
-import {CheckBox} from 'src/components/ui/CheckBox';
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
@@ -78,6 +78,25 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
     });
   }, [values, savePassportApi]);
 
+
+  const getAge = (date_of_birth: string): string | null => {
+    const birthday = new Date(date_of_birth);
+    const ageDifMs = Date.now() - birthday.getTime();
+    const ageDate = new Date(ageDifMs);
+    const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+    if (age < 1) {
+      return null;
+    }
+    if (age === 1) {
+      return `${age} год`;
+    }
+    if (age < 5) {
+      return `${age} года`;
+    }
+    return `${age} лет`;
+  };
+
   function renderForm() {
     return (
       <Form
@@ -91,7 +110,11 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
       >
         <FormRow>
           <Field className='col-6' name='fio' />
-          <Field className='col-6' name='date_of_birth' />
+          <Field
+            className='col-6'
+            name='date_of_birth'
+            extraValue={getAge(values.date_of_birth)}
+          />
         </FormRow>
         <FormRow>
           <Field className='col-6' name='subdivision_code' />
@@ -114,7 +137,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         <FormRow>
           <div className='col-12'>
             <div className={s.documentsTitle}>
-              <Text size={TextSize.subHeadline1} style={{ marginTop: 20, marginBottom: 8 }}>
+              <Text size={TextSize.subHeadline1} style={{marginTop: 20, marginBottom: 8}}>
                 Загрузите документы
               </Text>
               <div>
@@ -128,26 +151,26 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         { user && (!user.passport || user.passport.status !== ModerationStatus.approved) ? (
           <div>
             <CheckBox
-              style={{ marginBottom: 20 }}
+              style={{marginBottom: 20}}
               value={checkBoxes[0]}
               onChange={(checked) => setCheckBoxes([checked, checkBoxes[1], checkBoxes[2]])}
               label={
                 'Предоставленные личные данные физического лица верны.'
-              }/>
+              } />
             <CheckBox
-              style={{ marginBottom: 20 }}
+              style={{marginBottom: 20}}
               value={checkBoxes[1]}
               onChange={(checked) => setCheckBoxes([checkBoxes[0], checked, checkBoxes[2]])}
               label={
                 'Я даю согласие на передачу и обработку персональных данных.'
-              }/>
+              } />
             <CheckBox
-              style={{ marginBottom: 20 }}
+              style={{marginBottom: 20}}
               value={checkBoxes[2]}
               onChange={(checked) => setCheckBoxes([checkBoxes[0], checkBoxes[1], checked])}
               label={
                 <div>Я ознакомился с условиями <a className={s.link} href='#'>Правил</a> и всех приложений к ним.</div>
-              }/>
+              } />
           </div>
         ) : null }
         { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
@@ -167,7 +190,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
 
   function renderModerationInfo() {
     return (
-      <ModerationInfo/>
+      <ModerationInfo />
     );
   }
 

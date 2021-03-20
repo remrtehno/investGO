@@ -1,0 +1,12 @@
+.extraValue {
+  color: var(--label);
+  font-size: 16px;
+  line-height: 24px;
+  position: absolute;
+  right: 30px;
+  top: 27px;
+
+  &:empty {
+    display: none;
+  }
+}
