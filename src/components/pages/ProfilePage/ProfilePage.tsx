@@ -121,7 +121,7 @@ export const ProfilePage = withAuth(() => {
                   currentForm={currentForm}
                   forms={forms}
                 />
-                { user && user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
+                { user || user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
                   <FormActions>
                     <div className='col-4'>
                       <Button

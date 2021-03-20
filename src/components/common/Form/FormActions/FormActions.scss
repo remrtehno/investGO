@@ -1,3 +1,6 @@
 .FormActions {
   margin: 40px 0 60px;
+  [class^='col-'] {
+    padding: 0 8px;
+  }
 }
