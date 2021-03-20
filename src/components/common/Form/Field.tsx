@@ -4,7 +4,7 @@ import React, {useCallback} from 'react';
 import {fieldsModel} from './fields/fieldsModel';
 
 import {FieldType, useFormField, useFormModel} from './Form';
-import s from './Form.scss'
+import s from './Form.scss';
 
 export declare namespace Field {
   export type Props = {
