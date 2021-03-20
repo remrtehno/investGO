@@ -32,7 +32,7 @@ export const FormTitle: FC<FormTitle.Props> = (props) => {
 
     case ModerationStatus.approved:
       return (
-        <Text className={cx(s.status, s.appreoved)} size={TextSize.status}>
+        <Text className={cx(s.status, s.approved)} size={TextSize.status}>
           <ModeratedIcon />
           Подтверждено
         </Text>

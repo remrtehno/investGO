@@ -37,8 +37,6 @@ export const Button: FC<Button.Props> = (props) => {
     props.className
   );
 
-  console.log(props)
-
   const onClick = useCallback(() => {
     if (props.disabled) {
       return;
