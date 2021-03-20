@@ -37,6 +37,8 @@ export const Button: FC<Button.Props> = (props) => {
     props.className
   );
 
+  console.log(props)
+
   const onClick = useCallback(() => {
     if (props.disabled) {
       return;
@@ -46,7 +48,7 @@ export const Button: FC<Button.Props> = (props) => {
   }, [props.onClick, props.disabled]);
 
   return (
-    <button style={props.style} className={className} onClick={onClick}>
+    <button disabled={!!props.disabled} style={props.style} className={className} onClick={onClick}>
       { props.children }
     </button>
   );
