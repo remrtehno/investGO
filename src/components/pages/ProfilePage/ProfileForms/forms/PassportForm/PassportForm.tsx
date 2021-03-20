@@ -85,7 +85,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
     const ageDate = new Date(ageDifMs);
     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
-    if (age < 1) {
+    if (age < 1 || !date_of_birth) {
       return null;
     }
     if (age === 1) {
