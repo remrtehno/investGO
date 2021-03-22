@@ -13,7 +13,7 @@ declare namespace Tooltip {
 }
 
 export const Tooltip: FC<Tooltip.Props> = (props) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null);
