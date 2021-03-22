@@ -26,8 +26,8 @@ export enum RoutePaths {
   home = '/',
   recover = '/recover',
   passwordReset = '/password-reset',
-  investorDashboard = '/investor-dashboard',
-  borrowerDashboard = '/borrower-dashboard',
+  investorDashboard = '/investor/dashboard',
+  borrowerDashboard = '/borrower/dashboard',
 }
 
 export const routes: RouteInfo[] = [

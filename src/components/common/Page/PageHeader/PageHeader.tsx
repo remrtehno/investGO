@@ -54,7 +54,7 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
         <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
         <div className={s.space} />
         { user && isRegistrationComplete ? (
-          <HeaderMenu />
+          <HeaderMenu user={user} />
         ) : null }
         { user ? (
           <div className={s.userContainer}>
