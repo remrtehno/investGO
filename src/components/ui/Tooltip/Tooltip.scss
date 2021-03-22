@@ -1,0 +1,62 @@
+.tooltip {
+  max-width: 271px;
+  color: var(--white);
+  background-color: var(--black);
+  padding: 6px 22px 12px 11px;
+  border-radius: 4px;
+}
+
+.buttonTooltip {
+  border: 0;
+  background: none;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+
+  &:hover .iconTooltip {
+    color: var(--red);
+
+    path, svg {
+      fill: var(--red);
+    }
+  }
+}
+
+.arrow,
+.arrow::before {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: -1;
+  border-radius: 3px;
+}
+
+.arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: var(--black);
+}
+
+.tooltip[data-popper-placement^='top'] {
+  margin-bottom: 5px;
+  & > .arrow {
+    bottom: -6px;
+  }
+}
+
+.tooltip[data-popper-placement^='bottom'] {
+  margin-top: 10px;
+
+  & > .arrow {
+    top: -5px;
+  }
+}
+
+.tooltip[data-popper-placement^='left'] > .arrow {
+  right: -5px;
+}
+
+.tooltip[data-popper-placement^='right'] > .arrow {
+  left: -5px;
+}
+

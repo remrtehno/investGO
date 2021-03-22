@@ -16,12 +16,15 @@ import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/P
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
+import {Tooltip} from 'src/components/ui/Tooltip/Tooltip';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
+import {InfoIcon} from 'src/icons/InfoIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
 import s from './PassportForm.scss';
 import {usePassportFields} from './usePassportFields';
+import {TextWeight} from "src/components/ui/Text/Text";
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
@@ -139,6 +142,12 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <div className={s.documentsTitle}>
               <Text size={TextSize.subHeadline1} style={{marginTop: 20, marginBottom: 8}}>
                 Загрузите документы
+                <Tooltip componentIcon={InfoIcon}>
+                  <Text size={TextSize.bodyMini} weight={TextWeight.normal}>Допускается загрузка файлов в форматах
+                  jpg, jpeg, png, gif, pdf, zip, rar, doc, docx, xls,
+                  xlsx, ppt, pps, размер которых
+                    не превышает 5 Мб.</Text>
+                </Tooltip>
               </Text>
               <div>
                 — Копию документа, удостоверяющего личность физического лица (лицевая сторона, а также страница
