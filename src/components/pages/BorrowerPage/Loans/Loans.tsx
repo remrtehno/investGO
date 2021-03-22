@@ -1,20 +1,13 @@
-import {FC, useEffect} from 'react';
-import React, {useRef, useState} from 'react';
 import cx from 'classnames';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import type {FC} from 'react';
+import React, {useRef, useState} from 'react';
+import {useRecoilValue} from 'recoil';
 
-import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
-import {KebabMenuIcon} from 'src/icons/KebabMenuIcon';
-import type {User} from 'src/types/User';
+import {loansAtom} from 'src/recoil/loansAtom';
+
+import {Loan} from './Loan/Loan';
 
 import s from './Loans.scss';
-import { CalendarDateIcon } from 'src/icons/CalendarDateIcon';
-import { DropDownIcon } from 'src/icons/DropDownIcon';
-import { useGetLoans } from 'src/api/borrowerApi/useGetLoansApi';
-import { useRecoilValue } from 'recoil';
-import { loansAtom } from 'src/recoil/loansAtom';
-import { formatDate } from 'src/utils/formatDate';
 
 declare namespace Loans {
   export type Props = {
@@ -23,8 +16,6 @@ declare namespace Loans {
 
 export const Loans: FC<Loans.Props> = (props) => {
   const {loans} = useRecoilValue(loansAtom);
-
-  console.log(loans)
 
   if (!loans) {
     return null;
@@ -43,26 +34,12 @@ export const Loans: FC<Loans.Props> = (props) => {
         </div>
       </div>
       <div className={s.body}>
-        {loans.map((loan, index) => {
+        { loans.map((loan, index) => {
           return (
-            <div className={cx('row', 'align-items-center', s.row)} key={index}>
-              <div className='col-1'>{loan.num}</div>
-              <div className='col-2'>
-                <span className={s.mainSum}>{loan.amount} ₽</span>
-                + 7 500.00₽
-              </div>
-              <div className='col-2'>{formatDate(new Date(loan.collection_start_at))}</div>
-              <div className='col-2'>0.00 ₽</div>
-              <div className='col-2'>
-                <i className={s.icon}><CalendarDateIcon /></i>
-                5 000.00 ₽
-              </div>
-              <div className='col-2'>{loan.status}</div>
-              <i className={s.openBtn}><DropDownIcon /></i>
-            </div>
-          )
-        })}
+            <Loan loan={loan} key={index} />
+          );
+        }) }
       </div>
     </div>
-  )
-}
+  );
+};

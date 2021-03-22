@@ -1,10 +1,7 @@
 import type {FC} from 'react';
-import React, {useRef, useState} from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import React from 'react';
 
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
-import {KebabMenuIcon} from 'src/icons/KebabMenuIcon';
 import type {User} from 'src/types/User';
 
 import s from './CompanyBrief.scss';

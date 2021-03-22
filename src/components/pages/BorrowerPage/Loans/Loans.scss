@@ -4,31 +4,6 @@
   line-height: 1.3em;
 }
 
-.row {
-  min-height: 76px;
-  position: relative;
-
-  &:after {
-    content: '';
-    border-bottom: 1px solid var(--gray3);
-    position: absolute;
-    bottom: 0;
-    left: 15px;
-    right: 15px;
-  }
-
-  // &:last-child {
-  //   border-bottom: none;
-  // }
-}
-
-.mainSum {
-  white-space: nowrap;
-  font-family: Nunito;
-  font-weight: 700;
-  display: block;
-}
-
 .headerRow {
   height: 40px;
 }
@@ -43,28 +18,4 @@
 
 .body {
   padding: 0 20px 0 30px;
-}
-
-.icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  position: relative;
-  top: -.2em;
-  margin-right: 6px;
-  vertical-align: middle;
-
-  & > svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.openBtn {
-  position: absolute;
-  top: 50%;
-  right: 0px;
-  transform: translateY(-50%);
 }
