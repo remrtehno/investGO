@@ -16,6 +16,12 @@ declare namespace Loans {
 
 export const Loans: FC<Loans.Props> = (props) => {
   const {loans} = useRecoilValue(loansAtom);
+  const [showAll, setShowAll] = useState(false);
+  const loansToShow = 5;
+
+  function toggleShowAll() {
+    setShowAll(!showAll);
+  }
 
   if (!loans) {
     return null;
@@ -35,11 +41,18 @@ export const Loans: FC<Loans.Props> = (props) => {
       </div>
       <div className={s.body}>
         { loans.map((loan, index) => {
+          if (showAll && index > loansToShow - 1) {
+            return null;
+          }
+
           return (
             <Loan loan={loan} key={index} />
           );
         }) }
       </div>
+      { loans.length > loansToShow ? (
+        <div className={s.showAll} onClick={toggleShowAll}>Все займы</div>
+      ) : null }
     </div>
   );
 };

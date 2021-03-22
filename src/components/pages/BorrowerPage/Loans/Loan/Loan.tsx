@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {useRef, useState} from 'react';
+import React from 'react';
 
 import {CalendarDateIcon} from 'src/icons/CalendarDateIcon';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
