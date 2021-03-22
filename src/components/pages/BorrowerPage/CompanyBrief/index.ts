@@ -1,0 +1,1 @@
+export {CompanyBrief} from './CompanyBrief'

@@ -1,16 +1,17 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useCallback, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
+import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
 import {LogoIcon} from 'src/icons/LogoIcon';
 import {userAtom} from 'src/recoil/userAtom';
-import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete'
 
+import {HeaderMenu} from './HeaderMenu';
 import s from './PageHeader.scss';
 
 declare namespace LogoutIcon {
@@ -51,11 +52,9 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
     <div className={s.pageHeader}>
       <div className={cx('container', s.container)}>
         <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
-        <div className={s.space}></div>
+        <div className={s.space} />
         { user && isRegistrationComplete ? (
-          <div className={s.menuContainer}>
-            Заемщику
-          </div>
+          <HeaderMenu user={user} />
         ) : null }
         { user ? (
           <div className={s.userContainer}>

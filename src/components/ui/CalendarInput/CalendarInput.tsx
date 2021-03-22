@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 
 import 'src/libs/react-datepicker/react-datepicker.css';
 import {Input} from 'src/components/ui/Input';
-import {formatDate} from 'src/utils/formatDate';
+import {formatDateForServer} from 'src/utils/formatDate';
 import {parseDate} from 'src/utils/parseDate';
 
 import s from './CalendarInput.scss';
@@ -57,7 +57,7 @@ export const CalendarInput: FC<CalendarInput.Props> = (props) => {
       <DatePicker
         {...calendarProps}
         name={name || undefined}
-        onChange={(value: Date) => onChange(formatDate(value), name || null)}
+        onChange={(value: Date) => onChange(formatDateForServer(value), name || null)}
         selected={value ? parseDate(value) : null}
         customInput={<CustomInput disabled={props.disabled} name={name} label={label} error={error} />}
         dateFormat='dd.MM.yyyy'

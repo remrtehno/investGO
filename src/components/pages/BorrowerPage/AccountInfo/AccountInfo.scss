@@ -1,0 +1,77 @@
+.accountInfo {
+  display: flex;
+  align-items: center;
+  background: var(--gray2);
+  border-radius: 4px;
+  height: 80px;
+  font-family: Nunito;
+
+  &::after {
+    content: ' ';
+    display: block;
+    flex: 1 1 50%;
+    // order: 3;
+  }
+}
+
+.item {
+  padding: 0 30px;
+  white-space: nowrap;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2em;
+  letter-spacing: -0.2px;
+  vertical-align: middle;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.sum {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3px;
+  letter-spacing: -0.4px;
+  vertical-align: middle;
+}
+
+.menuContainer {
+  order: 4;
+  position: relative;
+}
+.menuIcon {
+  padding: 30px 25px;
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  bottom: 125%;
+  left: -20%;
+  width: 255px;
+  background-color: var(--white);
+  transition: all .4s ease;
+  box-shadow: 
+    0px 1px 8px rgba(0, 0, 0, 0.02), 
+    0px 3px 5px rgba(0, 0, 0, 0.03), 
+    0px 3px 4px rgba(0, 0, 0, 0.01);
+}
+
+.menuItem {
+  border-bottom: 1px solid;
+  border-color: var(--gray2);
+  font-size: 15px;
+  padding: 18px 17px;
+  display: block;
+  color: var(--black);
+  text-decoration: none;
+  transition: .3s;
+
+  &:hover {
+    color: var(--black);
+    background-color: var(--gray2);
+    text-decoration: none;
+  }
+}

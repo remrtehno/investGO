@@ -1,15 +1,19 @@
-import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from "react";
-import { useHistory, Link } from "react-router-dom";
 import _ from 'lodash';
-import {Form} from "../../../common/Form";
-import {FieldType} from "../../../common/Form/Form";
-import {Field} from "../../../common/Form/Field";
+import type {FC} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
+
+import {usePasswordResetRequestApi} from 'src/api/userApi/usePasswordResetRequestApi';
+import {RoutePaths} from 'src/components/common/App/routes';
+import {Form} from 'src/components/common/Form';
+import {Field} from 'src/components/common/Form/Field';
+import {FieldType} from 'src/components/common/Form/Form';
+import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {email} from 'src/validations/email';
 import {required} from 'src/validations/required';
-import {Button, ButtonSize, ButtonTheme} from "../../../ui/Button/Button";
-import {usePasswordResetRequestApi} from "../../../../api/userApi/usePasswordResetRequestApi"
-import s from "./RecoverForm.scss"
-import {PasswordResetModal} from "./PasswordResetModal";
+
+import {PasswordResetModal} from './PasswordResetModal';
+import s from './RecoverForm.scss';
 
 export declare namespace RecoverForm {
   export type RecoverValues = {
@@ -44,41 +48,43 @@ export const RecoverForm: FC = () => {
   }, []);
 
   useEffect(() => {
-    const error = passwordResetRequestState.error
-    const errorMessage = _.get(error, '[0].message')
-    if (!error || !errorMessage) return
-    if (errorMessage === "invalid_email") {
-      setErrors({...errors, email: 'Невалидный email'})
+    const error = passwordResetRequestState.error;
+    const errorMessage = _.get(error, '[0].message');
+    if (!error || !errorMessage) {
+      return;
     }
-    if (errorMessage === "user_not_found") {
-      setErrors({...errors, email: 'Неверный email'})
+    if (errorMessage === 'invalid_email') {
+      setErrors({...errors, email: 'Невалидный email'});
     }
-  }, [passwordResetRequestState.error])
+    if (errorMessage === 'user_not_found') {
+      setErrors({...errors, email: 'Неверный email'});
+    }
+  }, [passwordResetRequestState.error]);
 
   useEffect(() => {
     if (passwordResetRequestState.isSuccess) {
-      setIsPasswordResetModalVisible(true)
+      setIsPasswordResetModalVisible(true);
     }
-  }, [passwordResetRequestState.isSuccess])
+  }, [passwordResetRequestState.isSuccess]);
 
   const onChange = useCallback((values: RecoverForm.RecoverValues, errors: Form.Errors) => {
-    setValues(values)
-    setErrors(errors)
-  }, [])
+    setValues(values);
+    setErrors(errors);
+  }, []);
 
   const onSubmit = useCallback(() => {
-    submit()
-  }, [values])
+    submit();
+  }, [values]);
 
   const submit = () => {
     passwordResetRequestApi({
-      email: values.email
-    })
-  }
+      email: values.email,
+    });
+  };
 
   const handleModalClose = () => {
-    history.push("/signin");
-  }
+    history.push('/signin');
+  };
 
   return (
     <Form
@@ -90,7 +96,7 @@ export const RecoverForm: FC = () => {
       formApiRef={formApiRef}
       onSubmit={onSubmit}
     >
-      <Field className={s.field} name='email'/>
+      <Field className={s.field} name='email' />
       <Button
         className={s.continueButton}
         size={ButtonSize.m}
@@ -100,15 +106,15 @@ export const RecoverForm: FC = () => {
         Отправить ссылку на почту
       </Button>
       <div className={s.subLink}>
-        <Link to="/signin">Вернуться назад</Link>
+        <Link to={RoutePaths.signin}>Вернуться назад</Link>
       </div>
-      {isPasswordResetModalVisible ? (
+      { isPasswordResetModalVisible ? (
         <PasswordResetModal
           onClose={handleModalClose}
-          text="На вашу почту отправлена ссылка для восстановления пароля"
-          icon="email"
+          text='На вашу почту отправлена ссылка для восстановления пароля'
+          icon='email'
         />
-      ) : null}
+      ) : null }
     </Form>
-  )
+  );
 };

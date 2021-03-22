@@ -1,0 +1,16 @@
+.popup-menu-transition-enter {
+  opacity: 0;
+  transform: translateY(3px);
+}
+.popup-menu-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.popup-menu-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.popup-menu-transition-exit-active {
+  opacity: 0;
+  transform: translateY(3px);
+}

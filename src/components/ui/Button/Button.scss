@@ -26,6 +26,15 @@
     }
   }
 
+  &.theme_red {
+    background-color: var(--red);
+    border: none;
+    color: var(--white);
+    &:hover {
+      box-shadow: 0 0 0 5px var(--gray4);
+    }
+  }
+
   &.theme_light {
     background-color: var(--gray2);
     border: none;
