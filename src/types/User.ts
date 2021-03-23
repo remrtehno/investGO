@@ -40,7 +40,8 @@ export declare namespace User {
     document_registry_file: FilePrimitive,
     bank_details: User.BankDetails | null,
     emails: string[],
-    status: ModerationStatus
+    status: ModerationStatus,
+    name: string,
   };
 
   export type SignDocuments = {

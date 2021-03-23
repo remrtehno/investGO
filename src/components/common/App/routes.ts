@@ -5,6 +5,7 @@ import {AboutUs} from 'src/components/pages/AboutUs';
 import {BorrowerPage} from 'src/components/pages/BorrowerPage';
 import {EmailConfirmationPage} from 'src/components/pages/EmailConfirmationPage';
 import {InvestorPage} from 'src/components/pages/InvestorPage';
+import {LoanRequestPage} from 'src/components/pages/LoanRequestPage';
 import {PasswordResetPage} from 'src/components/pages/PasswordResetPage';
 import {ProfilePage} from 'src/components/pages/ProfilePage';
 import {ProjectsPage} from 'src/components/pages/ProjectsPage';
@@ -28,6 +29,7 @@ export enum RoutePaths {
   passwordReset = '/password-reset',
   investorDashboard = '/investor/dashboard',
   borrowerDashboard = '/borrower/dashboard',
+  loanRequest = '/borrower/loan-request/:companyId',
 }
 
 export const routes: RouteInfo[] = [
@@ -77,5 +79,9 @@ export const routes: RouteInfo[] = [
     path: RoutePaths.borrowerDashboard,
     Component: BorrowerPage,
     exact: true,
+  },
+  {
+    path: RoutePaths.loanRequest,
+    Component: LoanRequestPage,
   },
 ];

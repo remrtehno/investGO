@@ -50,7 +50,7 @@ export declare namespace Form {
     values: Values,
     errors: Errors,
     onChange: OnChange,
-    
+
     onSubmit?: OnSubmit,
     disabled?: boolean,
     formApiRef?: MutableRefObject<Api | null>,
@@ -215,17 +215,17 @@ export function Form(props: Form.Props) {
   }), [fields, props.initialValues]);
 
   function handleSubmit(event: any) {
-    if (props.onSubmit && props.formApiRef.current.isValid) {
-      props.onSubmit()
+    if (props.onSubmit && props.formApiRef?.current?.isValid) {
+      props.onSubmit();
     }
-    event.preventDefault()
+    event.preventDefault();
   }
 
   return (
     <FormModelProvider value={model}>
       <FormFieldsProvider value={formFields}>
         <form onSubmit={handleSubmit}>
-          {props.children}
+          { props.children }
         </form>
       </FormFieldsProvider>
     </FormModelProvider>
