@@ -2,12 +2,21 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import ReactSelect from 'react-select';
+import ReactSelect, { components } from 'react-select';
 
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Color} from 'src/contstants/Color';
+import { DropDownIcon } from 'src/icons/DropDownIcon';
 
 import s from './Select.scss';
+
+const DropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <DropDownIcon />
+    </components.DropdownIndicator>
+  );
+};
 
 export declare namespace Select {
   export type Props = {
@@ -98,6 +107,7 @@ export const Select: FC<Select.Props> = (props) => {
         isClearable={props.isClearable == null ? true : props.isClearable}
         classNamePrefix='select'
         noOptionsMessage={noOptionsMessage}
+        components={{ DropdownIndicator }}
       />
       { props.error ? (
         <Text size={TextSize.bodyMini} color={Color.red} className={s.error} style={{

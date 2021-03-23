@@ -74,6 +74,7 @@ export const useLoanRequestFields = () => {
       name: 'repayment_type',
       type: FieldType.select,
       label: 'Тип погашения',
+      isSearchable: false,
       validations: [required()],
       options: [
         {

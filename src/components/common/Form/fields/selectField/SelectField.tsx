@@ -26,6 +26,9 @@ export const SelectField: FC<SelectField.Props> = (props) => {
         options={field.options}
         error={field.isDirty ? field.error : null}
         onChange={onChange || form.onChange as any}
+        isSearchable={field.isSearchable}
+        isClearable={field.isClearable}
+        inputValue={field.inputValue}
         {...selectProps}
       />
     </div>

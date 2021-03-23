@@ -20,8 +20,17 @@
     }
   }
 
-  :global(.select__indicators) {
+  :global(.select__indicator-separator) {
     display: none;
+  }
+  :global(.select__dropdown-indicator) {
+    max-width: 40px;
+    overflow: hidden;
+  }
+  :global(.select__dropdown-indicator > svg) {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
   }
 
   :global(.select__value-container) {
