@@ -4,9 +4,10 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import ReactSelect from 'react-select';
 
-import s from './Select.scss';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Color} from 'src/contstants/Color';
+
+import s from './Select.scss';
 
 export declare namespace Select {
   export type Props = {
@@ -71,7 +72,7 @@ export const Select: FC<Select.Props> = (props) => {
         const newOptions = await props.loadOptions(inputValue);
         setOptions(newOptions);
       } catch (e) {
-
+        console.error('Error loading options', e);
       }
 
       setIsLoading(false);
@@ -82,10 +83,10 @@ export const Select: FC<Select.Props> = (props) => {
 
   return (
     <div style={{
-      position: 'relative'
+      position: 'relative',
     }}>
       <ReactSelect
-        className={cx(s.Select, props.className, { [s.withError]: Boolean(props.error) })}
+        className={cx(s.Select, props.className, {[s.withError]: Boolean(props.error)})}
         placeholder={props.placeholder || props.label}
         options={props.options || options}
         inputValue={inputValue}
@@ -102,9 +103,9 @@ export const Select: FC<Select.Props> = (props) => {
         <Text size={TextSize.bodyMini} color={Color.red} className={s.error} style={{
           position: 'absolute',
           bottom: -18,
-          right: 0
+          right: 0,
         }}>
-          {props.error}
+          { props.error }
         </Text>
       ) : null }
     </div>

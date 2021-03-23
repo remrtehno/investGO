@@ -72,17 +72,39 @@ export const useLoanRequestFields = () => {
     },
     repayment_type: {
       name: 'repayment_type',
-      type: FieldType.text,
+      type: FieldType.select,
       label: 'Тип погашения',
       validations: [required()],
-      // repayment_type - 'annuity', 'classical'
+      options: [
+        {
+          value: 'classical',
+          label: 'Дифференцированный',
+        },
+        {
+          value: 'annuity',
+          label: 'Аннуитентный',
+        },
+      ],
     },
     repayment_schedule: {
       name: 'repayment_schedule',
-      type: FieldType.text,
+      type: FieldType.select,
       label: 'График погашения',
       validations: [required()],
-      // repayment_schedule - 'day', 'month', 'year'
+      options: [
+        {
+          value: 'month',
+          label: 'Ежемесячно',
+        },
+        {
+          value: 'day',
+          label: 'Ежеквартально',
+        },
+        {
+          value: 'year',
+          label: 'В конце срока',
+        },
+      ],
     },
     is_buy_rights: {
       name: 'is_buy_rights',

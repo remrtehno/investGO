@@ -19,6 +19,7 @@ export enum FieldType {
   file = 'file',
   password = 'password',
   phone = 'phone',
+  select = 'select',
   custom = 'custom'
 }
 

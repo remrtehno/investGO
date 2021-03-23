@@ -39,7 +39,7 @@ export const LoanRequestPage = withAuth(() => {
         <div className={s.title}>Новая заявка на привлечение инвестиций</div>
         <div className='container'>
           <div className={s.content}>
-            <Text size={TextSize.h3}>Параметры займа</Text>
+            <Text size={TextSize.h3} className={s.header}>Параметры займа</Text>
             <LoanRequestForm />
           </div>
         </div>

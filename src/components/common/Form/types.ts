@@ -2,11 +2,12 @@ import type {FC} from 'react';
 
 import type {CalendarInput} from 'src/components/ui/CalendarInput';
 import type {Input} from 'src/components/ui/Input';
+import type {Select} from 'src/components/ui/Select';
+import type {TextArea as TextAreaComponent} from 'src/components/ui/TextArea';
 
 import type {FieldProps} from './fields/fieldsModel';
 
 import type {FieldType} from './Form';
-import {TextArea as TextAreaComponent} from 'src/components/ui/TextArea';
 
 export declare namespace FormFieldModel {
   type BaseFieldModel = {
@@ -69,6 +70,10 @@ export declare namespace FormFieldModel {
   export type Hidden = BaseFieldModel & {
     type: FieldType.hidden,
   }
+
+  export type Select = BaseFieldModel & Omit<Select.Props, 'value' | 'onChange'> & {
+    type: FieldType.select,
+  }
 }
 
 export type FormFieldModel = (
@@ -81,7 +86,8 @@ export type FormFieldModel = (
   FormFieldModel.Password |
   FormFieldModel.Phone |
   FormFieldModel.Custom |
-  FormFieldModel.Hidden
+  FormFieldModel.Hidden |
+  FormFieldModel.Select
 );
 
 export declare namespace FormField {
@@ -102,6 +108,7 @@ export declare namespace FormField {
   export type File = BaseField & FormFieldModel.File;
   export type Custom = BaseField & FormFieldModel.Custom;
   export type Hidden = BaseField & FormFieldModel.Hidden;
+  export type Select = BaseField & FormFieldModel.Select;
 }
 
 export type FormField =
@@ -113,4 +120,5 @@ export type FormField =
   FormField.FileArray |
   FormField.File |
   FormField.Custom |
-  FormField.Hidden;
+  FormField.Hidden |
+  FormField.Select;
