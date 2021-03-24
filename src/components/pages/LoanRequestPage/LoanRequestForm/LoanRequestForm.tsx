@@ -73,10 +73,10 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = (props) => {
           <Field className='col-6' name='repayment_schedule' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='is_buy_rights' />
+          <Field className='col-12' name='is_buy_rights' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='documents' />
+          <Field className='col-12' name='documents' />
         </FormRow>
 
         <FormActions>

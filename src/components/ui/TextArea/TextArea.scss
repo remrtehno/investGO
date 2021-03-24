@@ -1,5 +1,5 @@
 .TextArea {
-
+  position: relative;
 }
 
 .control {
@@ -9,4 +9,22 @@
   border-radius: 6px;
   min-height: 100px;
   padding: 18px;
+
+  &.withLabel {
+    padding-top: 26px;
+  }
+}
+
+.label {
+  position: absolute;
+  transition: all 0.15s ease-out;
+  top: 16px;
+  left: 18px;
+  overflow: hidden;
+  width: calc(100% - 36px);
+  white-space: nowrap;
+
+  &.isControlVisible {
+    top: 8px;
+  }
 }
