@@ -74,7 +74,9 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = (props) => {
           <Field className='col-6' name='repayment_schedule' />
         </FormRow>
         <FormRow>
-          <Field className='col-12' name='is_buy_rights' />
+          <div className='col-12'>
+            <Field className={cx(s.switchField)} name='is_buy_rights' />
+          </div>
         </FormRow>
         <FormRow>
           <Field className='col-12' name='documents' />

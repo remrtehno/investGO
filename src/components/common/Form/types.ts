@@ -79,7 +79,7 @@ export declare namespace FormFieldModel {
   }
 
   export type Switch = BaseFieldModel & Omit<Switch.Props, 'value' | 'onChange'> & {
-    type: FieldType.select,
+    type: FieldType.switch,
 
     label?: string,
   }

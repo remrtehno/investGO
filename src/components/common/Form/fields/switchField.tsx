@@ -25,6 +25,7 @@ export const SwitchField: FC<SwitchField.Props> = (props) => {
         name={field.name}
         error={field.isDirty ? field.error : null}
         onChange={onChange || form.onChange as any}
+        isLongLabel={field.isLongLabel}
         {...switchProps}
       />
     </div>

@@ -111,7 +111,12 @@ export const useLoanRequestFields = () => {
     is_buy_rights: {
       name: 'is_buy_rights',
       type: FieldType.switch,
-      label: 'is_buy_rights',
+      label: `Лицо, контролирующее юридическое лицо, привлекающее инвестиции, 
+        принимает на себя обязанность приобрести у инвесторов имущественные права, 
+        полученные при инвестировании в случае,
+        если такое лицо перестает являться лицом, контролирующим юридическое
+        лицо, привлекающее инвестиции`,
+      isLongLabel: true,
       validations: [required()],
     },
     documents: {
