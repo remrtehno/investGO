@@ -29,6 +29,7 @@ export const TextField: FC<TextField.Props> = (props) => {
         disabled={field.disabled}
         regExp={field.regExp}
         mask={field.mask}
+        postfix={field.postfix}
         {...inputProps}
       />
     </div>

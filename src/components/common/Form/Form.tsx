@@ -20,7 +20,8 @@ export enum FieldType {
   password = 'password',
   phone = 'phone',
   select = 'select',
-  custom = 'custom'
+  custom = 'custom',
+  switch = 'switch'
 }
 
 export declare namespace Form {

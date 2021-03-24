@@ -12,6 +12,9 @@ function getDefaultFieldValue(field: Form.FieldModel) {
   case FieldType.fileArray: return [];
 
   case FieldType.date: return '';
+
+  case FieldType.switch: return false;
+
   default: return null;
   }
 }

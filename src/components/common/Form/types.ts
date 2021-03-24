@@ -3,6 +3,7 @@ import type {FC} from 'react';
 import type {CalendarInput} from 'src/components/ui/CalendarInput';
 import type {Input} from 'src/components/ui/Input';
 import type {Select} from 'src/components/ui/Select';
+import type {Switch} from 'src/components/ui/Switch';
 import type {TextArea as TextAreaComponent} from 'src/components/ui/TextArea';
 
 import type {FieldProps} from './fields/fieldsModel';
@@ -76,6 +77,12 @@ export declare namespace FormFieldModel {
 
     label?: string,
   }
+
+  export type Switch = BaseFieldModel & Omit<Switch.Props, 'value' | 'onChange'> & {
+    type: FieldType.select,
+
+    label?: string,
+  }
 }
 
 export type FormFieldModel = (
@@ -89,7 +96,8 @@ export type FormFieldModel = (
   FormFieldModel.Phone |
   FormFieldModel.Custom |
   FormFieldModel.Hidden |
-  FormFieldModel.Select
+  FormFieldModel.Select |
+  FormFieldModel.Switch
 );
 
 export declare namespace FormField {
@@ -111,6 +119,7 @@ export declare namespace FormField {
   export type Custom = BaseField & FormFieldModel.Custom;
   export type Hidden = BaseField & FormFieldModel.Hidden;
   export type Select = BaseField & FormFieldModel.Select;
+  export type Switch = BaseField & FormFieldModel.Switch;
 }
 
 export type FormField =
@@ -123,4 +132,5 @@ export type FormField =
   FormField.File |
   FormField.Custom |
   FormField.Hidden |
-  FormField.Select;
+  FormField.Select |
+  FormField.Switch;

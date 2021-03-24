@@ -33,6 +33,7 @@ export const useLoanRequestFields = () => {
       type: FieldType.number,
       isInteger: false,
       label: 'Ставка по займу (% годовых)',
+      postfix: '%',
       validations: [required()],
     },
     min_investment_size: {
@@ -109,7 +110,7 @@ export const useLoanRequestFields = () => {
     },
     is_buy_rights: {
       name: 'is_buy_rights',
-      type: FieldType.text,
+      type: FieldType.switch,
       label: 'is_buy_rights',
       validations: [required()],
     },

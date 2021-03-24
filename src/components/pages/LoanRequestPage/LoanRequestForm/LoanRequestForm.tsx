@@ -11,6 +11,7 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
+import { Switch } from 'src/components/ui/Switch';
 
 import s from './LoanRequestForm.scss';
 import {useLoanRequestFields} from './useLoanRequestFields';
