@@ -15,13 +15,19 @@ function getDefaultFieldValue(field: Form.FieldModel) {
 
   case FieldType.switch: return false;
 
+  case FieldType.checkbox: return false;
+
   default: return null;
   }
 }
 
 export function getDefaultFieldValues(fields: Form.FieldModels): Form.Values {
   return _.reduce(fields, (values: Form.Values, field) => {
-    values[field.name] = getDefaultFieldValue(field);
+    let val = getDefaultFieldValue(field);
+    if (typeof field.defaultValue !== 'undefined') {
+      val = field.defaultValue;
+    }
+    values[field.name] = val;
     return values;
   }, {});
 }

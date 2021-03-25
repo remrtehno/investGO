@@ -1,3 +1,14 @@
+.loanRequestForm {
+  :global(.col-6) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  :global(.col-12) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 .switchField {
   background: var(--white);
   border-radius: 4px;
@@ -15,4 +26,8 @@
   padding: 45px 0;
   text-align: center;
   max-width: 740px;
+}
+
+.checkboxSeparator {
+  margin-top: 50px;
 }

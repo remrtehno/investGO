@@ -128,5 +128,27 @@ export const useLoanRequestFields = () => {
       label: 'Загрузите документы',
       validations: [required()],
     },
+    is_send_to_investors: {
+      name: 'is_send_to_investors',
+      type: FieldType.checkbox,
+      label: 'Направление инвестиционного предложения всем Инвесторам.',
+      defaultValue: true,
+      validations: [required()],
+    },
+    info_valid: {
+      name: 'info_valid',
+      type: FieldType.checkbox,
+      label: 'Верность сведений инвестиционного предложения и документов к нему.',
+      defaultValue: true,
+      validations: [required()],
+    },
+    legal_agreement: {
+      name: 'legal_agreement',
+      type: FieldType.checkbox,
+      label: `Даю согласие на размещение на сайте Оператора Платформы информации,
+      предусмотренной Законом No 259-ФЗ и Правилами.`,
+      defaultValue: true,
+      validations: [required()],
+    },
   }), []);
 };

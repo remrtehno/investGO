@@ -3,6 +3,7 @@ import type {CSSProperties, FC, ReactNode} from 'react';
 import React, {useCallback} from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
+import { Color } from 'src/contstants/Color';
 import type {SvgProps} from 'src/types/common';
 
 import s from './CheckBox.scss';
@@ -14,6 +15,7 @@ export declare namespace CheckBox {
     label: ReactNode,
 
     name?: string | null,
+    error?: string | null,
     className?: string,
     style?: CSSProperties
   };
@@ -39,6 +41,11 @@ export const CheckBox: FC<CheckBox.Props> = (props) => {
         <CheckIcon className={s.icon} />
       </div>
       <Text size={TextSize.body1} className={s.label}>{ props.label }</Text>
+      { props.error ? (
+        <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>
+          { props.error }
+        </Text>
+      ) : null }
     </div>
   );
 };

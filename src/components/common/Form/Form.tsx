@@ -21,7 +21,8 @@ export enum FieldType {
   phone = 'phone',
   select = 'select',
   custom = 'custom',
-  switch = 'switch'
+  switch = 'switch',
+  checkbox = 'checkbox',
 }
 
 export declare namespace Form {

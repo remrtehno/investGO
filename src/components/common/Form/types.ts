@@ -4,6 +4,7 @@ import type {CalendarInput} from 'src/components/ui/CalendarInput';
 import type {Input} from 'src/components/ui/Input';
 import type {Select} from 'src/components/ui/Select';
 import type {Switch} from 'src/components/ui/Switch';
+import type {CheckBox} from 'src/components/ui/CheckBox';
 import type {TextArea as TextAreaComponent} from 'src/components/ui/TextArea';
 
 import type {FieldProps} from './fields/fieldsModel';
@@ -20,6 +21,7 @@ export declare namespace FormFieldModel {
     toValue?(rawValue: any): any,
     fromValue?(value: any): any,
     transform?(field: FormFieldModel): FormFieldModel,
+    defaultValue?: any,
   }
 
   export type Text = BaseFieldModel & Omit<Input.Props, 'value' | 'onChange'> & {
@@ -83,6 +85,12 @@ export declare namespace FormFieldModel {
 
     label?: string,
   }
+
+  export type Checkbox = BaseFieldModel & Omit<CheckBox.Props, 'value' | 'onChange'> & {
+    type: FieldType.checkbox,
+
+    label?: string,
+  }
 }
 
 export type FormFieldModel = (
@@ -97,7 +105,8 @@ export type FormFieldModel = (
   FormFieldModel.Custom |
   FormFieldModel.Hidden |
   FormFieldModel.Select |
-  FormFieldModel.Switch
+  FormFieldModel.Switch |
+  FormFieldModel.Checkbox
 );
 
 export declare namespace FormField {
@@ -120,6 +129,7 @@ export declare namespace FormField {
   export type Hidden = BaseField & FormFieldModel.Hidden;
   export type Select = BaseField & FormFieldModel.Select;
   export type Switch = BaseField & FormFieldModel.Switch;
+  export type Checkbox = BaseField & FormFieldModel.Checkbox;
 }
 
 export type FormField =
@@ -133,4 +143,5 @@ export type FormField =
   FormField.Custom |
   FormField.Hidden |
   FormField.Select |
-  FormField.Switch;
+  FormField.Switch |
+  FormField.Checkbox;

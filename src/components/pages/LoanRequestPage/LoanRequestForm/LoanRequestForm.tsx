@@ -61,7 +61,6 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
         min_amount: parseInt(values.min_amount, 10),
         repayment_limit_month: parseInt(values.repayment_limit_month, 10),
 
-        is_send_to_investors: true,
         description: 'fsdferewrw',
       },
     });
@@ -74,7 +73,7 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
   }
 
   return (
-    <div>
+    <div className={s.loanRequestForm}>
       <Form
         initialValues={initialValues}
         errors={errors}
@@ -115,6 +114,15 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
         </FormRow>
         <FormRow>
           <Field className='col-12' name='documents' />
+        </FormRow>
+        <FormRow className={s.checkboxSeparator}>
+          <Field className='col-12' name='info_valid' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='is_send_to_investors' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='legal_agreement' />
         </FormRow>
 
         <FormActions>
