@@ -1,6 +1,7 @@
 .switch {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .label {
@@ -57,4 +58,10 @@
   &.checked {
     transform: translateX(10px);
   }
+}
+
+.error {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
 }

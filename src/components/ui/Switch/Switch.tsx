@@ -3,6 +3,7 @@ import type {ChangeEvent, FC} from 'react';
 import React, {useCallback, useRef, useState} from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
+import { Color } from 'src/contstants/Color';
 
 import s from './Switch.scss';
 
@@ -43,8 +44,8 @@ export const Switch: FC<Switch.Props> = (props) => {
           name={props.name}
           id={props.name}
           onChange={handleChange}
-          checked={props.value}
           disabled={props.disabled}
+          checked={props.value}
         />
         <label
           className={cx(s.bg, props.value && s.checked, props.disabled && s.disabled)}
@@ -53,6 +54,11 @@ export const Switch: FC<Switch.Props> = (props) => {
           <span className={cx(s.knob, props.value && s.checked)} />
         </label>
       </div>
+      { props.error ? (
+        <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>
+          { props.error }
+        </Text>
+      ) : null }
     </div>
   );
 };

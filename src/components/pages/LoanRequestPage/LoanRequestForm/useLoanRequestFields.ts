@@ -41,6 +41,7 @@ export const useLoanRequestFields = () => {
       type: FieldType.number,
       isInteger: true,
       label: 'Минимальный объем инвестиций',
+      postfix: '₽',
       validations: [required()],
     },
     min_amount: {
@@ -48,6 +49,7 @@ export const useLoanRequestFields = () => {
       type: FieldType.number,
       isInteger: true,
       label: 'Минимальная сумма для инвестирования',
+      postfix: '₽',
       validations: [required()],
     },
     collection_start_at: {
@@ -117,7 +119,6 @@ export const useLoanRequestFields = () => {
         если такое лицо перестает являться лицом, контролирующим юридическое
         лицо, привлекающее инвестиции`,
       isLongLabel: true,
-      validations: [required()],
     },
     documents: {
       name: 'documents',

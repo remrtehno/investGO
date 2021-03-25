@@ -100,7 +100,11 @@ export function Form(props: Form.Props) {
 
   const formFields = useMemo(() => {
     return _.reduce(fields, (fields: Form.Fields, field) => {
-      let value = props.values[field.name] || null;
+      let value = props.values[field.name];
+
+      if (typeof value === 'undefined') {
+        value = null;
+      }
 
       if (field.toValue) {
         value = field.toValue(value);

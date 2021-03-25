@@ -20,13 +20,19 @@
     }
   }
 
+  :global(.select__clear-indicator) {
+    display: none;
+  }
+
   :global(.select__indicator-separator) {
     display: none;
   }
+
   :global(.select__dropdown-indicator) {
     max-width: 40px;
     overflow: hidden;
   }
+
   :global(.select__dropdown-indicator > svg) {
     width: 42px;
     min-width: 42px;
@@ -50,4 +56,10 @@
     line-height: 1.5;
     color: #212529;
   }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  right: 0;
 }

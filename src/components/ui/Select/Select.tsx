@@ -110,11 +110,7 @@ export const Select: FC<Select.Props> = (props) => {
         components={{ DropdownIndicator }}
       />
       { props.error ? (
-        <Text size={TextSize.bodyMini} color={Color.red} className={s.error} style={{
-          position: 'absolute',
-          bottom: -18,
-          right: 0,
-        }}>
+        <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>
           { props.error }
         </Text>
       ) : null }
