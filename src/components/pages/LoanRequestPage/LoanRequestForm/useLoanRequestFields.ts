@@ -2,7 +2,9 @@ import {useMemo} from 'react';
 
 import type {Form} from 'src/components/common/Form';
 import {FieldType} from 'src/components/common/Form/Form';
+import { maxValue } from 'src/validations/maxValue';
 import {minLength} from 'src/validations/minLength';
+import { minValue } from 'src/validations/minValue';
 import {required} from 'src/validations/required';
 
 function getCollectionStartMinDate() {
@@ -64,14 +66,14 @@ export const useLoanRequestFields = () => {
       type: FieldType.number,
       isInteger: true,
       label: 'Срок действия предложения',
-      validations: [required()],
+      validations: [required(), maxValue(31), minValue(0)],
     },
     repayment_limit_month: {
       name: 'repayment_limit_month',
       type: FieldType.number,
       isInteger: true,
       label: 'Срок погашения займа',
-      validations: [required()],
+      validations: [required(), maxValue(360), minValue(1)],
     },
     repayment_type: {
       name: 'repayment_type',

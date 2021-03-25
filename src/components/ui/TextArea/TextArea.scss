@@ -13,6 +13,15 @@
   &.withLabel {
     padding-top: 26px;
   }
+
+  &.focused {
+    border-color: var(--black);
+  }
+
+  &.withError,
+  &.focused.withError {
+    border-color: var(--red);
+  }
 }
 
 .label {
@@ -27,4 +36,10 @@
   &.isControlVisible {
     top: 8px;
   }
+}
+
+.error {
+  position: absolute;
+  bottom: -18px;
+  right: 0;
 }

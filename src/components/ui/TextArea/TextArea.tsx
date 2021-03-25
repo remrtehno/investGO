@@ -61,11 +61,18 @@ export const TextArea: FC<TextArea.Props> = (props) => {
       <textarea
         placeholder={props.placeholder}
         onChange={onChange}
-        className={cx(s.control, props.label && s.withLabel, props.className)}
+        className={cx(s.control, props.className, {
+          [s.withLabel]: props.label,
+          [s.withError]: props.error,
+          [s.focused]: isFocused,
+        })}
         ref={controlRef}
         onFocus={handleFocus}
         onBlur={handleBlur}
       >{ props.value }</textarea>
+      { props.error ? (
+        <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{ props.error }</Text>
+      ) : null }
     </div>
   );
 };
