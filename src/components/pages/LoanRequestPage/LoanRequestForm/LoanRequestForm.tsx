@@ -110,10 +110,18 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
             <Field className={cx(s.switchField)} name='is_buy_rights' />
           </div>
         </FormRow>
+        <FormRow className={s.separator}>
+          <div className="col-12">
+            <Text size={TextSize.subHeadline1} className={s.subHead}>
+              Загрузите документы
+            </Text>
+            <Text size={TextSize.body0}>Годовую бухгалтерскую отчетность.</Text>
+          </div>
+        </FormRow>
         <FormRow>
           <Field className='col-12' name='documents' />
         </FormRow>
-        <FormRow className={s.checkboxSeparator}>
+        <FormRow className={s.separator}>
           <Field className='col-12' name='info_valid' />
         </FormRow>
         <FormRow>
