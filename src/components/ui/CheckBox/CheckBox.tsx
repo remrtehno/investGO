@@ -3,7 +3,7 @@ import type {CSSProperties, FC, ReactNode} from 'react';
 import React, {useCallback} from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
-import { Color } from 'src/contstants/Color';
+import {Color} from 'src/contstants/Color';
 import type {SvgProps} from 'src/types/common';
 
 import s from './CheckBox.scss';

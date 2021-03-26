@@ -15,6 +15,7 @@ import 'src/components/common/Form/fields/phoneField';
 import 'src/components/common/Form/fields/selectField';
 import 'src/components/common/Form/fields/switchField';
 import 'src/components/common/Form/fields/checkboxField';
+import 'src/components/common/Form/fields/rangeField';
 import 'src/libs/bootstrap/bootstrap-grid.css';
 import 'src/libs/bootstrap/bootstrap-reboot.css';
 import 'src/theme/theme.css';

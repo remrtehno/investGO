@@ -1,8 +1,7 @@
 import type {FC} from 'react';
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
-import {RoutePaths} from 'src/components/common/App/routes';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import type {User} from 'src/types/User';
 
@@ -15,6 +14,7 @@ declare namespace CompanyBrief {
 }
 
 export const CompanyBrief: FC<CompanyBrief.Props> = (props) => {
+  const history = useHistory();
   return (
     <div className={s.companyBrief}>
       <div className={s.logo}>
@@ -27,15 +27,14 @@ export const CompanyBrief: FC<CompanyBrief.Props> = (props) => {
         theme={ButtonTheme.black}>
         Редактировать
       </Button>
-      <Link to={`${RoutePaths.loanRequest}/${props.company.id}`}>
-        <Button
-          className={s.button2}
-          size={ButtonSize.s}
-          theme={ButtonTheme.red}
-        >
-          Привлечь инвестиции
-        </Button>
-      </Link>
+      <Button
+        className={s.button2}
+        size={ButtonSize.s}
+        theme={ButtonTheme.red}
+        onClick={() => {history.push(`/borrower/loan-request/${props.company.id}`)}}
+      >
+        Привлечь инвестиции
+      </Button>
     </div>
   );
 };

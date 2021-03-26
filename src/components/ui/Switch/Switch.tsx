@@ -1,9 +1,9 @@
 import cx from 'classnames';
 import type {ChangeEvent, FC} from 'react';
-import React, {useCallback, useRef, useState} from 'react';
+import React from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
-import { Color } from 'src/contstants/Color';
+import {Color} from 'src/contstants/Color';
 
 import s from './Switch.scss';
 

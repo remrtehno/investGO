@@ -2,13 +2,13 @@ import {useMemo} from 'react';
 
 import type {Form} from 'src/components/common/Form';
 import {FieldType} from 'src/components/common/Form/Form';
-import { maxValue } from 'src/validations/maxValue';
+import {maxValue} from 'src/validations/maxValue';
 import {minLength} from 'src/validations/minLength';
-import { minValue } from 'src/validations/minValue';
+import {minValue} from 'src/validations/minValue';
 import {required} from 'src/validations/required';
 
 function getCollectionStartMinDate() {
-  return new Date(Date.now() + 1000 * 60 * 60 * 24 * 10);
+  return new Date(Date.now() + (1000 * 60 * 60 * 24 * 10));
 }
 
 export const useLoanRequestFields = () => {
@@ -19,9 +19,10 @@ export const useLoanRequestFields = () => {
     },
     amount: {
       name: 'amount',
-      type: FieldType.number,
+      type: FieldType.range,
       label: 'Хочу собрать',
-      isInteger: true,
+      min: 0,
+      max: 20 * 1000 * 1000,
       postfix: '₽',
       validations: [required()],
     },

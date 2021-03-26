@@ -17,6 +17,8 @@ function getDefaultFieldValue(field: Form.FieldModel) {
 
   case FieldType.checkbox: return false;
 
+  case FieldType.range: return 0;
+
   default: return null;
   }
 }

@@ -1,6 +1,6 @@
-import {api} from "../../contstants/api";
-import {useApi} from "../../hooks/useApi";
-import {useApiRequest} from "../../hooks/useApiRequest";
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
 
 export declare namespace usePasswordResetApi {
   export type Payload = {
@@ -17,7 +17,7 @@ export declare namespace usePasswordResetApi {
 export const usePasswordResetApi = () => {
   const request = useApiRequest();
 
-  return useApi<usePasswordResetApi.Payload, null>(async (payload) => {
+  return useApi<usePasswordResetApi.Payload, null>(async(payload) => {
     const response = await request<usePasswordResetApi.Response>(api.user.passwordReset(), {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -26,6 +26,5 @@ export const usePasswordResetApi = () => {
     });
 
     return null;
-
   }, null);
-}
+};

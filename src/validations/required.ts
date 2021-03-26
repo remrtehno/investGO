@@ -15,5 +15,9 @@ export const required = (msg = 'Обязательное поле') => (value: a
     return msg;
   }
 
+  if (typeof value === 'number' && !value) {
+    return msg;
+  }
+
   return null;
 };

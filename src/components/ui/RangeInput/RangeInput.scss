@@ -1,4 +1,6 @@
-.rangeInput {}
+.rangeInput {
+  position: relative;
+}
 
 .range {
   margin-top: -13px;
@@ -15,6 +17,7 @@
   height: 3px;
   width: 100%;
   align-self: center;
+  position: relative;
 
   &:after {
     content: '';
@@ -27,6 +30,9 @@
 }
 
 .thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
   height: 20px;
   width: 20px;
   border-radius: 19px;
@@ -43,4 +49,19 @@
   width: 8px;
   border-radius: 8px;
   background: var(--white);
+}
+
+.textInput {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.error {
+  position: absolute;
+  bottom: -11px;
+  right: 0;
+}
+
+.label {
+  margin-bottom: 9px;
 }
