@@ -22,6 +22,7 @@ export const useLoanRequestFields = () => {
       type: FieldType.number,
       label: 'Хочу собрать',
       isInteger: true,
+      postfix: '₽',
       validations: [required()],
     },
     target: {
@@ -67,12 +68,14 @@ export const useLoanRequestFields = () => {
       isInteger: true,
       label: 'Срок действия предложения',
       validations: [required(), maxValue(31), minValue(0)],
+      postfix: ['день', 'дня', 'дней'],
     },
     repayment_limit_month: {
       name: 'repayment_limit_month',
       type: FieldType.number,
       isInteger: true,
       label: 'Срок погашения займа',
+      postfix: ['месяц', 'месяца', 'месяцев'],
       validations: [required(), maxValue(360), minValue(1)],
     },
     repayment_type: {
@@ -121,6 +124,7 @@ export const useLoanRequestFields = () => {
         если такое лицо перестает являться лицом, контролирующим юридическое
         лицо, привлекающее инвестиции`,
       isLongLabel: true,
+      validations: [required()],
     },
     documents: {
       name: 'documents',

@@ -9,7 +9,7 @@ import {Switch} from 'src/components/ui/Switch';
 
 export declare namespace SwitchField {
   export type Props = FieldProps<FormField.Switch> & {
-    onChange?(value: string, name: string | null): void,
+    onChange?(value: boolean, name: string | null): void,
   };
 }
 

@@ -68,8 +68,6 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
 
   function handleModalClose() {
     setIsSuccessModalOpen(false);
-    setValues(initialValues);
-    setErrors({});
   }
 
   return (
