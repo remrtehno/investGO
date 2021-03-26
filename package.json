@@ -99,6 +99,7 @@
     "react-input-mask": "^2.0.4",
     "react-lottie-player": "^1.2.0",
     "react-popper": "^2.2.4",
+    "react-range": "^1.8.7",
     "remove": "^0.1.5"
   },
   "browserslist": [

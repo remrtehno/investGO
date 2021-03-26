@@ -12,6 +12,7 @@ import {FormRow} from 'src/components/common/Form/FormRow';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
+import { RangeInput } from 'src/components/ui/RangeInput';
 import {Text, TextSize} from 'src/components/ui/Text';
 
 import s from './LoanRequestForm.scss';
@@ -70,6 +71,8 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
     setIsSuccessModalOpen(false);
   }
 
+  const [rangeVal, setRangeVal] = useState(100);
+
   return (
     <div className={s.loanRequestForm}>
       <Form
@@ -81,6 +84,16 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
         onSubmit={handleSubmit}
         formApiRef={formApiRef}
       >
+        <FormRow>
+          <div className='col-12'>
+            <RangeInput
+              value={rangeVal}
+              min={0}
+              max={2 * 1000 * 1000}
+              onChange={(value, name) => {setRangeVal(value)}}
+            />
+          </div>
+        </FormRow>
         <FormRow>
           <Field className='col-12' name='amount' />
         </FormRow>
