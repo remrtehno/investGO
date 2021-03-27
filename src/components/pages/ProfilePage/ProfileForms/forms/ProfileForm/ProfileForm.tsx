@@ -2,7 +2,6 @@ import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
-
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';

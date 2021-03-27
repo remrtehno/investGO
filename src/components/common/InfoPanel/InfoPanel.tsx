@@ -45,7 +45,7 @@ export const InfoPanel: FC<InfoPanel.Props> = (props) => {
       props.className
     )} style={props.style}>
       {renderIcon()}
-      <Text size={TextSize.body2}>{props.children}</Text>
+      <Text size={TextSize.body1}>{props.children}</Text>
     </div>
   );
 };
