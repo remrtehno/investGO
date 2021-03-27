@@ -12,6 +12,8 @@ import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldV
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {userAtom} from 'src/recoil/userAtom';
 
+import s from './ProfileForm.scss';
+
 const errors = {};
 
 export declare namespace ProfileForm {
@@ -45,7 +47,7 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
     <div ref={props.formRef} className='container'>
       <div className='row'>
         <div className='col-12'>
-          <FormTitle>{ props.form.title }</FormTitle>
+          <FormTitle className={s.title}>{ props.form.title }</FormTitle>
         </div>
       </div>
       <Form
