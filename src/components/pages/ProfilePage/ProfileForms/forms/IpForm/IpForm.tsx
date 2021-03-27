@@ -5,7 +5,6 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
-import {useUserSignDocuments} from 'src/api/userApi/useUserDocuments';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -18,7 +17,6 @@ import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
-import {DocumentIcon} from 'src/icons/DocumentIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
