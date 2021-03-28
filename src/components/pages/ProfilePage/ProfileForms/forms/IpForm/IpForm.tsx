@@ -112,7 +112,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           <Field className='container col-12' name='phones' />
         </FormRow>
 
-        <FormRow>
+        <FormRow className={s.uploadFileSection}>
           <div className='col-12'>
             <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из ЕГРИП</Text>
             <Text size={TextSize.body0} className={s.fieldDescription}>
