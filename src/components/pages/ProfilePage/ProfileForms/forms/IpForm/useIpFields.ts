@@ -2,9 +2,11 @@ import {useMemo} from 'react';
 
 import type {Form} from 'src/components/common/Form/Form';
 import {FieldType} from 'src/components/common/Form/Form';
-import {required} from 'src/validations/required';
-import {email} from 'src/validations/email';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
+import {email} from 'src/validations/email';
+import {required} from 'src/validations/required';
+
+import {dataAgreementLabel} from './IpForm';
 
 export const useIpFields = () => {
   return useMemo((): Form.FieldModels => {
@@ -40,6 +42,27 @@ export const useIpFields = () => {
         validations: [required()],
         label: 'Контактный номер телефона',
       } as any,
+      data_valid: {
+        name: 'data_valid',
+        type: FieldType.checkbox,
+        label: 'Предоставленные данные индивидуального предпринимателя верны.',
+        defaultValue: true,
+        validations: [required()],
+      },
+      data_agreement: {
+        name: 'data_agreement',
+        type: FieldType.checkbox,
+        label: dataAgreementLabel(),
+        defaultValue: true,
+        validations: [required()],
+      },
+      data_rules: {
+        name: 'data_rules',
+        type: FieldType.checkbox,
+        label: 'Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».',
+        defaultValue: true,
+        validations: [required()],
+      },
     };
   }, []);
 };

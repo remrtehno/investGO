@@ -5,7 +5,6 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
-import {useUserSignDocuments} from 'src/api/userApi/useUserDocuments';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -15,15 +14,21 @@ import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldV
 import {ModerationInfo} from 'src/components/common/ModerationInfo';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
-import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
-import {DocumentIcon} from 'src/icons/DocumentIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
 import s from './IpForm.scss';
 import {useIpFields} from './useIpFields';
+
+export const dataAgreementLabel:FC = () => {
+  return (
+    <React.Fragment>
+      Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>Политики конфиденциальности</a>.
+    </React.Fragment>
+  );
+};
 
 export declare namespace IpForm {
   export type Props = ProfileForms.FormProps;
@@ -33,7 +38,6 @@ export const IpForm: FC<IpForm.Props> = (props) => {
   const fields = useIpFields();
   const {user} = useRecoilValue(userAtom);
   const [, saveCompanyApi] = useSaveCompanyApi();
-  const [checkBoxes, setCheckBoxes] = useState(user?.company ? [true, true, true] : [false, false, false]);
   const formApiRef = useRef<Form.Api | null>(null);
 
   const getValuesFromUser = () => ({
@@ -61,10 +65,6 @@ export const IpForm: FC<IpForm.Props> = (props) => {
 
     formApiRef.current.submit();
     if (!formApiRef.current.isValid) {
-      return;
-    }
-
-    if (checkBoxes.find((value) => !value)) {
       return;
     }
 
@@ -125,37 +125,13 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           </div>
         </FormRow>
         <FormRow>
-          <div className='col-12'>
-            <CheckBox
-              style={{marginBottom: 18}}
-              value={checkBoxes[0]}
-              onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
-              label={(
-                <Text size={TextSize.body0}>
-                  Предоставленные данные индивидуального предпринимателя верны.
-                </Text>
-              )}
-            />
-            <CheckBox
-              style={{marginBottom: 18}}
-              value={checkBoxes[1]}
-              onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
-              label={(
-                <Text size={TextSize.body0}>
-                  Я даю согласие на передачу и обработку введенных данных в рамках <a href='#'>Политики конфиденциальности</a>.
-                </Text>
-              )}
-            />
-            <CheckBox
-              value={checkBoxes[2]}
-              onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
-              label={(
-                <Text size={TextSize.body0}>
-                  Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».
-                </Text>
-              )}
-            />
-          </div>
+          <Field className='col-12' name='data_valid' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='data_agreement' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='data_rules' />
         </FormRow>
         <FormActions>
           <div className='col-3'>
