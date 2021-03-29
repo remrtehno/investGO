@@ -2,7 +2,6 @@ import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
-
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
@@ -11,6 +10,8 @@ import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {userAtom} from 'src/recoil/userAtom';
+
+import s from './ProfileForm.scss';
 
 const errors = {};
 
@@ -45,7 +46,7 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
     <div ref={props.formRef} className='container'>
       <div className='row'>
         <div className='col-12'>
-          <FormTitle>{ props.form.title }</FormTitle>
+          <FormTitle className={s.title}>{ props.form.title }</FormTitle>
         </div>
       </div>
       <Form

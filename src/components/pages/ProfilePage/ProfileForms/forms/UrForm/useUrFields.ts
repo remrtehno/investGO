@@ -83,7 +83,12 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
       document_registry_file: {
         name: 'document_registry_file',
         type: FieldType.file,
-        validations: [required()],
+        validations: [(value) => {
+          if (value) {
+            return null;
+          }
+          return 'Вы не загрузили документы.';
+        }],
       },
       document_rule_file: {
         name: 'document_rule_file',

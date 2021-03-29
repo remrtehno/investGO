@@ -102,6 +102,7 @@ export const ProfilePage = withAuth(() => {
     } : null,
   ]), [user]);
 
+
   return (
     <Page>
       <div className={s.profilePage}>

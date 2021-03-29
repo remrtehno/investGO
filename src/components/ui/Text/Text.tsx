@@ -11,6 +11,7 @@ import s from './Text.scss';
 export enum TextSize {
   h2 = 'h2',
   h3 = 'h3',
+  headLine1 = 'headLine1',
   subHeadline1 = 'subHeadline1',
   body0 = 'body0',
   body1 = 'body1',
