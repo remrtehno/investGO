@@ -16,6 +16,7 @@ import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/P
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
+import {TextWeight} from 'src/components/ui/Text/Text';
 import {Tooltip} from 'src/components/ui/Tooltip/Tooltip';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {InfoIcon} from 'src/icons/InfoIcon';
@@ -24,7 +25,14 @@ import type {User} from 'src/types/User';
 
 import s from './PassportForm.scss';
 import {usePassportFields} from './usePassportFields';
-import {TextWeight} from "src/components/ui/Text/Text";
+
+export const rulesLabel:FC = () => {
+  return (
+    <React.Fragment>
+      Я ознакомился с условиями <a className={s.link} href='#'>Правил</a> и всех приложений к ним.
+    </React.Fragment>
+  );
+};
 
 export declare namespace PassportForm {
   export type Props = ProfileForms.FormProps;
@@ -143,9 +151,10 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
               <Text size={TextSize.subHeadline1} style={{marginTop: 20, marginBottom: 8}}>
                 Загрузите документы
                 <Tooltip componentIcon={InfoIcon}>
-                  <Text size={TextSize.bodyMini} weight={TextWeight.normal}>Допускается загрузка файлов в форматах
-                  jpg, jpeg, png, gif, pdf, zip, rar, doc, docx, xls,
-                  xlsx, ppt, pps, размер которых
+                  <Text size={TextSize.bodyMini} weight={TextWeight.normal}>
+                    Допускается загрузка файлов в форматах
+                    jpg, jpeg, png, gif, pdf, zip, rar, doc, docx, xls,
+                    xlsx, ppt, pps, размер которых
                     не превышает 5 Мб.</Text>
                 </Tooltip>
               </Text>
@@ -158,29 +167,17 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           </div>
         </FormRow>
         { user && (!user.passport || user.passport.status !== ModerationStatus.approved) ? (
-          <div>
-            <CheckBox
-              style={{marginBottom: 20}}
-              value={checkBoxes[0]}
-              onChange={(checked) => setCheckBoxes([checked, checkBoxes[1], checkBoxes[2]])}
-              label={
-                'Предоставленные личные данные физического лица верны.'
-              } />
-            <CheckBox
-              style={{marginBottom: 20}}
-              value={checkBoxes[1]}
-              onChange={(checked) => setCheckBoxes([checkBoxes[0], checked, checkBoxes[2]])}
-              label={
-                'Я даю согласие на передачу и обработку персональных данных.'
-              } />
-            <CheckBox
-              style={{marginBottom: 20}}
-              value={checkBoxes[2]}
-              onChange={(checked) => setCheckBoxes([checkBoxes[0], checkBoxes[1], checked])}
-              label={
-                <div>Я ознакомился с условиями <a className={s.link} href='#'>Правил</a> и всех приложений к ним.</div>
-              } />
-          </div>
+          <React.Fragment>
+            <FormRow>
+              <Field className='col-12' name='data_valid' />
+            </FormRow>
+            <FormRow>
+              <Field className='col-12' name='data_agreement' />
+            </FormRow>
+            <FormRow>
+              <Field className='col-12' name='data_rules' />
+            </FormRow>
+          </React.Fragment>
         ) : null }
         { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
           <FormActions>
@@ -189,6 +186,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
                 theme={ButtonTheme.black}
                 size={ButtonSize.m}
                 onClick={onContinue}
+                disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
               >Продолжить</Button>
             </div>
           </FormActions>

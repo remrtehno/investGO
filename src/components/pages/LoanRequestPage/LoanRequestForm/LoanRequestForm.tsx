@@ -59,8 +59,6 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
         min_investment_size: parseInt(values.min_investment_size, 10),
         min_amount: parseInt(values.min_amount, 10),
         repayment_limit_month: parseInt(values.repayment_limit_month, 10),
-
-        description: 'test',
       },
     });
   }

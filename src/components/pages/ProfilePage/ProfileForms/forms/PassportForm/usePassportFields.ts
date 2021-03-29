@@ -7,6 +7,8 @@ import {parseDate} from 'src/utils/parseDate';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
+import {rulesLabel} from './PassportForm';
+
 function validateAge(value: string) {
   if (moment().diff(moment(parseDate(value)), 'years') < 18) {
     return 'Меньше 18 лет';
@@ -100,7 +102,28 @@ export const usePassportFields = () => useMemo((): Form.FieldModels => ({
   personal_data_documents: {
     name: 'personal_data_documents',
     type: FieldType.fileArray,
-    validations: [required()]
-  }
+    validations: [required()],
+  },
+  data_valid: {
+    name: 'data_valid',
+    type: FieldType.checkbox,
+    label: 'Предоставленные личные данные физического лица верны.',
+    defaultValue: true,
+    validations: [required()],
+  },
+  data_agreement: {
+    name: 'data_agreement',
+    type: FieldType.checkbox,
+    label: 'Я даю согласие на передачу и обработку персональных данных.',
+    defaultValue: true,
+    validations: [required()],
+  },
+  data_rules: {
+    name: 'data_rules',
+    type: FieldType.checkbox,
+    label: rulesLabel({}),
+    defaultValue: true,
+    validations: [required()],
+  },
 
 }), []);

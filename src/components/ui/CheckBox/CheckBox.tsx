@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {CSSProperties, FC, ReactNode} from 'react';
+import type {CSSProperties, FC, ReactElement, ReactNode} from 'react';
 import React, {useCallback} from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
@@ -12,7 +12,7 @@ export declare namespace CheckBox {
   export type Props = {
     value: boolean,
     onChange(value: boolean, name: string | null): void,
-    label: ReactNode,
+    label: ReactNode | ReactElement,
 
     name?: string | null,
     error?: string | null,
