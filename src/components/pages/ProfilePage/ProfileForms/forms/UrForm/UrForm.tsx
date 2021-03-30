@@ -12,19 +12,19 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import {ModerationInfo} from 'src/components/common/ModerationInfo';
+import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {CheckBox} from 'src/components/ui/CheckBox';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {useLatestRef} from 'src/hooks/useLatestRef';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
 import s from './UrForm.scss';
 import {useUrFields} from './useUrFields';
-import {Text, TextSize} from 'src/components/ui/Text';
-import {ModerationStatus} from 'src/contstants/ModerationStatus';
-import {ModerationInfo} from 'src/components/common/ModerationInfo';
-import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 
 export declare namespace UrForm {
   export type Props = ProfileForms.FormProps;
@@ -44,7 +44,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
     ...user && user.company && user.company ? {
       ...user.company,
       document_registry_file: user.company.document_registry_file,
-      email: user.company.emails[0]
+      email: user.company.emails[0],
     } : {},
   } as Omit<User.Passport, 'serial' | 'number'> & { serialNumber: string });
 
@@ -97,8 +97,8 @@ export const UrForm: FC<UrForm.Props> = (props) => {
       founders: founders.map((founder: any) => {
         return {
           ...founder,
-          percent: Number(founder.percent)
-        }
+          percent: Number(founder.percent),
+        };
       }),
       director: isDirector ? null : {
         authority: director_authority,
@@ -140,12 +140,12 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   return (
     <div ref={props.formRef} className={cx(s.CompanyForm, 'container')}>
       <FormTitle
-        style={{ marginTop: 60 }}
+        style={{marginTop: 60}}
         status={user.company?.status}
       >{ props.form.title }</FormTitle>
 
       { user.company?.status === ModerationStatus.waiting || user.company?.status === ModerationStatus.filled ? (
-        <ModerationInfo/>
+        <ModerationInfo />
       ) : (
         <Form
           initialValues={initialValues}
@@ -180,6 +180,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <FormRow>
             <div className='col-12'>
               <CheckBox
+                className={s.isDirectorCheckbox}
                 value={isDirector}
                 onChange={() => setIsDirector(!isDirector)}
                 label='Я являюсь руководителем компании'
@@ -224,7 +225,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               <FormRow>
                 <div className='col-12'>
                   <div className={s.documentsTitle}>
-                    <Text size={TextSize.subHeadline1} style={{ marginTop: 20, marginBottom: 8 }}>
+                    <Text size={TextSize.subHeadline1} style={{marginTop: 20, marginBottom: 8}}>
                       Загрузите документы
                     </Text>
                     <div>
@@ -242,7 +243,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               <Text size={TextSize.subHeadline1} className={s.title}>Выгрузка из ЕГРЮЛ</Text>
               <Text size={TextSize.body0} className={s.fieldDescription}>
                 Выписка или копия выписки из единого государственного реестра юридических лиц, выданной не ранее чем за
-                  тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе).
+                тридцать дней до даты регистрации на сайте Оператора Платформы (Платформе).
               </Text>
               <Field name='document_registry_file' />
             </div>
@@ -312,7 +313,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <FormRow>
             <div className='col-12'>
               <CheckBox
-                style={{ marginBottom: 18 }}
+                style={{marginBottom: 18}}
                 value={checkBoxes[0]}
                 onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
                 label={(
@@ -322,7 +323,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 )}
               />
               <CheckBox
-                style={{ marginBottom: 18 }}
+                style={{marginBottom: 18}}
                 value={checkBoxes[1]}
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
                 label={(
@@ -353,7 +354,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             </div>
           </FormActions>
           { user.company && user.company.status === ModerationStatus.approved ? (
-            <AcceptRules/>
+            <AcceptRules />
           ) : null }
         </Form>
       ) }
