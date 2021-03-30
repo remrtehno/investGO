@@ -1,3 +1,6 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
 .modal {
     position: fixed;
     top: 0;
@@ -5,7 +8,6 @@
     bottom: 0;
     left: 0;
     background: rgba(248, 249, 250, 0.8);
-    // background-color: rgba(#000, 0.4);
 
     display: flex;
     align-items: center;
@@ -27,34 +29,33 @@
 
 .content {
     box-sizing: border-box;
-    padding: 40px;
+    padding: 40px 18px;
+    flex: 0 0 100%;
+
+    @include media-breakpoint-up(sm) {
+        padding: 40px;
+    }
 }
 
 .container {
     position: relative;
     box-sizing: border-box;
-    min-width: 600px;
+    min-width: 100%;
     max-width: 7400px;
     overflow: auto;
     max-height: 100%;
+    height: 100vh;
     background: #fff;
     // box-shadow: 0 2px 12px rgba(58, 66, 60, 0.13);
     box-shadow: 0px 7px 8px rgba(0, 0, 0, 0.05);
     border-radius: 0;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-@media screen and (max-width: 480px) {
-    .Modal__container {
-        max-width: 100%;
-        min-width: 100%;
-    }
-
-    .Modal__header {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    .Modal__content {
-        padding-left: 15px;
-        padding-right: 15px;
+    @include media-breakpoint-up(sm) {
+        min-width: 600px;
+        height: auto;
+        display: block;
     }
 }
