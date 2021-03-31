@@ -9,7 +9,7 @@ export const RecoverPage: FC = () => {
     <Page isBigLogo={true} className={s.page}>
       <div className='container'>
         <div className={cx(s.formContainer, 'row justify-content-center align-items-center')}>
-          <div className='col-4'>
+          <div className='col-xl-4 col-lg-5 col-md-6 col-sm-10 col-xs-12'>
             <RecoverForm />
           </div>
         </div>
