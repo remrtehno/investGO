@@ -10,6 +10,7 @@
     }
   }
 }
+
 .title {
   margin-bottom: 18px;
   @include media-breakpoint-up(sm) {
@@ -24,9 +25,16 @@
 }
 
 .sendCode {
+  margin-bottom: 20px;
+
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 0;
+  }
+
   span {
     color: var(--black);
   }
+
   button {
     background: none;
     border: 0;
