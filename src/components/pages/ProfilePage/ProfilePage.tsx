@@ -111,12 +111,12 @@ export const ProfilePage = withAuth(() => {
           { profileStep === ProfileSteps.profile ? (
             <div className='row'>
               <ProfileNavigation
-                className='col-2'
+                className='col-md-2'
                 forms={forms}
                 currentForm={currentForm}
                 onChangeCurrentForm={setCurrentForm}
               />
-              <div className='col-8'>
+              <div className='col-sm-12 col-md-8'>
                 <ProfileForms
                   onChangeCurrentForm={setCurrentForm}
                   currentForm={currentForm}
