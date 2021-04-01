@@ -18,6 +18,7 @@ import 'src/components/common/Form/fields/checkboxField';
 import 'src/components/common/Form/fields/rangeField';
 import 'src/libs/bootstrap/bootstrap-grid.css';
 import 'src/libs/bootstrap/bootstrap-reboot.css';
+import 'src/libs/helpers.scss';
 import 'src/theme/theme.css';
 import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import {useUserApi} from 'src/hooks/useUser';

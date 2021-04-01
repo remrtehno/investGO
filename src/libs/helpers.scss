@@ -1,0 +1,28 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+:global {
+  .mb-20px {
+    margin-bottom: 20px !important;
+  }
+  .mb-sm-20px {
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 20px !important;
+    }
+  }
+  .mb-md-20px {
+    @include media-breakpoint-up(md) {
+      margin-bottom: 20px !important;
+    }
+  }
+  .mb-lg-20px {
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 20px !important;
+    }
+  }
+  .mb-xl-20px {
+    @include media-breakpoint-up(xl) {
+      margin-bottom: 20px !important;
+    }
+  }
+}

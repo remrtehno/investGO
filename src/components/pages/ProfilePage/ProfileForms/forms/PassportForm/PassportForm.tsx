@@ -14,7 +14,6 @@ import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldV
 import {ModerationInfo} from 'src/components/common/ModerationInfo';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
-import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
 import {Tooltip} from 'src/components/ui/Tooltip/Tooltip';
@@ -120,17 +119,17 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         disabled={Boolean(user && user.passport && user.passport.status !== ModerationStatus.declined)}
       >
         <FormRow>
-          <Field className='col-6' name='fio' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='fio' />
           <Field
-            className='col-6'
+            className='col-sm-12 col-md-6'
             name='date_of_birth'
             extraValue={getAge(values.date_of_birth)}
           />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='subdivision_code' />
-          <Field className='col-3' name='serialNumber' />
-          <Field className='col-3' name='date_of_issue' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='subdivision_code' />
+          <Field className='col-sm-12 col-md-3 mb-20px mb-md-20px' name='serialNumber' />
+          <Field className='col-sm-12 col-md-3' name='date_of_issue' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='authority' />
@@ -142,8 +141,8 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           <Field className='col-12' name='place_of_residence' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='snils' />
-          <Field className='col-6' name='inn' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='snils' />
+          <Field className='col-sm-12 col-md-6' name='inn' />
         </FormRow>
         <FormRow>
           <div className='col-12'>
@@ -181,7 +180,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         ) : null }
         { user && (!user.passport || user.passport.status === ModerationStatus.declined) ? (
           <FormActions>
-            <div className='col-3'>
+            <div className='col-sm-12 col-md-5 col-xl-3'>
               <Button
                 theme={ButtonTheme.black}
                 size={ButtonSize.m}
@@ -214,7 +213,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   }
 
   return (
-    <div ref={props.formRef} className={cx(s.PassportForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.PassportForm)}>
       <FormTitle status={user?.passport?.status}>{ props.form.title }</FormTitle>
       { renderContent() }
     </div>

@@ -68,7 +68,7 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
   }
 
   return (
-    <div ref={props.formRef} className={cx(s.BankDetailsForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.BankDetailsForm)}>
       <Form
         initialValues={initialValues}
         errors={errors}
@@ -81,19 +81,19 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
           <Field className='col-12' name='bank_name' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='account' />
-          <Field className='col-6' name='owner_name' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='account' />
+          <Field className='col-sm-12 col-md-6' name='owner_name' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='bic' />
-          <Field className='col-6' name='correspondent_account' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='bic' />
+          <Field className='col-sm-12 col-md-6' name='correspondent_account' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='inn' />
-          <Field className='col-6' name='kpp' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='inn' />
+          <Field className='col-sm-12 col-md-6' name='kpp' />
         </FormRow>
         <FormActions>
-          <div className='col-3'>
+          <div className='col-sm-12 col-md-5 col-xl-3'>
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}
