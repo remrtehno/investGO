@@ -8,6 +8,7 @@ import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
 import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
+import { BurgerIcon } from 'src/icons/BurgerIcon';
 import {LogoIcon} from 'src/icons/LogoIcon';
 import {userAtom} from 'src/recoil/userAtom';
 
@@ -62,6 +63,11 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
             <LogoutIcon onClick={logout} />
           </div>
         ) : null }
+        <div className={s.burgerMenu}>
+          <div className={s.burgerMenuButton}>
+            <BurgerIcon />
+          </div>
+        </div>
       </div>
     </div>
   );

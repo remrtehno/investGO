@@ -9,6 +9,7 @@ import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
 import {email} from 'src/validations/email';
 import {required} from 'src/validations/required';
 
@@ -72,15 +73,15 @@ export const RecoverForm: FC = () => {
     setErrors(errors);
   }, []);
 
-  const onSubmit = useCallback(() => {
-    submit();
-  }, [values]);
-
   const submit = () => {
     passwordResetRequestApi({
       email: values.email,
     });
   };
+
+  const onSubmit = useCallback(() => {
+    submit();
+  }, [values]);
 
   const handleModalClose = () => {
     history.push('/signin');
@@ -96,6 +97,7 @@ export const RecoverForm: FC = () => {
       formApiRef={formApiRef}
       onSubmit={onSubmit}
     >
+      <Text className={s.title} size={TextSize.h3}>Восстановление пароля</Text>
       <Field className={s.field} name='email' />
       <Button
         className={s.continueButton}

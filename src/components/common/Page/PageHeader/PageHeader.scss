@@ -1,3 +1,6 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
 .pageHeader {
   display: flex;
   height: 60px;
@@ -5,11 +8,15 @@
   align-items: center;
   width: 100vw;
   z-index: 1;
-  background-color: var(--white);
+  
+  @include media-breakpoint-up(sm) {
+    background-color: var(--white);
+  }
 }
 
 .logo {
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .container {
@@ -23,8 +30,12 @@
 }
 
 .userContainer {
-  display: flex;
+  display: none;
   align-items: center;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+  }
 }
 
 .logoutIcon {
@@ -40,6 +51,11 @@
   font-size: 13px;
   font-weight: 600;
   position: relative;
+  display: none;
+
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
 
   & a {
     color: var(--black);
@@ -76,4 +92,16 @@
   & a {
     padding: 5px 17px 7px;
   }
+}
+
+.burgerMenu {
+  position: relative;
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+.burgerMenuButton {
+  padding: 15px;
+  margin-right: -10px;
 }

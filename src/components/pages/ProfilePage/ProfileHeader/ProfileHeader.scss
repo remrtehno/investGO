@@ -1,20 +1,26 @@
 .profileHeader {
+  background: var(--black);
+}
+
+.container {
   height: 50px;
   display: flex;
   align-content: center;
   justify-content: center;
-  background: var(--black);
+  overflow: hidden;
 }
 
 .steps {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 100%;
 }
 
 .step {
   position: relative;
   margin-left: 80px;
+  white-space: nowrap;
 
   &:after {
     content: '';
