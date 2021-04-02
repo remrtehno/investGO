@@ -12,13 +12,13 @@ import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
+import {SmsForm} from 'src/components/pages/SignPage/SignForm/SigninSmsForm';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
 import s from './BankDetailsForm.scss';
 import {useBankDetailsFields} from './useBankDetailsFields';
-import {SmsForm} from 'src/components/pages/SignPage/SignForm/SigninSmsForm';
 
 export declare namespace BankDetailsForm {
   export type Props = ProfileForms.FormProps;

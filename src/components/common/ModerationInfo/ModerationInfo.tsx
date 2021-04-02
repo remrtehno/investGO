@@ -1,4 +1,6 @@
-import React, {FC} from 'react';
+import type {FC} from 'react';
+import React from 'react';
+
 import {TimeIcon} from 'src/components/pages/ProfilePage/ProfileForms/forms/PassportForm/TimeIcon';
 import {Text, TextSize} from 'src/components/ui/Text';
 
@@ -12,5 +14,5 @@ export const ModerationInfo: FC = () => {
         Ваши данные отправлены на проверку. Информация о статусе проверки будет отправлена на ваш электронный адрес.
       </Text>
     </div>
-  )
+  );
 };
