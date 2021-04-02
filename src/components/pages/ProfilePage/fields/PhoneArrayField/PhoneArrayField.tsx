@@ -36,7 +36,7 @@ export const PhoneArrayField: FC<PhoneArrayField.Props> = (props) => {
           </div>
         </div>
       ) : null }
-      <div className='row' style={{marginBottom: -20}}>
+      <div className='row gx-3' style={{marginBottom: -20}}>
         { value.map((phone, index) => {
           return (
             <div key={index} className='col-sm-12 col-md-6 mb-20px mb-md-20px' style={{marginBottom: 20}}>

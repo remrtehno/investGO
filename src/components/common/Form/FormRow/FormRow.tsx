@@ -12,7 +12,7 @@ export declare namespace FormRow {
 
 export const FormRow: FC<FormRow.Props> = (props) => {
   return (
-    <div className={cx('row', s.FormRow, props.className)}>{ props.children }</div>
+    <div className={cx('row gx-3', s.FormRow, props.className)}>{ props.children }</div>
   );
 };
 
