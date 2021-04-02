@@ -121,7 +121,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         <FormRow>
           <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='fio' />
           <Field
-            className='col-sm-12 col-md-6'
+            className='col-sm-12 col-md-6 position-relative'
             name='date_of_birth'
             extraValue={getAge(values.date_of_birth)}
           />

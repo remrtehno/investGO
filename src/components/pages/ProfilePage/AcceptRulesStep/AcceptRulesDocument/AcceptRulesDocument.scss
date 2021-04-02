@@ -1,7 +1,25 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+.document {
+  margin-bottom: 60px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+}
+
 .docButton {
-  margin-top: 40px;
+  margin-top: 30px;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 40px;
+  }
+
   & button {
-    max-width: 162px;
+    @include media-breakpoint-up(md) {
+      max-width: 162px;
+    }
   }
 }
 
@@ -12,5 +30,15 @@
   &:visited,
   &:hover {
     color: black;
+  }
+
+  & > svg {
+    min-width: 24px;
+    margin-right: 12px;
+
+    @include media-breakpoint-up(md) {
+      min-width: 35px;
+      margin-right: 20px;
+    }
   }
 }
