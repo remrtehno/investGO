@@ -8,12 +8,12 @@ import {FieldType} from 'src/components/common/Form/Form';
 import {FoundersField} from 'src/components/pages/ProfilePage/fields/FoundersField';
 import {OkvedField} from 'src/components/pages/ProfilePage/fields/OkvedField';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
+import {Role} from 'src/contstants/Role';
 import {userAtom} from 'src/recoil/userAtom';
 import {parseDate} from 'src/utils/parseDate';
 import {email} from 'src/validations/email';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
-import {Role} from 'src/contstants/Role';
 
 type Options = {
   isSameAddress: boolean,
@@ -33,7 +33,8 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'inn',
         type: FieldType.text,
         label: 'ИНН',
-        mask: _.range(10).map(() => '9').join(''),
+        mask: _.range(10).map(() => '9')
+          .join(''),
         validations: [required()],
       },
       name: {
@@ -71,7 +72,8 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'ogrn',
         type: FieldType.text,
         label: 'ОГРН',
-        mask: _.range(13).map(() => '9').join(''),
+        mask: _.range(13).map(() => '9')
+          .join(''),
         validations: [required()],
       },
       date_issue_ogrn: {
@@ -106,14 +108,14 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         type: FieldType.text,
         label: 'ФИО руководителя',
         validations: [required()],
-        isHidden: isDirector
+        isHidden: isDirector,
       },
       director_date_of_birth: {
         name: 'director_date_of_birth',
         type: FieldType.date,
         label: 'Дата рождения руководителя',
         validations: [required()],
-        isHidden: isDirector
+        isHidden: isDirector,
       },
       director_serialNumber: {
         name: 'director_serialNumber',
@@ -126,7 +128,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
           }
           return 'Обязательное поле';
         }],
-        isHidden: isDirector
+        isHidden: isDirector,
       },
       director_personal_data_documents: {
         name: 'director_personal_data_documents',
@@ -142,7 +144,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         validations: [required(), (value) => {
           return value.replace(/_/g, '').length === 6 ? null : 'Обязательное поле';
         }],
-        isHidden: isDirector
+        isHidden: isDirector,
       },
       director_date_of_issue: {
         name: 'director_date_of_issue',
@@ -158,7 +160,7 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
           }
           return null;
         }],
-        isHidden: isDirector
+        isHidden: isDirector,
       },
       director_authority: {
         name: 'director_authority',
@@ -206,8 +208,8 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         name: 'additional_info',
         type: FieldType.textArea,
         placeholder: 'Дополнительные сведения',
-        isHidden: !user.roles.includes(Role.borrower)
-      }
+        isHidden: !user.roles.includes(Role.borrower),
+      },
     };
   }, [user, isDirector, isSameAddress]);
 };
