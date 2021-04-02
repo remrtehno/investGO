@@ -122,7 +122,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         <FormRow>
           <Field className='col-6' name='fio' />
           <Field
-            className='col-6'
+            className='col-6 position-relative'
             name='date_of_birth'
             extraValue={getAge(values.date_of_birth)}
           />
