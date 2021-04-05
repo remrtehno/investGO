@@ -62,7 +62,7 @@ function userFields(): Form.FieldModels {
       validations: [
         required(),
         minValue(1, true, 'Минимальное значение 1%'),
-        maxValue(100, true, 'Максимальное значение 100%')
+        maxValue(100, true, 'Максимальное значение 100%'),
       ],
     },
   };
@@ -112,7 +112,7 @@ export const FounderModal: FC<FounderModal.Props> = (props) => {
           setErrors(errors);
         }}
       >
-        <div className={cx('container', s.FounderModal)}>
+        <div className={cx(s.FounderModal)}>
           <div className='row'>
             <div className='col-12'>
               <Text size={TextSize.h2}>Добавить учредителя</Text>
@@ -133,28 +133,30 @@ export const FounderModal: FC<FounderModal.Props> = (props) => {
           </div>
         </div>
         <div className='row justify-content-center'>
-          <Button
-            className={cx('col-4', s.saveButton)}
-            size={ButtonSize.m}
-            theme={ButtonTheme.black}
-            onClick={() => {
-              if (!formApiRef.current) {
-                return;
-              }
+          <div className='col-12 col-sm-8 col-md-6 col-lg-4'>
+            <Button
+              className={s.saveButton}
+              size={ButtonSize.m}
+              theme={ButtonTheme.black}
+              onClick={() => {
+                if (!formApiRef.current) {
+                  return;
+                }
 
-              formApiRef.current.submit();
-              if (!formApiRef.current.isValid) {
-                return;
-              }
+                formApiRef.current.submit();
+                if (!formApiRef.current.isValid) {
+                  return;
+                }
 
-              props.onSave({
-                ..._.omit(values, 'serialNumber'),
-                passport_serial: values.serialNumber.slice(0, 4),
-                passport_number: values.serialNumber.slice(5),
-              } as FoundersField.Founder);
-              props.onClose();
-            }}
-          >Сохранить</Button>
+                props.onSave({
+                  ..._.omit(values, 'serialNumber'),
+                  passport_serial: values.serialNumber.slice(0, 4),
+                  passport_number: values.serialNumber.slice(5),
+                } as FoundersField.Founder);
+                props.onClose();
+              }}
+            >Сохранить</Button>
+          </div>
         </div>
       </Form>
     </Modal>

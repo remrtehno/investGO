@@ -112,11 +112,12 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
       ) : null }
       { renderFounders() }
       <div className='row'>
-        <div className='col-8 col-md-4'>
+        <div className='col-9 col-md-4'>
           <Button
             style={{marginTop: 28}}
             className={s.addFounderButton}
-            size={ButtonSize.m}
+            size={ButtonSize.s}
+            sizeSm={ButtonSize.m}
             theme={ButtonTheme.light}
             onClick={() => {
               setChangingFounderIndex(null);

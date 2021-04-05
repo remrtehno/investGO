@@ -5,6 +5,8 @@ import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 
 import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
+import {InfoPanel} from 'src/components/common/InfoPanel';
+import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {CloseIcon} from 'src/icons/CloseIcon';
@@ -14,8 +16,6 @@ import {downloadFile} from 'src/utils/downloadFile';
 
 import {AddButtonIcon} from './AddButtonIcon';
 import s from './FileArrayInput.scss';
-import {InfoPanel} from 'src/components/common/InfoPanel';
-import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 
 
 type Value = ({ isNew: false } & FilePrimitive) |
@@ -81,10 +81,12 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
       { props.error ? (
         <div className='row'>
           <div className='col-12'>
-            <InfoPanel style={{ marginTop: 32 }} isBorderless={true} theme={InfoPanelTheme.error}>{props.error}</InfoPanel>
+            <InfoPanel style={{marginTop: 32}} isBorderless={true} theme={InfoPanelTheme.error}>
+              { props.error }
+            </InfoPanel>
           </div>
         </div>
-        ) : null }
+      ) : null }
       <div className={cx(s.files, 'row')}>
         { files.map((file) => (
           <div
@@ -113,10 +115,11 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
         )) }
       </div>
       { props.disabled || props.readonly ? null : (
-        <div {...getRootProps()} className={s.addButtonContainer} style={{ marginTop: 32 }}>
+        <div {...getRootProps()} className={s.addButtonContainer} style={{marginTop: 32}}>
           <input {...getInputProps()} />
           <Button
-            size={ButtonSize.m}
+            size={ButtonSize.s}
+            sizeSm={ButtonSize.m}
             theme={ButtonTheme.light}
             onClick={_.noop}
           >
