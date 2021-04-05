@@ -93,15 +93,3 @@
     padding: 5px 17px 7px;
   }
 }
-
-.burgerMenu {
-  position: relative;
-
-  @include media-breakpoint-up(md) {
-    display: none;
-  }
-}
-.burgerMenuButton {
-  padding: 15px;
-  margin-right: -10px;
-}
