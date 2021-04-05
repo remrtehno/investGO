@@ -9,7 +9,7 @@ import type {FormField} from 'src/components/common/Form/types';
 import {InfoPanel} from 'src/components/common/InfoPanel';
 import {InfoPanelTheme} from 'src/components/common/InfoPanel/InfoPanel';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import { AddButtonIcon } from 'src/components/ui/FileArray/AddButtonIcon';
+import {AddButtonIcon} from 'src/components/ui/FileArray/AddButtonIcon';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Color} from 'src/contstants/Color';
 import {CloseIcon} from 'src/icons/CloseIcon';
@@ -47,7 +47,7 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
   function renderFounders() {
     return founders.map((founder, index) => {
       return (
-        <div className='container p-0' key={index}>
+        <div key={index}>
           <div
             className={s.founder}
             onClick={() => {
@@ -65,7 +65,7 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
               }}
             />
             <div className='row'>
-              <div className={cx('col-6', s.founderLabel)}>
+              <div className={cx('col-sm-12 col-md-6', s.founderLabel)}>
                 <Text
                   className={s.label}
                   size={TextSize.caption1}
@@ -74,7 +74,7 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
                   { founder.name }
                 </Text>
               </div>
-              <div className={cx('col-6', s.founderLabel)}>
+              <div className={cx('col-sm-12 col-md-6', s.founderLabel)}>
                 <Text
                   className={s.label}
                   size={TextSize.caption1}
@@ -83,7 +83,7 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
                   { founder.passport_serial } / { founder.passport_number }
                 </Text>
               </div>
-              <div className={cx('col-6', s.founderLabel)}>
+              <div className={cx('col-sm-12 col-md-6', s.founderLabel)}>
                 <Text
                   className={s.label}
                   size={TextSize.caption1}
