@@ -7,10 +7,12 @@ import {useRecoilValue} from 'recoil';
 import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
+import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
 import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
-import { BurgerIcon } from 'src/icons/BurgerIcon';
+import {BurgerIcon} from 'src/icons/BurgerIcon';
 import {LogoIcon} from 'src/icons/LogoIcon';
 import {userAtom} from 'src/recoil/userAtom';
+import {breackpointDown, breackpointUp} from 'src/utils/breackpointUtils';
 
 import {HeaderMenu} from './HeaderMenu';
 import s from './PageHeader.scss';
@@ -54,20 +56,22 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
       <div className={cx('container', s.container)}>
         <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
         <div className={s.space} />
-        { user && isRegistrationComplete ? (
+        { user && isRegistrationComplete && breackpointUp(adaptiveBreackpoints.md) ? (
           <HeaderMenu user={user} />
         ) : null }
-        { user ? (
+        { user && breackpointUp(adaptiveBreackpoints.md) ? (
           <div className={s.userContainer}>
             <Text size={TextSize.tabMenu} weight={TextWeight.bold}>{ user.email }</Text>
             <LogoutIcon onClick={logout} />
           </div>
         ) : null }
-        <div className={s.burgerMenu}>
-          <div className={s.burgerMenuButton}>
-            <BurgerIcon />
+        { breackpointDown(adaptiveBreackpoints.md) ? (
+          <div className={s.burgerMenu}>
+            <div className={s.burgerMenuButton}>
+              <BurgerIcon />
+            </div>
           </div>
-        </div>
+        ) : null }
       </div>
     </div>
   );
