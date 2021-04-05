@@ -18,9 +18,14 @@ export enum ButtonTheme {
 
 export declare namespace Button {
   export type Props = {
-    size: ButtonSize,
     theme: ButtonTheme,
-    
+
+    size?: ButtonSize,
+    sizeSm?: ButtonSize,
+    sizeMd?: ButtonSize,
+    sizeLg?: ButtonSize,
+    sizeXl?: ButtonSize,
+    sizeXxl?: ButtonSize,
     onClick?(): void,
     className?: string,
     disabled?: boolean,
@@ -31,8 +36,13 @@ export declare namespace Button {
 export const Button: FC<Button.Props> = (props) => {
   const className = cx(
     s.Button,
-    s[`size_${props.size}`],
     s[`theme_${props.theme}`],
+    props.size ? s[`size_${props.size}`] : null,
+    props.sizeSm ? s[`sizeSm_${props.sizeSm}`] : null,
+    props.sizeMd ? s[`sizeMd_${props.sizeMd}`] : null,
+    props.sizeLg ? s[`sizeLg_${props.sizeLg}`] : null,
+    props.sizeXl ? s[`sizeXl_${props.sizeXl}`] : null,
+    props.sizeXxl ? s[`sizeXxl_${props.sizeXxl}`] : null,
     props.disabled ? s.disabled : null,
     props.className
   );
@@ -42,11 +52,13 @@ export const Button: FC<Button.Props> = (props) => {
       return;
     }
 
-    if (props.onClick) props.onClick();
+    if (props.onClick) {
+      props.onClick();
+    }
   }, [props.onClick, props.disabled]);
 
   return (
-    <button disabled={!!props.disabled} style={props.style} className={className} onClick={onClick}>
+    <button disabled={Boolean(props.disabled)} style={props.style} className={className} onClick={onClick}>
       { props.children }
     </button>
   );

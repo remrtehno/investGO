@@ -3,11 +3,11 @@ import React from 'react';
 
 import {FieldType, useFormModel} from 'src/components/common/Form/Form';
 import type {FormField} from 'src/components/common/Form/types';
+import {FileInput} from 'src/components/ui/FileArray/FileInput';
 import type {Input} from 'src/components/ui/Input';
 
 import type {FieldProps} from './fieldsModel';
 import {fieldsModel} from './fieldsModel';
-import {FileInput} from 'src/components/ui/FileArray/FileInput';
 
 export declare namespace FileField {
   export type Props = FieldProps<FormField.FileArray> & Pick<Input.Props, 'regExp'>;
