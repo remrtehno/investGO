@@ -1,4 +1,14 @@
-.title > div{
-  font-size: 30px !important;
-  font-weight: 400 !important;
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+.title {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-family: Nunito;
+  
+  @include media-breakpoint-up(md) {
+    font-size: 30px;
+    margin-bottom: 28px;
+  }
 }

@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React, {useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 
@@ -32,7 +33,7 @@ export function AcceptRules(props: AcceptRules.Props) {
   }
 
   return (
-    <div className={s.AcceptRules} style={{marginBottom: 60}}>
+    <div className={s.AcceptRules}>
       <div className={s.header}>
         <Text size={TextSize.tabMenu}>
           { user.roles.includes(Role.investor) ? roleLabels[Role.investor] : roleLabels[Role.borrower] }
@@ -52,24 +53,24 @@ export function AcceptRules(props: AcceptRules.Props) {
         </Text>
       </div>
       <div>
-        <Text size={TextSize.h2} style={{marginBottom: 10}}>
+        <Text size={TextSize.h2} className={s.title}>
           Теперь вы можете присоединиться к правилам платформы InvestGo.
         </Text>
-        <Text size={TextSize.body0} style={{marginBottom: 50}}>
-          Присоединение к правилам предполагает предоставляние 
+        <Text size={TextSize.body0} className={s.text}>
+          Присоединение к правилам предполагает предоставляние
           необходимых документов и заключение договора между Вами (индивидуальным предпринимателем) и платформой.
         </Text>
         <div>
           <div>
             <CheckBox
-              style={{marginBottom: 20}}
+              className={s.checkbox}
               value={checkBoxes[0]}
               onChange={(checked) => setCheckBoxes([checked, checkBoxes[1], checkBoxes[2]])}
               label={
                 <Text size={TextSize.body0}>Сформировать заявление на присоединение к <a onClick={(e) => e.stopPropagation()} className={s.link} href='#'>Правилам</a>.</Text>
               } />
             <CheckBox
-              style={{marginBottom: 20}}
+              className={s.checkbox}
               value={checkBoxes[1]}
               onChange={(checked) => setCheckBoxes([checkBoxes[0], checked, checkBoxes[2]])}
               label={
@@ -78,7 +79,7 @@ export function AcceptRules(props: AcceptRules.Props) {
               } />
             { user.roles.includes(Role.borrower) ? (
               <CheckBox
-                style={{marginBottom: 20}}
+                className={s.checkbox}
                 value={checkBoxes[2]}
                 onChange={(checked) => setCheckBoxes([checkBoxes[0], checkBoxes[1], checked])}
                 label={
@@ -87,20 +88,21 @@ export function AcceptRules(props: AcceptRules.Props) {
             ) : null }
           </div>
 
-          <div className='row justify-content-center' style={{paddingBottom: 20}}>
-            <Button
-              disabled={(() => {
-                if (!checkBoxes[0] || !checkBoxes[1]) {
-                  return true;
-                }
+          <div className={cx(s.actions, 'row justify-content-center')}>
+            <div className='col-sm-12 col-md-7 col-xl-5 col-xxl-3'>
+              <Button
+                disabled={(() => {
+                  if (!checkBoxes[0] || !checkBoxes[1]) {
+                    return true;
+                  }
 
-                return user.roles.includes(Role.borrower) && !checkBoxes[2];
-              })()}
-              className='col-6'
-              size={ButtonSize.m}
-              onClick={handleSubmit}
-              theme={ButtonTheme.black}
-            >Присоединиться к правилам</Button>
+                  return user.roles.includes(Role.borrower) && !checkBoxes[2];
+                })()}
+                size={ButtonSize.m}
+                onClick={handleSubmit}
+                theme={ButtonTheme.black}
+              >Присоединиться к правилам</Button>
+            </div>
           </div>
         </div>
       </div>

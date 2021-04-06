@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {CSSProperties, FC} from 'react';
+import type {FC} from 'react';
 import React, {useEffect, useState} from 'react';
 
 import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
@@ -14,7 +14,7 @@ import type {User} from 'src/types/User';
 
 import s from './AcceptRulesDocument.scss';
 
-const DocIcon: FC<{ style: CSSProperties }> = (props) => {
+const DocIcon: FC = (props) => {
   return (
     <svg width='35' height='41' viewBox='0 0 35 41' fill='none' xmlns='http://www.w3.org/2000/svg' {...props}>
       <rect y='0.605469' width='35' height='40' fill='black' />
@@ -91,14 +91,14 @@ export const AcceptRulesDocument: FC<AcceptRulesDocument.Props> = (props) => {
   }
 
   return (
-    <div className={cx('col-6', s.document)}>
+    <div className={cx('col-sm-12 col-md-6', s.document)}>
       <a
         href={props.document?.file?.url}
         target='_blank'
         style={{display: 'flex', textDecoration: 'none'}}
         className={cx(s.link)}
       >
-        <DocIcon style={{minWidth: 35, marginRight: 20}} />
+        <DocIcon />
         { !loading && props.document
           && <Text size={TextSize.body2}>
             { props.name }
@@ -114,7 +114,7 @@ export const AcceptRulesDocument: FC<AcceptRulesDocument.Props> = (props) => {
         }
         { !loading && props.document?.status !== 'signed'
           && <Button
-            className='col-4'
+            className='col-sm-6 col-md-5 col-lg-4'
             size={ButtonSize.m}
             theme={ButtonTheme.black}
             onClick={getCode}

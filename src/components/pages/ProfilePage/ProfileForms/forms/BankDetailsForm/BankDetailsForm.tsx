@@ -12,13 +12,13 @@ import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
+import {SmsForm} from 'src/components/pages/SignPage/SignForm/SigninSmsForm';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
 import s from './BankDetailsForm.scss';
 import {useBankDetailsFields} from './useBankDetailsFields';
-import {SmsForm} from 'src/components/pages/SignPage/SignForm/SigninSmsForm';
 
 export declare namespace BankDetailsForm {
   export type Props = ProfileForms.FormProps;
@@ -68,7 +68,7 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
   }
 
   return (
-    <div ref={props.formRef} className={cx(s.BankDetailsForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.BankDetailsForm)}>
       <Form
         initialValues={initialValues}
         errors={errors}
@@ -81,19 +81,19 @@ export const BankDetailsForm: FC<BankDetailsForm.Props> = (props) => {
           <Field className='col-12' name='bank_name' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='account' />
-          <Field className='col-6' name='owner_name' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='account' />
+          <Field className='col-sm-12 col-md-6' name='owner_name' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='bic' />
-          <Field className='col-6' name='correspondent_account' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='bic' />
+          <Field className='col-sm-12 col-md-6' name='correspondent_account' />
         </FormRow>
         <FormRow>
-          <Field className='col-6' name='inn' />
-          <Field className='col-6' name='kpp' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='inn' />
+          <Field className='col-sm-12 col-md-6' name='kpp' />
         </FormRow>
         <FormActions>
-          <div className='col-3'>
+          <div className='col-sm-12 col-md-5 col-xl-3'>
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}

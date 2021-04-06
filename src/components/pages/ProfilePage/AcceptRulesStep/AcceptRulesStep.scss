@@ -1,7 +1,12 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
 .wrapper {
-  max-width: 780px;
-  margin: 0 auto;
-  padding-top: 55px;
+  @include media-breakpoint-up(md) {
+    padding-top: 55px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
 }
 
 .backLink {
@@ -10,8 +15,12 @@
   color: var(--label);
   cursor: pointer;
   display: inline-block;
-  margin-bottom: 49px;
+  margin-bottom: 22px;
   transition: color .3s;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 49px;
+  }
 
   &:hover {
     color: var(--black);
@@ -34,12 +43,23 @@
 }
 
 .title {
-  font-size: 34px;
-  line-height: 36px;
+  font-size: 26px;
+  line-height: 32px;
   letter-spacing: -0.4px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+  font-family: Nunito;
+
+  @include media-breakpoint-up(md) {
+    font-size: 34px;
+    line-height: 36px;
+    margin-bottom: 24px;
+  }
 }
 
 .text {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 60px;
+  }
 }

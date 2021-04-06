@@ -1,0 +1,143 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+.mobileMenuContainer {
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+
+.burgerButton {
+  padding: 15px;
+  margin-right: -10px;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--white);
+  transition: all .4s ease;
+  font-family: Nunito;
+  display: flex;
+  flex-flow: column;
+  padding-bottom: 13px;
+}
+
+.top {
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 26px;
+  align-items: center;
+}
+
+.middle {
+  flex: 1 1 100%;
+}
+
+.bottom {
+  flex: 0 0 64px;
+  display: flex;
+  align-items: center;
+
+  & svg {
+    margin-left: 15px;
+  }
+
+  .logoutLabel {
+    padding-left: 14px;
+  }
+}
+
+.logo {
+  flex: 0 0 auto;
+}
+
+.space {
+  flex: 1 1 90%;
+}
+
+.close {
+  padding: 20px 5px 20px 20px;
+  flex: 0 0 34px;
+}
+
+.user {
+  padding: 11px 0;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  margin-right: 10px;
+  background: var(--gray2);
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.items {
+  padding-bottom: 9px;
+}
+
+.item {
+  display: block;
+  position: relative;
+  font-family: Nunito;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.1;
+  padding: 9px 12px;
+  color: var(--black);
+  text-decoration: none;
+
+  &.active {
+    color: var(--red);
+
+    &:before {
+      content: '';
+      width: 3px;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--red);
+      position: absolute;
+      top: 52%;
+      left: 0px;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.notifications {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--gray2);
+  border-bottom: 1px solid var(--gray2);
+}
+
+.notificationsLabel {
+  flex: 1 1 100%;
+}
+
+.notificationsCount {
+  width: 17px;
+  padding: 1px 0;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 15px;
+  font-style: normal;
+  color: var(--white);
+  background: var(--red);
+  display: inline-block;
+  font-weight: 600;
+  font-family: Nunito;
+}

@@ -138,7 +138,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   }
 
   return (
-    <div ref={props.formRef} className={cx(s.CompanyForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.CompanyForm)}>
       <FormTitle
         style={{marginTop: 60}}
         status={user.company?.status}
@@ -159,8 +159,8 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <Field className='container col-12' name='name' />
           </FormRow>
           <FormRow>
-            <Field className='col-6' name='ogrn' />
-            <Field className='col-6' name='date_issue_ogrn' />
+            <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='ogrn' />
+            <Field className='col-sm-12 col-md-6' name='date_issue_ogrn' />
           </FormRow>
           <FormRow>
             <Field className='container col-12' name='place' />
@@ -189,13 +189,13 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           </FormRow>
           { isDirector ? (
             <FormRow>
-              <Field className='col-6' name='date_director_set' />
+              <Field className='col-sm-12 col-md-6' name='date_director_set' />
             </FormRow>
           ) : (
             <Fragment>
               <FormRow>
-                <Field className='col-6' name='director_fio' />
-                <Field className='col-6' name='director_date_of_birth' />
+                <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='director_fio' />
+                <Field className='col-sm-12 col-md-6' name='director_date_of_birth' />
               </FormRow>
               <FormRow>
                 <Field className='col-12' name='director_place_of_register' />
@@ -212,15 +212,15 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 <Field className='col-12' name='director_place_of_residence' />
               </FormRow>
               <FormRow>
-                <Field className='col-6' name='director_serialNumber' />
-                <Field className='col-3' name='director_subdivision_code' />
-                <Field className='col-3' name='director_date_of_issue' />
+                <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='director_serialNumber' />
+                <Field className='col-7 col-md-3 mb-20px mb-md-20px' name='director_subdivision_code' />
+                <Field className='col-7 col-md-3' name='director_date_of_issue' />
               </FormRow>
               <FormRow>
                 <Field className='col-12' name='director_authority' />
               </FormRow>
               <FormRow>
-                <Field className='col-6' name='date_director_set' />
+                <Field className='col-sm-12 col-md-6' name='date_director_set' />
               </FormRow>
               <FormRow>
                 <div className='col-12'>
@@ -251,7 +251,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <FormRow>
             <div className='col-12'>
               <Text size={TextSize.subHeadline1} className={s.title}>Копия устава юридического лица</Text>
-              <div className={s.fieldDescription}>
+              <div>
                 Загрузите копию устава юридического лица.
               </div>
               <Field name='document_rule_file' />
@@ -260,7 +260,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <FormRow>
             <div className='col-12'>
               <Text size={TextSize.subHeadline1} className={s.title}>Документ о полномочиях</Text>
-              <Text size={TextSize.body0} className={s.fieldDescription}>
+              <Text size={TextSize.body0}>
                 Копии документов, подтверждающих полномочия руководителя.
               </Text>
               <Field name='document_director_approved_file' />
@@ -272,7 +272,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               <Text size={TextSize.subHeadline1} className={s.title}>Учредители</Text>
               <FormRow>
                 <div className='col-12'>
-                  <Text size={TextSize.body0} className={s.fieldDescription}>
+                  <Text size={TextSize.body0}>
                     Укажите сведения о лицах, имеющих право распоряжаться не менее чем 10% голосов в высшем органе
                     управления юридического лица, если таким лицом является корпорация.
                   </Text>
@@ -345,7 +345,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           </FormRow>
 
           <FormActions>
-            <div className='col-3'>
+            <div className='col-sm-12 col-md-5 col-xl-3'>
               <Button
                 theme={ButtonTheme.black}
                 size={ButtonSize.m}

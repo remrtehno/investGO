@@ -1,12 +1,28 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+.row {
+  padding-top: 25px;
+  margin-bottom: 30px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+}
+
 .joinDocs {
   color: inherit;
-  padding-top: 25px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   display: grid;
   grid-template-columns: 55px 1fr;
+
   &:hover {
     text-decoration: none;
     color: var(--red);
+  }
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 50px;
   }
 }
 

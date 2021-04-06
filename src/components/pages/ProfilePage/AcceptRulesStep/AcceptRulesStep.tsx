@@ -62,7 +62,7 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
         <div className={s.title}>Присоединение к правилам</div>
         <Text className={s.text} size={TextSize.body2}>
           Ознакомьтесь с документами, сформированными на основе данных, указанных в вашем
-          профиле, и нажмите кнопку  "Подписать".
+          профиле, и нажмите кнопку  &quot;Подписать&quot;.
         </Text>
         <div className='row'>
           { user.roles.includes(Role.borrower) ? (

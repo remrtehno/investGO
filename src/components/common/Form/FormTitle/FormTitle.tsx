@@ -27,6 +27,7 @@ export const FormTitle: FC<FormTitle.Props> = (props) => {
   function renderStatus() {
     switch (props.status) {
     case ModerationStatus.filled:
+
     case ModerationStatus.waiting:
       return <Text className={cx(s.status, s.moderation)} size={TextSize.status}>Проверяется</Text>;
 

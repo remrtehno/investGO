@@ -43,10 +43,10 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
   }), [fields, user]);
 
   return (
-    <div ref={props.formRef} className='container'>
+    <div ref={props.formRef}>
       <div className='row'>
         <div className='col-12'>
-          <FormTitle className={s.title}>{ props.form.title }</FormTitle>
+          <div className={s.title}>{ props.form.title }</div>
         </div>
       </div>
       <Form
@@ -57,8 +57,8 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
         onChange={_.noop}
       >
         <FormRow>
-          <Field className='col-6' name='email' />
-          <Field className='col-6' name='phone' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='email' />
+          <Field className='col-sm-12 col-md-6' name='phone' />
         </FormRow>
       </Form>
     </div>

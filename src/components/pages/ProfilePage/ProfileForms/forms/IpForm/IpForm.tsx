@@ -89,7 +89,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
   }
 
   return (
-    <div ref={props.formRef} className={cx(s.CompanyForm, 'container')}>
+    <div ref={props.formRef} className={cx(s.CompanyForm)}>
       { user.company?.status === ModerationStatus.waiting || user.company?.status === ModerationStatus.filled ? (
         <ModerationInfo />
       ) : (<Form
@@ -104,8 +104,8 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           { props.form.title }
         </FormTitle>
         <FormRow>
-          <Field className='col-6' name='ogrn' />
-          <Field className='col-6' name='date_issue_ogrn' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='ogrn' />
+          <Field className='col-sm-12 col-md-6' name='date_issue_ogrn' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='email' />
@@ -134,7 +134,7 @@ export const IpForm: FC<IpForm.Props> = (props) => {
           <Field className='col-12' name='data_rules' />
         </FormRow>
         <FormActions>
-          <div className='col-3'>
+          <div className='col-sm-12 col-md-5 col-xl-3'>
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}

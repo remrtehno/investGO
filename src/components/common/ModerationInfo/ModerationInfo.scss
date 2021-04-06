@@ -1,13 +1,30 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
 .ModerationInfo {
   background-color: var(--gray2);
-  height: 96px;
+  min-height: 96px;
   border: 1px solid var(--black);
   border-radius: 4px;
-  display: flex;
-  padding: 24px 38px;
-  margin-bottom: 96px;
+  padding: 15px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 96px;
+    padding: 24px 38px;
+    text-align: left;
+  }
 }
 
 .moderationIcon {
-  margin-right: 18px;
+  margin: 0 auto 10px;
+
+  @include media-breakpoint-up(md) {
+    margin: 0 18px 0 0;
+    min-width: 34px;
+  }
 }

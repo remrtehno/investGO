@@ -113,7 +113,7 @@ export const SmsForm: FC<SmsForm.Props> = (props) => {
           theme={ButtonTheme.black}
           size={ButtonSize.m}
           onClick={_.noop}
-        >Отправить повторно</Button>
+        >Отправить заново</Button>
       </div>
     </Modal>
   );
