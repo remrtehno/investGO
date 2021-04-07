@@ -1,0 +1,62 @@
+.investorStats {
+  padding: 40px;
+  background: var(--white);
+}
+
+.list {
+  font-size: 13px;
+  line-height: 1.23em;
+}
+
+.listItem {
+  padding: 18.7px 0;
+  border-bottom: 1px solid var(--gray3);
+
+  &:first-child {
+    padding-top: 7px;
+  }
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.chart {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 40px;
+}
+
+.chartLabels {
+  
+}
+
+.chartLabel {
+  font-size: 12px;
+  font-family: Nunito;
+  margin-bottom: 1px;
+
+  & > i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 5px;
+    border-radius: 2px;
+
+    &.red {
+      background: var(--red);
+    }
+    &.black {
+      background: var(--black);
+    }
+    &.gray {
+      background: #D1CED2;
+    }
+  }
+}
+
+.sum {
+  font-size: 15px;
+  font-family: Nunito;
+  padding-left: 12px;
+}

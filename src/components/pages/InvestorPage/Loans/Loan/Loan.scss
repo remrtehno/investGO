@@ -1,7 +1,21 @@
+.loan {
+  background: var(--white);
+  margin-bottom: 30px;
+}
+
 .row {
   min-height: 78px;
   position: relative;
   background: var(--white);
+
+  &:after {
+    content: '';
+    border-bottom: 1px solid var(--gray3);
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 15px;
+  }
 }
 
 .mainSum {

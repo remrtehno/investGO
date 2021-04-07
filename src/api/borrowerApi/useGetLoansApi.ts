@@ -3,12 +3,12 @@ import {useRecoilState} from 'recoil';
 import {api} from 'src/contstants/api';
 import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
-import {loansAtom} from 'src/recoil/loansAtom';
+import {borrowerLoansAtom} from 'src/recoil/borrowerLoansAtom';
 import {RequestStatus} from 'src/types/common';
 
 export const useGetLoans = () => {
   const request = useApiRequest();
-  const [, setLoans] = useRecoilState(loansAtom);
+  const [, setLoans] = useRecoilState(borrowerLoansAtom);
 
   return useApi(async() => {
     const loans = await request(api.borrower.loanRequest(), {

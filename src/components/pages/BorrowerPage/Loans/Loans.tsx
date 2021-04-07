@@ -1,9 +1,9 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {loansAtom} from 'src/recoil/loansAtom';
+import {borrowerLoansAtom} from 'src/recoil/borrowerLoansAtom';
 
 import {Loan} from './Loan/Loan';
 
@@ -15,7 +15,7 @@ declare namespace Loans {
 }
 
 export const Loans: FC<Loans.Props> = (props) => {
-  const {loans} = useRecoilValue(loansAtom);
+  const {loans} = useRecoilValue(borrowerLoansAtom);
   const [showAll, setShowAll] = useState(false);
   const loansToShow = 5;
 
