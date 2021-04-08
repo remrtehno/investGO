@@ -1,7 +1,10 @@
-.paymentSchedule {}
+.paymentSchedule {
+  min-height: 200px;
+}
 
 .title {
   margin-bottom: 25px;
+  cursor: pointer;
 }
 
 .headerRow {

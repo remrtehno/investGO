@@ -23,10 +23,15 @@
   & > tbody {
 
     & > tr {
+      transition: background-color .3s;
+
+      &:hover {
+        background-color: var(--gray1);
+      }
 
       & > td {
         height: 48px;
-        padding: 15px;
+        padding: 8px 15px;
         font-size: 13px;
         line-height: 1.2em;
         font-weight: 400;

@@ -3,6 +3,7 @@
   border-radius: 4px;
   transition: margin-bottom .3s;
   position: relative;
+  margin-bottom: 0px;
 
   &.opened {
     margin-bottom: 30px;
@@ -32,7 +33,9 @@
   position: relative;
   background: var(--white);
 
-  
+  & a {
+    color: var(--black);
+  }
 }
 
 .mainSum {
@@ -60,6 +63,7 @@
   transform: translateY(-50%);
   width: 24px;
   min-width: 24px;
+  cursor: pointer;
 }
 
 .details {
@@ -74,15 +78,21 @@
 
 :global {
   .loan-details-transition-enter {
+    transition: all .3s ease;
+    overflow: hidden;
     max-height: 0px;
   }
   .loan-details-transition-enter-active {
-    max-height: 400px;
+    max-height: 600px;
+    overflow: hidden;
   }
   .loan-details-transition-exit {
-    max-height: 400px;
+    transition: all .3s ease;
+    overflow: hidden;
+    max-height: 600px;
   }
   .loan-details-transition-exit-active {
     max-height: 0px;
+    overflow: hidden;
   }
 }

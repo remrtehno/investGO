@@ -17,67 +17,79 @@ declare namespace PaymentSchedule {
 }
 
 export const PaymentSchedule: FC<PaymentSchedule.Props> = (props) => {
+  const [isOpened, setIsOpened] = useState(false);
+
+  function toggle() {
+    setIsOpened(!isOpened);
+  }
+
   return (
     <div className={s.paymentSchedule}>
-      <div className={s.title}>
+      <div className={s.title} onClick={toggle}>
         <Text size={TextSize.tabMenu}>
           График выплат <DropDownIcon />
         </Text>
       </div>
-      <Table>
-        <thead>
-          <tr>
-            <th style={{width: '59%'}}>Дата</th>
-            <th>Пени</th>
-            <th>Сумма</th>
-            <th style={{width: '8%'}}>Статус</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>21.02.20</td>
-            <td />
-            <td>1 400.00₽</td>
-            <td><StatusCheckIcon /></td>
-          </tr>
-          <tr>
-            <td>21.02.20</td>
-            <td />
-            <td>1 400.00₽</td>
-            <td><StatusCheckIcon /></td>
-          </tr>
-          <tr>
-            <td>21.02.20</td>
-            <td />
-            <td>1 400.00₽</td>
-            <td><StatusCheckIcon /></td>
-          </tr>
-          <tr>
-            <td>21.02.20</td>
-            <td className='color-red'>+400</td>
-            <td className='color-red'>1 400.00₽</td>
-            <td><StatusErrorIcon /></td>
-          </tr>
-          <tr>
-            <td>21.02.20</td>
-            <td />
-            <td className='color-gray4'>1 400.00₽</td>
-            <td><StatusCheckIcon className={s.grayIcon} /></td>
-          </tr>
-          <tr>
-            <td colSpan={2}>
-              <Text size={TextSize.body1} weight={TextWeight.semibold}>
-                Итого остаток
-              </Text>
-            </td>
-            <td colSpan={2} className='text-end'>
-              <Text size={TextSize.body1} weight={TextWeight.semibold}>
-                14 200.00 ₽
-              </Text>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+      <TransitionGroup>
+        { isOpened ? (
+          <CSSTransition timeout={400} classNames='loan-details-transition'>
+            <Table>
+              <thead>
+                <tr>
+                  <th style={{width: '59%'}}>Дата</th>
+                  <th>Пени</th>
+                  <th>Сумма</th>
+                  <th style={{width: '8%'}}>Статус</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>21.02.20</td>
+                  <td />
+                  <td>1 400.00₽</td>
+                  <td><StatusCheckIcon /></td>
+                </tr>
+                <tr>
+                  <td>21.02.20</td>
+                  <td />
+                  <td>1 400.00₽</td>
+                  <td><StatusCheckIcon /></td>
+                </tr>
+                <tr>
+                  <td>21.02.20</td>
+                  <td />
+                  <td>1 400.00₽</td>
+                  <td><StatusCheckIcon /></td>
+                </tr>
+                <tr>
+                  <td>21.02.20</td>
+                  <td className='color-red'>+400</td>
+                  <td className='color-red'>1 400.00₽</td>
+                  <td><StatusErrorIcon /></td>
+                </tr>
+                <tr>
+                  <td>21.02.20</td>
+                  <td />
+                  <td className='color-gray4'>1 400.00₽</td>
+                  <td><StatusCheckIcon className={s.grayIcon} /></td>
+                </tr>
+                <tr>
+                  <td colSpan={2}>
+                    <Text size={TextSize.body1} weight={TextWeight.semibold}>
+                      Итого остаток
+                    </Text>
+                  </td>
+                  <td colSpan={2} className='text-end'>
+                    <Text size={TextSize.body1} weight={TextWeight.semibold}>
+                      14 200.00 ₽
+                    </Text>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </CSSTransition>
+        ) : null }
+      </TransitionGroup>
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.fileIcon {
+  height: 28px;
+  width: 28px;
+  margin-right: 10px;
+}
+
+.tableRow {
+
+  .downloadIcon {
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  &:hover .downloadIcon {
+    opacity: 1;
+  }
+}

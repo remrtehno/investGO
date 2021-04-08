@@ -28,3 +28,6 @@
 .color-gray4 {
   color: var(--gray4);
 }
+.color-label {
+  color: var(--label);
+}

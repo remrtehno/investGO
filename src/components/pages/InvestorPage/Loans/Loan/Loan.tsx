@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import {TabsContent} from 'src/components/pages/AboutUs/TabsContent';
@@ -11,6 +12,8 @@ import type {Borrower} from 'src/types/Borrower';
 import {plural} from 'src/utils/plural';
 
 import s from './Loan.scss';
+import { LoanDocuments } from './LoanDocuments';
+import { LoanEvents } from './LoanEvents';
 import {PaymentSchedule} from './PaymentSchedule';
 
 declare namespace Loan {
@@ -41,7 +44,7 @@ export const Loan: FC<Loan.Props> = (props) => {
           <i className={s.projectImg} />
           { loan?.company?.name || 'ООО Завод ЖБИ' }
         </div>
-        <div className='col-1'>{ loan.num }</div>
+        <div className='col-1'><Link to='/'>{ loan.num }</Link></div>
         <div className='col-2'>
           <span className={s.mainSum}>{ loan.amount } ₽</span>
         </div>
@@ -69,6 +72,12 @@ export const Loan: FC<Loan.Props> = (props) => {
                   <div>
                     <PaymentSchedule />
                   </div>
+                ) : null }
+                { activeTab === '2' ? (
+                  <LoanDocuments />
+                ) : null }
+                { activeTab === '3' ? (
+                  <LoanEvents />
                 ) : null }
               </div>
             </div>
