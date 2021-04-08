@@ -11,3 +11,20 @@
   --link: #1D5CFF;
   --secondaryGray: #ECECEC;
 }
+
+.color-red {
+  color: var(--red);
+}
+
+.color-gray1 {
+  color: var(--gray1);
+}
+.color-gray2 {
+  color: var(--gray2);
+}
+.color-gray3 {
+  color: var(--gray3);
+}
+.color-gray4 {
+  color: var(--gray4);
+}

@@ -1,0 +1,41 @@
+.tableWrapper {}
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+
+  & > thead {
+
+    & > tr {
+      background: var(--gray1);
+      border-radius: 4px;
+
+      & > th {
+        height: 38px;
+        font-size: 13px;
+        line-height: 1.2em;
+        font-weight: 400;
+        padding: 10px 15px;
+      }
+    }
+  }
+
+  & > tbody {
+
+    & > tr {
+
+      & > td {
+        height: 48px;
+        padding: 15px;
+        font-size: 13px;
+        line-height: 1.2em;
+        font-weight: 400;
+        border-bottom: 1px solid var(--gray3);
+      }
+
+      &:last-child > td {
+        border-bottom: none;
+      }
+    }
+  }
+}

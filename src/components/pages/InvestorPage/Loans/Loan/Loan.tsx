@@ -1,13 +1,17 @@
 import cx from 'classnames';
-import {FC, useState} from 'react';
-import React from 'react';
+import type {FC} from 'react';
+import React, {useState} from 'react';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
+import {TabsContent} from 'src/components/pages/AboutUs/TabsContent';
+import Tabs from 'src/components/ui/Tabs/Tabs';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
 import {LoanStatusTranslation} from 'src/translations/LoanStatusTranslation';
 import type {Borrower} from 'src/types/Borrower';
 import {plural} from 'src/utils/plural';
 
 import s from './Loan.scss';
+import {PaymentSchedule} from './PaymentSchedule';
 
 declare namespace Loan {
   export type Props = {
@@ -15,16 +19,23 @@ declare namespace Loan {
   }
 }
 
+const tabs = [
+  {id: '1', label: 'Выплаты'},
+  {id: '2', label: 'Документы'},
+  {id: '3', label: 'События'},
+];
+
 export const Loan: FC<Loan.Props> = (props) => {
   const {loan} = props;
-  const [isOpened, setIsOpened] = useState(false)
+  const [isOpened, setIsOpened] = useState(true);
+  const [activeTab, setActiveTab] = useState('1');
 
   function toggle() {
     setIsOpened(!isOpened);
   }
 
   return (
-    <div className={s.loan}>
+    <div className={cx(s.loan, isOpened && s.opened)}>
       <div className={cx('row', 'align-items-center', s.row)}>
         <div className='col-3'>
           <i className={s.projectImg} />
@@ -42,6 +53,28 @@ export const Loan: FC<Loan.Props> = (props) => {
         <div className='col-2'>{ LoanStatusTranslation[loan.status] }</div>
         <i className={s.openBtn} onClick={toggle}><DropDownIcon /></i>
       </div>
+
+      <TransitionGroup>
+        { isOpened ? (
+          <CSSTransition timeout={400} classNames='loan-details-transition'>
+            <div className={cx('row', s.details)}>
+              <div className={s.detailsInner}>
+                <Tabs
+                  tabs={tabs}
+                  activeTab={activeTab}
+                  onChange={setActiveTab}
+                  viewType='about-boroow'
+                />
+                { activeTab === '1' ? (
+                  <div>
+                    <PaymentSchedule />
+                  </div>
+                ) : null }
+              </div>
+            </div>
+          </CSSTransition>
+        ) : null }
+      </TransitionGroup>
     </div>
   );
 };

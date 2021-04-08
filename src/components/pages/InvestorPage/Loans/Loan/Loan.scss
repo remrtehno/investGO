@@ -1,6 +1,30 @@
 .loan {
   background: var(--white);
-  margin-bottom: 30px;
+  border-radius: 4px;
+  transition: margin-bottom .3s;
+  position: relative;
+
+  &.opened {
+    margin-bottom: 30px;
+    border: 1px solid #F2F2F2;
+    box-shadow:
+      0px 1px 8px rgba(0, 0, 0, 0.02),
+      0px 3px 5px rgba(0, 0, 0, 0.03),
+      0px 3px 4px rgba(0, 0, 0, 0.01);
+  }
+
+  &:after {
+    content: '';
+    border-bottom: 1px solid var(--gray3);
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+  }
+
+  &:last-child::after {
+    content: none;
+  }
 }
 
 .row {
@@ -8,14 +32,7 @@
   position: relative;
   background: var(--white);
 
-  &:after {
-    content: '';
-    border-bottom: 1px solid var(--gray3);
-    position: absolute;
-    bottom: 0;
-    left: 15px;
-    right: 15px;
-  }
+  
 }
 
 .mainSum {
@@ -43,4 +60,29 @@
   transform: translateY(-50%);
   width: 24px;
   min-width: 24px;
+}
+
+.details {
+  overflow: hidden;
+  background: var(--white);
+  transition: all .3s ease;
+}
+
+.detailsInner {
+  padding: 30px 40px;
+}
+
+:global {
+  .loan-details-transition-enter {
+    max-height: 0px;
+  }
+  .loan-details-transition-enter-active {
+    max-height: 400px;
+  }
+  .loan-details-transition-exit {
+    max-height: 400px;
+  }
+  .loan-details-transition-exit-active {
+    max-height: 0px;
+  }
 }
