@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, {Fragment, useState} from 'react';
+import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import {TabsContent} from 'src/components/pages/AboutUs/TabsContent';
@@ -12,9 +12,10 @@ import type {Borrower} from 'src/types/Borrower';
 import {plural} from 'src/utils/plural';
 
 import s from './Loan.scss';
-import { LoanDocuments } from './LoanDocuments';
-import { LoanEvents } from './LoanEvents';
+import {LoanDocuments} from './LoanDocuments';
+import {LoanEvents} from './LoanEvents';
 import {PaymentSchedule} from './PaymentSchedule';
+import {PaymentTimeline} from './PaymentTimeline';
 
 declare namespace Loan {
   export type Props = {
@@ -30,7 +31,7 @@ const tabs = [
 
 export const Loan: FC<Loan.Props> = (props) => {
   const {loan} = props;
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
   const [activeTab, setActiveTab] = useState('1');
 
   function toggle() {
@@ -69,9 +70,12 @@ export const Loan: FC<Loan.Props> = (props) => {
                   viewType='about-boroow'
                 />
                 { activeTab === '1' ? (
-                  <div>
+                  <Fragment>
+                    <div className={s.timeline}>
+                      <PaymentTimeline />
+                    </div>
                     <PaymentSchedule />
-                  </div>
+                  </Fragment>
                 ) : null }
                 { activeTab === '2' ? (
                   <LoanDocuments />
