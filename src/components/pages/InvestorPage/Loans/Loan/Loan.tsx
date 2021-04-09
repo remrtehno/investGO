@@ -31,7 +31,7 @@ const tabs = [
 
 export const Loan: FC<Loan.Props> = (props) => {
   const {loan} = props;
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
   const [activeTab, setActiveTab] = useState('1');
 
   function toggle() {
