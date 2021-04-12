@@ -1,3 +1,6 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
 .loan {
   background: var(--white);
   border-radius: 4px;
@@ -8,10 +11,14 @@
   &.opened {
     margin-bottom: 30px;
     border: 1px solid #F2F2F2;
-    box-shadow:
-      0px 1px 8px rgba(0, 0, 0, 0.02),
-      0px 3px 5px rgba(0, 0, 0, 0.03),
-      0px 3px 4px rgba(0, 0, 0, 0.01);
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 20px;
+      box-shadow:
+        0px 1px 8px rgba(0, 0, 0, 0.02),
+        0px 3px 5px rgba(0, 0, 0, 0.03),
+        0px 3px 4px rgba(0, 0, 0, 0.01);
+    }
   }
 
   &:after {
@@ -29,9 +36,13 @@
 }
 
 .row {
-  min-height: 78px;
+  min-height: 69px;
   position: relative;
   background: var(--white);
+
+  @include media-breakpoint-up(md) {
+    min-height: 78px;
+  }
 
   & a {
     color: var(--black);
@@ -59,11 +70,26 @@
 .openBtn {
   position: absolute;
   top: 50%;
-  right: 25px;
-  transform: translateY(-50%);
+  right: 9px;
   width: 24px;
   min-width: 24px;
   cursor: pointer;
+  transform: translateY(-50%) scale(1.5);
+  transition: transform .3s;
+  transform-origin: 71% 45%;
+
+  @include media-breakpoint-up(md) {
+    right: 25px;
+    transform: translateY(-50%);
+  }
+}
+
+.opened .openBtn {
+  transform: translateY(-50%) rotate(180deg) scale(1.5);
+
+  @include media-breakpoint-up(md) {
+    transform: translateY(-50%) rotate(180deg);
+  }
 }
 
 .details {

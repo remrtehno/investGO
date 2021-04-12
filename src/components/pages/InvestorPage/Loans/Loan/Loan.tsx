@@ -41,20 +41,28 @@ export const Loan: FC<Loan.Props> = (props) => {
   return (
     <div className={cx(s.loan, isOpened && s.opened)}>
       <div className={cx('row', 'align-items-center', s.row)}>
-        <div className='col-3'>
+        <div className='col-11 col-md-3'>
           <i className={s.projectImg} />
           { loan?.company?.name || 'ООО Завод ЖБИ' }
         </div>
-        <div className='col-1'><Link to='/'>{ loan.num }</Link></div>
-        <div className='col-2'>
+        <div className='col-1 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
+          <Link to='/'>{ loan.num }</Link>
+        </div>
+        <div className='col-2 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
           <span className={s.mainSum}>{ loan.amount } ₽</span>
         </div>
-        <div className='col-1'>{ loan.rate }%</div>
-        <div className='col-2'>12 500 ₽</div>
-        <div className='col-1'>
+        <div className='col-1 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
+          { loan.rate }%
+        </div>
+        <div className='col-2 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
+          12 500 ₽
+        </div>
+        <div className='col-1 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
           { loan.term_limit } { plural(loan.term_limit, ['день', 'дня', 'дней']) }
         </div>
-        <div className='col-2'>{ LoanStatusTranslation[loan.status] }</div>
+        <div className='col-2 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
+          { LoanStatusTranslation[loan.status] }
+        </div>
         <i className={s.openBtn} onClick={toggle}><DropDownIcon /></i>
       </div>
 

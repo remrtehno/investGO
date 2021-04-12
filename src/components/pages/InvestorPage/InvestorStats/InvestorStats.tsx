@@ -14,7 +14,7 @@ export const InvestorStats: FC<InvestorStats.Props> = (props) => {
   return (
     <div className={s.investorStats}>
       <div className='row'>
-        <div className='col-6 pe-5'>
+        <div className='col-12 col-md-6 pe-md-5'>
           <div className={s.list}>
             <div className={cx('row', s.listItem)}>
               <div className='col-8'>Всего инвестиций</div>
@@ -38,7 +38,7 @@ export const InvestorStats: FC<InvestorStats.Props> = (props) => {
             </div>
           </div>
         </div>
-        <div className='col-6 ps-5'>
+        <div className='col-12 col-md-6 ps-md-5'>
           <div className={s.chart}>
             <PieChart
               data={[

@@ -17,7 +17,7 @@
   color: var(--label);
   margin: -3px 0 13px;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     margin: 3px 0 4px;
   }
 }
@@ -25,15 +25,15 @@
 .section {
   margin-bottom: 32px;
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-up(md) {
     margin-bottom: 65px;
   }
 }
 
 .sectionTitle {
   margin-bottom: 15px;
-  
-  @include media-breakpoint-up(lg) {
+
+  @include media-breakpoint-up(md) {
     margin-bottom: 19px;
   }
 }
