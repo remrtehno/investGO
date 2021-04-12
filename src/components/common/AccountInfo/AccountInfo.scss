@@ -1,55 +1,98 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
 .accountInfo {
-  display: flex;
+  display: block;
   align-items: center;
   background: var(--gray2);
   border-radius: 4px;
-  height: 80px;
   font-family: Nunito;
+  padding: 20px 9px;
+  margin: 0 -9px;
+  position: relative;
+
+  @include media-breakpoint-up(md) {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    height: 80px;
+    position: static;
+  }
 
   &::after {
     content: ' ';
     display: block;
     flex: 1 1 50%;
-    // order: 3;
   }
 }
 
 .item {
-  padding: 0 30px;
+  padding: 0;
+  margin-bottom: 28px;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 30px;
+    display: block;
+  }
+
+  &.itemLast {
+    margin-bottom: 0;
+  }
 }
 
 .label {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.2em;
   letter-spacing: -0.2px;
   vertical-align: middle;
   margin-right: 10px;
   display: inline-block;
+  flex: 1 1 100%;
+
+  @include media-breakpoint-up(md) {
+    font-size: 12px;
+  }
 }
 
 .sum {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.3px;
   letter-spacing: -0.4px;
   vertical-align: middle;
+
+  @include media-breakpoint-up(md) {
+    font-size: 24px;
+  }
 }
 
 .menuContainer {
-  order: 4;
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: -53px;
+  
+  @include media-breakpoint-up(md) {
+    order: 4;
+    position: relative;
+  }
 }
 .menuIcon {
-  padding: 30px 25px;
+  padding: 20px 10px;
   cursor: pointer;
+
+  @include media-breakpoint-up(md) {
+    padding: 30px 25px;
+  }
 }
 
 .menu {
   position: absolute;
-  bottom: 125%;
-  left: -20%;
+  top: 120%;
+  right: 0;
   width: 255px;
   background-color: var(--white);
   transition: all .4s ease;
@@ -57,6 +100,13 @@
     0px 1px 8px rgba(0, 0, 0, 0.02), 
     0px 3px 5px rgba(0, 0, 0, 0.03), 
     0px 3px 4px rgba(0, 0, 0, 0.01);
+
+  @include media-breakpoint-up(md) {
+    top: auto;
+    left: auto;
+    bottom: 125%;
+    left: -20%;
+  }
 }
 
 .menuItem {

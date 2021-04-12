@@ -2,6 +2,7 @@ import type {FC} from 'react';
 import React, {useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import cx from 'classnames'
 
 import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
 import {KebabMenuIcon} from 'src/icons/KebabMenuIcon';
@@ -31,7 +32,7 @@ export const AccountInfo: FC<AccountInfo.Props> = (props) => {
     <div className={s.accountInfo}>
       { props.items.map((item, index) => {
         return (
-          <div className={s.item} key={index}>
+          <div className={cx(s.item, index === props.items.length - 1 && s.itemLast)} key={index}>
             <span className={s.label}>{ item.label }</span>
             <span className={s.sum}>{ item.value }</span>
           </div>
