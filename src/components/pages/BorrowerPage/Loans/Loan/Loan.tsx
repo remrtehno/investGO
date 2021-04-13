@@ -4,7 +4,7 @@ import React from 'react';
 
 import {CalendarDateIcon} from 'src/icons/CalendarDateIcon';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
-import {LoanStatusTranslation} from 'src/translations/LoanStatusTranslation';
+import {BorrowerLoanStatusTranslation} from 'src/translations/BorrowerLoanStatusTranslation';
 import type {Borrower} from 'src/types/Borrower';
 import {formatDate} from 'src/utils/formatDate';
 
@@ -32,7 +32,9 @@ export const Loan: FC<Loan.Props> = (props) => {
         <i className={s.icon}><CalendarDateIcon /></i>
         5 000.00 ₽
       </div>
-      <div className='col-2'>{ LoanStatusTranslation[loan.status] }</div>
+      <div className='col-2'>
+        { BorrowerLoanStatusTranslation[loan.status] }
+      </div>
       <i className={s.openBtn}><DropDownIcon /></i>
     </div>
   );

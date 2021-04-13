@@ -51,23 +51,29 @@ export const InvestorStats: FC<InvestorStats.Props> = (props) => {
             <div className={s.chartTotal}>120 000 ₽</div>
           </div>
           <div className={cx('row', s.chartLabels)}>
-            <div className='col-4'>
-              <div className={s.chartLabel}>
-                <i className={s.gray} />Общий долг
+            <div className={cx('col-4', s.chartLabelWrapper)}>
+              <div>
+                <div className={s.chartLabel}>
+                  <i className={s.gray} />Общий долг
+                </div>
+                <div className={s.sum}>80 000 ₽  </div>
               </div>
-              <div className={s.sum}>80 000 ₽  </div>
             </div>
-            <div className='col-4'>
-              <div className={s.chartLabel}>
-                <i className={s.black} />Выплачено
+            <div className={cx('col-4', s.chartLabelWrapper)}>
+              <div>
+                <div className={s.chartLabel}>
+                  <i className={s.black} />Выплачено
+                </div>
+                <div className={s.sum}>35 000 ₽  </div>
               </div>
-              <div className={s.sum}>35 000 ₽  </div>
             </div>
-            <div className='col-4'>
-              <div className={s.chartLabel}>
-                <i className={s.red} />Задолженность
+            <div className={cx('col-4', s.chartLabelWrapper)}>
+              <div>
+                <div className={s.chartLabel}>
+                  <i className={s.red} />Задолженность
+                </div>
+                <div className={s.sum}>5000 ₽  </div>
               </div>
-              <div className={s.sum}>5000 ₽  </div>
             </div>
           </div>
         </div>

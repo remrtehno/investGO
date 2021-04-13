@@ -5,16 +5,16 @@ import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import Tabs from 'src/components/ui/Tabs/Tabs';
-import { adaptiveBreackpoints } from 'src/contstants/adaptiveBreackpoints';
+import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
-import {LoanStatusTranslation} from 'src/translations/LoanStatusTranslation';
+import {InvestorLoanStatusTranslation} from 'src/translations/InvestorLoanStatusTranslation';
 import type {Borrower} from 'src/types/Borrower';
-import { breackpointDown } from 'src/utils/breackpointUtils';
+import {breackpointDown} from 'src/utils/breackpointUtils';
 import {plural} from 'src/utils/plural';
 
 import s from './Loan.scss';
 import {LoanDocuments} from './LoanDocuments';
-import { LoanEvents } from './LoanEvents';
+import {LoanEvents} from './LoanEvents';
 import {PaymentSchedule} from './PaymentSchedule';
 import {PaymentTimeline} from './PaymentTimeline';
 
@@ -62,7 +62,7 @@ export const Loan: FC<Loan.Props> = (props) => {
           { loan.term_limit } { plural(loan.term_limit, ['день', 'дня', 'дней']) }
         </div>
         <div className='col-2 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
-          { LoanStatusTranslation[loan.status] }
+          { InvestorLoanStatusTranslation[loan.status] }
         </div>
         <i className={s.openBtn} onClick={toggle}><DropDownIcon /></i>
       </div>
@@ -98,7 +98,7 @@ export const Loan: FC<Loan.Props> = (props) => {
                     </div>
                     <div className={s.field}>
                       <div className={s.fieldLabel}>Статус</div>
-                      <div className={s.fieldValue}>{ LoanStatusTranslation[loan.status] }</div>
+                      <div className={s.fieldValue}>{ InvestorLoanStatusTranslation[loan.status] }</div>
                     </div>
                   </div>
                 ) : null }

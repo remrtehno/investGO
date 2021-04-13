@@ -84,8 +84,9 @@
   transform: translate(-50%, -50%);
 }
 
-.chartLabels {
-  
+.chartLabelWrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .chartLabel {
