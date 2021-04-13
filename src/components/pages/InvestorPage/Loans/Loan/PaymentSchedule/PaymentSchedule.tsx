@@ -46,32 +46,42 @@ export const PaymentSchedule: FC<PaymentSchedule.Props> = (props) => {
                 <tr>
                   <td>21.02.20</td>
                   <td />
-                  <td>1 400.00₽</td>
-                  <td><StatusCheckIcon /></td>
+                  <td className='text-nowrap'>1 400.00₽</td>
+                  <td className='text-end text-md-center'>
+                    <StatusCheckIcon />
+                  </td>
                 </tr>
                 <tr>
                   <td>21.02.20</td>
                   <td />
-                  <td>1 400.00₽</td>
-                  <td><StatusCheckIcon /></td>
+                  <td className='text-nowrap'>1 400.00₽</td>
+                  <td className='text-end text-md-center'>
+                    <StatusCheckIcon />
+                  </td>
                 </tr>
                 <tr>
                   <td>21.02.20</td>
                   <td />
-                  <td>1 400.00₽</td>
-                  <td><StatusCheckIcon /></td>
+                  <td className='text-nowrap'>1 400.00₽</td>
+                  <td className='text-end text-md-center'>
+                    <StatusCheckIcon />
+                  </td>
                 </tr>
                 <tr>
                   <td>21.02.20</td>
                   <td className='color-red'>+400</td>
-                  <td className='color-red'>1 400.00₽</td>
-                  <td><StatusErrorIcon /></td>
+                  <td className='color-red text-nowrap'>1 400.00₽</td>
+                  <td className='text-end text-md-center'>
+                    <StatusErrorIcon />
+                  </td>
                 </tr>
                 <tr>
                   <td>21.02.20</td>
                   <td />
-                  <td className='color-gray4'>1 400.00₽</td>
-                  <td><StatusCheckIcon className={s.grayIcon} /></td>
+                  <td className='color-gray4 text-nowrap'>1 400.00₽</td>
+                  <td className='text-end text-md-center'>
+                    <StatusCheckIcon className={s.grayIcon} />
+                  </td>
                 </tr>
                 <tr>
                   <td colSpan={2}>
@@ -79,7 +89,7 @@ export const PaymentSchedule: FC<PaymentSchedule.Props> = (props) => {
                       Итого остаток
                     </Text>
                   </td>
-                  <td colSpan={2} className='text-end'>
+                  <td colSpan={2} className='text-end text-nowrap'>
                     <Text size={TextSize.body1} weight={TextWeight.semibold}>
                       14 200.00 ₽
                     </Text>

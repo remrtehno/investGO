@@ -4,16 +4,17 @@ import React, {Fragment, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
-import {TabsContent} from 'src/components/pages/AboutUs/TabsContent';
 import Tabs from 'src/components/ui/Tabs/Tabs';
+import { adaptiveBreackpoints } from 'src/contstants/adaptiveBreackpoints';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
 import {LoanStatusTranslation} from 'src/translations/LoanStatusTranslation';
 import type {Borrower} from 'src/types/Borrower';
+import { breackpointDown } from 'src/utils/breackpointUtils';
 import {plural} from 'src/utils/plural';
 
 import s from './Loan.scss';
 import {LoanDocuments} from './LoanDocuments';
-import {LoanEvents} from './LoanEvents';
+import { LoanEvents } from './LoanEvents';
 import {PaymentSchedule} from './PaymentSchedule';
 import {PaymentTimeline} from './PaymentTimeline';
 
@@ -71,6 +72,36 @@ export const Loan: FC<Loan.Props> = (props) => {
           <CSSTransition timeout={400} classNames='loan-details-transition'>
             <div className={cx('row', s.details)}>
               <div className={s.detailsInner}>
+                { breackpointDown(adaptiveBreackpoints.md) ? (
+                  <div className={s.fields}>
+                    <div className={s.field}>
+                      <div className={s.fieldLabel}>Заявка</div>
+                      <div className={s.fieldValue}>{ loan.num }</div>
+                    </div>
+                    <div className={s.field}>
+                      <div className={s.fieldLabel}>Инвестиции</div>
+                      <div className={s.fieldValue}>{ loan.amount } ₽</div>
+                    </div>
+                    <div className={s.field}>
+                      <div className={s.fieldLabel}>Ставка</div>
+                      <div className={s.fieldValue}>{ loan.rate }%</div>
+                    </div>
+                    <div className={s.field}>
+                      <div className={s.fieldLabel}>Начислено %</div>
+                      <div className={s.fieldValue}>12 500 ₽</div>
+                    </div>
+                    <div className={s.field}>
+                      <div className={s.fieldLabel}>Срок</div>
+                      <div className={s.fieldValue}>
+                        { loan.term_limit } { plural(loan.term_limit, ['день', 'дня', 'дней']) }
+                      </div>
+                    </div>
+                    <div className={s.field}>
+                      <div className={s.fieldLabel}>Статус</div>
+                      <div className={s.fieldValue}>{ LoanStatusTranslation[loan.status] }</div>
+                    </div>
+                  </div>
+                ) : null }
                 <Tabs
                   tabs={tabs}
                   activeTab={activeTab}
