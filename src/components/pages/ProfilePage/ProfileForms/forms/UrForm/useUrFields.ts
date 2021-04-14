@@ -5,13 +5,13 @@ import {useRecoilValue} from 'recoil';
 
 import type {Form} from 'src/components/common/Form/Form';
 import {FieldType} from 'src/components/common/Form/Form';
+import {EmailArrayField} from 'src/components/pages/ProfilePage/fields/EmailArrayField';
 import {FoundersField} from 'src/components/pages/ProfilePage/fields/FoundersField';
 import {OkvedField} from 'src/components/pages/ProfilePage/fields/OkvedField';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
 import {Role} from 'src/contstants/Role';
 import {userAtom} from 'src/recoil/userAtom';
 import {parseDate} from 'src/utils/parseDate';
-import {email} from 'src/validations/email';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
@@ -55,12 +55,13 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         label: 'Почтовый адрес (адрес получения корреспонденции)',
         validations: [required()],
       },
-      email: {
-        name: 'email',
-        type: FieldType.text,
+      emails: {
+        type: FieldType.custom,
+        Field: EmailArrayField,
+        name: 'emails',
+        validations: [required()],
         label: 'Адрес электронной почты',
-        validations: [required(), email()],
-      },
+      } as any,
       phones: {
         type: FieldType.custom,
         Field: PhoneArrayField,

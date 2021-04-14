@@ -75,7 +75,6 @@ export const UrForm: FC<UrForm.Props> = (props) => {
     }
 
     const {
-      email,
       director_authority,
       director_date_of_birth,
       director_date_of_issue,
@@ -86,13 +85,11 @@ export const UrForm: FC<UrForm.Props> = (props) => {
       director_place_of_residence,
       director_subdivision_code,
       founders,
-      director_passport_id,
       ...saveValues
     } = values;
 
     const payload: any = {
       ...saveValues,
-      emails: [email],
       user_is_director: isDirector,
       founders: founders.map((founder: any) => {
         return {
@@ -172,7 +169,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <Field className='col-12' name='inn' />
           </FormRow>
           <FormRow>
-            <Field className='col-12' name='email' />
+            <Field className='col-12' name='emails' />
           </FormRow>
           <FormRow>
             <Field className='container col-12' name='phones' />
