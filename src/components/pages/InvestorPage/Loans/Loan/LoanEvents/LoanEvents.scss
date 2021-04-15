@@ -1,0 +1,36 @@
+.event {
+  display: flex;
+  border-bottom: 1px solid var(--gray3);
+  padding: 15px 0 20px;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.date {
+  padding-right: 5px;
+  white-space: nowrap;
+}
+
+.description {
+  padding-left: 10px;
+}
+
+.name {
+  font-weight: 600;
+  margin-bottom: 11px;
+}
+
+.comment {
+  color: var(--label);
+  margin-bottom: 11px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,9 +1,9 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {borrowerLoansAtom} from 'src/recoil/borrowerLoansAtom';
+import {investorLoansAtom} from 'src/recoil/investorLoansAtom';
 
 import {Loan} from './Loan/Loan';
 
@@ -15,7 +15,7 @@ declare namespace Loans {
 }
 
 export const Loans: FC<Loans.Props> = (props) => {
-  const {loans} = useRecoilValue(borrowerLoansAtom);
+  const {loans} = useRecoilValue(investorLoansAtom);
   const [showAll, setShowAll] = useState(false);
   const loansToShow = 5;
 
@@ -31,11 +31,12 @@ export const Loans: FC<Loans.Props> = (props) => {
     <div className={s.loans}>
       <div className={s.header}>
         <div className={cx('row', 'align-items-center', s.headerRow)}>
-          <div className='col-1'>№ заявки</div>
-          <div className='col-2'>Сумма + %</div>
-          <div className='col-2'>Срок до</div>
-          <div className='col-2'>Выплачено</div>
-          <div className='col-2'>Ближайший платеж</div>
+          <div className='col-3'>Компания</div>
+          <div className='col-1'>Заявка</div>
+          <div className='col-2'>Инвестиции</div>
+          <div className='col-1'>Ставка</div>
+          <div className='col-2'>Начислено %</div>
+          <div className='col-1'>Срок</div>
           <div className='col-2'>Статус</div>
         </div>
       </div>

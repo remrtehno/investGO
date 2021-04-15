@@ -149,13 +149,18 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
             <div className={s.documentsTitle}>
               <Text size={TextSize.subHeadline1} style={{marginTop: 20, marginBottom: 8}}>
                 Загрузите документы
-                <Tooltip componentIcon={InfoIcon}>
-                  <Text size={TextSize.bodyMini} weight={TextWeight.normal}>
-                    Допускается загрузка файлов в форматах
-                    jpg, jpeg, png, gif, pdf, zip, rar, doc, docx, xls,
-                    xlsx, ppt, pps, размер которых
-                    не превышает 5 Мб.</Text>
-                </Tooltip>
+                <Tooltip
+                  showButton={true}
+                  componentIcon={InfoIcon}
+                  content={
+                    <Text size={TextSize.bodyMini} weight={TextWeight.normal}>
+                      Допускается загрузка файлов в форматах
+                      jpg, jpeg, png, gif, pdf, zip, rar, doc, docx, xls,
+                      xlsx, ppt, pps, размер которых
+                      не превышает 5 Мб.
+                    </Text>
+                  }
+                />
               </Text>
               <div>
                 — Копию документа, удостоверяющего личность физического лица (лицевая сторона, а также страница

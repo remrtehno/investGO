@@ -6,9 +6,9 @@ import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
 import {TopMenu} from 'src/components/common/TopMenu';
 import {withAuth} from 'src/components/hocs/withAuth';
-import {AccountInfo} from 'src/components/pages/BorrowerPage/AccountInfo';
+import {Account} from 'src/components/pages/BorrowerPage/Account';
 import {Text, TextSize} from 'src/components/ui/Text';
-import {loansAtom} from 'src/recoil/loansAtom';
+import {borrowerLoansAtom} from 'src/recoil/borrowerLoansAtom';
 import {userAtom} from 'src/recoil/userAtom';
 
 import s from './BorrowerPage.scss';
@@ -22,7 +22,7 @@ export const BorrowerPage = withAuth(() => {
   const {user} = useRecoilValue(userAtom);
   const company = user?.company;
   const [, getLoans] = useGetLoans();
-  const {loans} = useRecoilValue(loansAtom);
+  const {loans} = useRecoilValue(borrowerLoansAtom);
 
   useEffect(() => {
     getLoans(null);
@@ -56,7 +56,7 @@ export const BorrowerPage = withAuth(() => {
             <section className={s.section}>
               <Text size={TextSize.h2}>Счет</Text>
               <div className={s.accountNum}>№586920</div>
-              <AccountInfo />
+              <Account />
             </section>
             { company ? (
               <section className={s.section}>

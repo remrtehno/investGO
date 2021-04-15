@@ -21,6 +21,7 @@ import 'src/libs/bootstrap/bootstrap-reboot.css';
 import 'src/libs/helpers.scss';
 import 'src/libs/bootstrap/bootstrap-utilities.css';
 import 'src/theme/theme.css';
+import 'src/theme/container.scss';
 import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import {useUserApi} from 'src/hooks/useUser';
 import {isPageInitAtom} from 'src/recoil/isPageInitAtom';

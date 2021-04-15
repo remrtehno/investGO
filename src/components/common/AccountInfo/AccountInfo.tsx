@@ -1,6 +1,8 @@
 import type {FC} from 'react';
 import React, {useRef, useState} from 'react';
+import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import cx from 'classnames'
 
 import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
 import {KebabMenuIcon} from 'src/icons/KebabMenuIcon';
@@ -9,6 +11,8 @@ import s from './AccountInfo.scss';
 
 declare namespace AccountInfo {
   export type Props = {
+    items: Array<{label: string, value: string}>,
+    menuItems: Array<{to: string, label: string}>,
   }
 }
 
@@ -26,18 +30,15 @@ export const AccountInfo: FC<AccountInfo.Props> = (props) => {
 
   return (
     <div className={s.accountInfo}>
-      <div className={s.item}>
-        <span className={s.label}>Свободно:</span>
-        <span className={s.sum}>0.00 ₽</span>
-      </div>
-      <div className={s.item}>
-        <span className={s.label}>Займы:</span>
-        <span className={s.sum}>1 163 000.00 ₽</span>
-      </div>
-      <div className={s.item}>
-        <span className={s.label}>Начислено:</span>
-        <span className={s.sum}>0.00 ₽</span>
-      </div>
+      { props.items.map((item, index) => {
+        return (
+          <div className={cx(s.item, index === props.items.length - 1 && s.itemLast)} key={index}>
+            <span className={s.label}>{ item.label }</span>
+            <span className={s.sum}>{ item.value }</span>
+          </div>
+        );
+      }) }
+
       <div className={s.menuContainer} ref={menuRef}>
         <i className={s.menuIcon} onClick={toggleMenu}>
           <KebabMenuIcon />
@@ -46,8 +47,11 @@ export const AccountInfo: FC<AccountInfo.Props> = (props) => {
           { isMenuOpened ? (
             <CSSTransition timeout={400} classNames='popup-menu-transition'>
               <div className={s.menu}>
-                <a href='#' className={s.menuItem}>Пополнить счет</a>
-                <a href='#' className={s.menuItem}>Вывести средства</a>
+                { props.menuItems.map((item, index) => {
+                  return (
+                    <Link to={item.to} className={s.menuItem} key={index}>{ item.label }</Link>
+                  );
+                }) }
               </div>
             </CSSTransition>
           ) : null }

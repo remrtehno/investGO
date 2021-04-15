@@ -1,0 +1,18 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+
+:global {
+  .container,
+  .container-fluid,
+  .container-xxl,
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    @include media-breakpoint-down(md) {
+      padding-left: 17px;
+      padding-right: 17px;
+    }
+  }
+}
