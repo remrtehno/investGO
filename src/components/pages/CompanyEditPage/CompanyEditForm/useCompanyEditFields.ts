@@ -28,6 +28,8 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       Field: BgImageField,
       // label: 'Загрузить фоновое изображение',
       validations: [required()],
+      size: 'small',
+      background: 'white',
     } as any,
     name: {
       name: 'name',
@@ -35,6 +37,11 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       label: 'Наименование юридического лица (проекта)',
       validations: [required()],
       disabled: true,
+    },
+    video: {
+      name: 'video',
+      type: FieldType.text,
+      label: 'Ссылка на видео (если есть)',
     },
     emails: {
       name: 'emails',

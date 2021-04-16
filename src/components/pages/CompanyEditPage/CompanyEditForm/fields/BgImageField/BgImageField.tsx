@@ -24,6 +24,7 @@ export declare namespace BgImageField {
   type Field = FormField.BaseField & {
     type: FieldType.custom,
     onChange(file: FilePrimitive | null, name: string | null): void,
+    background?: 'white' | 'default'
   }
 
   export type Props = FieldProps<FormField.FileArray>
@@ -84,16 +85,18 @@ export const BgImageField: FC<BgImageField.Props> = (props) => {
 
   return (
     <div
-      className={s.bgImageField}
+      className={cx(s.bgImageField, field.background === 'white' && s.bgWhite)}
       {...getRootProps()}
       style={file && file.url ? {backgroundImage: `url(${file?.url})`} : {}}
     >
       <input {...getInputProps()} />
       <div className={s.label}>
         <PhotoIcon />
-        <Text size={TextSize.body1} color={Color.gray2}>
-          { field.label }
-        </Text>
+        { field.label ? (
+          <Text size={TextSize.body1} color={Color.gray2}>
+            { field.label }
+          </Text>
+        ) : null }
       </div>
     </div>
   );
