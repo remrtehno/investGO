@@ -19,14 +19,23 @@ import { Text, TextSize } from 'src/components/ui/Text';
 
 import s from './CompanyEditForm.scss';
 import {useCompanyEditFields} from './useCompanyEditFields';
+import { useSaveCompanyApi } from 'src/api/companyApi/useSaveCompanyApi';
 
 export declare namespace CompanyEditForm {
   export type Props = {};
 }
 
 export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
-  const fields = useCompanyEditFields();
-  const initialValues = {};
+  const {user} = useRecoilValue(userAtom);
+  const fields = useCompanyEditFields(user?.company || {});
+  const [, saveCompanyApi] = useSaveCompanyApi();
+
+  const getValuesFromUser = () => ({
+    ...getDefaultFieldValues(fields),
+    ...(user?.company || {}),
+  });
+
+  const initialValues = useMemo(() => getValuesFromUser(), [fields]);
   const [values, setValues] = useState<Form.Values>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
 
@@ -43,6 +52,19 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       onChange={onChange}
       fields={fields}
     >
+      <section className={s.section}>
+        <Text size={TextSize.h2} className={s.sectionHeader}>Превью</Text>
+        <Text size={TextSize.body2} className={s.sectionDescr}>
+          Укажите название проекта и дайте краткое описание его деятельности.<br />
+          Загрузите изображения.
+        </Text>
+        <FormRow>
+          <Field className='col-12' name='bg_image' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='name' />
+        </FormRow>
+      </section>
       <section className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Контактные данные</Text>
         <FormRow>

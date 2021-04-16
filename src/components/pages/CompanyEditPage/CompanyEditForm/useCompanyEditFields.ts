@@ -4,14 +4,37 @@ import type {Form} from 'src/components/common/Form';
 import {FieldType} from 'src/components/common/Form/Form';
 import {EmailArrayField} from 'src/components/pages/ProfilePage/fields/EmailArrayField';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
+import { User } from 'src/types/User';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
+import { BgImageField } from './fields/BgImageField';
 
-export const useCompanyEditFields = () => {
+export const useCompanyEditFields = (company: User.Company | {}) => {
   return useMemo((): Form.FieldModels => ({
     id: {
       name: 'id',
       type: FieldType.hidden,
+    },
+    bg_image: {
+      name: 'bg_image',
+      type: FieldType.custom,
+      Field: BgImageField,
+      label: 'Загрузить фоновое изображение',
+      validations: [required()],
+    } as any,
+    logo: {
+      name: 'logo',
+      type: FieldType.custom,
+      Field: BgImageField,
+      // label: 'Загрузить фоновое изображение',
+      validations: [required()],
+    } as any,
+    name: {
+      name: 'name',
+      type: FieldType.text,
+      label: 'Наименование юридического лица (проекта)',
+      validations: [required()],
+      disabled: true,
     },
     emails: {
       name: 'emails',
