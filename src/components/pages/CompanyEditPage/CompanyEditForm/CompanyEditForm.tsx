@@ -21,6 +21,7 @@ import s from './CompanyEditForm.scss';
 import {useCompanyEditFields} from './useCompanyEditFields';
 import { useSaveCompanyApi } from 'src/api/companyApi/useSaveCompanyApi';
 import { Color } from 'src/contstants/Color';
+import { TextEditor } from 'src/components/ui/TextEditor';
 
 export declare namespace CompanyEditForm {
   export type Props = {};
@@ -66,6 +67,9 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           <Field className='col-2' name='logo' />
           <Field className='col-10' name='name' />
         </FormRow>
+        <FormRow>
+          <Field className='col-12' name='field_of_activity' />
+        </FormRow>
       </section>
       <section className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Описание</Text>
@@ -76,6 +80,11 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           Расскажите о вашем проекте.
           Заполните описание (цели, миссия, планы, история, технологии, методы, достижения и т.д.).
         </Text>
+        <FormRow>
+          <div className='col-12'>
+            <TextEditor label='Текст описания' />
+          </div>
+        </FormRow>
       </section>
       <section className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Контактные данные</Text>

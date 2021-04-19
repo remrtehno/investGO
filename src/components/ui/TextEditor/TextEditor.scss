@@ -1,0 +1,48 @@
+.wrapper {
+  background: #FFFFFF;
+  border: 1px solid var(--gray2);
+  border-radius: 6px;
+}
+
+.editor {
+  height: 475px;
+  padding: 20px 17px; 
+}
+
+.label {
+  padding: 6px 17px 0;
+}
+
+.menu {
+  height: 49px;
+  padding: 0 20px;
+  box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.separator {
+  display: block;
+  height: 23px;
+  width: 1px;
+  background-color: #D1CED2;
+}
+

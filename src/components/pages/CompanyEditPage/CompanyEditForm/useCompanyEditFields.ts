@@ -26,7 +26,6 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       name: 'logo',
       type: FieldType.custom,
       Field: BgImageField,
-      // label: 'Загрузить фоновое изображение',
       validations: [required()],
       size: 'small',
       background: 'white',
@@ -37,6 +36,12 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       label: 'Наименование юридического лица (проекта)',
       validations: [required()],
       disabled: true,
+    },
+    field_of_activity: {
+      name: 'field_of_activity',
+      type: FieldType.text,
+      label: 'Cфера деятельности',
+      validations: [required()],
     },
     video: {
       name: 'video',
