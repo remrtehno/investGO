@@ -60,14 +60,24 @@ export const ProfilePage = withAuth(() => {
   }
 
   const hasAcceptRules = useMemo(() => {
+    let returnValue = false;
+
     if (user?.company
-    && user?.company.status === ModerationStatus.approved
-    && user?.company?.bank_details
-    && user?.roles.includes(Role.ip)
-    && !isRegistrationComplete) {
-      return true;
+      && user?.company.status === ModerationStatus.approved
+      && user?.roles.includes(Role.ip)
+      && !isRegistrationComplete
+    ) {
+      returnValue = true;
     }
-    return false;
+
+    if (returnValue
+      && user?.roles.includes(Role.borrower)
+      && !user?.company?.bank_details
+    ) {
+      returnValue = false;
+    }
+
+    return returnValue;
   }, [user]);
 
   const forms = useMemo((): ProfilePage.FormInfo[] => _.compact([
