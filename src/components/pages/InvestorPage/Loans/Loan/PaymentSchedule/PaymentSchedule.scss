@@ -1,0 +1,17 @@
+.paymentSchedule {
+  min-height: 200px;
+}
+
+.title {
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.headerRow {
+  height: 38px;
+  background: var(--gray1);
+}
+
+.grayIcon * {
+  stroke: var(--gray4);
+}

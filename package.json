@@ -98,6 +98,7 @@
     "postcss-loader": "^4.1.0",
     "react-input-mask": "^2.0.4",
     "react-lottie-player": "^1.2.0",
+    "react-minimal-pie-chart": "^8.2.0",
     "react-popper": "^2.2.4",
     "remove": "^0.1.5"
   },

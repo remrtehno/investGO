@@ -1,9 +1,19 @@
+@import 'src/theme/elevations.scss';
+
 .tooltip {
   max-width: 271px;
   color: var(--white);
   background-color: var(--black);
   padding: 6px 22px 12px 11px;
   border-radius: 4px;
+
+  &.bgWhite {
+    background-color: var(--white);
+    color: var(--black);
+    border-radius: 8px;
+    border: 1px solid var(--gray2);
+    @include elevation-5;
+  }
 }
 
 .buttonTooltip {
@@ -35,6 +45,10 @@
   content: '';
   transform: rotate(45deg);
   background: var(--black);
+}
+
+.bgWhite .arrow::before {
+  background-color: var(--white);
 }
 
 .tooltip[data-popper-placement^='top'] {

@@ -1,1 +1,39 @@
-.investorPage {}
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+.content {
+  padding: 47px 0;
+
+  @include media-breakpoint-up(lg) {
+    padding: 71px 95px;
+  }
+}
+
+.accountNum {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  color: var(--label);
+  margin: -3px 0 13px;
+
+  @include media-breakpoint-up(md) {
+    margin: 3px 0 4px;
+  }
+}
+
+.section {
+  margin-bottom: 32px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 65px;
+  }
+}
+
+.sectionTitle {
+  margin-bottom: 15px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 19px;
+  }
+}
