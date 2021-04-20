@@ -7,6 +7,9 @@ import cx from 'classnames'
 import 'src/libs/Draft.css';
 import { Text, TextSize } from '../Text/Text';
 import s from './TextEditor.scss';
+import { TButtonIcon } from 'src/icons/editor/TButtonIcon';
+import { ImgIcon } from 'src/icons/editor/ImgIcon';
+import { LinkIcon } from 'src/icons/LinkIcon';
 
 
 export declare namespace TextEditor {
@@ -30,10 +33,10 @@ export const TextEditor: FC<TextEditor.Props> = (props) => {
         {props.label}
       </Text>
       <div className={s.menu}>
-        <span className={s.button}>!!</span>
+        <span className={s.button}><TButtonIcon /></span>
         <span className={s.separator} />
-        <span className={s.button}>11</span>
-        <span className={s.button}>22</span>
+        <span className={s.button}><ImgIcon /></span>
+        <span className={s.button}><LinkIcon /></span>
       </div>
       <div className={s.editor}>
         <Editor editorState={editorState} onChange={setEditorState} />

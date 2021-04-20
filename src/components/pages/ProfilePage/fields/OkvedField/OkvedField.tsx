@@ -82,7 +82,7 @@ export const OkvedField: FC<OkvedField.Props> = (props) => {
         <div className={s.items}>
           { value.map(({cod, name}, index) => {
             return (
-              <div className={cx('container', s.item)}>
+              <div className={cx('container', s.item)} key={index}>
                 <div className={cx('row', s.itemContent)}>
                   <div className='col-2'>
                     <Text size={TextSize.body1} className={s.cod}>{ cod }</Text>
