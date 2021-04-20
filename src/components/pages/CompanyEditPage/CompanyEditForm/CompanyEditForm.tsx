@@ -4,6 +4,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
+import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
 // import {useSaveCompanyEditApi} from 'src/api/companyApi/useSaveCompanyEditApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
@@ -11,17 +12,15 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
-import type {ProfileForms} from 'src/components/pages/ProfilePage/ProfileForms/ProfileForms';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
+import {Text, TextSize} from 'src/components/ui/Text';
+import {TextEditor} from 'src/components/ui/TextEditor';
+import {Color} from 'src/contstants/Color';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
-import { Text, TextSize } from 'src/components/ui/Text';
 
 import s from './CompanyEditForm.scss';
 import {useCompanyEditFields} from './useCompanyEditFields';
-import { useSaveCompanyApi } from 'src/api/companyApi/useSaveCompanyApi';
-import { Color } from 'src/contstants/Color';
-import { TextEditor } from 'src/components/ui/TextEditor';
 
 export declare namespace CompanyEditForm {
   export type Props = {};
@@ -112,4 +111,4 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       </section>
     </Form>
   );
-}
+};

@@ -22,7 +22,6 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       type: FieldType.custom,
       Field: BgImageField,
       label: 'Загрузить фоновое изображение',
-      validations: [required()],
     } as any,
     logo: {
       name: 'logo',
