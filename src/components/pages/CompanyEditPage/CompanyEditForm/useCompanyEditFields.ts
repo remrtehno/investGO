@@ -4,10 +4,12 @@ import type {Form} from 'src/components/common/Form';
 import {FieldType} from 'src/components/common/Form/Form';
 import {EmailArrayField} from 'src/components/pages/ProfilePage/fields/EmailArrayField';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
-import { User } from 'src/types/User';
+import type {User} from 'src/types/User';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
-import { BgImageField } from './fields/BgImageField';
+
+import {BgImageField} from './fields/BgImageField';
+import {SocialsField} from './fields/SocialsField/SocialsField';
 
 export const useCompanyEditFields = (company: User.Company | {}) => {
   return useMemo((): Form.FieldModels => ({
@@ -68,6 +70,13 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       label: 'Адрес сайта',
       validations: [required()],
     },
+    socials: {
+      name: 'socials',
+      type: FieldType.custom,
+      Field: SocialsField,
+      label: 'Социальные сети',
+      validations: [required()],
+    } as any,
     data_valid: {
       name: 'data_valid',
       type: FieldType.checkbox,

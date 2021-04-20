@@ -69,6 +69,7 @@ export declare namespace FormFieldModel {
     type: FieldType.custom,
     Field: FC<FieldProps<any>>,
     options?: Record<string, any>,
+    label?: string,
   }
 
   export type Hidden = BaseFieldModel & {

@@ -22,9 +22,9 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
 import {Color} from 'src/contstants/Color';
 import {DocumentIcon} from 'src/icons/DocumentIcon';
-import {FacebookIcon} from 'src/icons/FacebookIcon';
-import {Instagram} from 'src/icons/InstagramIcon';
-import {LinkedIn} from 'src/icons/LinkedIn';
+import {FacebookIcon} from 'src/icons/socials/FacebookIcon';
+import {Instagram} from 'src/icons/socials/InstagramIcon';
+import {LinkedIn} from 'src/icons/socials/LinkedIn';
 
 import s from './AboutUs.scss';
 

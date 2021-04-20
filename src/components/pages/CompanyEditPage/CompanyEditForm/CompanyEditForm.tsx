@@ -95,7 +95,8 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           <Field className='col-12' name='phones' />
         </FormRow>
         <FormRow>
-          <Field className='col-12' name='site' />
+          <Field className='col-6' name='site' />
+          <Field className='col-6' name='socials' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='data_valid' />
