@@ -80,9 +80,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           Заполните описание (цели, миссия, планы, история, технологии, методы, достижения и т.д.).
         </Text>
         <FormRow>
-          <div className='col-12'>
-            <TextEditor label='Текст описания' />
-          </div>
+          <Field className='col-12' name='description' />
         </FormRow>
       </section>
       <section className={s.section}>

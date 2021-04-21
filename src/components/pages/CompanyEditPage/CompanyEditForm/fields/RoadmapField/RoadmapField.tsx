@@ -1,5 +1,3 @@
-import cx from 'classnames';
-import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useEffect, useState} from 'react';
 
@@ -8,12 +6,11 @@ import {useFormModel} from 'src/components/common/Form/Form';
 import type {FormField} from 'src/components/common/Form/types';
 import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import {AddButtonIcon} from 'src/components/ui/FileArrayInput/AddButtonIcon';
 import {Text, TextSize} from 'src/components/ui/Text';
-import {Color} from 'src/contstants/Color';
 
 import {AddPointForm} from './AddPointForm';
 import s from './RoadmapField.scss';
+import {RoadmapItem} from './RoadmapItem';
 
 export declare namespace RoadmapField {
   export type Props = FieldProps<FormField.Custom>
@@ -33,10 +30,16 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
     setIsModalOpened(false);
   }
 
-  function addPoint(point: AddPointForm.Values) {
-    value.push(point);
+  function addItem(item: AddPointForm.Values) {
+    value.push(item);
     form.onChange(value, field.name);
     setIsModalOpened(false);
+  }
+
+  function removeItem(index: number) {
+    const newValue = [...value];
+    newValue.splice(index, 1);
+    form.onChange(newValue, field.name);
   }
 
   return (
@@ -44,10 +47,13 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
       <div className={s.items}>
         { value.map((item: AddPointForm.Values, index: number) => {
           return (
-            <div className={cx(s.item, index === value.length - 1 && s.itemLast)} key={index}>
-              <div className={s.name}>{ item.name }</div>
-              <Text size={TextSize.body0}>{ item.description }</Text>
-            </div>
+            <RoadmapItem
+              item={item}
+              index={index}
+              className={index === value.length - 1 ? s.itemLast : undefined}
+              onRemove={removeItem}
+              key={index}
+            />
           );
         }) }
       </div>
@@ -67,7 +73,7 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
           allowClose={true}
           onClose={handleModalClose}
         >
-          <AddPointForm onAddPoint={addPoint} />
+          <AddPointForm onAddPoint={addItem} />
         </Modal>
       ) : null }
     </div>

@@ -50,6 +50,12 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       type: FieldType.text,
       label: 'Ссылка на видео (если есть)',
     },
+    description: {
+      name: 'description',
+      type: FieldType.textArea,
+      label: 'Текст описания',
+      validations: [required()],
+    },
     roadmap: {
       name: 'roadmap',
       type: FieldType.custom,

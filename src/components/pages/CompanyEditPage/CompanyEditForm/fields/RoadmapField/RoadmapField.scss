@@ -1,5 +1,3 @@
-.roadmapField {}
-
 .addButton {
   max-width: 180px;
 }
@@ -12,9 +10,13 @@
   background: var(--white);
   border-radius: 6px;
   margin-bottom: 20px;
-  padding: 7px 13px 9px;
+  padding: 7px 13px 9px 13px;
   position: relative;
-  max-width: 425px;
+  max-width: 430px;
+
+  &:hover .closeButton {
+    opacity: 1;
+  }
 
   &::before {
     content: '';
@@ -26,6 +28,7 @@
     background: var(--black);
     border-radius: 4px;
     transform: translateX(-50%);
+    z-index: 1;
   }
 
   &::after {
@@ -49,7 +52,15 @@
     border-radius: 4px;
   }
 
+  &.itemActive::after {
+    background: var(--label);
+  }
+
   &.itemFuture::before {
+    background: var(--label);
+  }
+
+  &.itemFuture::after {
     background: var(--label);
   }
 }
@@ -60,12 +71,19 @@
   font-weight: 600;
   letter-spacing: -0.2px;
   margin-bottom: 2px;
+  padding-right: 30px;
 }
 
 .itemActive .name {
   color: var(--red);
 }
 
-.bullet {
-  
+.closeButton {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .3s;
 }
