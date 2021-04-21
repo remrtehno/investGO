@@ -52,6 +52,10 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
     },
   });
 
+  function handleSliderClose() {
+    setIsSliderOpened(false);
+  }
+
   return (
     <div className={s.galleryField}>
       <div className={cx('row', s.items)}>
@@ -99,7 +103,7 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
         ) : null }
       </div>
       { isSliderOpened ? (
-        <PhotoSlider images={value} startImageIndex={sliderStartImage} />
+        <PhotoSlider images={value} startImageIndex={sliderStartImage} onClose={handleSliderClose} />
       ) : null }
     </div>
   );

@@ -1,9 +1,10 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Color} from 'src/contstants/Color';
+import {useOnClickOutside} from 'src/hooks/useOnClickOutside';
 import {NextIcon} from 'src/icons/NextIcon';
 import type {FilePrimitive} from 'src/types/FilePrimitive';
 
@@ -12,6 +13,7 @@ import s from './PhotoSlider.scss';
 export declare namespace PhotoSlider {
   export type Props = {
     images: [FilePrimitive],
+    onClose(): void,
     startImageIndex?: number
   }
 }
@@ -19,6 +21,7 @@ export declare namespace PhotoSlider {
 export const PhotoSlider: FC<PhotoSlider.Props> = (props) => {
   const startIndex = props.startImageIndex || 0;
   const [current, setCurrent] = useState(startIndex);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   function next() {
     let next = current + 1;
@@ -52,9 +55,13 @@ export const PhotoSlider: FC<PhotoSlider.Props> = (props) => {
     };
   });
 
+  useOnClickOutside(contentRef, () => {
+    props.onClose();
+  });
+
   return (
     <div className={s.photoSlider}>
-      <div className={s.content}>
+      <div className={s.content} ref={contentRef}>
         <div className={s.items}>
           <span className={cx(s.button, s.buttonPrev)} onClick={prev}><NextIcon /></span>
           <span className={cx(s.button, s.buttonNext)} onClick={next}><NextIcon /></span>
