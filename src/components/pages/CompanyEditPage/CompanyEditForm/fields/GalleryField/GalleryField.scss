@@ -1,0 +1,22 @@
+.galleryField {
+  padding-top: 7px;
+}
+
+.item {
+  height: 160px;
+  border: 1px solid var(--gray2);
+  background-color: var(--gray2);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.itemEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg * {
+    fill: var(--black);
+  }
+}

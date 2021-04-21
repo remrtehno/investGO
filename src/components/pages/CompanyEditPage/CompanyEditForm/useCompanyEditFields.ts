@@ -9,6 +9,7 @@ import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
 import {BgImageField} from './fields/BgImageField';
+import { GalleryField } from './fields/GalleryField';
 import { RoadmapField } from './fields/RoadmapField';
 import {SocialsField} from './fields/SocialsField/SocialsField';
 
@@ -56,6 +57,11 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       label: 'Текст описания',
       validations: [required()],
     },
+    gallery: {
+      name: 'gallery',
+      type: FieldType.custom,
+      Field: GalleryField,
+    } as any,
     roadmap: {
       name: 'roadmap',
       type: FieldType.custom,

@@ -13,7 +13,6 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {Color} from 'src/contstants/Color';
 import {PhotoIcon} from 'src/icons/PhotoIcon';
 import type {FilePrimitive} from 'src/types/FilePrimitive';
-import {downloadFile} from 'src/utils/downloadFile';
 
 import s from './BgImageField.scss';
 
@@ -85,7 +84,7 @@ export const BgImageField: FC<BgImageField.Props> = (props) => {
 
   return (
     <div
-      className={cx(s.bgImageField, field.background === 'white' && s.bgWhite)}
+      className={cx(s.bgImageField, field?.background === 'white' && s.bgWhite)}
       {...getRootProps()}
       style={file && file.url ? {backgroundImage: `url(${file?.url})`} : {}}
     >

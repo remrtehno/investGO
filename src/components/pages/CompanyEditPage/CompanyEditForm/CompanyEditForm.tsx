@@ -84,6 +84,15 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
         </FormRow>
       </section>
       <section className={s.section}>
+        <Text size={TextSize.h2} className={s.sectionHeader}>Галерея</Text>
+        <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
+          Добавьте фотографии проекта.
+        </Text>
+        <FormRow>
+          <Field className='col-12' name='gallery' />
+        </FormRow>
+      </section>
+      <section className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Дорожная карта</Text>
         <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
           Добавьте этапы развития проекта.
