@@ -7,11 +7,13 @@ import {FormRow} from 'src/components/common/Form/FormRow';
 import s from './FormActions.scss';
 
 export declare namespace FormActions {
-  export type Props = {};
+  export type Props = {
+    className?: string
+  };
 }
 
 export const FormActions: FC<FormActions.Props> = (props) => (
-  <FormRow className={cx('justify-content-center', s.FormActions)}>
+  <FormRow className={cx('justify-content-center', s.FormActions, props.className)}>
     { props.children }
   </FormRow>
 );

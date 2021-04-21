@@ -1,0 +1,71 @@
+.roadmapField {}
+
+.addButton {
+  max-width: 180px;
+}
+
+.items {
+  padding-left: 36px;
+}
+
+.item {
+  background: var(--white);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  padding: 7px 13px 9px;
+  position: relative;
+  max-width: 425px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -27px;
+    width: 8px;
+    height: 8px;
+    background: var(--black);
+    border-radius: 4px;
+    transform: translateX(-50%);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: -27px;
+    width: 1px;
+    height: 134%;
+    background: var(--black);
+  }
+
+  &.itemLast::after {
+    content: none;
+  }
+
+  &.itemActive::before {
+    background: var(--red);
+    width: 13px;
+    height: 13px;
+    border-radius: 4px;
+  }
+
+  &.itemFuture::before {
+    background: var(--label);
+  }
+}
+
+.name {
+  font-size: 18px;
+  line-height: 1.5em;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  margin-bottom: 2px;
+}
+
+.itemActive .name {
+  color: var(--red);
+}
+
+.bullet {
+  
+}

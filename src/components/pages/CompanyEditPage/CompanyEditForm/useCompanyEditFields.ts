@@ -9,6 +9,7 @@ import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
 import {BgImageField} from './fields/BgImageField';
+import { RoadmapField } from './fields/RoadmapField';
 import {SocialsField} from './fields/SocialsField/SocialsField';
 
 export const useCompanyEditFields = (company: User.Company | {}) => {
@@ -49,6 +50,11 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       type: FieldType.text,
       label: 'Ссылка на видео (если есть)',
     },
+    roadmap: {
+      name: 'roadmap',
+      type: FieldType.custom,
+      Field: RoadmapField,
+    } as any,
     emails: {
       name: 'emails',
       type: FieldType.custom,
@@ -67,14 +73,12 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       name: 'site',
       type: FieldType.text,
       label: 'Адрес сайта',
-      validations: [required()],
     },
     socials: {
       name: 'socials',
       type: FieldType.custom,
       Field: SocialsField,
       label: 'Социальные сети',
-      validations: [required()],
     } as any,
     data_valid: {
       name: 'data_valid',
