@@ -9,6 +9,11 @@
   border-radius: 6px;
   margin-bottom: 20px;
   cursor: pointer;
+  position: relative;
+
+  &:hover .closeButton {
+    opacity: 1;
+  }
 }
 
 .itemEmpty {
@@ -19,4 +24,14 @@
   & svg * {
     fill: var(--black);
   }
+}
+
+.closeButton {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .3s;
 }

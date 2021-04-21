@@ -7,6 +7,8 @@ import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
 import type {FieldProps} from 'src/components/common/Form/fields/fieldsModel';
 import {useFormModel} from 'src/components/common/Form/Form';
 import type {FormField} from 'src/components/common/Form/types';
+import { Color } from 'src/contstants/Color';
+import { CloseIcon } from 'src/icons/CloseIcon';
 import {PhotoIcon} from 'src/icons/PhotoIcon';
 import type {FilePrimitive} from 'src/types/FilePrimitive';
 
@@ -50,15 +52,26 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
     <div className={s.galleryField}>
       <div className={cx('row', s.items)}>
         { value.map((item: Item, index: number) => {
+          function removeItem() {
+            const newValue = [...value];
+            newValue.splice(index, 1);
+            form.onChange(newValue, field.name);
+          }
+
           if (index >= maxFiles) {
             return null;
           }
+
           return (
             <div className={cx('col-3')} key={index}>
               <div
                 className={s.item}
                 style={{backgroundImage: `url(${item.url})`}}
-              />
+              >
+                <i className={s.closeButton} onClick={removeItem}>
+                  <CloseIcon color={Color.black} />
+                </i>
+              </div>
             </div>
           );
         }) }
