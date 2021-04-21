@@ -63,8 +63,8 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           <Field className={cx(s.bgField, 'col-12')} name='bg_image' />
         </FormRow>
         <FormRow>
-          <Field className='col-2' name='logo' />
-          <Field className='col-10' name='name' />
+          <Field className={cx('col-2', s.logoField)} name='logo' />
+          <Field className={cx('col-10', s.nameField)} name='name' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='field_of_activity' />
