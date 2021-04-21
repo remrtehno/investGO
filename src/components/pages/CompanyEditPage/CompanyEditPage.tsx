@@ -1,36 +1,21 @@
 
-import React, {useEffect, useMemo} from 'react';
-import {useRecoilValue} from 'recoil';
 import cx from 'classnames';
+import React, {useMemo} from 'react';
 
-import {useGetLoans} from 'src/api/borrowerApi/useGetLoansApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
-import { PageTitle } from 'src/components/common/Page/PageTitle';
+import {PageTitle} from 'src/components/common/Page/PageTitle';
 import {TopMenu} from 'src/components/common/TopMenu';
 import {withAuth} from 'src/components/hocs/withAuth';
-import { Text, TextSize } from 'src/components/ui/Text';
-import {borrowerLoansAtom} from 'src/recoil/borrowerLoansAtom';
-import {userAtom} from 'src/recoil/userAtom';
-import { CompanyEditForm } from './CompanyEditForm';
+import {Text, TextSize} from 'src/components/ui/Text';
 
+import {CompanyEditForm} from './CompanyEditForm';
 import s from './CompanyEditPage.scss';
 
 export declare namespace CompanyEditPage {
 }
 
 export const CompanyEditPage = withAuth(() => {
-  const {user} = useRecoilValue(userAtom);
-  const company = user?.company;
-  const [, getLoans] = useGetLoans();
-  const {loans} = useRecoilValue(borrowerLoansAtom);
-
-  /*
-   * useEffect(() => {
-   *   getLoans(null);
-   * }, []);
-   */
-
   const menuItems = useMemo(() => {
     return (
       [

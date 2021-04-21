@@ -7,8 +7,9 @@ import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
 import type {FieldProps} from 'src/components/common/Form/fields/fieldsModel';
 import {useFormModel} from 'src/components/common/Form/Form';
 import type {FormField} from 'src/components/common/Form/types';
-import { Color } from 'src/contstants/Color';
-import { CloseIcon } from 'src/icons/CloseIcon';
+import {PhotoSlider} from 'src/components/ui/PhotoSlider';
+import {Color} from 'src/contstants/Color';
+import {CloseIcon} from 'src/icons/CloseIcon';
 import {PhotoIcon} from 'src/icons/PhotoIcon';
 import type {FilePrimitive} from 'src/types/FilePrimitive';
 
@@ -26,7 +27,10 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
   const [uploadedFile, uploadFileApi, uploadApi] = useUploadFileApi();
   const form = useFormModel();
   const {field} = props;
-  const value = field.value || [];
+  const value = field.value || [
+  ];
+  const [isSliderOpened, setIsSliderOpened] = useState(false);
+  const [sliderStartImage, setSliderStartImage] = useState(0);
 
   useEffect(() => {
     if (uploadedFile) {
@@ -52,10 +56,16 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
     <div className={s.galleryField}>
       <div className={cx('row', s.items)}>
         { value.map((item: Item, index: number) => {
-          function removeItem() {
+          function removeItem(event: any) {
+            event.preventDefault();
             const newValue = [...value];
             newValue.splice(index, 1);
             form.onChange(newValue, field.name);
+          }
+
+          function handleItemClick() {
+            setIsSliderOpened(true);
+            setSliderStartImage(index);
           }
 
           if (index >= maxFiles) {
@@ -67,6 +77,7 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
               <div
                 className={s.item}
                 style={{backgroundImage: `url(${item.url})`}}
+                onClick={handleItemClick}
               >
                 <i className={s.closeButton} onClick={removeItem}>
                   <CloseIcon color={Color.black} />
@@ -87,6 +98,9 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
           </div>
         ) : null }
       </div>
+      { isSliderOpened ? (
+        <PhotoSlider images={value} startImageIndex={sliderStartImage} />
+      ) : null }
     </div>
   );
 };
