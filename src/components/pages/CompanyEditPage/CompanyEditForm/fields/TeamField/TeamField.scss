@@ -1,0 +1,64 @@
+.addButton {
+  width: auto;
+}
+
+.members {
+  margin-bottom: 20px;
+}
+
+.member {
+  background-color: var(--white);
+  border-radius: 4px;
+  position: relative;
+  padding: 20px 15px 30px;
+  display: flex;
+  min-height: 100%;
+
+  &:hover .closeButton {
+    opacity: 1;
+  }
+}
+
+.userpic {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.right {
+  padding-left: 11px;
+}
+
+.post {
+  margin-bottom: 10px;
+}
+
+.memberSocials {
+  display: flex;
+  margin-top: 15px;
+}
+
+.socialItem {
+  padding-right: 10px;
+
+  & > svg {
+    width: 24px;
+    height: 24px;
+  }
+  & > svg rect {
+    fill: var(--black);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .3s;
+}

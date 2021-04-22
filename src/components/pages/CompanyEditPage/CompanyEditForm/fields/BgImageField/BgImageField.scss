@@ -1,0 +1,20 @@
+.bgImageField {
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+
+  &.bgWhite {
+    background-color: var(--white);
+    border: 1px solid var(--gray3);
+  }
+}
+
+.label {
+  & > div {
+    display: inline-block;
+    margin-left: 15px;
+  }
+}

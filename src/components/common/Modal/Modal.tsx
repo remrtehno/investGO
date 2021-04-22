@@ -38,7 +38,7 @@ export const Modal: FC<Props> = (props) => {
       >
         <div
           className={s.container}
-          style={{ minWidth: width }}
+          style={{minWidth: width}}
           onClick={(e) => e.stopPropagation()}
         >
           <div className={s.content}>

@@ -2,6 +2,7 @@ import React, {useEffect, useMemo} from 'react';
 
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
+import { PageTitle } from 'src/components/common/Page/PageTitle';
 import {TopMenu} from 'src/components/common/TopMenu';
 import {withAuth} from 'src/components/hocs/withAuth';
 import {Text, TextSize} from 'src/components/ui/Text';
@@ -36,7 +37,7 @@ export const LoanRequestPage = withAuth(() => {
     <Page>
       <div className={s.loanRequestPage}>
         <TopMenu items={menuItems()} />
-        <div className={s.title}>Новая заявка на привлечение инвестиций</div>
+        <PageTitle>Новая заявка на привлечение инвестиций</PageTitle>
         <div className='container'>
           <div className={s.content}>
             <Text size={TextSize.h3} className={s.header}>Параметры займа</Text>

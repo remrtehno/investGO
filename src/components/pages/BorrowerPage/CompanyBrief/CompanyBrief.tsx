@@ -1,7 +1,8 @@
 import type {FC} from 'react';
 import React from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
+import {RoutePaths} from 'src/components/common/App/routes';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import type {User} from 'src/types/User';
 
@@ -24,14 +25,20 @@ export const CompanyBrief: FC<CompanyBrief.Props> = (props) => {
       <Button
         className={s.button1}
         size={ButtonSize.s}
-        theme={ButtonTheme.black}>
+        theme={ButtonTheme.black}
+        onClick={() => {
+          history.push(RoutePaths.companyEdit(props.company.id as string));
+        }}
+      >
         Редактировать
       </Button>
       <Button
         className={s.button2}
         size={ButtonSize.s}
         theme={ButtonTheme.red}
-        onClick={() => {history.push(`/borrower/loan-request/${props.company.id}`)}}
+        onClick={() => {
+          history.push(RoutePaths.loanRequest(props.company.id as string));
+        }}
       >
         Привлечь инвестиции
       </Button>

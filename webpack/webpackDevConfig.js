@@ -96,7 +96,7 @@ module.exports = [{
   target: 'web',
   devtool: 'inline-source-map',
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
     path.resolve(basePath, 'src/index.tsx'),
   ],
   output: {

@@ -1,0 +1,27 @@
+.section {
+  margin-bottom: 60px;
+}
+
+.sectionHeader {
+  margin-bottom: 20px;
+}
+
+.sectionDescr {
+  margin-bottom: 20px;
+}
+
+.bgField {
+  height: 174px;
+}
+
+.logoField {
+  flex: 0 0 60px;
+
+  & > * {
+    width: 60px;
+  }
+}
+
+.nameField {
+  flex: 1 0 50%;
+}
