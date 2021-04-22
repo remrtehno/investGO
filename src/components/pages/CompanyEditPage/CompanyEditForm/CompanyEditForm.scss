@@ -1,5 +1,9 @@
 .section {
-  margin-bottom: 60px;
+  margin-bottom: 55px;
+
+  &.gallerySection {
+    margin-bottom: 35px;
+  }
 }
 
 .sectionHeader {
@@ -24,4 +28,13 @@
 
 .nameField {
   flex: 1 0 50%;
+}
+
+.navigationContainer {
+  margin-bottom: 40px;
+}
+
+.navigation {
+  background: var(--gray1);
+  z-index: 10;
 }

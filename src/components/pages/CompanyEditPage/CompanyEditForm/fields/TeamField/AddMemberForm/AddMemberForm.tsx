@@ -47,7 +47,7 @@ const fields: Form.FieldModels = {
     name: 'socials',
     type: FieldType.custom,
     Field: SocialsField,
-    label: 'Социальные сети',
+    label: 'Ссылки',
   } as any,
 };
 
