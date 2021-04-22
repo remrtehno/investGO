@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useState} from 'react';
 
@@ -8,15 +9,15 @@ import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 
-import {AddPointForm} from './AddPointForm';
-import s from './RoadmapField.scss';
-import {RoadmapItem} from './RoadmapItem';
+import {AddMemberForm} from './AddMemberForm';
+import s from './TeamField.scss';
+import {TeamMember} from './TeamMember';
 
-export declare namespace RoadmapField {
+export declare namespace TeamField {
   export type Props = FieldProps<FormField.Custom>
 }
 
-export const RoadmapField: FC<RoadmapField.Props> = (props) => {
+export const TeamField: FC<TeamField.Props> = (props) => {
   const form = useFormModel();
   const {field} = props;
   const value = field.value || [];
@@ -30,30 +31,31 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
     setIsModalOpened(false);
   }
 
-  function addItem(item: AddPointForm.Values) {
+  function addMember(item: AddMemberForm.Values) {
     value.push(item);
     form.onChange(value, field.name);
     setIsModalOpened(false);
   }
 
-  function removeItem(index: number) {
+  function removeMember(index: number) {
     const newValue = [...value];
     newValue.splice(index, 1);
     form.onChange(newValue, field.name);
   }
 
   return (
-    <div className={s.roadmapField}>
-      <div className={s.items}>
-        { value.map((item: AddPointForm.Values, index: number) => {
+    <div>
+      <div className={cx('row', value.length && s.members)}>
+        { value.map((member: AddMemberForm.Values, index: number) => {
           return (
-            <RoadmapItem
-              item={item}
-              index={index}
-              className={index === value.length - 1 ? s.itemLast : undefined}
-              onRemove={removeItem}
-              key={index}
-            />
+            <div className='col-6' key={index}>
+              <TeamMember
+                member={member}
+                index={index}
+                className={index === value.length - 1 ? s.itemLast : undefined}
+                onRemove={removeMember}
+              />
+            </div>
           );
         }) }
       </div>
@@ -64,7 +66,7 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
         onClick={openForm}
         className={s.addButton}
       >
-        <Text className={s.addButtonLabel} size={TextSize.body1}>+&nbsp;&nbsp;Добавить пункт</Text>
+        <Text className={s.addButtonLabel} size={TextSize.body1}>+&nbsp;&nbsp;Добавить человека</Text>
       </Button>
 
       { isModalOpened ? (
@@ -73,7 +75,7 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
           allowClose={true}
           onClose={handleModalClose}
         >
-          <AddPointForm onAddPoint={addItem} />
+          <AddMemberForm onAddMember={addMember} />
         </Modal>
       ) : null }
     </div>

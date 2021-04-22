@@ -9,9 +9,10 @@ import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
 import {BgImageField} from './fields/BgImageField';
-import { GalleryField } from './fields/GalleryField';
-import { RoadmapField } from './fields/RoadmapField';
+import {GalleryField} from './fields/GalleryField';
+import {RoadmapField} from './fields/RoadmapField';
 import {SocialsField} from './fields/SocialsField/SocialsField';
+import {TeamField} from './fields/TeamField';
 
 export const useCompanyEditFields = (company: User.Company | {}) => {
   return useMemo((): Form.FieldModels => ({
@@ -61,6 +62,11 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       name: 'gallery',
       type: FieldType.custom,
       Field: GalleryField,
+    } as any,
+    founders: {
+      name: 'founders',
+      type: FieldType.custom,
+      Field: TeamField,
     } as any,
     roadmap: {
       name: 'roadmap',

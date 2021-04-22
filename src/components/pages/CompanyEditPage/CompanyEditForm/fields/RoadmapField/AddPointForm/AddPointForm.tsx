@@ -7,6 +7,7 @@ import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
 import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
+import { FormTitle } from 'src/components/common/Form/FormTitle';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
@@ -84,6 +85,7 @@ export const AddPointForm: FC<AddPointForm.Props> = (props) => {
       formApiRef={formApiRef}
       onSubmit={handleSubmit}
     >
+      <FormTitle>Новый пункт</FormTitle>
       <FormRow>
         <Field className={s.field} name='name' />
       </FormRow>
