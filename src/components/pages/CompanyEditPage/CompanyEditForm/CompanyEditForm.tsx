@@ -1,8 +1,7 @@
 import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
-import {CSSProperties, useRef} from 'react';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
@@ -11,44 +10,26 @@ import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
-import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import Tabs from 'src/components/ui/Tabs/Tabs';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextEditor} from 'src/components/ui/TextEditor';
 import {Color} from 'src/contstants/Color';
-import {usePageScroll} from 'src/hooks/usePageScroll';
-import {usePosition} from 'src/hooks/usePosition';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
-import {getElementPosition} from 'src/utils/getElementPosition';
 
 import s from './CompanyEditForm.scss';
+import {CompanyEditNavigation} from './CompanyEditNavigation';
 import {useCompanyEditFields} from './useCompanyEditFields';
 
 export declare namespace CompanyEditForm {
   export type Props = {};
 }
 
-const tabs = [
-  {id: 'preview-section', label: 'Превью'},
-  {id: 'description-section', label: 'Описание'},
-  {id: 'gallery-section', label: 'Галерея'},
-  {id: 'team-section', label: 'Команда'},
-  {id: 'roadmap-section', label: 'Дорожная карта'},
-  {id: 'contacts-section', label: 'Контакты'},
-];
-
 export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = useCompanyEditFields(user?.company || {});
   const [, saveCompanyApi] = useSaveCompanyApi();
-  const [activeSection, setActiveSection] = useState('');
-  const preventHandleScrollRef = useRef(false);
-  const {scrollTop} = usePageScroll();
-  const navRef = useRef<HTMLDivElement | null>(null);
-  const navPos = usePosition(navRef);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -64,25 +45,6 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     setErrors(errors);
   }, []);
 
-  function handleChangeTab(tab: string) {
-    setActiveSection(tab);
-  }
-
-  useEffect(() => {
-    if (preventHandleScrollRef.current) {
-      return;
-    }
-    const sectionEl = document.getElementById(activeSection);
-    if (sectionEl) {
-      preventHandleScrollRef.current = true;
-      sectionEl.scrollIntoView();
-      // prevFormRef.current = props.currentForm;
-      setTimeout(() => {
-        preventHandleScrollRef.current = false;
-      }, 100);
-    }
-  }, [activeSection]);
-
   return (
     <Form
       initialValues={initialValues}
@@ -91,15 +53,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       onChange={onChange}
       fields={fields}
     >
-      <div className={s.navigationContainer} ref={navRef}>
-        <div className={s.navigation}>
-          <Tabs
-            tabs={tabs}
-            activeTab={activeSection}
-            onChange={handleChangeTab}
-          />
-        </div>
-      </div>
+      <CompanyEditNavigation />
       <section id='preview-section' className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Превью</Text>
         <Text size={TextSize.body2} className={s.sectionDescr}>
