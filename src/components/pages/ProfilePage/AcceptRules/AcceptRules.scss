@@ -2,7 +2,7 @@
 @import 'src/libs/bootstrap/_variables.scss';
 
 .AcceptRules {
-  padding: 30px 9px 40px;
+  padding: 34px 47px 49px;
   margin-left: -9px;
   margin-right: -9px;
   margin-bottom: 60px;
@@ -13,7 +13,7 @@
   }
 
   @include media-breakpoint-up(lg) {
-    padding: 34px 46px 66px;
+    padding: 34px 47px 49px;
   }
 }
 
@@ -41,20 +41,12 @@
 
 .text {
   margin-bottom: 40px;
-
-  @include media-breakpoint-up(md) {
-    margin-bottom: 50px;
-  }
 }
 
 .checkbox {
   margin-bottom: 16px;
-
-  @include media-breakpoint-up(md) {
-    margin-bottom: 20px;
-  }
 }
 
 .actions {
-  padding-top: 18px;
+  padding-top: 22px;
 }

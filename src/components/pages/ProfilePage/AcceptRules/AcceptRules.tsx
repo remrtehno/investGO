@@ -89,7 +89,7 @@ export function AcceptRules(props: AcceptRules.Props) {
           </div>
 
           <div className={cx(s.actions, 'row justify-content-center')}>
-            <div className='col-sm-12 col-md-7 col-xl-5 col-xxl-3'>
+            <div className='col-sm-12 col-md-7 col-xl-5 col-xxl-5'>
               <Button
                 disabled={(() => {
                   if (!checkBoxes[0] || !checkBoxes[1]) {
