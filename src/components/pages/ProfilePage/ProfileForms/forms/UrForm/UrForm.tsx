@@ -310,7 +310,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           <FormRow>
             <div className='col-12'>
               <CheckBox
-                style={{marginBottom: 18}}
+                style={{marginBottom: 22}}
                 value={checkBoxes[0]}
                 onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
                 label={(
@@ -320,12 +320,20 @@ export const UrForm: FC<UrForm.Props> = (props) => {
                 )}
               />
               <CheckBox
-                style={{marginBottom: 18}}
+                style={{marginBottom: 22}}
                 value={checkBoxes[1]}
                 onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
                 label={(
                   <Text size={TextSize.body0}>
-                    Я даю согласие на передачу и обработку введенных данных в рамках <a onClick={(e) => e.stopPropagation()} href='#'>Политики конфиденциальности</a>.
+                    Я даю согласие на передачу и обработку введенных данных в рамках &nbsp;
+                    <a
+                      className={s.links} onClick={
+                        (e) => e.stopPropagation()
+                      }
+                      href='#'
+                    >
+                      Политики конфиденциальности
+                    </a>.
                   </Text>
                 )}
               />
