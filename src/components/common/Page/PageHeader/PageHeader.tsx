@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useCallback, useEffect} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
@@ -14,7 +14,7 @@ import {userAtom} from 'src/recoil/userAtom';
 import {breackpointDown, breackpointUp} from 'src/utils/breackpointUtils';
 
 import {HeaderMenu} from './HeaderMenu';
-import { MobileMenu } from './MobileMenu';
+import {MobileMenu} from './MobileMenu';
 import s from './PageHeader.scss';
 
 declare namespace LogoutIcon {
