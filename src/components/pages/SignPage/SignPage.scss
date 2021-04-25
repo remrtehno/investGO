@@ -9,3 +9,9 @@
 .isBigHeader {
   padding-top: 40px;
 }
+
+.page {
+  [class*="pageHeader"] {
+    background: none;
+  }
+}
