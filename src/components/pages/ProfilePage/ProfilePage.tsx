@@ -134,22 +134,25 @@ export const ProfilePage = withAuth(() => {
                 />
                 { user && user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
                   <FormActions>
-                    <div className='col-4'>
+                    <div className='col-12 col-md-4'>
                       <Button
+                        className={s.continueAsButtons}
                         theme={ButtonTheme.black}
                         size={ButtonSize.m}
                         onClick={() => onContinueAs(Role.fl, [Role.investor])}
                       >Продолжить как физ.&nbsp;лицо</Button>
                     </div>
-                    <div className='col-4'>
+                    <div className='col-12 col-md-4'>
                       <Button
+                        className={s.continueAsButtons}
                         theme={ButtonTheme.black}
                         size={ButtonSize.m}
                         onClick={() => onContinueAs(Role.ip, [Role.investor, Role.borrower])}
                       >Продолжить как ИП</Button>
                     </div>
-                    <div className='col-4'>
+                    <div className='col-12 col-md-4'>
                       <Button
+                        className={s.continueAsButtons}
                         theme={ButtonTheme.black}
                         size={ButtonSize.m}
                         onClick={() => onContinueAs(Role.ur, [Role.investor, Role.borrower])}
