@@ -42,6 +42,7 @@ export const SelectRolesModal: FC<SelectRolesModal.Props> = (props) => {
       { props.roles.map((role, i) => {
         return (
           <CheckBox
+            className={s.checkboxes}
             key={i}
             value={values.includes(role)}
             name={role}
