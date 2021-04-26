@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="page" lang="ru">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="description" content="">
@@ -11,17 +12,21 @@
 
 	<title>Главная</title>
 
-  <link rel="icon" type="image/svg+xml" href="landing/img/favicon/favicon.svg">
-	<link rel="apple-touch-icon" sizes="180x180" href="landing/img/favicon/apple-touch-icon-180x180.png">
+	<link rel="icon" href="img/favicon/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-  <link href="/landing//fonts/fonts.css?v9" rel="stylesheet">
+	<link rel="stylesheet" href="/landing/fonts/fonts.css">
 
-  <link href="/landing//css/styles.min.css?v9" rel="stylesheet">
-  <link href="/landing//css/main.css?v9" rel="stylesheet">
+  <link rel="stylesheet" href="/landing/css/styles.min.css">
+  <link rel="stylesheet" href="/landing/css/nouislider.min.css">
+  <link rel="stylesheet" href="/landing/css/nice-select.css">
+  <link rel="stylesheet" href="/landing/css/main.css?v1">
+  <link rel="stylesheet" href="/landing/css/new.css">
 </head>
+
 <body class="page__body">
 	<header class="page-header">
 		<div class="container">
@@ -52,7 +57,7 @@
 					<a href="tel:+74994443361" class="phone link-reset">+7 (499) 444-33-61</a>
 					<a href="/signin" class="btn btn--130 link-reset">
 						Войти
-          </a>
+                    </a>
 				</nav>
 			</div>
 		</div>
@@ -95,55 +100,52 @@
 <main class="page-main">
 
   <section class="transform">
-    <img alt="" src="/landing/img/header-bottom.png">
-    <img alt="" src="/landing/img/header-top.png">
     <div class="container">
       <div class="transform__row">
         <div class="transorm__text">
           <h1 class="transform__title animate__fadeInUp">
-            Скоро открытие
+            Готовы к цифровой трансформации?
           </h1>
           <b class="transform__subtitle animate__fadeInUp s3">
-            Следите за нашими обновлениями
+            Добро пожаловать на борт!
           </b>
-          <a class="btn btn--big btn--red btn--200 link-reset animate__fadeInUp s6 btn--disabled">
-             Войти
-          </a>
+          <a href="/signin" class="btn btn--big btn--red btn--200 link-reset animate__fadeInUp s6">
+						Войти
+					</a>
         </div>
         <div class="transform__col">
+          <lottie-player src="landing/animations/data.json" autoplay loop mode="normal" style="width: 575px">
+          </lottie-player>
           <picture>
-            <source media="(max-width: 575px)" srcset="/landing/img/shape-form-320@2x.png">
-            <img alt="" src="/landing/img/shape-form@2x.png">
+            <img src="/landing/img/shape-form2.png" alt="">
           </picture>
         </div>
       </div>
-      <!--      <div class="transform__grid">-->
-      <!--        <div class="transform-item">-->
-      <!--          <img alt="" class="tranform-item__img" src="/landing/img/ti1.svg">-->
-      <!--          <strong class="tranform-item__title">-->
-      <!--            Создание заявки <br>-->
-      <!--            онлайн-->
-      <!--          </strong>-->
-      <!--        </div>-->
-      <!--        <div class="transform-item">-->
-      <!--          <img alt="" class="tranform-item__img" src="/landing/img/ti2.svg">-->
-      <!--          <strong class="tranform-item__title">-->
-      <!--            Только проверенные <br>-->
-      <!--            пользователи-->
-      <!--          </strong>-->
-      <!--        </div>-->
-      <!--        <div class="transform-item">-->
-      <!--          <img alt="" class="tranform-item__img" src="/landing/img/ti3.svg">-->
-      <!--          <strong class="tranform-item__title">-->
-      <!--            Индивидуальные <br>-->
-      <!--            условия-->
-      <!--          </strong>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div class="transform__grid">
+        <div class="transform-item">
+          <img class="tranform-item__img" src="/landing/img/ti1.svg" alt="">
+          <strong class="tranform-item__title">
+            Создание заявки <br>
+            онлайн
+          </strong>
+        </div>
+        <div class="transform-item">
+          <img class="tranform-item__img" src="/landing/img/ti2.svg" alt="">
+          <strong class="tranform-item__title">
+            Только проверенные <br>
+            пользователи
+          </strong>
+        </div>
+        <div class="transform-item">
+          <img class="tranform-item__img" src="/landing/img/ti3.svg" alt="">
+          <strong class="tranform-item__title">
+            Индивидуальные <br>
+            условия
+          </strong>
+        </div>
+      </div>
     </div>
   </section>
-
-  
   <section class="steps">
     <div class="container">
       <h2 class="steps__title">
@@ -159,8 +161,8 @@
               Регистрация
             </b>
             <p class="step__text">
-              Заполнение анкеты <br> для всех участников <br>
-              InvestGO
+              Для всех участников <br>
+              в InvestGO
             </p>
           </div>
 
@@ -174,7 +176,8 @@
               Проверка
             </b>
             <p class="step__text">
-              Андеррайтинг анкетных <br> данных и документов
+              Проверка всех <br>
+              заемщиков
             </p>
           </div>
 
@@ -188,11 +191,9 @@
               Публикация
             </b>
             <p class="step__text">
-              Создание и публикация <br>
+              Публикация <br>
               инвестиционного <br>
-              предложения <br>
-              получателем <br>
-              инвестиций
+              предложения
             </p>
           </div>
 
@@ -206,10 +207,10 @@
               Инвестирование
             </b>
             <p class="step__text">
-              Подача заявок <br>
-              инвестором для <br>
-              инвестирования <br>
-              в проекты
+              Подача инвестором <br>
+              заявок на инвестирование <br>
+              в выбранные <br>
+              инвестиционные предложения
             </p>
           </div>
 
@@ -220,10 +221,13 @@
           </div>
           <div class="step__info">
             <b class="step__name">
-              Готово!
+              Получение дохода
             </b>
             <p class="step__text">
-              Получение дохода <br> и возврат <br> инвестиций
+              Перевод денежных <br>
+              средств заемщику и <br>
+              возврат денежных <br>
+              средств инвестору <br>
             </p>
           </div>
 
@@ -231,9 +235,7 @@
       </div>
     </div>
   </section>
- 
-
-  <section class="invest">
+  <!--<section class="invest">
     <div class="container">
       <h2 class="invest__title">
         129 компаний уже успешно привлекли <br> инвестиции
@@ -373,15 +375,12 @@
         Смотреть все
       </a>
     </div>
-  </section>
-
-  
-
+  </section>-->
   <section class="pluses">
     <div class="container">
       <h2 class="pluses__title">
         Преимущества InvestGO
-        <span class="red">:</span>
+         <span class="red">:</span>
       </h2>
       <div class="pluses__container">
         <div class="plus">
@@ -403,7 +402,7 @@
             </strong>
             <p class="plus__text">
               Осуществлять вложения могут,
-              как физические, так и юридические лица
+                как физические, так и юридические лица
             </p>
           </div>
         </div>
@@ -411,10 +410,10 @@
           <span class="plus-icon plus-icon--3"></span>
           <div class="plus__info">
             <strong class="plus__title">
-              Качественные инвестпредложения
+              Качественные инвестиционные предложения
             </strong>
             <p class="plus__text">
-              Тщательный андерайтинг получателя инвестиций до публикации предложения
+              Тщательный андеррайтинг получателя инвестиций до публикации предложения
             </p>
           </div>
         </div>
@@ -425,8 +424,8 @@
               Юридическая защищенность
             </strong>
             <p class="plus__text">
-              Юридическое сопровождение на всех этапах инвестирования. Деятельность регулируется ФЗ №259 от 02.08.2019
-              г.
+              Юридическое сопровождение на всех этапах инвестирования. Деятельность регулируется Федеральным законом
+              от 02.08.2019 <br>N 259-ФЗ
             </p>
           </div>
         </div>
@@ -461,9 +460,8 @@
               Гос. регулирование
             </strong>
             <p class="plus__text">
-              Соотвествует ФЗ от 02.08.2019 N 259-ФЗ <br>
-              "О привлечении инвестиций с использованием инвест.платформ»
-
+              Соотвествует Федеральному закону от 02.08.2019 N 259-ФЗ "О привлечении инвестиций с использованием
+              инвестиционных платформ и о внесении изменений в отдельные законодательные акты Российской Федерации"
             </p>
           </div>
         </div>
@@ -474,83 +472,62 @@
               Поддержка
             </strong>
             <p class="plus__text">
-              На связи 24/7 с заемщиками и <br>
-              инвесторами
+              На связи ежедневно в будние дни с 9:00 до 18:00 по Москве
             </p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section id="faq" class="faq">
+  <section class="faq">
     <div class="container">
       <div class="faq__container">
         <h2 class="faq__title">
           Часто задаваемые вопросы:
         </h2>
         <div class="faq-item">
-          <button class="accordionBtn btn-reset accordion-btn" type="button">
+          <button type="button" class="accordionBtn btn-reset accordion-btn">
             Что такое InvestGO?
           </button>
           <div class="accordionContent accordion-content">
-            InvestGO - это инвестиционная платформа нового поколения, позволяющая привлекать финансирование со стороны
-            инвесторов для целей бизнеса.
+            InvestGO -  это инвестиционная платформа нового поколения, позволяющая привлекать финансирование со стороны инвесторов для целей бизнеса.
           </div>
         </div>
         <div class="faq-item">
-          <button class="accordionBtn btn-reset accordion-btn" type="button">
+          <button type="button" class="accordionBtn btn-reset accordion-btn">
             Как регулируется деятельность платформы?
           </button>
           <div class="accordionContent accordion-content">
-            InvestGO существляет свою деятельность в соответствии с Федеральным законом от 02.08.2019 N 259-ФЗ "О
-            привлечении инвестиций с использованием инвестиционных платформ»
+            InvestGO осуществляет свою деятельность в соответствии с Федеральным законом от 02.08.2019 N 259-ФЗ "О
+            привлечении инвестиций с использованием инвестиционных платформ и о внесении изменений в отдельные
+            законодательные акты Российской Федерации"
           </div>
         </div>
         <div class="faq-item">
-          <button class="accordionBtn btn-reset accordion-btn" type="button">
-            Кто может стать инвестором?
+          <button type="button" class="accordionBtn btn-reset accordion-btn">
+            Как стать инвестором?
           </button>
           <div class="accordionContent accordion-content">
-            Физическое лицо: Максимальная сумма 600 000 рублей во все проекты на всех инвестиционных платформах. Для
-            снятия ограничения необходимо пройти квалификацию. От 18 лет. Необходимые документы: паспорт (разворот с
-            фото и прописка), ИНН, СНИЛС, реквизиты для перечисления денежных средств. <p></p>
-            Индивидуальный предприниматель: Максимальная сумма не ограничена. От 18 лет. Гражданство РФ. Необходимые
-            документы: паспорт (разворот с фото и прописка), ИНН, СНИЛС, номер ОГРНИП, реквизиты для перечисления
-            денежных средств <p></p>
-            Юридическое лицо: Максимальная сумма не ограничена. Необходимые документы:
+            Физическое лицо: Максимальная сумма 600 000 рублей во все проекты на всех инвестиционных платформах. Для  снятия ограничения необходимо пройти квалификацию. От 18 лет. Необходимые документы: паспорт (разворот с фото и прописка), ИНН, СНИЛС, реквизиты для перечисления денежных средств. <br>
+            Индивидуальный предприниматель: Максимальная сумма не ограничена. От 18 лет. Гражданство РФ. Необходимые документы: паспорт (разворот с фото и прописка), ИНН, СНИЛС, номер ОГРНИП, реквизиты для перечисления денежных средств <br>
+            Юридическое лицо: Максимальная сумма не ограничена. <br>
+             Необходимые документы:
             карточка предприятия (ИНН, ОГРН, банковские реквизиты), паспорта директора и участников.
           </div>
         </div>
         <div class="faq-item">
-          <button class="accordionBtn btn-reset accordion-btn" type="button">
+          <button type="button" class="accordionBtn btn-reset accordion-btn">
             Как происходит отбор получателей инвестиций?
           </button>
           <div class="accordionContent accordion-content">
-            Каждая компания проходит несколько этапов тщательной проверки в процессе регистрации и подготовки
-            инвестиционного предложения для публикации на платформе InvestGO:
-            <ol>
-              <li>
-                Проверка документов юридического лица
-              </li>
-              <li>
-                Проверка учредителей, генерального директора и главного бухгалтера
-              </li>
-              <li>
-                Интервью с генеральным директором по видеосвязи
-              </li>
-              <li>
-                Анализ финансовой отчетности
-              </li>
-              <li>
-                Анализ поставщиков и контрагентов
-              <li>
-                Выездная оценка соответствия суммы запрашиваемых инвестиций объемам осуществляемой деятельности.
-              </li>
-              <li>
-                Принятие решения о размещении инвестиционного предложения на платформе InvestGO
-              </li>
-            </ol>
-
+            Каждая компания проходит несколько этапов тщательной проверки в процессе регистрации и  подготовки инвестиционного предложения для публикации на платформе InvestGO: <br>
+            1. Проверка документов юридического лица <br>
+            2. Проверка учредителей, генерального директора и главного бухгалтера <br>
+            3. Интервью с генеральным директором по видеосвязи <br>
+            4. Анализ финансовой отчетности <br>
+            5. Анализ поставщиков и контрагентов <br>
+            6. Выездная оценка соответствия суммы запрашиваемых инвестиций объемам осуществляемой деятельности. <br>
+            7. Принятие решения о размещении инвестиционного предложения на платформе InvestGO
           </div>
         </div>
       </div>
@@ -560,8 +537,8 @@
     <div class="get__column">
       <div class="get__left get__col">
         <picture>
-          <source media="(max-width: 767px)" srcset="./img/left-320.jpg">
-          <img alt="" class="get__image" src="/landing/img/left.jpg">
+          <source srcset="/landing/img/left-320.jpg" media="(max-width: 767px)">
+          <img src="/landing/img/left.jpg" alt="" class="get__image">
         </picture>
         <div class="get__container">
           <h2 class="get__title">
@@ -571,13 +548,12 @@
             Выбери качественные инвестпредложения от проверенных компаний.
           </p>
           <div class="get__arrow end">
-            <svg height="13" viewBox="0 0 68 13" width="68">
-              <path d="M60.6602 12.4684L66.8096 6.73419L60.6602 1" stroke="white" stroke-linecap="round"
-                stroke-linejoin="round"/>
+            <svg width="68" height="13" viewBox="0 0 68 13">
+              <path d="M60.6602 12.4684L66.8096 6.73419L60.6602 1" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M66.8065 6.73401L1 6.73401" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <a class="btn btn--border btn--big btn--245 link-reset" href="#">
+          <a href="/investor" class="btn btn--border btn--big btn--245 link-reset">
             Начать инвестировать
           </a>
         </div>
@@ -586,8 +562,8 @@
     <div class="get__column">
       <div class="get__right get__col">
         <picture>
-          <source media="(max-width: 767px)" srcset="./img/right-320.jpg">
-          <img alt="" class="get__image" src="/landing/img/right.jpg">
+          <source srcset="/landing/img/right-320.jpg" media="(max-width: 767px)">
+          <img src="/landing/img/right.jpg" alt="" class="get__image">
         </picture>
         <div class="get__container">
           <h2 class="get__title">
@@ -597,13 +573,12 @@
             Получи инвестиции онлайн с минимальным пакетом документов.
           </p>
           <div class="get__arrow end">
-            <svg fill="none" height="13" viewBox="0 0 68 13" width="68">
-              <path d="M60.6602 12.4684L66.8096 6.73419L60.6602 1" stroke="black" stroke-linecap="round"
-                stroke-linejoin="round"/>
+            <svg width="68" height="13" viewBox="0 0 68 13" fill="none">
+              <path d="M60.6602 12.4684L66.8096 6.73419L60.6602 1" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M66.8065 6.73401L1 6.73401" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-          <a class="btn btn--big btn--245 link-reset" href="#">
+          <a href="/borrower" class="btn btn--big btn--245 link-reset">
             Привлечь инвестиции
           </a>
         </div>
@@ -611,7 +586,7 @@
     </div>
 
   </section>
-  <section id="contacts" class="contacts">
+  <section class="contacts">
     <div class="container">
       <div class="contacts__wrap">
         <h2 class="contacts__title">
@@ -619,22 +594,22 @@
         </h2>
         <p class="contacts__text">
           У вас есть вопросы? Оставьте Ваши данные, и мы свяжемся с Вами в <br>
-          ближайшее время.
+           ближайшее время.
         </p>
         <form action="/api/appeal" class="formSend">
           <div class="form-grid">
             <div class="form-item">
-              <input class="formSendName" id="name" placeholder="Имя" type="text">
+              <input type="text" id="name" placeholder="Имя" class="formSendName">
               <label for="name">Имя</label>
-              <span class="invalid__text">Введите имя</span>
+             <span class="invalid__text">Введите имя</span>
             </div>
             <div class="form-item">
-              <input class="formSendTel" id="tel" placeholder="Телефон" type="tel">
+              <input type="tel" id="tel" placeholder="Телефон" class="formSendTel" pattern="^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$">
               <label for="tel">Телефон</label>
               <span class="invalid__text">Введите номер</span>
             </div>
             <div class="form-item">
-              <textarea id="text" placeholder="Текст обращения" type="text"></textarea>
+              <textarea type="text" id="text" placeholder="Текст обращения"></textarea>
               <label for="text">Текст обращения</label>
             </div>
 
@@ -642,6 +617,10 @@
           <button class="btn contacts__btn btn--200 btn--center btn--big btn-reset" type="submit">
             Отправить
           </button>
+          <p class="agreement__text">
+            Нажимая кнопку "Отправить", Вы подтверждаете, что ознакомлены и согласны с
+            <a href="/landing/documents/Политика_конфиденциальности_Инвест_Гоу.pdf" target="_blank">Политикой конфиденциальности</a>
+          </p>
         </form>
 
       </div>
@@ -649,29 +628,27 @@
   </section>
 
 </main>
-
-
 <footer class="page-footer">
   <div class="page-footer__top">
     <div class="container">
       <ul class="social list-reset">
         <li>
-          <a href="#"><img alt="" src="/landing/img/s1.svg">Vkontakte</a>
+          <a href="#"><img src="/landing/img/s1.svg" alt="">Vkontakte</a>
         </li>
         <li>
-          <a href="#"><img alt="" src="/landing/img/s2.svg">Telegram</a>
+          <a href="#"><img src="/landing/img/s2.svg" alt="">Telegram</a>
         </li>
         <li>
-          <a href="#"><img alt="" src="/landing/img/s3.svg">Facebook</a>
+          <a href="#"><img src="/landing/img/s3.svg" alt="">Facebook</a>
         </li>
         <li>
-          <a href="#"><img alt="" src="/landing/img/s4.svg">Linkedin</a>
+          <a href="#"><img src="/landing/img/s4.svg" alt="">Linkedin</a>
         </li>
         <li>
-          <a href="#"><img alt="" src="/landing/img/s5.svg">Instagram</a>
+          <a href="#"><img src="/landing/img/s5.svg" alt="">Instagram</a>
         </li>
         <li>
-          <a href="#"><img alt="" src="/landing/img/s6.svg">Twitter</a>
+          <a href="#"><img src="/landing/img/s6.svg" alt="">Twitter</a>
         </li>
       </ul>
     </div>
@@ -683,22 +660,28 @@
           <h3 class="footer-title">
             InvestGO
           </h3>
-          <ul class="footer-list footer-list__wrap list-reset">
+          <ul class="footer-list footer-list__wrap list-reset inline-list">
             <li>
-              <a href="#">О платформе</a>
+              <a href="#">О&nbspплатформе</a>
             </li>
             <li>
-              <a href="#">Инвестру</a>
+              <a href="/investor">Инвестору</a>
             </li>
             <li>
-              <a href="#">Заемщику</a>
+              <a href="/borrower">Заемщику</a>
             </li>
             <li>
-              <a href="#">Партнерам</a>
+              <a href="/documents">Документы</a>
+            </li>
+            <li>
+              <a href="/documents/disclosure">Раскрытие информации</a>
+            </li>
+            <li>
+              <a href="https://blog.investgo.ru ">Блог</a>
             </li>
           </ul>
         </div>
-        <div class="footer__col">
+        <div class="footer__col" style="display:none;">
           <h3 class="footer-title docBtn">
             Документы
           </h3>
@@ -717,24 +700,24 @@
             </li>
           </ul>
         </div>
-        <div class="footer__col">
+        <div class="footer__col" style="display:none;">
           <h3 class="footer-title">
             Информация
           </h3>
           <ul class="footer-list footer-list__wrap list-reset">
             <li>
-              <a href="#contacts">Саппорт</a>
+              <a href="#">Саппорт</a>
             </li>
             <li>
               <a href="#">Блог</a>
             </li>
             <li>
-              <a href="#faq">FAQ</a>
+              <a href="#">FAQ</a>
             </li>
           </ul>
         </div>
         <div class="footer__col">
-          <a class="footer-tel" href="tel:+7 495 369 00 48">+7 495 369 00 48</a>
+          <a href="tel:+7 (499) 444-33-61" class="footer-tel">+7 (499) 444-33-61</a>
         </div>
       </div>
 
@@ -745,15 +728,17 @@
       <div class="bottom-row">
         <small>© 2021 InvestGo</small>
         <div class="bottom-links">
-          <a href="#">Пользовательское соглашение</a>
+          <a href="/privacy">Пользовательское соглашение</a>
+          <a href="/landing/documents/Политика_конфиденциальности_Инвест_Гоу.pdf" target="_blank">Политика конфиденциальности</a>
         </div>
       </div>
       <p class="footer-text">
-        Осуществляет деятельность в соответствии с Федеральным законом от 02. 08.2019 N 259-ФЗ “О привлечении инвестиций
-        с использованием инвестиционных платформ”
+        Осуществляет деятельность в соответствии с Федеральным законом от 02.08.2019 N 259-ФЗ "О привлечении инвестиций
+        с использованием инвестиционных платформ и о внесении изменений в отдельные законодательные акты Российской
+        Федерации"
       </p>
-      <p class="footer-text" style="display: none;">
-        ООО “Инвест Гоу” зарегистрировано в реестре Банка России под #____ в качестве Оператора инвестиционной платформы
+      <p class="footer-text">
+        ООО “Инвест Гоу” зарегистрировано в реестре Банка России в качестве Оператора инвестиционной платформы 17.02.2021 года.
       </p>
       <p class="footer-text">
         ООО “Инвест Гоу”, ИНН 7720394256, ОГРН 1177746958619
@@ -764,15 +749,37 @@
     <small>© 2021 InvestGo</small>
   </div>
 </footer>
-
-
-
-
+<div class="modal" role="dialog" aria-modal="true">
+  <div class="modal__content">
+    <button type="button" class="modal__close modalClose" aria-label="Close modal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8225 8.18354C15.5859 7.94691 15.2036 7.94691 14.967 8.18354L12 11.1445L9.03299 8.17747C8.79636 7.94084 8.41411 7.94084 8.17747 8.17747C7.94084 8.41411 7.94084 8.79636 8.17747 9.03299L11.1445 12L8.17747 14.967C7.94084 15.2036 7.94084 15.5859 8.17747 15.8225C8.41411 16.0592 8.79636 16.0592 9.03299 15.8225L12 12.8555L14.967 15.8225C15.2036 16.0592 15.5859 16.0592 15.8225 15.8225C16.0592 15.5859 16.0592 15.2036 15.8225 14.967L12.8555 12L15.8225 9.03299C16.0531 8.80243 16.0531 8.41411 15.8225 8.18354Z" fill="black"/>
+      </svg>
+    </button>
+    <div class="modal__body">
+      <svg width="42" height="43" viewBox="0 0 42 43" fill="none">
+        <path d="M1 21.5C1 10.4543 9.95431 1.5 21 1.5C32.0457 1.5 41 10.4543 41 21.5C41 32.5457 32.0457 41.5 21 41.5C9.95431 41.5 1 32.5457 1 21.5Z" fill="white"/>
+        <path d="M18.9949 26.0729L12.0449 19.1229L9.67822 21.4729L18.9949 30.7895L28.9949 20.7895L33.9949 15.7901L31.6449 13.4401L27.8199 17.2562L18.9949 26.0729Z" fill="black"/>
+        <path d="M21 40.5C10.5066 40.5 2 31.9934 2 21.5H0C0 33.098 9.40202 42.5 21 42.5V40.5ZM40 21.5C40 31.9934 31.4934 40.5 21 40.5V42.5C32.598 42.5 42 33.098 42 21.5H40ZM21 2.5C31.4934 2.5 40 11.0066 40 21.5H42C42 9.90202 32.598 0.5 21 0.5V2.5ZM21 0.5C9.40202 0.5 0 9.90202 0 21.5H2C2 11.0066 10.5066 2.5 21 2.5V0.5Z" fill="black"/>
+      </svg>
+      <p>
+        Ваше обращение отправлено. <br>
+        Мы свяжемся с вами в ближайшее время.
+      </p>
+      <button class="btn btn--100 btn-reset modalClose" type="button">
+        Ок
+      </button>
+    </div>
+  </div>
+</div>
 <div class="overlay"></div>
-<script crossorigin="anonymous"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="/landingjs/scripts.min.js?v9"></script>
-<!-- <script src="/landing/js/inputmask.min.js"></script> -->
-<script src="/landing/js/common.js?v9"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="/landing/js/scripts.min.js"></script>
+<script src="/landing/js/nouislider.min.js"></script>
+<script src="/landing/js/jquery.maskedinput.min.js"></script>
+<script src="/landing/js/jquery.nice-select.min.js"></script>
+<script src="/landing/js/common.js"></script>
 </body>
 </html>
