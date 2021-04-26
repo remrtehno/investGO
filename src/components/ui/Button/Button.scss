@@ -87,6 +87,7 @@
     background-color: var(--black);
     border-color: #000;
     color: var(--white);
+    border-style: none;
     &:hover {
       box-shadow: 0 0 0 5px var(--gray4);
     }

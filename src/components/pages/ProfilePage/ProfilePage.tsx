@@ -60,14 +60,24 @@ export const ProfilePage = withAuth(() => {
   }
 
   const hasAcceptRules = useMemo(() => {
+    let returnValue = false;
+
     if (user?.company
-    && user?.company.status === ModerationStatus.approved
-    && user?.company?.bank_details
-    && user?.roles.includes(Role.ip)
-    && !isRegistrationComplete) {
-      return true;
+      && user?.company.status === ModerationStatus.approved
+      && user?.roles.includes(Role.ip)
+      && !isRegistrationComplete
+    ) {
+      returnValue = true;
     }
-    return false;
+
+    if (returnValue
+      && user?.roles.includes(Role.borrower)
+      && !user?.company?.bank_details
+    ) {
+      returnValue = false;
+    }
+
+    return returnValue;
   }, [user]);
 
   const forms = useMemo((): ProfilePage.FormInfo[] => _.compact([
@@ -82,7 +92,7 @@ export const ProfilePage = withAuth(() => {
     claims.ipForm.read() ? {
       id: ProfileFormType.ip,
       title: 'Данные ИП',
-      longTitle: 'Данные индивидуального предпринимателя',
+      longTitle: 'Данные ИП',
     } : null,
     claims.urForm.read() ? {
       id: ProfileFormType.ur,
@@ -124,22 +134,25 @@ export const ProfilePage = withAuth(() => {
                 />
                 { user && user.passport && user.passport.status === 'approved' && user.roles.length < 2 ? (
                   <FormActions>
-                    <div className='col-4'>
+                    <div className='col-12 col-md-4'>
                       <Button
+                        className={s.continueAsButtons}
                         theme={ButtonTheme.black}
                         size={ButtonSize.m}
                         onClick={() => onContinueAs(Role.fl, [Role.investor])}
                       >Продолжить как физ.&nbsp;лицо</Button>
                     </div>
-                    <div className='col-4'>
+                    <div className='col-12 col-md-4'>
                       <Button
+                        className={s.continueAsButtons}
                         theme={ButtonTheme.black}
                         size={ButtonSize.m}
                         onClick={() => onContinueAs(Role.ip, [Role.investor, Role.borrower])}
                       >Продолжить как ИП</Button>
                     </div>
-                    <div className='col-4'>
+                    <div className='col-12 col-md-4'>
                       <Button
+                        className={s.continueAsButtons}
                         theme={ButtonTheme.black}
                         size={ButtonSize.m}
                         onClick={() => onContinueAs(Role.ur, [Role.investor, Role.borrower])}

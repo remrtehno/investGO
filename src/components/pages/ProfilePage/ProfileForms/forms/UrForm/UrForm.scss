@@ -16,3 +16,10 @@
 .fieldDescription {
   margin-bottom: 20px;
 }
+
+.links {
+  color: var(--black);
+  &:hover {
+    color: var(--red);
+  }
+}
