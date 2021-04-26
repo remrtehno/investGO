@@ -51,85 +51,85 @@ app.get('/', async (req, res, next) => {
     next();
 });
 
-app.get('/investor', async (req, res, next) => {
-  const response = await fetch(`https://testing.investgo.ru/api/user`, {
-    headers: {
-      Cookie: req.headers.Cookie
-    }
-  })
-    .then((res) => res.json());
+// app.get('/investor', async (req, res, next) => {
+//   const response = await fetch(`https://testing.investgo.ru/api/user`, {
+//     headers: {
+//       Cookie: req.headers.Cookie
+//     }
+//   })
+//     .then((res) => res.json());
 
-  if (response.status === 'error') {
-    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/investor.html'));
-    return;
-  }
+//   if (response.status === 'error') {
+//     res.sendFile(path.resolve(process.cwd(), 'build/public/landing/investor.html'));
+//     return;
+//   }
 
-  next();
-});
+//   next();
+// });
 
-app.get('/borrower', async (req, res, next) => {
-  const response = await fetch(`https://testing.investgo.ru/api/user`, {
-    headers: {
-      Cookie: req.headers.Cookie
-    }
-  })
-    .then((res) => res.json());
+// app.get('/borrower', async (req, res, next) => {
+//   const response = await fetch(`https://testing.investgo.ru/api/user`, {
+//     headers: {
+//       Cookie: req.headers.Cookie
+//     }
+//   })
+//     .then((res) => res.json());
 
-  if (response.status === 'error') {
-    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/borrower.html'));
-    return;
-  }
+//   if (response.status === 'error') {
+//     res.sendFile(path.resolve(process.cwd(), 'build/public/landing/borrower.html'));
+//     return;
+//   }
 
-  next();
-});
+//   next();
+// });
 
-app.get('/privacy', async (req, res, next) => {
-  const response = await fetch(`https://testing.investgo.ru/api/user`, {
-    headers: {
-      Cookie: req.headers.Cookie
-    }
-  })
-    .then((res) => res.json());
+// app.get('/privacy', async (req, res, next) => {
+//   const response = await fetch(`https://testing.investgo.ru/api/user`, {
+//     headers: {
+//       Cookie: req.headers.Cookie
+//     }
+//   })
+//     .then((res) => res.json());
 
-  if (response.status === 'error') {
-    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/privacy.html'));
-    return;
-  }
+//   if (response.status === 'error') {
+//     res.sendFile(path.resolve(process.cwd(), 'build/public/landing/privacy.html'));
+//     return;
+//   }
 
-  next();
-});
+//   next();
+// });
 
-app.get('/documents', async (req, res, next) => {
-  const response = await fetch(`https://testing.investgo.ru/api/user`, {
-    headers: {
-      Cookie: req.headers.Cookie
-    }
-  })
-    .then((res) => res.json());
+// app.get('/documents', async (req, res, next) => {
+//   const response = await fetch(`https://testing.investgo.ru/api/user`, {
+//     headers: {
+//       Cookie: req.headers.Cookie
+//     }
+//   })
+//     .then((res) => res.json());
 
-  if (response.status === 'error') {
-    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/documents.html'));
-    return;
-  }
+//   if (response.status === 'error') {
+//     res.sendFile(path.resolve(process.cwd(), 'build/public/landing/documents.html'));
+//     return;
+//   }
 
-  next();
-});
+//   next();
+// });
 
-app.get('/documents/disclosure', async (req, res, next) => {
-  const response = await fetch(`https://testing.investgo.ru/api/user`, {
-    headers: {
-      Cookie: req.headers.Cookie
-    }
-  })
-    .then((res) => res.json());
+// app.get('/documents/disclosure', async (req, res, next) => {
+//   const response = await fetch(`https://testing.investgo.ru/api/user`, {
+//     headers: {
+//       Cookie: req.headers.Cookie
+//     }
+//   })
+//     .then((res) => res.json());
 
-  if (response.status === 'error') {
-    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/documents.html'));
-    return;
-  }
+//   if (response.status === 'error') {
+//     res.sendFile(path.resolve(process.cwd(), 'build/public/landing/documents.html'));
+//     return;
+//   }
 
-  next();
-});
+//   next();
+// });
 
 app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 
