@@ -84,3 +84,20 @@
 .phone {
     font-weight: 600;
 }
+
+@media (min-width: 992px) {
+    .footer__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .footer__row .footer__col:last-child {
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    .footer-tel {
+        font-size: 20px;
+    }
+}
