@@ -22,7 +22,7 @@ export const SignPage: FC = () => {
 
 
   return (
-    <Page isBigLogo={true} className={s.page}>
+    <Page isBigLogo={true} classNameHeader={s.pageHeader} className={s.page}>
       <div className='container'>
         <div className={cx(s.formContainer, 'row justify-content-center align-items-center')}>
           <div className='col-xl-4 col-lg-5 col-md-6 col-sm-10 col-xs-12'>
