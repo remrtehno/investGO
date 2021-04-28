@@ -1,11 +1,12 @@
 import cx from 'classnames';
 import _ from 'lodash';
-import {FC, useRef} from 'react';
+import type {FC} from 'react';
+import {useRef} from 'react';
 import React, {useCallback, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
-import { useSaveProjectApi } from 'src/api/companyApi/useSaveProjectApi';
+import {useSaveProjectApi} from 'src/api/companyApi/useSaveProjectApi';
 // import {useSaveCompanyEditApi} from 'src/api/companyApi/useSaveCompanyEditApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
@@ -19,6 +20,8 @@ import {Color} from 'src/contstants/Color';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
+import {VideoPreview} from './VideoPreview/VideoPreview';
+
 import s from './CompanyEditForm.scss';
 import {CompanyEditNavigation} from './CompanyEditNavigation';
 import {useCompanyEditFields} from './useCompanyEditFields';
@@ -30,7 +33,6 @@ export declare namespace CompanyEditForm {
 export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = useCompanyEditFields(user?.company || {});
-  const [, saveCompanyApi] = useSaveCompanyApi();
   const [, saveProjectApi] = useSaveProjectApi();
   const formApiRef = useRef<Form.Api | null>(null);
 
@@ -88,6 +90,9 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
         <FormRow>
           <Field className='col-12' name='video_link' />
         </FormRow>
+        { values.video_link ? (
+          <VideoPreview videoLink={values.video_link} />
+        ) : null }
         <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
           Расскажите о вашем проекте.
           Заполните описание (цели, миссия, планы, история, технологии, методы, достижения и т.д.).
