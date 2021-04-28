@@ -1,10 +1,11 @@
 import cx from 'classnames';
 import _ from 'lodash';
-import type {FC} from 'react';
+import {FC, useRef} from 'react';
 import React, {useCallback, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
+import { useSaveProjectApi } from 'src/api/companyApi/useSaveProjectApi';
 // import {useSaveCompanyEditApi} from 'src/api/companyApi/useSaveCompanyEditApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
@@ -30,10 +31,12 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = useCompanyEditFields(user?.company || {});
   const [, saveCompanyApi] = useSaveCompanyApi();
+  const [, saveProjectApi] = useSaveProjectApi();
+  const formApiRef = useRef<Form.Api | null>(null);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
-    ...(user?.company || {}),
+    ...({title: user?.company?.name, email: user?.company?.emails[0], phone: user?.company?.phones[0]}),
   });
 
   const initialValues = useMemo(() => getValuesFromUser(), [fields]);
@@ -45,6 +48,10 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     setErrors(errors);
   }, []);
 
+  const onSave = useCallback(() => {
+    saveProjectApi(values);
+  }, [values]);
+
   return (
     <Form
       initialValues={initialValues}
@@ -52,6 +59,8 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       values={values}
       onChange={onChange}
       fields={fields}
+      onSubmit={onSave}
+      formApiRef={formApiRef}
     >
       <CompanyEditNavigation />
       <section id='preview-section' className={s.section}>
@@ -64,17 +73,20 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           <Field className={cx(s.bgField, 'col-12')} name='bg_image' />
         </FormRow>
         <FormRow>
-          <Field className={cx('col-2', s.logoField)} name='logo' />
-          <Field className={cx('col-10', s.nameField)} name='name' />
+          <Field className={cx('col-2', s.logoField)} name='logo_id' />
+          <Field className={cx('col-10', s.nameField)} name='title' />
         </FormRow>
         <FormRow>
-          <Field className='col-12' name='field_of_activity' />
+          <Field className='col-12' name='small_description' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='address' />
         </FormRow>
       </section>
       <section id='description-section' className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Описание</Text>
         <FormRow>
-          <Field className='col-12' name='video' />
+          <Field className='col-12' name='video_link' />
         </FormRow>
         <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
           Расскажите о вашем проекте.
@@ -90,7 +102,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           Добавьте фотографии проекта.
         </Text>
         <FormRow>
-          <Field className='col-12' name='gallery' />
+          <Field className='col-12' name='gallery_image' />
         </FormRow>
       </section>
       <section id='team-section' className={s.section}>
@@ -99,7 +111,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           Добавьте представителей вашей команды с описанием их опыта.
         </Text>
         <FormRow>
-          <Field className='col-12' name='founders' />
+          <Field className='col-12' name='team' />
         </FormRow>
       </section>
       <section id='roadmap-section' className={s.section}>
@@ -114,14 +126,12 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       <section id='contacts-section' className={s.section}>
         <Text size={TextSize.h2} className={s.sectionHeader}>Контактные данные</Text>
         <FormRow>
-          <Field className='col-12' name='emails' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='phones' />
+          <Field className='col-6' name='email' />
+          <Field className='col-6' name='phone' />
         </FormRow>
         <FormRow>
           <Field className='col-6' name='site' />
-          <Field className='col-6' name='socials' />
+          <Field className='col-6' name='link' />
         </FormRow>
         <FormRow>
           <Field className='col-12' name='data_valid' />
@@ -131,6 +141,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
             <Button
               theme={ButtonTheme.black}
               size={ButtonSize.m}
+              disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
             >Готово</Button>
           </div>
         </FormActions>

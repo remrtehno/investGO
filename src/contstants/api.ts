@@ -25,6 +25,7 @@ export const api = {
     get: () => '/company',
     save: () => '/company',
     saveBankDetails: () => '/company/bank-details',
+    saveProject: () => '/company/project',
   },
   sms: {
     sign: () => '/sms-sign',
