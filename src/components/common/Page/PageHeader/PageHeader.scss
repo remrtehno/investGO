@@ -42,8 +42,15 @@
   margin-left: 28px;
   cursor: pointer;
 }
-.isBiglogoutIcon {
 
+.link {
+  color:  var(--black);
+  text-decoration: none;
+  transition: color .3s;
+
+  &:hover {
+    color: var(--red);
+  }
 }
 
 .menuContainer {
