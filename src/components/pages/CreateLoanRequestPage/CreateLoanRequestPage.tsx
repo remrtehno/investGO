@@ -35,7 +35,7 @@ const menuItems = () => {
 export const CreateLoanRequestPage = withAuth(() => {
   return (
     <Page>
-      <div className={s.loanRequestPage}>
+      <div className={s.createLoanRequestPage}>
         <TopMenu items={menuItems()} />
         <PageTitle>Новая заявка на привлечение инвестиций</PageTitle>
         <div className='container'>

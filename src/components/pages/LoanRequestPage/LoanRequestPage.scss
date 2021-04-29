@@ -1,0 +1,43 @@
+.content {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 55px 0;
+}
+
+.header {
+  font-family: Nunito;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.4px;
+  margin-bottom: 14px;
+}
+
+.loan {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 45px 35px;
+}
+
+.preview {
+  margin-bottom: 42px;
+}
+
+.desc {
+  
+}
+
+.description {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  margin-top: 3px;
+}
+
+.amount {
+  font-family: Nunito, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 22px;
+  margin-bottom: 5px;
+}
