@@ -56,4 +56,26 @@
   font-weight: 700;
 }
 
-.targetText {}
+.statsRow {
+  font-size: 13px;
+  line-height: 1.7em;
+  font-family: Nunito, sans-serif;
+  color: var(--label);
+  margin-bottom: 16px;
+
+  & b {
+    font-weight: 600;
+    color: var(--black);
+  }
+}
+
+.statsLine {
+  height: 2px;
+  background: var(--black);
+}
+
+.statsFill {
+  height: 3.5px;
+  background: var(--black);
+  transform: translateY(-25%);
+}

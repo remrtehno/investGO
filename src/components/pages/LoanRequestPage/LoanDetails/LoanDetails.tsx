@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import type {FC} from 'react';
 import {Fragment} from 'react';
 import React, {useEffect, useState} from 'react';
@@ -19,12 +20,6 @@ export declare namespace LoanDetails {
   export type Props = {
     loan: Borrower.LoanDetails
   };
-}
-
-enum translateRepaymentShedule {
-  month ='Ежемесячно',
-  day ='Ежеквартально',
-  year ='В конце срока',
 }
 
 enum translateRepaymentType {
@@ -60,6 +55,13 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
       </div>
       <div className={s.stats}>
         <div className={s.amount}>{ loan.amount } ₽</div>
+        <div className={cx('row', s.statsRow)}>
+          <div className='col'>Собрано <b>999 000 ₽</b></div>
+          <div className='col text-end'>{loan.status}</div>
+        </div>
+        <div className={s.statsLine}>
+          <div className={s.statsFill} style={{width: '10%'}} />
+        </div>
       </div>
       <Tabs
         tabs={tabs}
