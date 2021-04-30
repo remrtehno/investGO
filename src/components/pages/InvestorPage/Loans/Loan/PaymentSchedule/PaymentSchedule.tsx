@@ -30,7 +30,7 @@ export const PaymentSchedule: FC<PaymentSchedule.Props> = (props) => {
           График выплат <DropDownIcon />
         </Text>
       </div>
-      <TransitionGroup>
+      <TransitionGroup className='row'>
         { isOpened ? (
           <CSSTransition timeout={400} classNames='loan-details-transition'>
             <Table>

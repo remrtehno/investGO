@@ -12,7 +12,7 @@ declare namespace Table {
 
 export const Table: FC<Table.Props> = (props) => {
   return (
-    <div className={cx('row', s.tableWrapper, props.className && props.className)}>
+    <div className={cx(s.tableWrapper, props.className && props.className)}>
       <table className={s.table}>
         { props.children }
       </table>
