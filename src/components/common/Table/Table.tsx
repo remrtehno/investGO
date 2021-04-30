@@ -6,14 +6,16 @@ import s from './Table.scss';
 
 declare namespace Table {
   export type Props = {
-    className?: string
+    className?: string,
+    dense?: boolean,
   }
 }
 
 export const Table: FC<Table.Props> = (props) => {
   return (
-    <div className={cx(s.tableWrapper, props.className && props.className)}>
-      <table className={s.table}>
+    <div className={cx(s.tableWrapper,
+      props.className && props.className)}>
+      <table className={cx(s.table, props.dense && s.dense)}>
         { props.children }
       </table>
     </div>

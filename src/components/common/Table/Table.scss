@@ -94,4 +94,13 @@
       }
     }
   }
+
+  &.dense > tbody {
+    & > tr {
+      & > td {
+        padding: 6px 10px;
+        height: 30px;
+      }
+    }
+  }
 }

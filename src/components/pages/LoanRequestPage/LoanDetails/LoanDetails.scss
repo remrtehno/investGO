@@ -79,3 +79,20 @@
   background: var(--black);
   transform: translateY(-25%);
 }
+
+.title {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--gray2);
+  height: 26px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px
+}
+
+.borrowerSection {
+  margin-bottom: 40px;
+}
