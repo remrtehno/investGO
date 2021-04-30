@@ -17,10 +17,10 @@ import {TeamField} from './fields/TeamField';
 
 export const useCompanyEditFields = (company: User.Company | {}) => {
   return useMemo((): Form.FieldModels => ({
-    id: {
-      name: 'id',
-      type: FieldType.hidden,
-    },
+    // id: {
+    //   name: 'id',
+    //   type: FieldType.hidden,
+    // },
     bg_image: {
       name: 'bg_image',
       type: FieldType.custom,

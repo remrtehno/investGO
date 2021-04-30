@@ -38,7 +38,11 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
-    ...({title: user?.company?.name, email: user?.company?.emails[0], phone: user?.company?.phones[0]}),
+    ...({
+      title: user?.company?.name,
+      email: user?.company?.emails[0],
+      phone: user?.company?.phones[0],
+    }),
   });
 
   const initialValues = useMemo(() => getValuesFromUser(), [fields]);
