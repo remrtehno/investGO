@@ -32,6 +32,7 @@ export const LogoutIcon: FC<LogoutIcon.Props> = (props) => (
 declare namespace PageHeader {
   export type Props = {
     isBigLogo?: boolean,
+    className?: string,
   }
 }
 
@@ -52,7 +53,7 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
   }, [logoutState.isSuccess]);
 
   return (
-    <div className={s.pageHeader}>
+    <div className={cx(s.pageHeader, props.className)}>
       <div className={cx('container', s.container)}>
         <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
         <div className={s.space} />

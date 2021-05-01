@@ -101,10 +101,10 @@ export const IpForm: FC<IpForm.Props> = (props) => {
         onChange={onChange}
       >
         <FormTitle status={user.company?.status}>
-          { props.form.title }
+          { props.form.longTitle }
         </FormTitle>
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='ogrn' />
+          <Field className='col-sm-12 col-md-6' name='ogrn' />
           <Field className='col-sm-12 col-md-6' name='date_issue_ogrn' />
         </FormRow>
         <FormRow>

@@ -9,6 +9,7 @@ import {PageHeader} from './PageHeader';
 
 type Props = {
   className?: string,
+  classNameHeader?: string,
   isBigLogo?: boolean,
 }
 
@@ -18,7 +19,7 @@ export const Page: FC<Props> = (props) => {
   return (
     <PageScrollProvider pageRef={ref}>
       <div ref={ref} className={cx(s.page, props.className)}>
-        <PageHeader isBigLogo={props.isBigLogo} />
+        <PageHeader className={props.classNameHeader} isBigLogo={props.isBigLogo} />
         <div className={cx(s.content, props.isBigLogo ? s.isBigLogoContent : null )}>{ props.children }</div>
       </div>
     </PageScrollProvider>

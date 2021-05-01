@@ -139,7 +139,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
       <FormTitle
         style={{marginTop: 60}}
         status={user.company?.status}
-      >{ props.form.title }</FormTitle>
+      >{ props.form.longTitle }</FormTitle>
 
       { user.company?.status === ModerationStatus.waiting || user.company?.status === ModerationStatus.filled ? (
         <ModerationInfo />
@@ -156,7 +156,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <Field className='container col-12' name='name' />
           </FormRow>
           <FormRow>
-            <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='ogrn' />
+            <Field className='col-sm-12 col-md-6' name='ogrn' />
             <Field className='col-sm-12 col-md-6' name='date_issue_ogrn' />
           </FormRow>
           <FormRow>
@@ -166,9 +166,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
             <Field className='container col-12' name='postal_address' />
           </FormRow>
           <FormRow>
-            <Field className='col-12' name='inn' />
-          </FormRow>
-          <FormRow>
+            <Field className='col-6 mb-20px' name='inn' />
             <Field className='col-12' name='emails' />
           </FormRow>
           <FormRow>

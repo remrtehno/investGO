@@ -135,6 +135,11 @@ app.get('/documents/disclosure', async (req, res, next) => {
   next();
 });
 
+app.get('/robots.txt', async (req, res, next) => {
+  res.sendFile(path.resolve(process.cwd(), 'build/landing/robots.txt'));
+  next();
+});
+
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
   webpackDevMiddleware(multiCompiler, {
