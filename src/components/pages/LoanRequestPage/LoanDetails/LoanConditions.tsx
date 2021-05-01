@@ -1,18 +1,14 @@
 import type {FC} from 'react';
 import {Fragment} from 'react';
 import React, {useEffect, useState} from 'react';
-import {useRecoilValue} from 'recoil';
 
 import {Table} from 'src/components/common/Table';
-import Tabs from 'src/components/ui/Tabs/Tabs';
-import {Text, TextSize} from 'src/components/ui/Text';
-import {TextWeight} from 'src/components/ui/Text/Text';
-import {userAtom} from 'src/recoil/userAtom';
 import type {Borrower} from 'src/types/Borrower';
 import {formatDate} from 'src/utils/formatDate';
 import {plural} from 'src/utils/plural';
 
 import s from './LoanDetails.scss';
+import { formatSum } from 'src/utils/formatSum';
 
 export declare namespace LoanConditions {
   export type Props = {
@@ -54,11 +50,15 @@ export const LoanConditions: FC<LoanConditions.Props> = (props) => {
           </tr>
           <tr>
             <td>Минимальный объем инвестиций</td>
-            <td className='text-end'>{ loan.min_amount }</td>
+            <td className='text-end'>{ formatSum(loan.min_amount) }₽</td>
+          </tr>
+          <tr>
+            <td>Максимальный объем инвестиций</td>
+            <td className='text-end'>{ formatSum(loan.amount) }₽</td>
           </tr>
           <tr>
             <td>Минимальная сумма инвестиции</td>
-            <td className='text-end'>{ loan.min_investment_size }</td>
+            <td className='text-end'>{ formatSum(loan.min_investment_size) }₽</td>
           </tr>
           <tr>
             <td>Срок действия предложения</td>
