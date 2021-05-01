@@ -1,16 +1,13 @@
-.title {
-  background: var(--black);
-  font-size: 15px;
-  font-weight: 600;
-  padding: 14px 0;
-  color: var(--white);
-  text-align: center;
-}
-
 .content {
-  padding: 53px 200px;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 55px 0;
 }
 
 .header {
-  margin-bottom: 28px;
+  font-family: Nunito;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.4px;
+  margin-bottom: 14px;
 }

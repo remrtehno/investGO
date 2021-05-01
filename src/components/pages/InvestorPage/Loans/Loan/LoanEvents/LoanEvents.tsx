@@ -41,48 +41,50 @@ export const LoanEvents: FC<LoanEvents.Props> = (props) => {
           </div>
         </div>
       ) : (
-        <Table>
-          <thead>
-            <tr>
-              <th>Дата</th>
-              <th>Событие</th>
-              <th>Комментарий</th>
-              <th>Файлы</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>21.01.20</td>
-              <td className='color-label'>Принудительная просрочка</td>
-              <td>Частичное погашение</td>
-              <td />
-            </tr>
-            <tr>
-              <td>21.01.20</td>
-              <td className='color-label'>Цессия</td>
-              <td>Автоматическая цессия</td>
-              <td />
-            </tr>
-            <tr>
-              <td>21.01.20</td>
-              <td className='color-label'>Информационное письмо от заемщика</td>
-              <td />
-              <td><a href='#'>Файл письма</a></td>
-            </tr>
-            <tr>
-              <td>21.01.20</td>
-              <td className='color-label'>Частичное погашение</td>
-              <td>Погашено 1 000.00 ₽</td>
-              <td />
-            </tr>
-            <tr>
-              <td>21.01.20</td>
-              <td className='color-label'>Частичное погашение</td>
-              <td>Погашено 1 000.00 ₽</td>
-              <td />
-            </tr>
-          </tbody>
-        </Table>
+        <div className='row'>
+          <Table>
+            <thead>
+              <tr>
+                <th>Дата</th>
+                <th>Событие</th>
+                <th>Комментарий</th>
+                <th>Файлы</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>21.01.20</td>
+                <td className='color-label'>Принудительная просрочка</td>
+                <td>Частичное погашение</td>
+                <td />
+              </tr>
+              <tr>
+                <td>21.01.20</td>
+                <td className='color-label'>Цессия</td>
+                <td>Автоматическая цессия</td>
+                <td />
+              </tr>
+              <tr>
+                <td>21.01.20</td>
+                <td className='color-label'>Информационное письмо от заемщика</td>
+                <td />
+                <td><a href='#'>Файл письма</a></td>
+              </tr>
+              <tr>
+                <td>21.01.20</td>
+                <td className='color-label'>Частичное погашение</td>
+                <td>Погашено 1 000.00 ₽</td>
+                <td />
+              </tr>
+              <tr>
+                <td>21.01.20</td>
+                <td className='color-label'>Частичное погашение</td>
+                <td>Погашено 1 000.00 ₽</td>
+                <td />
+              </tr>
+            </tbody>
+          </Table>
+        </div>
       ) }
     </div>
   );

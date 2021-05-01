@@ -1,1 +1,1 @@
-export {LoanRequestPage} from './LoanRequestPage'
+export {LoanRequestPage} from './LoanRequestPage';
