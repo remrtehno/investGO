@@ -8,10 +8,16 @@ import {Table} from 'src/components/common/Table';
 import Tabs from 'src/components/ui/Tabs/Tabs';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
+import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
 import {LoanModerationStatus} from 'src/contstants/ModerationStatus';
 import {Role} from 'src/contstants/Role';
+import {Document2Icon} from 'src/icons/Document2Icon';
+import {DocumentIcon} from 'src/icons/DocumentIcon';
+import {DownloadIcon} from 'src/icons/DownloadIcon';
+import {FilePdfIcon} from 'src/icons/files/FilePdfIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import type {Borrower} from 'src/types/Borrower';
+import {breackpointUp} from 'src/utils/breackpointUtils';
 import {formatDate} from 'src/utils/formatDate';
 import {plural} from 'src/utils/plural';
 
@@ -37,6 +43,7 @@ const translateLoanStatus = {
   [LoanModerationStatus.completed]: 'Завершена',
   [LoanModerationStatus.canceled]: 'Отменена',
   [LoanModerationStatus.filled]: 'Новая',
+  active: 'активна',
 };
 
 export const LoanDetails: FC<LoanDetails.Props> = (props) => {
@@ -70,7 +77,7 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
         <div className={cx('row', s.statsRow)}>
           <div className='col'>Собрано <b>999 000 ₽</b></div>
           <div className='col text-end'>
-            { translateLoanStatus[loan.status as LoanModerationStatus] }
+            { translateLoanStatus[loan.status] }
           </div>
         </div>
         <div className={s.statsLine}>
@@ -131,8 +138,62 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
               </Table>
             </Fragment>
           ) : null }
-          <div className={s.title}>Деятельность</div>
+          { loan.borrower.okved ? (
+            <div className={s.title}>Деятельность</div>
+          ) : null }
         </Fragment>
+      ) : null }
+      { activeTab === '3' && loan.documents.length ? (
+        <Table>
+          <tbody>
+            { loan.documents.map((document, index) => {
+              return (
+                <tr key={index} className={s.docTableRow}>
+                  <td>
+                    { breackpointUp(adaptiveBreackpoints.md) ? (
+                      <FilePdfIcon className={s.fileIcon} />
+                    ) : (
+                      <Document2Icon className={s.fileIcon} />
+                    ) }
+                    { document.original_name }
+                  </td>
+                  <td className='text-end'>
+                    <a href={document.url}>
+                      <DownloadIcon className={s.downloadIcon} />
+                    </a>
+                  </td>
+                </tr>
+              );
+            }) }
+          </tbody>
+        </Table>
+      ) : null }
+      { activeTab === '4' && loan.investors.length ? (
+        <Table>
+          <thead>
+            <tr>
+              <th>Инвестор</th>
+              <th>Сумма</th>
+              <th>Начислено</th>
+              <th>Выплачено</th>
+              <th>Договор</th>
+            </tr>
+          </thead>
+          <tbody>
+            { loan.investors.map((investor, index) => {
+              <tr key={index}>
+                <td>{ investor.name }</td>
+                <td>{ investor.amount }</td>
+                <td>{ investor.accrued_amount }</td>
+                <td>{ investor.paid_amount }</td>
+                <td>!</td>
+              </tr>;
+            }) }
+          </tbody>
+        </Table>
+      ) : null }
+      { activeTab === '4' && !loan.investors.length ? (
+        <Text size={TextSize.body0}>Пока нет инвесторов</Text>
       ) : null }
     </div>
   );
