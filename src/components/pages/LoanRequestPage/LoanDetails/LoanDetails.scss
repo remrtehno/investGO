@@ -5,7 +5,7 @@
   background: var(--white);
   border-radius: 4px;
   padding: 45px 35px;
-  min-height: 908px;
+  min-height: 805px;
 }
 
 .preview {
@@ -121,5 +121,18 @@
 
   &:hover .downloadIcon {
     opacity: 1;
+  }
+}
+
+.downloadAll {
+  margin-top: 40px;
+
+  & > span {
+    cursor: pointer;
+    transition: color .3s;
+
+    &:hover {
+      color: var(--red);
+    }
   }
 }

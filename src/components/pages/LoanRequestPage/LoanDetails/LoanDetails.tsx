@@ -1,7 +1,6 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import {Fragment} from 'react';
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {Table} from 'src/components/common/Table';
@@ -12,7 +11,6 @@ import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
 import {LoanModerationStatus} from 'src/contstants/ModerationStatus';
 import {Role} from 'src/contstants/Role';
 import {Document2Icon} from 'src/icons/Document2Icon';
-import {DocumentIcon} from 'src/icons/DocumentIcon';
 import {DownloadIcon} from 'src/icons/DownloadIcon';
 import {FilePdfIcon} from 'src/icons/files/FilePdfIcon';
 import {userAtom} from 'src/recoil/userAtom';
@@ -23,6 +21,7 @@ import {plural} from 'src/utils/plural';
 
 import {LoanConditions} from './LoanConditions';
 import s from './LoanDetails.scss';
+import {LoanDocuments} from './LoanDocuments';
 
 export declare namespace LoanDetails {
   export type Props = {
@@ -50,7 +49,7 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
   const {loan} = props;
   const {user} = useRecoilValue(userAtom);
   const company = user?.company;
-  const [activeTab, setActiveTab] = useState('2');
+  const [activeTab, setActiveTab] = useState('1');
 
   const tabs = [
     {id: '1', label: 'Общая информация'},
@@ -144,29 +143,7 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
         </Fragment>
       ) : null }
       { activeTab === '3' && loan.documents.length ? (
-        <Table>
-          <tbody>
-            { loan.documents.map((document, index) => {
-              return (
-                <tr key={index} className={s.docTableRow}>
-                  <td>
-                    { breackpointUp(adaptiveBreackpoints.md) ? (
-                      <FilePdfIcon className={s.fileIcon} />
-                    ) : (
-                      <Document2Icon className={s.fileIcon} />
-                    ) }
-                    { document.original_name }
-                  </td>
-                  <td className='text-end'>
-                    <a href={document.url}>
-                      <DownloadIcon className={s.downloadIcon} />
-                    </a>
-                  </td>
-                </tr>
-              );
-            }) }
-          </tbody>
-        </Table>
+        <LoanDocuments loan={loan} />
       ) : null }
       { activeTab === '4' && loan.investors.length ? (
         <Table>
