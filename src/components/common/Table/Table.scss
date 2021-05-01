@@ -103,4 +103,12 @@
       }
     }
   }
+
+  &.noBorder > tbody {
+    & > tr {
+      & > td {
+        border-bottom: none;
+      }
+    }
+  }
 }

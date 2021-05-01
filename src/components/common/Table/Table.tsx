@@ -8,14 +8,20 @@ declare namespace Table {
   export type Props = {
     className?: string,
     dense?: boolean,
+    border?: boolean
   }
 }
 
 export const Table: FC<Table.Props> = (props) => {
+  let {border} = props;
+  if (typeof border === 'undefined') {
+    border = true;
+  }
+
   return (
     <div className={cx(s.tableWrapper,
       props.className && props.className)}>
-      <table className={cx(s.table, props.dense && s.dense)}>
+      <table className={cx(s.table, props.dense && s.dense, !border && s.noBorder)}>
         { props.children }
       </table>
     </div>

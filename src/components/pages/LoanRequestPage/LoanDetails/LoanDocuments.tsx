@@ -36,7 +36,7 @@ export const LoanDocuments: FC<LoanDocuments.Props> = (props) => {
           { loan.documents.map((document, index) => {
             return (
               <tr key={index} className={s.docTableRow}>
-                <td>
+                <td className='ps-0'>
                   { breackpointUp(adaptiveBreackpoints.md) ? (
                     <FilePdfIcon className={s.fileIcon} />
                   ) : (
