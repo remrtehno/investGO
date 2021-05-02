@@ -35,6 +35,7 @@ export declare namespace User {
 
   export type Company = {
     id: string | null,
+    inn: string,
     ogrn: string,
     date_issue_ogrn: string,
     document_registry_file: FilePrimitive,

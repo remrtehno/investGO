@@ -1,13 +1,17 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useParams} from 'react-router';
+import {useRecoilValue} from 'recoil';
 
+import {useGetLoan} from 'src/api/borrowerApi/useGetLoanApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
-import { PageTitle } from 'src/components/common/Page/PageTitle';
 import {TopMenu} from 'src/components/common/TopMenu';
 import {withAuth} from 'src/components/hocs/withAuth';
 import {Text, TextSize} from 'src/components/ui/Text';
+import {TextWeight} from 'src/components/ui/Text/Text';
 
-import {LoanRequestForm} from './LoanRequestForm';
+import { LoanDetails } from './LoanDetails';
+
 import s from './LoanRequestPage.scss';
 
 export declare namespace LoanRequestPage {
@@ -33,16 +37,34 @@ const menuItems = () => {
 };
 
 export const LoanRequestPage = withAuth(() => {
+  const {loanId} = useParams() as {loanId: string};
+  const [loan, getLoan, getLoanState] = useGetLoan(loanId);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getLoan(null);
+  }, []);
+
+  useEffect(() => {
+    setError(getLoanState.error);
+  }, [getLoanState.error]);
+
   return (
     <Page>
       <div className={s.loanRequestPage}>
         <TopMenu items={menuItems()} />
-        <PageTitle>Новая заявка на привлечение инвестиций</PageTitle>
         <div className='container'>
-          <div className={s.content}>
-            <Text size={TextSize.h3} className={s.header}>Параметры займа</Text>
-            <LoanRequestForm />
-          </div>
+          { loan ? (
+            <div className={s.content}>
+              <div className={s.header}>Заявка #{ loan?.num }</div>
+              <LoanDetails loan={loan} />
+            </div>
+          ) : null }
+          { error ? (
+            <div className={s.content}>
+              <div className={s.header}>Заявка не найдена</div>
+            </div>
+          ) : null }
         </div>
       </div>
     </Page>

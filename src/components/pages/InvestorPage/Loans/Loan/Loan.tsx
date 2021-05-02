@@ -117,7 +117,9 @@ export const Loan: FC<Loan.Props> = (props) => {
                   </Fragment>
                 ) : null }
                 { activeTab === '2' ? (
-                  <LoanDocuments />
+                  <div className='row'>
+                    <LoanDocuments />
+                  </div>
                 ) : null }
                 { activeTab === '3' ? (
                   <LoanEvents />

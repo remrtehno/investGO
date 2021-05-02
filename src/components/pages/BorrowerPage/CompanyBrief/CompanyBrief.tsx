@@ -37,7 +37,7 @@ export const CompanyBrief: FC<CompanyBrief.Props> = (props) => {
         size={ButtonSize.s}
         theme={ButtonTheme.red}
         onClick={() => {
-          history.push(RoutePaths.loanRequest(props.company.id as string));
+          history.push(RoutePaths.createLoanRequest(props.company.id as string));
         }}
       >
         Привлечь инвестиции
