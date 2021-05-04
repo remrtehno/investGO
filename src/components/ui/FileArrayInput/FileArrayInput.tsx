@@ -57,7 +57,7 @@ export const FileArrayInput: FC<FileArrayInput.Props> = (props) => {
   }, [uploadedFile, props.onChange, files, props.name]);
 
   const {getRootProps, getInputProps} = useDropzone({
-    accept: 'image/*',
+    accept: '.pdf,image/*',
     multiple: false,
     maxSize: 10485760, // 10MB,
     onDrop(acceptedFiles: File[]) {

@@ -17,7 +17,7 @@ import {userAtom} from 'src/recoil/userAtom';
 import type {Borrower} from 'src/types/Borrower';
 import {breackpointUp} from 'src/utils/breackpointUtils';
 import {formatDate} from 'src/utils/formatDate';
-import { formatSum } from 'src/utils/formatSum';
+import { formatNumber } from 'src/utils/formatNumber';
 import {plural} from 'src/utils/plural';
 
 import {LoanBorrowerInfo} from './LoanBorrowerInfo';
@@ -69,21 +69,25 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
         </div>
       </div>
       <div className={s.stats}>
-        <div className={s.amount}>{ formatSum(loan.amount) } ₽</div>
+        <div className={s.amount}>{ formatNumber(loan.received_amount) } ₽</div>
         <div className={cx('row', s.statsRow)}>
-          <div className='col'>Собрано <b>999 000 ₽</b></div>
+          <div className='col'>Из <b>{formatNumber(loan.amount)} ₽</b></div>
           <div className='col text-end'>
             { translateLoanStatus[loan.status] }
           </div>
         </div>
         <div className={s.statsLine}>
-          <div className={s.statsFill} style={{width: '10%'}} />
+          <div
+            className={s.statsFill}
+            style={{width: loan.received_amount * 100 / loan.amount + '%' }}
+          />
         </div>
       </div>
       <Tabs
         tabs={tabs}
         activeTab={activeTab}
         onChange={setActiveTab}
+        activeColor='red'
       />
       { activeTab === '1' ? (
         <LoanConditions loan={loan} />

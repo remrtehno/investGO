@@ -1,6 +1,6 @@
-export function formatSum(sum: number, separator = ' ') {
+export function formatNumber(number: number, separator = ' ') {
   const group = 3;
-  const parts = sum.toString().split('.');
+  const parts = number.toString().split('.');
   const intPart = parts[0];
   let formattedStr = '';
   let i;

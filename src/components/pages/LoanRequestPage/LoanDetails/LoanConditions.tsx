@@ -8,7 +8,7 @@ import {formatDate} from 'src/utils/formatDate';
 import {plural} from 'src/utils/plural';
 
 import s from './LoanDetails.scss';
-import { formatSum } from 'src/utils/formatSum';
+import { formatNumber } from 'src/utils/formatNumber';
 
 export declare namespace LoanConditions {
   export type Props = {
@@ -50,15 +50,15 @@ export const LoanConditions: FC<LoanConditions.Props> = (props) => {
           </tr>
           <tr>
             <td>Минимальный объем инвестиций</td>
-            <td className='text-end'>{ formatSum(loan.min_amount) }₽</td>
+            <td className='text-end'>{ formatNumber(loan.min_amount) }₽</td>
           </tr>
           <tr>
             <td>Максимальный объем инвестиций</td>
-            <td className='text-end'>{ formatSum(loan.amount) }₽</td>
+            <td className='text-end'>{ formatNumber(loan.amount) }₽</td>
           </tr>
           <tr>
             <td>Минимальная сумма инвестиции</td>
-            <td className='text-end'>{ formatSum(loan.min_investment_size) }₽</td>
+            <td className='text-end'>{ formatNumber(loan.min_investment_size) }₽</td>
           </tr>
           <tr>
             <td>Срок действия предложения</td>

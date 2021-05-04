@@ -186,6 +186,7 @@ export declare namespace Borrower {
     num: number,
     publish_before_at: string,
     rate: number,
+    received_amount: number,
     repayment_limit_month: number,
     repayment_schedule: string,
     repayment_type: string,

@@ -15,7 +15,7 @@ export type TabProps = {
   viewType?: string,
   activeTab: string,
   onChange(tab: string): void,
-
+  activeColor?: 'red' | 'black'
 };
 
 const Tabs: FC<TabProps> = (props) => {
@@ -31,7 +31,8 @@ const Tabs: FC<TabProps> = (props) => {
             className={classNames(
               s.TabsItem,
               tab.id === props.activeTab ? s.TabsItemActive : '',
-              tab.className
+              tab.className,
+              props.activeColor === 'red' && s.activeColorRed
             )}
             key={tab.id}
             onClick={() => props.onChange(tab.id)}
