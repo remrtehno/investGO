@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 
 import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
+import { useUploadImageApi } from 'src/api/common/UseUploadImageApi';
 import type {FieldProps} from 'src/components/common/Form/fields/fieldsModel';
 import type {FieldType} from 'src/components/common/Form/Form';
 import {useFormModel} from 'src/components/common/Form/Form';
@@ -30,7 +31,7 @@ export declare namespace BgImageField {
 }
 
 export const BgImageField: FC<BgImageField.Props> = (props) => {
-  const [uploadedFile, uploadFileApi, uploadApi] = useUploadFileApi();
+  const [uploadedFile, uploadFileApi, uploadApi] = useUploadImageApi();
   const form = useFormModel();
   const {field} = props;
   const value = field.value;

@@ -18,6 +18,7 @@ export const api = {
   },
   common: {
     uploadFile: () => '/file/upload',
+    uploadImage: () => '/image/upload',
     confirmEmail: () => '/user/email-confirm',
     okved: () => '/okved',
   },

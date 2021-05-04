@@ -21,14 +21,14 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
     //   name: 'id',
     //   type: FieldType.hidden,
     // },
-    bg_image: {
-      name: 'bg_image',
+    preview: {
+      name: 'preview',
       type: FieldType.custom,
       Field: BgImageField,
       label: 'Загрузить фоновое изображение',
     } as any,
-    logo_id: {
-      name: 'logo_id',
+    logo: {
+      name: 'logo',
       type: FieldType.custom,
       Field: BgImageField,
       // validations: [required()],
@@ -65,8 +65,8 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       label: 'Текст описания',
       validations: [required()],
     },
-    gallery_image: {
-      name: 'gallery_image',
+    gallery_images: {
+      name: 'gallery_images',
       type: FieldType.custom,
       Field: GalleryField,
     } as any,
