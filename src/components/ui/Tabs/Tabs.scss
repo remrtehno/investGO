@@ -22,4 +22,8 @@
 .TabsItemActive {
   color: var(--black);
   border-bottom: 2px solid var(--black);
+
+  &.activeColorRed {
+    border-bottom: 2px solid var(--red);
+  }
 }

@@ -69,9 +69,9 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
         </div>
       </div>
       <div className={s.stats}>
-        <div className={s.amount}>{ formatNumber(loan.amount) } ₽</div>
+        <div className={s.amount}>{ formatNumber(loan.received_amount) } ₽</div>
         <div className={cx('row', s.statsRow)}>
-          <div className='col'>Собрано <b>{formatNumber(loan.received_amount)} ₽</b></div>
+          <div className='col'>Из <b>{formatNumber(loan.amount)} ₽</b></div>
           <div className='col text-end'>
             { translateLoanStatus[loan.status] }
           </div>
@@ -87,6 +87,7 @@ export const LoanDetails: FC<LoanDetails.Props> = (props) => {
         tabs={tabs}
         activeTab={activeTab}
         onChange={setActiveTab}
+        activeColor='red'
       />
       { activeTab === '1' ? (
         <LoanConditions loan={loan} />
