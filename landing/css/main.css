@@ -1198,15 +1198,16 @@ iframe {
 .page-footer__top .container {
   border-bottom: 1px solid #EEEEF0
 }
+.page-footer__bottom {
+  margin-bottom: 19px;
+}
 
 .social {
   padding-top: 31px;
   padding-bottom: 31px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 530px;
-  margin: 0 auto
+  margin: 0 auto;
 }
 
 .social a {
@@ -1218,11 +1219,23 @@ iframe {
   line-height: 26px;
   letter-spacing: -0.2px;
   color: #000000;
-  transition: .3s
+  transition: .3s;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.social svg {
+  max-width: 32px;
+  max-height: 32px;
+  border-radius: 3px;
 }
 
 .social a:hover {
   color: var(--red)
+}
+.social a:hover svg, .social a:hover svg path {
+  fill: var(--red);
+  color: var(--red);
 }
 
 .page-footer__center {
@@ -1260,6 +1273,10 @@ iframe {
 
 .footer-list a:hover {
   color: #000
+}
+
+.footer-list__wrap {
+
 }
 
 .footer-list li:not(:last-child) {
@@ -1324,10 +1341,6 @@ iframe {
 }
 
 .copyright {
-  display: none
-}
-
-.social img {
   display: none
 }
 

@@ -1,6 +1,7 @@
 /**
  * Starts local dev server with HMR
  */
+const [compileEjs] = require("./ejs-build");
 
 const express = require('express');
 const path = require('path');
@@ -8,7 +9,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const webpack = require('webpack');
 const [clientConfig, serverConfig] = require('../webpack/webpackDevConfig');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const {createProxyMiddleware} = require('http-proxy-middleware');
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -164,4 +165,6 @@ multiCompiler.hooks.done.tap('startSsr', () => {
     });
     isStarted = true;
   }
+  compileEjs(path.resolve(process.cwd(), 'build/landing/'));
 });
+
