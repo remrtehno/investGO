@@ -24,7 +24,7 @@ enum translateRepaymentShedule {
 
 enum translateRepaymentType {
   classical = 'Дифференцированный',
-  annuity = 'Аннуитентный'
+  annuity = 'Аннуитетный'
 }
 
 export const LoanConditions: FC<LoanConditions.Props> = (props) => {
