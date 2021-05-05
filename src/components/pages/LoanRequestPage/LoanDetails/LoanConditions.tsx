@@ -32,7 +32,7 @@ export const LoanConditions: FC<LoanConditions.Props> = (props) => {
 
   function getCollectionEnd() {
     const startDate = new Date(loan.collection_start_at);
-    const days = startDate.getDate() + loan.term_limit;
+    const days = startDate.getDate() + loan.term_limit - 1;
     startDate.setDate(days);
     return startDate;
   }
@@ -44,8 +44,7 @@ export const LoanConditions: FC<LoanConditions.Props> = (props) => {
           <tr>
             <td>Период сбора</td>
             <td className='text-end'>
-              { formatDate(new Date(loan.collection_start_at)) } –
-              { formatDate(getCollectionEnd()) }
+              { formatDate(new Date(loan.collection_start_at)) } – { formatDate(getCollectionEnd()) }
             </td>
           </tr>
           <tr>
