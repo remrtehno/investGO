@@ -20,6 +20,7 @@ import {Color} from 'src/contstants/Color';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
 
+import type {AddMemberForm} from './TeamField/AddMemberForm';
 import {VideoPreview} from './VideoPreview/VideoPreview';
 
 import s from './CompanyEditForm.scss';
@@ -54,8 +55,33 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     setErrors(errors);
   }, []);
 
+  function processLinksforSave(links: {}) {
+    return Object.entries(links).map((entry) => {
+      return {
+        source: entry[0],
+        url: entry[1],
+      };
+    });
+  }
+
+  function processValuesForSave() {
+    const valuesForSave = {...values};
+    if (values.link) {
+      valuesForSave.link = processLinksforSave(values.link);
+    }
+    if (values.team) {
+      valuesForSave.team.forEach((team: AddMemberForm.Values) => {
+        if (team.link) {
+          team.link = processLinksforSave(team.link);
+        }
+      });
+    }
+    return valuesForSave;
+  }
+
   const onSave = useCallback(() => {
-    saveProjectApi(values);
+    const valuesForSave = processValuesForSave();
+    saveProjectApi(valuesForSave);
   }, [values]);
 
   return (
@@ -76,7 +102,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           Загрузите изображения.
         </Text>
         <FormRow>
-          <Field className={cx(s.bgField, 'col-12')} name='bg_image' />
+          <Field className={cx(s.bgField, 'col-12')} name='preview' />
         </FormRow>
         <FormRow>
           <Field className={cx('col-2', s.logoField)} name='logo' />
@@ -111,7 +137,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           Добавьте фотографии проекта.
         </Text>
         <FormRow>
-          <Field className='col-12' name='gallery_image' />
+          <Field className='col-12' name='gallery_images' />
         </FormRow>
       </section>
       <section id='team-section' className={s.section}>
