@@ -27,6 +27,14 @@ import type {User} from 'src/types/User';
 import s from './UrForm.scss';
 import {useUrFields} from './useUrFields';
 
+export const dataAgreementLabel:FC = () => {
+  return (
+    <React.Fragment>
+      Я даю согласие на передачу и обработку введенных данных в рамках <a href='#' className={s.links}>Политики конфиденциальности</a>.
+    </React.Fragment>
+  );
+};
+
 export declare namespace UrForm {
   export type Props = ProfileForms.FormProps;
 }
@@ -308,45 +316,13 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           ) }
 
           <FormRow>
-            <div className='col-12'>
-              <CheckBox
-                style={{marginBottom: 22}}
-                value={checkBoxes[0]}
-                onChange={(newValue) => setCheckBoxes([newValue, checkBoxes[1], checkBoxes[2]])}
-                label={(
-                  <Text size={TextSize.body0}>
-                    Предоставленные данные юридического лица верны.
-                  </Text>
-                )}
-              />
-              <CheckBox
-                style={{marginBottom: 22}}
-                value={checkBoxes[1]}
-                onChange={(newValue) => setCheckBoxes([checkBoxes[0], newValue, checkBoxes[2]])}
-                label={(
-                  <Text size={TextSize.body0}>
-                    Я даю согласие на передачу и обработку введенных данных в рамках &nbsp;
-                    <a
-                      className={s.links} onClick={
-                        (e) => e.stopPropagation()
-                      }
-                      href='#'
-                    >
-                      Политики конфиденциальности
-                    </a>.
-                  </Text>
-                )}
-              />
-              <CheckBox
-                value={checkBoxes[2]}
-                onChange={(newValue) => setCheckBoxes([checkBoxes[0], checkBoxes[1], newValue])}
-                label={(
-                  <Text size={TextSize.body0}>
-                    Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».
-                  </Text>
-                )}
-              />
-            </div>
+            <Field className='col-12' name='data_valid' />
+          </FormRow>
+          <FormRow>
+            <Field className='col-12' name='data_agreement' />
+          </FormRow>
+          <FormRow>
+            <Field className='col-12' name='data_rules' />
           </FormRow>
 
           <FormActions>

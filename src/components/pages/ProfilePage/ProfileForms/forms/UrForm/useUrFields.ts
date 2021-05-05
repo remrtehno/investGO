@@ -15,6 +15,8 @@ import {parseDate} from 'src/utils/parseDate';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
+import {dataAgreementLabel} from './UrForm';
+
 type Options = {
   isSameAddress: boolean,
   isDirector: boolean
@@ -210,6 +212,27 @@ export const useUrFields = ({isSameAddress, isDirector}: Options) => {
         type: FieldType.textArea,
         placeholder: 'Дополнительные сведения',
         isHidden: !user.roles.includes(Role.borrower),
+      },
+      data_valid: {
+        name: 'data_valid',
+        type: FieldType.checkbox,
+        label: 'Предоставленные данные юридического лица верны.',
+        defaultValue: true,
+        validations: [required()],
+      },
+      data_agreement: {
+        name: 'data_agreement',
+        type: FieldType.checkbox,
+        label: dataAgreementLabel(),
+        defaultValue: true,
+        validations: [required()],
+      },
+      data_rules: {
+        name: 'data_rules',
+        type: FieldType.checkbox,
+        label: 'Согласен с условиями, направленными на исполнения требований ФЗ No 218-ФЗ «О кредитных историях».',
+        defaultValue: true,
+        validations: [required()],
       },
     };
   }, [user, isDirector, isSameAddress]);
