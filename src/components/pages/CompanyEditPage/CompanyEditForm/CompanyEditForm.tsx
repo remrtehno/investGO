@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
+import {useEffect} from 'react';
 import {useRef} from 'react';
 import React, {useCallback, useMemo, useState} from 'react';
 import {useRecoilValue} from 'recoil';
@@ -13,6 +14,7 @@ import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextEditor} from 'src/components/ui/TextEditor';
@@ -34,8 +36,9 @@ export declare namespace CompanyEditForm {
 export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = useCompanyEditFields(user?.company || {});
-  const [, saveProjectApi] = useSaveProjectApi();
+  const [, saveProjectApi, saveProjectState] = useSaveProjectApi();
   const formApiRef = useRef<Form.Api | null>(null);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -83,6 +86,16 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     const valuesForSave = processValuesForSave();
     saveProjectApi(valuesForSave);
   }, [values]);
+
+  useEffect(() => {
+    if (saveProjectState.isSuccess) {
+      setIsSuccessModalOpen(true);
+    }
+  }, [saveProjectState.isSuccess]);
+
+  function handleModalClose() {
+    setIsSuccessModalOpen(false);
+  }
 
   return (
     <Form
@@ -181,6 +194,25 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
           </div>
         </FormActions>
       </section>
+      { isSuccessModalOpen ? (
+        <Modal className={s.successModal} allowClose={true} onClose={handleModalClose}>
+          <div className={s.modalInner}>
+            <Text size={TextSize.body2}>
+              Ваши данные отправлены на проверку.
+              Информация о статусе проверки будет отправлена на ваш электронный адрес.
+            </Text>
+            <div className={s.modalButtons}>
+              <Button
+                size={ButtonSize.s}
+                theme={ButtonTheme.black}
+                onClick={handleModalClose}
+              >
+                Понятно
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      ) : null }
     </Form>
   );
 };
