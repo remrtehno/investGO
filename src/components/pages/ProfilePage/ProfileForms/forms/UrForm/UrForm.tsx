@@ -19,6 +19,7 @@ import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {CheckBox} from 'src/components/ui/CheckBox';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {ModerationStatus} from 'src/contstants/ModerationStatus';
+import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
 import {useLatestRef} from 'src/hooks/useLatestRef';
 import {userAtom} from 'src/recoil/userAtom';
 import type {User} from 'src/types/User';
@@ -38,6 +39,7 @@ export const UrForm: FC<UrForm.Props> = (props) => {
   const fields = useUrFields({isSameAddress, isDirector});
   const [checkBoxes, setCheckBoxes] = useState(user?.company ? [true, true, true] : [false, false, false]);
   const formApiRef = useRef<Form.Api | null>(null);
+  const isRegistrationComplete = useIsRegistrationComplete();
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -356,9 +358,12 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               >Сохранить</Button>
             </div>
           </FormActions>
-          { user.company && user.company.status === ModerationStatus.approved ? (
-            <AcceptRules />
-          ) : null }
+          { user.company
+            && user.company.status === ModerationStatus.approved
+            && !isRegistrationComplete
+            ? (
+              <AcceptRules />
+            ) : null }
         </Form>
       ) }
     </div>
