@@ -14,11 +14,8 @@ export type TabProps = {
   tabs: Tab[],
   activeTab: string,
   onChange(tab: string): void,
-<<<<<<< HEAD
   viewType?: string,
-=======
   activeColor?: 'red' | 'black'
->>>>>>> testing
 };
 
 const Tabs: FC<TabProps> = (props) => {
