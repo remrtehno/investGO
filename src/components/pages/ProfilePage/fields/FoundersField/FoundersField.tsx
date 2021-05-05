@@ -69,7 +69,7 @@ export const FoundersField: FC<FoundersField.Props> = (props) => {
                 <Text
                   className={s.label}
                   size={TextSize.caption1}
-                >Генеральный директор</Text>
+                >Учредитель</Text>
                 <Text size={TextSize.subHeadline1}>
                   { founder.name }
                 </Text>

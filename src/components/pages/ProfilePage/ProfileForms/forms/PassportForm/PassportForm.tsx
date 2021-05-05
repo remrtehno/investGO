@@ -42,7 +42,6 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = usePassportFields();
   const formApiRef = useRef<Form.Api | null>(null);
-  const [checkBoxes, setCheckBoxes] = useState([false, false, false]);
 
   const getValuesFromPassport = () => ({
     ...getDefaultFieldValues(fields),

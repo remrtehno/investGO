@@ -7,6 +7,7 @@ import {CompanyEditPage} from 'src/components/pages/CompanyEditPage';
 import {EmailConfirmationPage} from 'src/components/pages/EmailConfirmationPage';
 import {InvestorPage} from 'src/components/pages/InvestorPage';
 import {LoanRequestPage} from 'src/components/pages/LoanRequestPage';
+import {CreateLoanRequestPage} from 'src/components/pages/CreateLoanRequestPage';
 import {PasswordResetPage} from 'src/components/pages/PasswordResetPage';
 import {ProfilePage} from 'src/components/pages/ProfilePage';
 import {ProjectsPage} from 'src/components/pages/ProjectsPage';
@@ -30,7 +31,8 @@ export const RoutePaths = {
   passwordReset: '/password-reset',
   investorDashboard: '/investor/dashboard',
   borrowerDashboard: '/borrower/dashboard',
-  loanRequest: (companyId = ':companyId') => `/borrower/loan-request/${companyId}`,
+  createLoanRequest: (companyId = ':companyId') => `/borrower/create-loan-request/${companyId}`,
+  loanRequest: (loanId = ':loanId') => `/borrower/loan-request/${loanId}`,
   companyEdit: (companyId = ':companyId') => `/company/edit/${companyId}`,
 };
 
@@ -83,11 +85,15 @@ export const routes: RouteInfo[] = [
     exact: true,
   },
   {
-    path: RoutePaths.loanRequest(),
-    Component: LoanRequestPage,
-  },
-  {
     path: RoutePaths.companyEdit(),
     Component: CompanyEditPage,
+  },
+  {
+    path: RoutePaths.createLoanRequest(),
+    Component: CreateLoanRequestPage,
+  },
+  {
+    path: RoutePaths.loanRequest(),
+    Component: LoanRequestPage,
   },
 ];

@@ -10,9 +10,12 @@
   <meta property="og:image" content="path/to/image.jpg">
   <meta name="theme-color" content="#FF3B30">
 
+  <meta name="robots" content="noindex, nofollow"/>
+  <meta name="robots" content="none"/>
+
   <title>Заемщику</title>
 
-  <link rel="icon" href="img/favicon/favicon.ico">
+  <link rel="icon" href="img/favicon/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link
@@ -116,7 +119,7 @@
             <b class="transform__subtitle animate__fadeInUp s3">
               Начать можно уже сейчас!
             </b>
-            <a href="/signin" class="btn btn--big btn--red btn--200 link-reset animate__fadeInUp s6">
+            <a class="btn btn--big btn--red btn--200 btn--disabled link-reset animate__fadeInUp s6">
               Привлечь инвестиции
             </a>
           </div>
@@ -388,7 +391,7 @@
                     Платформа предложит ваше предложение частным инвесторам и компаниям, зарегистрированным на платформе.
                   </p>
                 </div>
-                <a href="/signin" type="button" class="btn btn__steps link-reset">
+                <a type="button" class="btn btn__steps btn--disabled link-reset">
                   Начать
                 </a>
               </div>
@@ -460,9 +463,12 @@
                   <span>Сумма переплаты %</span>
                   <strong>117 000.00 ₽</strong>
                 </div>
-                <button type="button" class="btn-reset btn btn--red" onclick="document.location = '/signin'">
+                <button type="button" class="btn-reset btn btn--red btn--disabled">
                   Привлечь инвестиции
                 </button>
+                <!-- <button type="button" class="btn-reset btn btn--red" onclick="document.location = '/signin'">
+                  Привлечь инвестиции
+                </button> -->
               </div>
 
             </div>
@@ -517,127 +523,9 @@
       </div>
     </section>
   </main>
-  <footer class="page-footer">
-    <div class="page-footer__top">
-      <div class="container">
-        <ul class="social list-reset">
-          <li>
-            <a href="#"><img src="/landing/img/s1.svg" alt="">Vkontakte</a>
-          </li>
-          <li>
-            <a href="#"><img src="/landing/img/s2.svg" alt="">Telegram</a>
-          </li>
-          <li>
-            <a href="#"><img src="/landing/img/s3.svg" alt="">Facebook</a>
-          </li>
-          <li>
-            <a href="#"><img src="/landing/img/s4.svg" alt="">Linkedin</a>
-          </li>
-          <li>
-            <a href="#"><img src="/landing/img/s5.svg" alt="">Instagram</a>
-          </li>
-          <li>
-            <a href="#"><img src="/landing/img/s6.svg" alt="">Twitter</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="page-footer__center">
-      <div class="container">
-        <div class="footer__row">
-          <div class="footer__col">
-            <h3 class="footer-title">
-              InvestGO
-            </h3>
-            <ul class="footer-list footer-list__wrap list-reset inline-list">
-              <li>
-                <a href="#">О&nbspплатформе</a>
-              </li>
-              <li>
-                <a href="/investor">Инвестору</a>
-              </li>
-              <li>
-                <a href="/borrower">Заемщику</a>
-              </li>
-              <li>
-                <a href="/documents">Документы</a>
-              </li>
-              <li>
-                <a href="/documents/disclosure">Раскрытие информации</a>
-              </li>
-              <li>
-                <a href="https://blog.investgo.ru ">Блог</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer__col" style="display:none;">
-            <h3 class="footer-title docBtn">
-              Документы
-            </h3>
-            <ul class="footer-list list-reset">
-              <li>
-                <a href="#">Документ 1</a>
-              </li>
-              <li>
-                <a href="#">Документ 2</a>
-              </li>
-              <li>
-                <a href="#">Документ 3</a>
-              </li>
-              <li>
-                <a href="#">Документ 4</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer__col" style="display:none;">
-            <h3 class="footer-title">
-              Информация
-            </h3>
-            <ul class="footer-list footer-list__wrap list-reset">
-              <li>
-                <a href="#">Саппорт</a>
-              </li>
-              <li>
-                <a href="#">Блог</a>
-              </li>
-              <li>
-                <a href="#">FAQ</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer__col">
-            <a href="tel:+7 (499) 444-33-61" class="footer-tel">+7 (499) 444-33-61</a>
-          </div>
-        </div>
 
-      </div>
-    </div>
-    <div class="page-footer__bottom">
-      <div class="container">
-        <div class="bottom-row">
-          <small>© 2021 InvestGo</small>
-          <div class="bottom-links">
-            <a href="/privacy">Пользовательское соглашение</a>
-            <a href="/landing/documents/Политика_конфиденциальности_Инвест_Гоу.pdf" target="_blank">Политика конфиденциальности</a>
-          </div>
-        </div>
-        <p class="footer-text">
-          Осуществляет деятельность в соответствии с Федеральным законом от 02.08.2019 N 259-ФЗ "О привлечении инвестиций
-          с использованием инвестиционных платформ и о внесении изменений в отдельные законодательные акты Российской
-          Федерации"
-        </p>
-        <p class="footer-text">
-          ООО “Инвест Гоу” зарегистрировано в реестре Банка России  в качестве Оператора инвестиционной платформы 17.02.2021 года.
-        </p>
-        <p class="footer-text">
-          ООО “Инвест Гоу”, ИНН 7720394256, ОГРН 1177746958619
-        </p>
-      </div>
-    </div>
-    <div class="copyright">
-      <small>© 2021 InvestGo</small>
-    </div>
-  </footer>
+  <%- include(process.cwd() + '/landing/include/footer.html'); -%>
+
   <div class="overlay"></div>
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal__content">

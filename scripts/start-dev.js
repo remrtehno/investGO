@@ -1,6 +1,7 @@
 /**
  * Starts local dev server with HMR
  */
+const [compileEjs] = require("./ejs-build");
 
 const express = require('express');
 const path = require('path');
@@ -8,7 +9,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const webpack = require('webpack');
 const [clientConfig, serverConfig] = require('../webpack/webpackDevConfig');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const {createProxyMiddleware} = require('http-proxy-middleware');
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -135,6 +136,11 @@ app.get('/documents/disclosure', async (req, res, next) => {
   next();
 });
 
+app.get('/robots.txt', async (req, res, next) => {
+  res.sendFile(path.resolve(process.cwd(), 'build/landing/robots.txt'));
+  next();
+});
+
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
   webpackDevMiddleware(multiCompiler, {
@@ -159,4 +165,6 @@ multiCompiler.hooks.done.tap('startSsr', () => {
     });
     isStarted = true;
   }
+  compileEjs(path.resolve(process.cwd(), 'build/landing/'));
 });
+

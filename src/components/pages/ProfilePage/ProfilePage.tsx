@@ -29,6 +29,7 @@ export declare namespace ProfilePage {
   export type FormInfo = {
     id: ProfileFormType,
     title: string,
+    longTitle?: string,
   }
 }
 
@@ -92,11 +93,12 @@ export const ProfilePage = withAuth(() => {
     claims.ipForm.read() ? {
       id: ProfileFormType.ip,
       title: 'Данные ИП',
-      longTitle: 'Данные ИП',
+      longTitle: 'Данные индивидуального предпринимателя',
     } : null,
     claims.urForm.read() ? {
       id: ProfileFormType.ur,
       title: 'Юридическое лицо',
+      longTitle: 'Данные юридического лица',
     } : null,
     claims.bankDetailsForm.read() ? {
       id: ProfileFormType.signDocuments,
