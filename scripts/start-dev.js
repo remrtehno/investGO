@@ -137,8 +137,10 @@ app.get('/documents/disclosure', async (req, res, next) => {
 });
 
 app.get('/robots.txt', async (req, res, next) => {
-  res.sendFile(path.resolve(process.cwd(), 'build/landing/robots.txt'));
-  next();
+  res.type('text/plain')
+  res.send("User-agent: *\nDisallow: /");
+  //res.sendFile(path.resolve(process.cwd(), 'build/landing/documents.html'));
+  // next();
 });
 
 // note that we pass multiCompiler to webpackDevMiddleware
