@@ -76,7 +76,7 @@ export const useApiRequest = () => {
 
       return responseJSON.result;
     } catch (err) {
-      if (err.stack && showNotifyOnError) {
+      if (err && err.stack && showNotifyOnError) {
         /*
          * showErrorNotify(
          *     intlCommon('error'),

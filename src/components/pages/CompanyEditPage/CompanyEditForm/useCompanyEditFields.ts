@@ -31,7 +31,7 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       name: 'logo',
       type: FieldType.custom,
       Field: BgImageField,
-      // validations: [required()],
+      validations: [required()],
       size: 'small',
       background: 'white',
     } as any,

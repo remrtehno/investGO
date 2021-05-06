@@ -79,6 +79,17 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
         }
       });
     }
+    if (values.gallery_images) {
+      valuesForSave.gallery_images = valuesForSave.gallery_images.map((img: any) => {
+        return {id: img.id};
+      });
+    }
+    if (values.logo) {
+      valuesForSave.logo = {id: valuesForSave.logo.id};
+    }
+    if (values.preview) {
+      valuesForSave.preview = {id: valuesForSave.preview.id};
+    }
     return valuesForSave;
   }
 
@@ -97,6 +108,10 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     setIsSuccessModalOpen(false);
   }
 
+  function handleSubmit() {
+    return false;
+  }
+
   return (
     <Form
       initialValues={initialValues}
@@ -104,8 +119,9 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       values={values}
       onChange={onChange}
       fields={fields}
-      onSubmit={onSave}
+      onSubmit={handleSubmit}
       formApiRef={formApiRef}
+      id='CompanyEditForm'
     >
       <CompanyEditNavigation />
       <section id='preview-section' className={s.section}>
@@ -190,6 +206,8 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
               theme={ButtonTheme.black}
               size={ButtonSize.m}
               disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+              type='button'
+              onClick={onSave}
             >Готово</Button>
           </div>
         </FormActions>

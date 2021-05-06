@@ -5,6 +5,10 @@ export const required = (msg = 'Обязательное поле') => (value: a
 
   if (Array.isArray(value)) {
     return value.length > 0 ? null : msg;
+  } if (typeof value === 'object') {
+    if (value && Object.keys(value).length === 0) {
+      return msg;
+    }
   }
 
   if (!value && typeof value !== 'number' && typeof value !== 'boolean') {

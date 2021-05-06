@@ -18,11 +18,11 @@ import {required} from 'src/validations/required';
 import s from './AddMemberForm.scss';
 
 const fields: Form.FieldModels = {
-  logo_id: {
-    name: 'logo_id',
+  image_id: {
+    name: 'image_id',
     type: FieldType.custom,
     Field: BgImageField,
-    validations: [required()],
+    // validations: [required()],
     size: 'small',
     background: 'white',
   } as any,
@@ -52,7 +52,7 @@ const fields: Form.FieldModels = {
 };
 
 const initialValues: AddMemberForm.Values = {
-  logo_id: {} as FilePrimitive,
+  image_id: {} as FilePrimitive,
   full_name: '',
   position: '',
   description: '',
@@ -65,7 +65,7 @@ export declare namespace AddMemberForm {
   };
 
   export type Values = {
-    logo_id: FilePrimitive,
+    image_id: FilePrimitive,
     full_name: string,
     position: string,
     description: string,
@@ -99,7 +99,7 @@ export const AddMemberForm: FC<AddMemberForm.Props> = (props) => {
     >
       <FormTitle>Добавление представителя команды</FormTitle>
       <FormRow>
-        <Field className={s.userpicField} name='logo_id' />
+        <Field className={s.userpicField} name='image_id' />
       </FormRow>
       <FormRow>
         <Field className='col-12' name='full_name' />

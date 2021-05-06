@@ -41,8 +41,8 @@ export const TeamMember: FC<TeamMember.Props> = (props) => {
         props.className
       )}
     >
-      { member.logo_id ? (
-        <div className={s.userpic} style={{backgroundImage: `url(${props.member.logo_id.url})`}} />
+      { member.image_id && member.image_id.url ? (
+        <div className={s.userpic} style={{backgroundImage: `url(${props.member.image_id.url})`}} />
       ) : null }
       <div className={s.right}>
         <Text size={TextSize.body2} weight={TextWeight.semibold} className={s.name}>
