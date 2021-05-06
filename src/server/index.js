@@ -131,6 +131,11 @@ app.get('/documents/disclosure', async (req, res, next) => {
   next();
 });
 
+app.get('/robots.txt', async (req, res, next) => {
+  res.type('text/plain')
+  res.send("User-agent: *\nDisallow: /");
+});
+
 app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 
 app.listen(PORT, () => {
