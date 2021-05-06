@@ -22,7 +22,6 @@ const fields: Form.FieldModels = {
     name: 'image_id',
     type: FieldType.custom,
     Field: BgImageField,
-    // validations: [required()],
     size: 'small',
     background: 'white',
   } as any,
