@@ -20,8 +20,8 @@ export declare namespace RoadmapItem {
 
 export const RoadmapItem: FC<RoadmapItem.Props> = (props) => {
   const {item} = props;
-  const dateStart = new Date(item.dateStart).getTime();
-  const dateEnd = new Date(item.dateEnd).getTime();
+  const dateStart = new Date(item.date_start).getTime();
+  const dateEnd = new Date(item.date_end).getTime();
   const dateNow = Date.now();
   const isActive = dateNow >= dateStart && dateNow <= dateEnd;
   const isFuture = dateNow < dateStart;

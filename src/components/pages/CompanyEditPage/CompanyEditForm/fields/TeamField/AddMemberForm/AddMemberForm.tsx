@@ -18,45 +18,44 @@ import {required} from 'src/validations/required';
 import s from './AddMemberForm.scss';
 
 const fields: Form.FieldModels = {
-  userpic: {
-    name: 'userpic',
+  image_id: {
+    name: 'image_id',
     type: FieldType.custom,
     Field: BgImageField,
-    validations: [required()],
     size: 'small',
     background: 'white',
   } as any,
-  name: {
-    name: 'name',
+  full_name: {
+    name: 'full_name',
     type: FieldType.text,
     validations: [required(), minLength(3)],
     label: 'ФИО',
   },
-  post: {
-    name: 'post',
+  position: {
+    name: 'position',
     type: FieldType.text,
     validations: [required(), minLength(3)],
     label: 'Должность',
   },
-  expirience: {
-    name: 'expirience',
+  description: {
+    name: 'description',
     type: FieldType.textArea,
     label: 'Опыт и достижения представителя ',
   },
-  socials: {
-    name: 'socials',
+  link: {
+    name: 'link',
     type: FieldType.custom,
     Field: SocialsField,
-    label: 'Социальные сети',
+    label: 'Ссылки',
   } as any,
 };
 
 const initialValues: AddMemberForm.Values = {
-  userpic: {} as FilePrimitive,
-  name: '',
-  post: '',
-  expirience: '',
-  socials: {} as SocialNetwork.Values,
+  image_id: {} as FilePrimitive,
+  full_name: '',
+  position: '',
+  description: '',
+  link: {} as SocialNetwork.Values,
 };
 
 export declare namespace AddMemberForm {
@@ -65,11 +64,11 @@ export declare namespace AddMemberForm {
   };
 
   export type Values = {
-    userpic: FilePrimitive,
-    name: string,
-    post: string,
-    expirience: string,
-    socials: SocialNetwork.Values,
+    image_id: FilePrimitive,
+    full_name: string,
+    position: string,
+    description: string,
+    link: SocialNetwork.Values,
   };
 }
 
@@ -99,19 +98,19 @@ export const AddMemberForm: FC<AddMemberForm.Props> = (props) => {
     >
       <FormTitle>Добавление представителя команды</FormTitle>
       <FormRow>
-        <Field className={s.userpicField} name='userpic' />
+        <Field className={s.userpicField} name='image_id' />
       </FormRow>
       <FormRow>
-        <Field className='col-12' name='name' />
+        <Field className='col-12' name='full_name' />
       </FormRow>
       <FormRow>
-        <Field className='col-12' name='post' />
+        <Field className='col-12' name='position' />
       </FormRow>
       <FormRow>
-        <Field className='col-12' name='expirience' />
+        <Field className='col-12' name='description' />
       </FormRow>
       <FormRow>
-        <Field className='col-12' name='socials' />
+        <Field className='col-12' name='link' />
       </FormRow>
       <FormActions className='mb-0'>
         <div className='col-sm-12 col-md-6 col-xl-4'>

@@ -41,6 +41,7 @@ export declare namespace User {
     document_registry_file: FilePrimitive,
     bank_details: User.BankDetails | null,
     emails: string[],
+    phones: string[],
     status: ModerationStatus,
     name: string,
   };

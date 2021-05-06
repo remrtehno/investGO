@@ -18,6 +18,7 @@ export const api = {
   },
   common: {
     uploadFile: () => '/file/upload',
+    uploadImage: () => '/image/upload',
     confirmEmail: () => '/user/email-confirm',
     okved: () => '/okved',
   },
@@ -25,6 +26,7 @@ export const api = {
     get: () => '/company',
     save: () => '/company',
     saveBankDetails: () => '/company/bank-details',
+    saveProject: () => '/company/project',
   },
   sms: {
     sign: () => '/sms-sign',

@@ -5,6 +5,7 @@ import {FieldType} from 'src/components/common/Form/Form';
 import {EmailArrayField} from 'src/components/pages/ProfilePage/fields/EmailArrayField';
 import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
 import type {User} from 'src/types/User';
+import { email } from 'src/validations/email';
 import {minLength} from 'src/validations/minLength';
 import {required} from 'src/validations/required';
 
@@ -16,12 +17,12 @@ import {TeamField} from './fields/TeamField';
 
 export const useCompanyEditFields = (company: User.Company | {}) => {
   return useMemo((): Form.FieldModels => ({
-    id: {
-      name: 'id',
-      type: FieldType.hidden,
-    },
-    bg_image: {
-      name: 'bg_image',
+    // id: {
+    //   name: 'id',
+    //   type: FieldType.hidden,
+    // },
+    preview: {
+      name: 'preview',
       type: FieldType.custom,
       Field: BgImageField,
       label: 'Загрузить фоновое изображение',
@@ -34,21 +35,27 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       size: 'small',
       background: 'white',
     } as any,
-    name: {
-      name: 'name',
+    title: {
+      name: 'title',
       type: FieldType.text,
       label: 'Наименование юридического лица (проекта)',
       validations: [required()],
       disabled: true,
     },
-    field_of_activity: {
-      name: 'field_of_activity',
+    small_description: {
+      name: 'small_description',
       type: FieldType.text,
       label: 'Cфера деятельности',
       validations: [required()],
     },
-    video: {
-      name: 'video',
+    address: {
+      name: 'address',
+      type: FieldType.text,
+      label: 'Адрес',
+      validations: [required()],
+    },
+    video_link: {
+      name: 'video_link',
       type: FieldType.text,
       label: 'Ссылка на видео (если есть)',
     },
@@ -58,13 +65,13 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       label: 'Текст описания',
       validations: [required()],
     },
-    gallery: {
-      name: 'gallery',
+    gallery_images: {
+      name: 'gallery_images',
       type: FieldType.custom,
       Field: GalleryField,
     } as any,
-    founders: {
-      name: 'founders',
+    team: {
+      name: 'team',
       type: FieldType.custom,
       Field: TeamField,
     } as any,
@@ -73,17 +80,15 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       type: FieldType.custom,
       Field: RoadmapField,
     } as any,
-    emails: {
-      name: 'emails',
-      type: FieldType.custom,
-      Field: EmailArrayField,
+    email: {
+      name: 'email',
+      type: FieldType.text,
       label: 'Ваш email',
-      validations: [required()],
+      validations: [required(), email()],
     } as any,
-    phones: {
-      name: 'phones',
-      type: FieldType.custom,
-      Field: PhoneArrayField,
+    phone: {
+      name: 'phone',
+      type: FieldType.phone,
       label: 'Номер телефона',
       validations: [required()],
     } as any,
@@ -92,8 +97,8 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       type: FieldType.text,
       label: 'Адрес сайта',
     },
-    socials: {
-      name: 'socials',
+    link: {
+      name: 'link',
       type: FieldType.custom,
       Field: SocialsField,
       label: 'Социальные сети',

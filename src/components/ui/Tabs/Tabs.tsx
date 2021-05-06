@@ -12,9 +12,9 @@ export type Tab = {
 
 export type TabProps = {
   tabs: Tab[],
-  viewType?: string,
   activeTab: string,
   onChange(tab: string): void,
+  viewType?: string,
   activeColor?: 'red' | 'black'
 };
 

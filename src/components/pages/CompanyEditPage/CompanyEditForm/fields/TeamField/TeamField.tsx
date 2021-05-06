@@ -65,6 +65,7 @@ export const TeamField: FC<TeamField.Props> = (props) => {
         theme={ButtonTheme.light}
         onClick={openForm}
         className={s.addButton}
+        type='button'
       >
         <Text className={s.addButtonLabel} size={TextSize.body1}>+&nbsp;&nbsp;Добавить человека</Text>
       </Button>

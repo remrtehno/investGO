@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type {CSSProperties, FC} from 'react';
+import type {ButtonHTMLAttributes, CSSProperties, FC} from 'react';
 import React, {useCallback} from 'react';
 
 import s from './Button.scss';
@@ -29,7 +29,9 @@ export declare namespace Button {
     onClick?(): void,
     className?: string,
     disabled?: boolean,
-    style?: CSSProperties
+    style?: CSSProperties,
+    type?: 'button' | 'submit' | 'reset',
+    form?: string,
   };
 }
 
@@ -58,7 +60,14 @@ export const Button: FC<Button.Props> = (props) => {
   }, [props.onClick, props.disabled]);
 
   return (
-    <button disabled={Boolean(props.disabled)} style={props.style} className={className} onClick={onClick}>
+    <button
+      disabled={Boolean(props.disabled)}
+      style={props.style}
+      className={className}
+      type={props.type}
+      form={props.form}
+      onClick={onClick}
+    >
       { props.children }
     </button>
   );

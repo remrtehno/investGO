@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useCallback, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
@@ -12,6 +12,7 @@ import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
 import {LogoIcon} from 'src/icons/LogoIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import {breackpointDown, breackpointUp} from 'src/utils/breackpointUtils';
+import { RoutePaths } from '../../App/routes';
 
 import {HeaderMenu} from './HeaderMenu';
 import {MobileMenu} from './MobileMenu';
@@ -62,7 +63,9 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
         ) : null }
         { user && breackpointUp(adaptiveBreackpoints.md) ? (
           <div className={s.userContainer}>
-            <Text size={TextSize.tabMenu} weight={TextWeight.bold}>{ user.email }</Text>
+            <Link to={RoutePaths.profile} className={s.link}>
+              <Text size={TextSize.tabMenu} weight={TextWeight.bold}>{ user.email }</Text>
+            </Link>
             <LogoutIcon onClick={logout} />
           </div>
         ) : null }

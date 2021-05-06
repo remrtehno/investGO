@@ -27,14 +27,14 @@ const fields: Form.FieldModels = {
     validations: [required(), minLength(3)],
     label: 'Описание',
   },
-  dateStart: {
-    name: 'dateStart',
+  date_start: {
+    name: 'date_start',
     type: FieldType.date,
     validations: [required()],
     label: 'Дата начала этапа',
   },
-  dateEnd: {
-    name: 'dateEnd',
+  date_end: {
+    name: 'date_end',
     type: FieldType.date,
     validations: [required()],
     label: 'Дата завершения этапа',
@@ -44,8 +44,8 @@ const fields: Form.FieldModels = {
 const initialValues: AddPointForm.Values = {
   name: '',
   description: '',
-  dateStart: '',
-  dateEnd: '',
+  date_start: '',
+  date_end: '',
 };
 
 export declare namespace AddPointForm {
@@ -56,8 +56,8 @@ export declare namespace AddPointForm {
   export type Values = {
     name: string,
     description: string,
-    dateStart: string,
-    dateEnd: string
+    date_start: string,
+    date_end: string
   };
 }
 
@@ -84,14 +84,15 @@ export const AddPointForm: FC<AddPointForm.Props> = (props) => {
       onChange={onChange}
       formApiRef={formApiRef}
       onSubmit={handleSubmit}
+      id='AddPointForm'
     >
       <FormTitle>Новый пункт</FormTitle>
       <FormRow>
         <Field className={s.field} name='name' />
       </FormRow>
       <FormRow>
-        <Field className='col-6' name='dateStart' />
-        <Field className='col-6' name='dateEnd' />
+        <Field className='col-6' name='date_start' />
+        <Field className='col-6' name='date_end' />
       </FormRow>
       <FormRow>
         <Field className={s.field} name='description' />
@@ -102,6 +103,8 @@ export const AddPointForm: FC<AddPointForm.Props> = (props) => {
             theme={ButtonTheme.black}
             size={ButtonSize.m}
             disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+            type='submit'
+            form='AddPointForm'
           >Добавить</Button>
         </div>
       </FormActions>

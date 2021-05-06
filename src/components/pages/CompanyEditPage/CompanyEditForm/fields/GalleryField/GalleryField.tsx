@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 
 import {useUploadFileApi} from 'src/api/common/useUploadFileApi';
+import { useUploadImageApi } from 'src/api/common/UseUploadImageApi';
 import type {FieldProps} from 'src/components/common/Form/fields/fieldsModel';
 import {useFormModel} from 'src/components/common/Form/Form';
 import type {FormField} from 'src/components/common/Form/types';
@@ -24,7 +25,7 @@ export declare namespace GalleryField {
 const maxFiles = 8;
 
 export const GalleryField: FC<GalleryField.Props> = (props) => {
-  const [uploadedFile, uploadFileApi, uploadApi] = useUploadFileApi();
+  const [uploadedFile, uploadFileApi, uploadApi] = useUploadImageApi();
   const form = useFormModel();
   const {field} = props;
   const value = field.value || [
@@ -62,6 +63,7 @@ export const GalleryField: FC<GalleryField.Props> = (props) => {
         { value.map((item: Item, index: number) => {
           function removeItem(event: any) {
             event.preventDefault();
+            event.stopPropagation();
             const newValue = [...value];
             newValue.splice(index, 1);
             form.onChange(newValue, field.name);

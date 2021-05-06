@@ -58,6 +58,7 @@ export declare namespace Form {
     onSubmit?: OnSubmit,
     disabled?: boolean,
     formApiRef?: MutableRefObject<Api | null>,
+    id?: string,
   };
 }
 
@@ -232,7 +233,7 @@ export function Form(props: Form.Props) {
   return (
     <FormModelProvider value={model}>
       <FormFieldsProvider value={formFields}>
-        <form onSubmit={handleSubmit}>
+        <form id={props.id} onSubmit={handleSubmit}>
           { props.children }
         </form>
       </FormFieldsProvider>

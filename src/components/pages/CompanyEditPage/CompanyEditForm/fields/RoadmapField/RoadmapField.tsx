@@ -63,6 +63,7 @@ export const RoadmapField: FC<RoadmapField.Props> = (props) => {
         theme={ButtonTheme.light}
         onClick={openForm}
         className={s.addButton}
+        type='button'
       >
         <Text className={s.addButtonLabel} size={TextSize.body1}>+&nbsp;&nbsp;Добавить пункт</Text>
       </Button>

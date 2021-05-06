@@ -41,24 +41,24 @@ export const TeamMember: FC<TeamMember.Props> = (props) => {
         props.className
       )}
     >
-      { member.userpic ? (
-        <div className={s.userpic} style={{backgroundImage: `url(${props.member.userpic.url})`}} />
+      { member.image_id && member.image_id.url ? (
+        <div className={s.userpic} style={{backgroundImage: `url(${props.member.image_id.url})`}} />
       ) : null }
       <div className={s.right}>
         <Text size={TextSize.body2} weight={TextWeight.semibold} className={s.name}>
-          { member.name }
+          { member.full_name }
         </Text>
         <Text size={TextSize.body0} color={Color.label} className={s.post}>
-          { member.post }
+          { member.position }
         </Text>
-        { member.expirience ? (
+        { member.description ? (
           <Text size={TextSize.body0} className={s.expirience}>
-            { member.expirience }
+            { member.description }
           </Text>
         ) : null }
-        { !_.isEmpty(member.socials) ? (
+        { !_.isEmpty(member.link) ? (
           <div className={s.memberSocials}>
-            { Object.entries(member.socials).map((entry, index) => {
+            { Object.entries(member.link).map((entry, index) => {
               const network = entry[0];
               const link = entry[1];
 
