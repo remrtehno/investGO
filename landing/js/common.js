@@ -115,9 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 $(document).ready(function () {
+  $('.accordionLink').on('click', function () {
+    $(this).closest('li').find('.accordion-content').slideToggle();
+    $(this).closest('li').find('.accordionBtn').toggleClass('open');
+  });
+
   $('.accordionBtn').on('click', function () {
     $(this).toggleClass('open');
     $(this).next().slideToggle();
+
+    if(!$(this).next().length) {
+      $(this).closest('li').find('.accordion-content').slideToggle();
+    }
   });
 
   function valLength(count, el) {
@@ -242,8 +251,12 @@ $(document).ready(function () {
 
 
 const player = document.querySelector("lottie-player");
-player.load(player.getAttribute('src'), {
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid meet'
-  }
-});
+
+if (player) {
+  player.load(player.getAttribute('src'), {
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid meet'
+    }
+  });
+}
+
