@@ -13,8 +13,6 @@ import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldV
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {userAtom} from 'src/recoil/userAtom';
 
-import type {AddMemberForm} from './TeamField/AddMemberForm';
-
 import {CompanyEditContacts} from './CompanyEditContacts';
 import {CompanyEditDescription} from './CompanyEditDescription';
 import s from './CompanyEditForm.scss';
@@ -71,7 +69,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       valuesForSave.link = processLinksforSave(values.link);
     }
     if (values.team) {
-      valuesForSave.team.forEach((team: AddMemberForm.Values) => {
+      valuesForSave.team.forEach((team: any) => {
         if (team.link) {
           team.link = processLinksforSave(team.link);
         }
@@ -99,7 +97,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
 
   function savePartial() {
     const processedValues = processValuesForSave();
-    const valuesForSave = {};
+    const valuesForSave = {} as any;
     Object.entries(processedValues).forEach((entry) => {
       let add = true;
       const value = entry[1];
@@ -165,6 +163,15 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
             type='button'
             onClick={onSave}
           >Готово</Button>
+        </div>
+        <div className='col-sm-12 col-md-5 col-xl-4'>
+          <Button
+            theme={ButtonTheme.black}
+            size={ButtonSize.m}
+            disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+            type='button'
+            onClick={onSave}
+          >Сохранить и отправить</Button>
         </div>
       </FormActions>
       { isSuccessModalOpen ? (
