@@ -2,8 +2,6 @@ import {useMemo} from 'react';
 
 import type {Form} from 'src/components/common/Form';
 import {FieldType} from 'src/components/common/Form/Form';
-import {EmailArrayField} from 'src/components/pages/ProfilePage/fields/EmailArrayField';
-import {PhoneArrayField} from 'src/components/pages/ProfilePage/fields/PhoneArrayField';
 import type {User} from 'src/types/User';
 import { email } from 'src/validations/email';
 import {minLength} from 'src/validations/minLength';
@@ -15,12 +13,8 @@ import {RoadmapField} from './fields/RoadmapField';
 import {SocialsField} from './fields/SocialsField/SocialsField';
 import {TeamField} from './fields/TeamField';
 
-export const useCompanyEditFields = (company: User.Company | {}) => {
+export const useCompanyEditFields = () => {
   return useMemo((): Form.FieldModels => ({
-    // id: {
-    //   name: 'id',
-    //   type: FieldType.hidden,
-    // },
     preview: {
       name: 'preview',
       type: FieldType.custom,
@@ -31,7 +25,6 @@ export const useCompanyEditFields = (company: User.Company | {}) => {
       name: 'logo',
       type: FieldType.custom,
       Field: BgImageField,
-      validations: [required()],
       size: 'small',
       background: 'white',
     } as any,
