@@ -11,7 +11,7 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {investorLoansAtom} from 'src/recoil/investorLoansAtom';
 
 import s from './InvestorPage.scss';
-import { InvestorStats } from './InvestorStats';
+import {InvestorStats} from './InvestorStats';
 import {Loans} from './Loans';
 
 export declare namespace InvestorPage {
@@ -29,11 +29,11 @@ export const InvestorPage = withAuth(() => {
           text: 'Портфель',
         },
         {
-          to: RoutePaths.borrowerDashboard,
+          to: RoutePaths.home,
           text: 'Предложения',
         },
         {
-          to: RoutePaths.borrowerDashboard,
+          to: RoutePaths.home,
           text: 'Транзакции',
         },
       ]
