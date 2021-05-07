@@ -1,32 +1,27 @@
-import cx from 'classnames';
+
 import _ from 'lodash';
 import type {FC} from 'react';
-import {useEffect} from 'react';
-import {useRef} from 'react';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {useSaveCompanyApi} from 'src/api/companyApi/useSaveCompanyApi';
 import {useSaveProjectApi} from 'src/api/companyApi/useSaveProjectApi';
-// import {useSaveCompanyEditApi} from 'src/api/companyApi/useSaveCompanyEditApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
-import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import {Text, TextSize} from 'src/components/ui/Text';
-import {TextEditor} from 'src/components/ui/TextEditor';
-import {Color} from 'src/contstants/Color';
 import {userAtom} from 'src/recoil/userAtom';
-import type {User} from 'src/types/User';
 
-import type {AddMemberForm} from './TeamField/AddMemberForm';
-import {VideoPreview} from './VideoPreview/VideoPreview';
-
+import {CompanyEditContacts} from './CompanyEditContacts';
+import {CompanyEditDescription} from './CompanyEditDescription';
 import s from './CompanyEditForm.scss';
+import {CompanyEditGallery} from './CompanyEditGallery';
 import {CompanyEditNavigation} from './CompanyEditNavigation';
+import {CompanyEditPreview} from './CompanyEditPreview';
+import {CompanyEditRoadmap} from './CompanyEditRoadmap';
+import {CompanyEditSuccessModal} from './CompanyEditSuccessModal';
+import {CompanyEditTeam} from './CompanyEditTeam';
 import {useCompanyEditFields} from './useCompanyEditFields';
 
 export declare namespace CompanyEditForm {
@@ -35,10 +30,11 @@ export declare namespace CompanyEditForm {
 
 export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
-  const fields = useCompanyEditFields(user?.company || {});
+  const fields = useCompanyEditFields();
   const [, saveProjectApi, saveProjectState] = useSaveProjectApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isFullySaved, setIsFullySaved] = useState(false);
 
   const getValuesFromUser = () => ({
     ...getDefaultFieldValues(fields),
@@ -73,7 +69,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       valuesForSave.link = processLinksforSave(values.link);
     }
     if (values.team) {
-      valuesForSave.team.forEach((team: AddMemberForm.Values) => {
+      valuesForSave.team.forEach((team: any) => {
         if (team.link) {
           team.link = processLinksforSave(team.link);
         }
@@ -96,7 +92,31 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const onSave = useCallback(() => {
     const valuesForSave = processValuesForSave();
     saveProjectApi(valuesForSave);
+    setIsFullySaved(true);
   }, [values]);
+
+  function savePartial() {
+    const processedValues = processValuesForSave();
+    const valuesForSave = {} as any;
+    Object.entries(processedValues).forEach((entry) => {
+      let add = true;
+      const value = entry[1];
+      if (!value) {
+        add = false;
+      }
+      if (Array.isArray(value) && !value.length) {
+        add = false;
+      }
+      if ((entry[0] === 'logo' || entry[0] === 'preview') && value && !value.id) {
+        add = false;
+      }
+      if (add) {
+        valuesForSave[entry[0]] = value;
+      }
+    });
+    setIsFullySaved(false);
+    saveProjectApi(valuesForSave);
+  }
 
   useEffect(() => {
     if (saveProjectState.isSuccess) {
@@ -107,6 +127,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   function handleModalClose() {
     setIsSuccessModalOpen(false);
   }
+
 
   function handleSubmit() {
     return false;
@@ -124,112 +145,37 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       id='CompanyEditForm'
     >
       <CompanyEditNavigation />
-      <section id='preview-section' className={s.section}>
-        <Text size={TextSize.h2} className={s.sectionHeader}>Превью</Text>
-        <Text size={TextSize.body2} className={s.sectionDescr}>
-          Укажите название проекта и дайте краткое описание его деятельности.<br />
-          Загрузите изображения.
-        </Text>
-        <FormRow>
-          <Field className={cx(s.bgField, 'col-12')} name='preview' />
-        </FormRow>
-        <FormRow>
-          <Field className={cx('col-2', s.logoField)} name='logo' />
-          <Field className={cx('col-10', s.nameField)} name='title' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='small_description' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='address' />
-        </FormRow>
-      </section>
-      <section id='description-section' className={s.section}>
-        <Text size={TextSize.h2} className={s.sectionHeader}>Описание</Text>
-        <FormRow>
-          <Field className='col-12' name='video_link' />
-        </FormRow>
-        { values.video_link ? (
-          <VideoPreview videoLink={values.video_link} />
-        ) : null }
-        <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
-          Расскажите о вашем проекте.
-          Заполните описание (цели, миссия, планы, история, технологии, методы, достижения и т.д.).
-        </Text>
-        <FormRow>
-          <Field className='col-12' name='description' />
-        </FormRow>
-      </section>
-      <section id='gallery-section' className={cx(s.section, s.gallerySection)}>
-        <Text size={TextSize.h2} className={s.sectionHeader}>Галерея</Text>
-        <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
-          Добавьте фотографии проекта.
-        </Text>
-        <FormRow>
-          <Field className='col-12' name='gallery_images' />
-        </FormRow>
-      </section>
-      <section id='team-section' className={s.section}>
-        <Text size={TextSize.h2} className={s.sectionHeader}>Команда</Text>
-        <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
-          Добавьте представителей вашей команды с описанием их опыта.
-        </Text>
-        <FormRow>
-          <Field className='col-12' name='team' />
-        </FormRow>
-      </section>
-      <section id='roadmap-section' className={s.section}>
-        <Text size={TextSize.h2} className={s.sectionHeader}>Дорожная карта</Text>
-        <Text size={TextSize.body2} color={Color.label} className={s.sectionDescr}>
-          Добавьте этапы развития проекта.
-        </Text>
-        <FormRow>
-          <Field className='col-12' name='roadmap' />
-        </FormRow>
-      </section>
-      <section id='contacts-section' className={s.section}>
-        <Text size={TextSize.h2} className={s.sectionHeader}>Контактные данные</Text>
-        <FormRow>
-          <Field className='col-6' name='email' />
-          <Field className='col-6' name='phone' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-6' name='site' />
-          <Field className='col-6' name='link' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='data_valid' />
-        </FormRow>
-        <FormActions>
-          <div className='col-sm-12 col-md-5 col-xl-3'>
-            <Button
-              theme={ButtonTheme.black}
-              size={ButtonSize.m}
-              disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
-              type='button'
-              onClick={onSave}
-            >Готово</Button>
-          </div>
-        </FormActions>
-      </section>
+      <CompanyEditPreview onSave={savePartial} />
+      <CompanyEditDescription onSave={savePartial} videoLink={values.video_link} />
+      <CompanyEditGallery onSave={savePartial} />
+      <CompanyEditTeam onSave={savePartial} />
+      <CompanyEditRoadmap onSave={savePartial} />
+      <CompanyEditContacts />
+      <FormRow>
+        <Field className='col-12' name='data_valid' />
+      </FormRow>
+      <FormActions>
+        <div className='col-sm-12 col-md-5 col-xl-3'>
+          <Button
+            theme={ButtonTheme.black}
+            size={ButtonSize.m}
+            disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+            type='button'
+            onClick={onSave}
+          >Готово</Button>
+        </div>
+        <div className='col-sm-12 col-md-5 col-xl-4'>
+          <Button
+            theme={ButtonTheme.black}
+            size={ButtonSize.m}
+            disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+            type='button'
+            onClick={onSave}
+          >Сохранить и отправить</Button>
+        </div>
+      </FormActions>
       { isSuccessModalOpen ? (
-        <Modal className={s.successModal} allowClose={true} onClose={handleModalClose}>
-          <div className={s.modalInner}>
-            <Text size={TextSize.body2}>
-              Ваши данные отправлены на проверку.
-              Информация о статусе проверки будет отправлена на ваш электронный адрес.
-            </Text>
-            <div className={s.modalButtons}>
-              <Button
-                size={ButtonSize.s}
-                theme={ButtonTheme.black}
-                onClick={handleModalClose}
-              >
-                Понятно
-              </Button>
-            </div>
-          </div>
-        </Modal>
+        <CompanyEditSuccessModal isFullySaved={isFullySaved} onClose={handleModalClose} />
       ) : null }
     </Form>
   );
