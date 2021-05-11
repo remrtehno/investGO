@@ -26,7 +26,10 @@ export const api = {
     get: () => '/company',
     save: () => '/company',
     saveBankDetails: () => '/company/bank-details',
+  },
+  project: {
     saveProject: () => '/company/project',
+    moderateProject: () => '/company/project/moderating',
   },
   sms: {
     sign: () => '/sms-sign',
