@@ -29,6 +29,7 @@ export const api = {
   },
   project: {
     saveProject: () => '/company/project',
+    getProject: () => '/company/project',
     moderateProject: () => '/company/project/moderating',
   },
   sms: {

@@ -3,6 +3,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
+import {useGetProjectApi} from 'src/api/projectApi/useGetProjectApi';
 import {useModerateProjectApi} from 'src/api/projectApi/useModerateProjectApi';
 import {useSaveProjectApi} from 'src/api/projectApi/useSaveProjectApi';
 import {Form} from 'src/components/common/Form';
@@ -32,23 +33,41 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = useCompanyEditFields();
   const [, saveProjectApi, saveProjectState] = useSaveProjectApi();
+  const [project, getProjectApi, getProjectState] = useGetProjectApi();
   const [, moderateProjectApi, moderateProjectState] = useModerateProjectApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isFullySaved, setIsFullySaved] = useState(false);
 
-  const getValuesFromUser = () => ({
-    ...getDefaultFieldValues(fields),
-    ...({
-      title: user?.company?.name,
-      email: user?.company?.emails[0],
-      phone: user?.company?.phones[0],
-    }),
-  });
+  const getValues = () => {
+    if (project) {
+      return {
+        ...getDefaultFieldValues(fields),
+        ...project,
+      };
+    }
+    return ({
+      ...getDefaultFieldValues(fields),
+      ...({
+        title: user?.company?.name,
+        email: user?.company?.emails[0],
+        phone: user?.company?.phones[0],
+      }),
+    });
+  };
 
-  const initialValues = useMemo(() => getValuesFromUser(), [fields]);
+  const initialValues = useMemo(() => getValues(), [fields]);
   const [values, setValues] = useState<Form.Values>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
+
+  useEffect(() => {
+    getProjectApi(null);
+  }, []);
+
+  useEffect(() => {
+    const values = getValues();
+    setValues(values);
+  }, [getProjectState.isSuccess]);
 
   const onChange: Form.OnChange = useCallback((values, errors) => {
     setValues(values);
