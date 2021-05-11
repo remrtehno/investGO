@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router';
 import {useSetRecoilState} from 'recoil';
 
 import {api} from 'src/contstants/api';
@@ -14,6 +15,7 @@ export declare namespace useSignOutApi {
 export const useSignOutApi = () => {
   const request = useApiRequest();
   const setUser = useSetRecoilState(userAtom);
+  const history = useHistory();
 
   return useApi<useSignOutApi.Payload, null>(async() => {
     await request<User | null>(api.user.signOut(), {
@@ -27,6 +29,8 @@ export const useSignOutApi = () => {
       status: RequestStatus.success,
       error: null,
     });
+
+    history.push('/signin');
 
     return null;
   }, null);

@@ -48,12 +48,6 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
     logoutApi();
   }, []);
 
-  useEffect(() => {
-    if (logoutState.isSuccess) {
-      history.push('/');
-    }
-  }, [logoutState.isSuccess]);
-
   function getHomePath() {
     if (isRegistrationComplete) {
       if (user?.roles.includes(Role.borrower)) {
