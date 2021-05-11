@@ -124,7 +124,7 @@ $(document).ready(function () {
     $(this).toggleClass('open');
     $(this).next().slideToggle();
 
-    if(!$(this).next().length) {
+    if (!$(this).next().length) {
       $(this).closest('li').find('.accordion-content').slideToggle();
     }
   });
@@ -211,6 +211,61 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+
+  var documentsAjaxLoadTable = $('[data-ajax]');
+  var documentsAjaxLoadTableResponse = [];
+  if (documentsAjaxLoadTable.length) {
+    var url = documentsAjaxLoadTable.data('ajax');
+
+    $.get(url, function (data, status) {
+      if (status === 'success') {
+        if (Array.isArray(data.result)) {
+          documentsAjaxLoadTableResponse.concat(data.result);
+          data.result.forEach(function (value) {
+            var datePublish = new Date(value.publish_date);
+            var dateAchieve = new Date(value.limit_achievement_date);
+            documentsAjaxLoadTable.append(`
+             <tr>
+                <th scope="row">${value.loan_request_id}</th>
+                <td>
+                    ${datePublish.getDate()}.${datePublish.getMonth()}.${datePublish.getFullYear()} / 
+                    ${datePublish.getHours() > 10 ? datePublish.getHours() : '0' + datePublish.getHours()}:${datePublish.getMinutes() > 10 ? datePublish.getMinutes() : '0' + datePublish.getMinutes()}</td>
+                <td>${dateAchieve.getDate()}.${dateAchieve.getMonth()}.${dateAchieve.getFullYear()}</td>
+                <td>${value.amount}</td>
+                <td>${value.okved && value.okved[0] && value.okved[0].cod}</td>
+              </tr>
+          `)
+          })
+        }
+      }
+
+      $('.download-csv').on('click', function () {
+        var fileName = 'data.csv';
+        var blob = new Blob([documentsAjaxLoadTableResponse], {});
+        if (window.navigator.appVersion.toString().indexOf('.NET') !== -1) {
+
+          window.navigator.msSaveBlob(blob, fileName);
+          return;
+        }
+        var link = document.createElement('a');
+
+        var href = window.URL.createObjectURL(blob);
+        link.href = href;
+        link.style.display = 'none';
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(href);
+        }, 100);
+      });
+
+
+    })
+  }
+
+
   $('.tabs__head').on('click', function () {
 
     let target = $(this).data('target');
