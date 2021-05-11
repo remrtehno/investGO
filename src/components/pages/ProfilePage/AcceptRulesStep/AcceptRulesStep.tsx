@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useEffect, useMemo} from 'react';
+import { useHistory } from 'react-router';
 import {useRecoilState, useRecoilValue} from 'recoil';
+import { RoutePaths } from 'src/components/common/App/routes';
 
 import {AcceptRulesDocument} from 'src/components/pages/ProfilePage/AcceptRulesStep/AcceptRulesDocument';
 import {Text, TextSize} from 'src/components/ui/Text';
@@ -25,6 +27,7 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
   const {documents} = useRecoilValue(documentsAtom);
   const [, setProfileStep] = useRecoilState(uiAtom);
   const isRegistrationComplete = useIsRegistrationComplete();
+  const history = useHistory();
 
   const borrowerAccessionAgreement = useMemo(() => {
     return _.find(documents, (doc: User.SignDocuments): boolean => {
@@ -44,7 +47,11 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
 
   useEffect(() => {
     if (isRegistrationComplete) {
-      back();
+      if (user && user.roles.includes(Role.borrower)) {
+        history.push(RoutePaths.borrowerDashboard);
+      } else {
+        history.push(RoutePaths.investorDashboard);
+      }
     }
   }, [documents]);
 
