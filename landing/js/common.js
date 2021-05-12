@@ -212,6 +212,29 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
+  // JSON to CSV Converter
+  function ConvertToCSV(objArray) {
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+
+    for (var i = 0; i < array.length; i++) {
+      var line = '';
+      for (var index in array[i]) {
+        if (line != '') line += ','
+        if(Array.isArray(array[i][index])) {
+          for(var obj of array[i][index]) {
+            line += Object.values(obj).join(',');
+          }
+        } else {
+          line += array[i][index];
+        }
+      }
+      str += line + '\r\n';
+    }
+
+    return str;
+  }
+
   var documentsAjaxLoadTable = $('[data-ajax]');
   var documentsAjaxLoadTableResponse = [];
   if (documentsAjaxLoadTable.length) {
@@ -220,7 +243,7 @@ $(document).ready(function () {
     $.get(url, function (data, status) {
       if (status === 'success') {
         if (Array.isArray(data.result)) {
-          documentsAjaxLoadTableResponse.concat(data.result);
+          documentsAjaxLoadTableResponse = data.result.slice(0);
           data.result.forEach(function (value) {
             var datePublish = new Date(value.publish_date);
             var dateAchieve = new Date(value.limit_achievement_date);
@@ -239,9 +262,10 @@ $(document).ready(function () {
         }
       }
 
-      $('.download-csv').on('click', function () {
+      $('.download-csv').on('click', function (event) {
+        event.preventDefault();
         var fileName = 'data.csv';
-        var blob = new Blob([documentsAjaxLoadTableResponse], {});
+        var blob = new Blob([ConvertToCSV(documentsAjaxLoadTableResponse)], {});
         if (window.navigator.appVersion.toString().indexOf('.NET') !== -1) {
 
           window.navigator.msSaveBlob(blob, fileName);
