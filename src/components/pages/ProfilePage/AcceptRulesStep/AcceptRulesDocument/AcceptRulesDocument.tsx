@@ -41,7 +41,7 @@ export const AcceptRulesDocument: FC<AcceptRulesDocument.Props> = (props) => {
   const [, smsSignApi] = useSmsSignApi();
   const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
   const [smsCodeError, setSmsCodeError] = useState('');
-  const [, signDocsApi, signDocsApiResult] = useSignDocs(props.type);
+  const [, signDocsApi, signDocsApiState] = useSignDocs(props.type);
 
   useEffect(() => {
     if (!props.document) {
@@ -80,11 +80,11 @@ export const AcceptRulesDocument: FC<AcceptRulesDocument.Props> = (props) => {
   useEffect(() => {
     setIsSmsModalOpened(false);
     setSmsCodeError('');
-  }, [signDocsApiResult.isSuccess]);
+  }, [signDocsApiState.isSuccess]);
 
   useEffect(() => {
     setSmsCodeError('Неверный код подтверждения');
-  }, [signDocsApiResult.error]);
+  }, [signDocsApiState.error]);
 
   function sign(code: string) {
     signDocsApi({code: parseInt(code, 10)});

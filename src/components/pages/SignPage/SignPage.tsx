@@ -4,7 +4,11 @@ import React, {useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
+import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
+import {Role} from 'src/contstants/Role';
+import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
+import {documentsAtom} from 'src/recoil/documentsAtom';
 import {userAtom} from 'src/recoil/userAtom';
 
 import {SignForm} from './SignForm';
@@ -12,13 +16,22 @@ import s from './SignPage.scss';
 
 export const SignPage: FC = () => {
   const {user} = useRecoilValue(userAtom);
+  const {documents} = useRecoilValue(documentsAtom);
   const history = useHistory();
+  const isRegistrationComplete = useIsRegistrationComplete();
 
   useEffect(() => {
-    if (user) {
-      history.push('/profile');
+    if (user && !isRegistrationComplete) {
+      history.push(RoutePaths.profile);
     }
-  }, [user]);
+    if (user && isRegistrationComplete) {
+      if (user.roles.includes(Role.borrower)) {
+        history.push(RoutePaths.borrowerDashboard);
+      } else {
+        history.push(RoutePaths.investorDashboard);
+      }
+    }
+  }, [documents]);
 
 
   return (

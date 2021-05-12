@@ -1,5 +1,6 @@
 import {useSetRecoilState} from 'recoil';
 
+import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
 import {api} from 'src/contstants/api';
 import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
@@ -18,6 +19,7 @@ export declare namespace useSignInApi {
 export const useSignInApi = () => {
   const request = useApiRequest();
   const setUser = useSetRecoilState(userAtom);
+  const [, getSignDocuments] = useUserDocuments();
 
   return useApi<useSignInApi.Payload, null>(async(payload) => {
     await request(api.user.signIn(), {
@@ -34,6 +36,8 @@ export const useSignInApi = () => {
       status: RequestStatus.success,
       error: null,
     });
+
+    getSignDocuments(null);
 
     return null;
   }, null);

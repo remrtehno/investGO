@@ -36,11 +36,11 @@ export const BorrowerPage = withAuth(() => {
           text: 'Портфель',
         },
         {
-          to: RoutePaths.investorDashboard,
+          to: RoutePaths.home,
           text: 'Мои заявки',
         },
         {
-          to: RoutePaths.investorDashboard,
+          to: RoutePaths.home,
           text: 'Транзакции',
         },
       ]

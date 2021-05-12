@@ -2,8 +2,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
-import {useRecoilValue} from 'recoil';
+import {Link} from 'react-router-dom';
 
 import {useSignInApi} from 'src/api/userApi/useSignInApi';
 import {useSignUpApi} from 'src/api/userApi/useSignUpApi';
@@ -15,7 +14,6 @@ import {FieldType} from 'src/components/common/Form/Form';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {useLatestRef} from 'src/hooks/useLatestRef';
-import {userAtom} from 'src/recoil/userAtom';
 import {email} from 'src/validations/email';
 import {required} from 'src/validations/required';
 
@@ -50,8 +48,6 @@ export const SignForm: FC<SignForm.Props> = () => {
   const [isNeedShowPhone, setIsNeedShowPhone] = useState(false);
   const [isShowSmsForm, setIsShowSmsForm] = useState(false);
   const emailRef = useLatestRef(values.email);
-  const {user} = useRecoilValue(userAtom);
-  const history = useHistory();
   const [isCheckEmailModalVisible, setIsCheckEmailModalVisible] = useState(false);
 
   const signFields = useMemo((): Form.FieldModels => ({
@@ -128,16 +124,6 @@ export const SignForm: FC<SignForm.Props> = () => {
       setErrors({...errors, phone: 'Пользователь с таким номером уже существует'});
     }
   }, [signInState.error, signUpState.error, isUserExists]);
-
-  useEffect(() => {
-    if (user && signInState.isSuccess) {
-      if (!user.passport) {
-        history.push('/registration');
-      } else {
-        history.push('/');
-      }
-    }
-  }, [signInState, user, history]);
 
   const onContinue = useCallback(() => {
     if (isUserExists) {

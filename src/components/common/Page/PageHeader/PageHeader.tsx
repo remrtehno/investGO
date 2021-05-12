@@ -5,14 +5,15 @@ import {Link, useHistory} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useSignOutApi} from 'src/api/userApi/useSignOutApi';
+import {RoutePaths} from 'src/components/common/App/routes';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
 import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
+import {Role} from 'src/contstants/Role';
 import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
 import {LogoIcon} from 'src/icons/LogoIcon';
 import {userAtom} from 'src/recoil/userAtom';
 import {breackpointDown, breackpointUp} from 'src/utils/breackpointUtils';
-import { RoutePaths } from '../../App/routes';
 
 import {HeaderMenu} from './HeaderMenu';
 import {MobileMenu} from './MobileMenu';
@@ -47,16 +48,22 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
     logoutApi();
   }, []);
 
-  useEffect(() => {
-    if (logoutState.isSuccess) {
-      history.push('/');
+  function getHomePath() {
+    if (isRegistrationComplete) {
+      if (user?.roles.includes(Role.borrower)) {
+        return RoutePaths.borrowerDashboard;
+      }
+      return RoutePaths.investorDashboard;
     }
-  }, [logoutState.isSuccess]);
+    return RoutePaths.home;
+  }
 
   return (
     <div className={cx(s.pageHeader, props.className)}>
       <div className={cx('container', s.container)}>
-        <LogoIcon isBig={props.isBigLogo} className={s.logo} onClick={() => window.location.href = '/'} />
+        <Link to={getHomePath()}>
+          <LogoIcon isBig={props.isBigLogo} className={s.logo} />
+        </Link>
         <div className={s.space} />
         { user && isRegistrationComplete && breackpointUp(adaptiveBreackpoints.md) ? (
           <HeaderMenu user={user} />
