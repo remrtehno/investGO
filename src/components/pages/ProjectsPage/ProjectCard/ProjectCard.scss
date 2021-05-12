@@ -1,0 +1,94 @@
+.projectItem {
+  margin-bottom: 40px;
+  background: white;
+  padding-bottom: 22px;
+  border-radius: 4.3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.projectItemTextBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 30px 20px 30px;
+  @media (max-width: 768px) {
+    padding: 0 20px 20px 20px;
+  }
+}
+
+.projectImageContainer {
+  max-height: 241px;
+  position: relative;
+}
+
+.title {
+  margin-bottom: 6px;
+}
+
+.projectItemSteps {
+  display: flex;
+}
+
+.projectItemStepsItem {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+
+  & > * {
+    margin-bottom: 5px;
+  }
+}
+
+
+.projectImage {
+  max-width: 100%;
+}
+
+.projectItemLogo {
+  max-width: 100%;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.projectItemCollected {
+  text-align: right;
+  padding: 0 24px;
+  margin-bottom: 15px;
+}
+
+.projectItemCollectedLabel {
+  color: var(--label);
+  margin-right: 5px;
+  display: inline;
+}
+
+.projectItemPrice {
+  padding: 0 30px;
+}
+
+.projectItemCollectedOffer {
+  &::before {
+    content: '/';
+    color: var(--black);
+    margin: 0 5px;
+  }
+
+  display: inline-flex;
+  align-items: center;
+  color: var(--red);
+}
+
+.progressBar {
+  height: 1.1px;
+  background: black;
+  margin-bottom: 20px;
+}
+
+.progressBarInner {
+  height: 3.3px;
+  background: black;
+  transform: translateY(-50%);
+}

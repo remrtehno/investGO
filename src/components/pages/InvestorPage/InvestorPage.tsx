@@ -29,7 +29,7 @@ export const InvestorPage = withAuth(() => {
           text: 'Портфель',
         },
         {
-          to: RoutePaths.home,
+          to: RoutePaths.projects,
           text: 'Предложения',
         },
         {

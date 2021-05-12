@@ -10,8 +10,8 @@ export declare namespace useGetProjectApi {
 export const useGetProjectApi = () => {
   const request = useApiRequest();
 
-  return useApi<useGetProjectApi.Payload, Project | null>(async() => {
-    const project = await request<Project | null>(api.project.getProject(), {
+  return useApi<useGetProjectApi.Payload, Project.Project | null>(async() => {
+    const project = await request<Project.Project | null>(api.project.getProject(), {
       method: 'GET',
     });
 
