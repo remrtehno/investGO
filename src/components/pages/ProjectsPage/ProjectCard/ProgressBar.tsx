@@ -1,11 +1,11 @@
 import type {FC} from 'react';
 import React from 'react';
 
-import s from './ProjectsPage.scss';
+import s from './ProjectCard.scss';
 
 export declare namespace ProgressBar {
   export type Props = {
-    progress?: string,
+    progress?: number,
   };
 }
 

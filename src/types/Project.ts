@@ -1,6 +1,6 @@
 import type {ImagePrimitive} from './ImagePrimitive';
 
-// export declare namespace Project {
+export declare namespace Project {
   export type Project = {
     amount: number,
     collected_amount: number,
@@ -47,4 +47,21 @@ import type {ImagePrimitive} from './ImagePrimitive';
     uuid: string,
     video_link: string
   }
-// }
+
+  export type InvestorProject = {
+    collected_amount: string,
+    current_user_invest_amount: string,
+    description: string,
+    logo: ImagePrimitive,
+    preview: ImagePrimitive,
+    site: string,
+    small_description: string,
+    term: number,
+    title: string,
+    users_count: number,
+    uuid: string,
+
+    amount: string,
+    rate: number,
+  }
+}

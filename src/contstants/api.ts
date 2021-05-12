@@ -43,5 +43,6 @@ export const api = {
   investor: {
     accessionAgreement: () => '/investor/accession-agreement',
     loanRequest: () => '/investor/loan-request',
+    projects: () => '/investor/available-projects',
   },
 };

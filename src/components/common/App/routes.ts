@@ -21,7 +21,7 @@ export type RouteInfo = RouteProps & {
 
 export const RoutePaths = {
   about: '/about',
-  projects: '/projects',
+  projects: '/investor/projects',
   profile: '/profile',
   registration: '/registration',
   signin: '/signin',

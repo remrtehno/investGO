@@ -1,75 +1,16 @@
 import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
-import React from 'react';
+import React, {useEffect, useMemo} from 'react';
 
+import {useGetProjectsApi} from 'src/api/investorApi/useGetProjectsApi';
+import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
-import {ProjectPageCard} from 'src/components/pages/ProjectsPage/ProjectPageCard';
+import {TopMenu} from 'src/components/common/TopMenu';
+import {ProjectCard} from 'src/components/pages/ProjectsPage/ProjectCard/ProjectCard';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button/Button';
 
 import s from './ProjectsPage.scss';
-
-const cards = [
-  {
-    title: 'Airbnb',
-    description: 'Под разработку мобильного приложения',
-    price: '10 000 000.00',
-    collect: '999 000',
-    progress: '30',
-    image: '/src/assets/images/project-1.png',
-    logo: '../../../assets/images/logo1.png',
-    rate: '20%',
-    term: '10 дней',
-    investors: '10',
-  },
-  {
-    title: 'Carsy',
-    description: 'Под разработку мобильного приложения',
-    price: '12 000 000.00',
-    collect: '999 000',
-    progress: '80',
-    image: '../../../assets/project-2.png',
-    rate: '20%',
-    term: '30 дней',
-    investors: '15',
-  },
-  {
-    title: 'ООО УралАвтоИмпорт',
-    description: 'Под разработку мобильного приложения',
-    price: '7 000 000.00',
-    collect: '999 000',
-    progress: '50',
-    image: '../../../assets/project-3.png',
-    rate: '20%',
-    term: '30 дней',
-    investors: '15',
-  },
-  {
-    title: 'Airbnb',
-    description: 'Под разработку мобильного приложения',
-    price: '10 000 000.00',
-    collect: '999 000',
-    progress: '20',
-    image: '../../../assets/project-4.png',
-    logo: '../../../assets/logo3.png',
-    rate: '20%',
-    term: '30 дней',
-    investors: '15',
-  },
-  {
-    title: 'Airbnb',
-    description: 'Под разработку мобильного приложения',
-    price: '1 000 000.00',
-    collect: '999 000',
-    progress: '80',
-    image: '../../../assets/project-5.png',
-    logo: '../../../assets/logo4.png',
-    rate: '24%',
-    term: '30 дней',
-    investors: '19',
-    offer: '999 000',
-  },
-];
 
 function WarningIcon() {
   return (
@@ -82,47 +23,67 @@ function WarningIcon() {
   );
 }
 
-export const ProjectsPage: FC = () => (
-  <Page>
-    <div className={s.ProjectsPage}>
-      <div className={s.alert}>
-        <div className={cx('container', s.ProjectContainer)}>
-          <div className={s.ProjectText}>
-            <WarningIcon />
-            Доступ ограничен. Заполните данные профиля и присоединитесь к новым <a href='#'>Правилам платформы.</a>
+export const ProjectsPage: FC = () => {
+  const [projectsResult, getProjectsApi, getProjectsState] = useGetProjectsApi();
+  const projects = projectsResult?.data;
+
+  const menuItems = useMemo(() => {
+    return (
+      [
+        {
+          to: RoutePaths.investorDashboard,
+          text: 'Портфель',
+        },
+        {
+          to: RoutePaths.projects,
+          text: 'Предложения',
+        },
+        {
+          to: RoutePaths.home,
+          text: 'Транзакции',
+        },
+      ]
+    );
+  }, []);
+
+  useEffect(() => {
+    getProjectsApi(null);
+  }, []);
+
+  return (
+    <Page>
+      <div className={s.ProjectsPage}>
+        <TopMenu items={menuItems} />
+        <div className={s.alert} style={{display: 'none'}}>
+          <div className={cx('container', s.ProjectContainer)}>
+            <div className={s.ProjectText}>
+              <WarningIcon />
+              Доступ ограничен. Заполните данные профиля и присоединитесь к новым <a href='#'>Правилам платформы.</a>
+            </div>
+            <Button
+              onClick={_.noop}
+              className={s.joinBtn}
+              size={ButtonSize.s}
+              theme={ButtonTheme.white}
+            > Присоединиться </Button>
           </div>
-          <Button
-            onClick={_.noop}
-            className={s.joinBtn}
-            size={ButtonSize.s}
-            theme={ButtonTheme.white}
-          > Присоединиться </Button>
+        </div>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-12'>
+              <h1 className={s.title}>
+                Проекты, доступные для инвестирования
+              </h1>
+            </div>
+            { projects && projects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                project={project}
+              />
+            )) }
+          </div>
         </div>
       </div>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-12'>
-            <h1 className={s.title}>
-              Проекты для инвестиций
-            </h1>
-          </div>
-          { cards && cards.map((item, index) => (
-            <ProjectPageCard
-              key={index}
-              image={item.image}
-              title={item.title}
-              collect={item.collect}
-              description={item.description}
-              price={item.price}
-              logo={item.logo}
-              rate={item.rate}
-              term={item.term}
-              investors={item.investors}
-              progress={item.progress}
-              offer={item.offer}
-            />
-          )) }
-        </div>
-      </div>
-    </div>
-  </Page>);
+    </Page>
+  );
+};
