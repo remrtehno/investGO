@@ -1,10 +1,11 @@
 
-import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
-import {useSaveProjectApi} from 'src/api/companyApi/useSaveProjectApi';
+import {useGetProjectApi} from 'src/api/projectApi/useGetProjectApi';
+import {useModerateProjectApi} from 'src/api/projectApi/useModerateProjectApi';
+import {useSaveProjectApi} from 'src/api/projectApi/useSaveProjectApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -32,22 +33,41 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
   const {user} = useRecoilValue(userAtom);
   const fields = useCompanyEditFields();
   const [, saveProjectApi, saveProjectState] = useSaveProjectApi();
+  const [project, getProjectApi, getProjectState] = useGetProjectApi();
+  const [, moderateProjectApi, moderateProjectState] = useModerateProjectApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isFullySaved, setIsFullySaved] = useState(false);
 
-  const getValuesFromUser = () => ({
-    ...getDefaultFieldValues(fields),
-    ...({
-      title: user?.company?.name,
-      email: user?.company?.emails[0],
-      phone: user?.company?.phones[0],
-    }),
-  });
+  const getValues = () => {
+    if (project) {
+      return {
+        ...getDefaultFieldValues(fields),
+        ...project,
+      };
+    }
+    return ({
+      ...getDefaultFieldValues(fields),
+      ...({
+        title: user?.company?.name,
+        email: user?.company?.emails[0],
+        phone: user?.company?.phones[0],
+      }),
+    });
+  };
 
-  const initialValues = useMemo(() => getValuesFromUser(), [fields]);
+  const initialValues = useMemo(() => getValues(), [fields]);
   const [values, setValues] = useState<Form.Values>(initialValues);
   const [errors, setErrors] = useState<Form.Errors>({});
+
+  useEffect(() => {
+    getProjectApi(null);
+  }, []);
+
+  useEffect(() => {
+    const values = getValues();
+    setValues(values);
+  }, [getProjectState.isSuccess]);
 
   const onChange: Form.OnChange = useCallback((values, errors) => {
     setValues(values);
@@ -89,10 +109,16 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     return valuesForSave;
   }
 
-  const onSave = useCallback(() => {
+  const save = useCallback(() => {
+    const valuesForSave = processValuesForSave();
+    saveProjectApi(valuesForSave);
+  }, [values]);
+
+  const saveAndModerate = useCallback(() => {
     const valuesForSave = processValuesForSave();
     saveProjectApi(valuesForSave);
     setIsFullySaved(true);
+    moderateProjectApi(null);
   }, [values]);
 
   function savePartial() {
@@ -161,7 +187,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
             size={ButtonSize.m}
             disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
             type='button'
-            onClick={onSave}
+            onClick={save}
           >Готово</Button>
         </div>
         <div className='col-sm-12 col-md-5 col-xl-4'>
@@ -170,7 +196,7 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
             size={ButtonSize.m}
             disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
             type='button'
-            onClick={onSave}
+            onClick={saveAndModerate}
           >Сохранить и отправить</Button>
         </div>
       </FormActions>

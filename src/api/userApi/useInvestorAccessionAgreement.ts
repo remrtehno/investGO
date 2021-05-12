@@ -1,6 +1,6 @@
-import {api} from "../../contstants/api";
-import {useApi} from "../../hooks/useApi";
-import {useApiRequest} from "../../hooks/useApiRequest";
+import {api} from 'src/contstants/api';
+import {useApi} from 'src/hooks/useApi';
+import {useApiRequest} from 'src/hooks/useApiRequest';
 
 export declare namespace useInvestorAccessionAgreementApi {
   export type Response = {
@@ -12,7 +12,7 @@ export declare namespace useInvestorAccessionAgreementApi {
 export const useInvestorAccessionAgreementApi = () => {
   const request = useApiRequest();
 
-  return useApi<null, null>(async (payload) => {
+  return useApi<null, null>(async(payload) => {
     const response = await request<useInvestorAccessionAgreementApi.Response>(api.investor.accessionAgreement(), {
       method: 'GET',
       showNotifyOnError: false,
@@ -20,6 +20,5 @@ export const useInvestorAccessionAgreementApi = () => {
     });
 
     return null;
-
   }, null);
-}
+};

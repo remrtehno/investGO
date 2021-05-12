@@ -69,7 +69,8 @@ export const TextArea: FC<TextArea.Props> = (props) => {
         ref={controlRef}
         onFocus={handleFocus}
         onBlur={handleBlur}
-      >{ props.value }</textarea>
+        value={props.value || ''}
+      />
       { props.error ? (
         <Text size={TextSize.bodyMini} color={Color.red} className={s.error}>{ props.error }</Text>
       ) : null }
