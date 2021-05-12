@@ -30,7 +30,7 @@ export const useSignOutApi = () => {
       error: null,
     });
 
-    history.push('/signin');
+    history.push('/');
 
     return null;
   }, null);
