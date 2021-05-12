@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import type {FC} from 'react';
 import React from 'react';
 
@@ -42,18 +43,28 @@ export const ProjectCard: FC<ProjectCard.Props> = (props) => {
   return (
     <div className='col-lg-4 col-md-6 col-sm-10 offset-sm-1 offset-md-0'>
       <div className={s.projectItem}>
-        <div className={s.projectImageContainer}>
-          { project.preview ? (
-            <img src={project.preview.url} alt='' className={s.projectImage} />
-          ) : (
-            <img src={pr1} alt='' className={s.projectImage} />
-          ) }
+        <div
+          className={s.projectImageContainer}
+          style={{backgroundImage: `url(${project?.preview?.url || pr1})`}}
+        >
           { project.logo ? (
-            <img src={project.logo.url} alt='logo' className={s.projectItemLogo} />
+            <div
+              className={s.projectItemLogo}
+              style={{backgroundImage: `url(${project?.logo?.url})`}}
+            />
           ) : null }
           <div className={s.projectItemTextBottom}>
-            <Text color={Color.white} size={TextSize.h3} className={s.title}>{ project.title }</Text>
-            <Text color={Color.white} size={TextSize.tabMenu}>{ project.description }</Text>
+            <Text
+              color={Color.white}
+              size={TextSize.h3}
+              weight={TextWeight.bold}
+              className={cx(s.title, project.logo && s.titleWithLogo)}
+            >
+              { project.title }
+            </Text>
+            <Text color={Color.white} size={TextSize.tabMenu}>
+              { project.description }
+            </Text>
           </div>
         </div>
         <div className={s.projectItemSteps}>
@@ -82,7 +93,7 @@ export const ProjectCard: FC<ProjectCard.Props> = (props) => {
               { project.current_user_invest_amount } ₽
             </span> }
         </Text>
-        <Text className={s.projectItemPrice} size={TextSize.h3} weight={TextWeight.normal}>
+        <Text className={s.projectItemPrice} size={TextSize.h3} weight={TextWeight.semibold}>
           { project.amount } ₽
         </Text>
       </div>
