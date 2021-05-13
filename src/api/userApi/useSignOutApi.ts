@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router';
 import {useSetRecoilState} from 'recoil';
+import { RoutePaths } from 'src/components/common/App/routes';
 
 import {api} from 'src/contstants/api';
 import {useApi} from 'src/hooks/useApi';
@@ -30,7 +31,7 @@ export const useSignOutApi = () => {
       error: null,
     });
 
-    history.push('/');
+    history.push(RoutePaths.signin);
 
     return null;
   }, null);

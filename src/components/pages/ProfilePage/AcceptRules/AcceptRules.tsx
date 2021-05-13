@@ -75,7 +75,7 @@ export function AcceptRules(props: AcceptRules.Props) {
               onChange={(checked) => setCheckBoxes([checkBoxes[0], checked, checkBoxes[2]])}
               label={
                 <Text size={TextSize.body0}>Сформировать договор на оказание Оператором Платформы услуг по
-                  { user.roles.includes(Role.borrower) ? 'привлечению инвестиций' : 'содействию в инвестировании' }.</Text>
+                  { user.roles.includes(Role.borrower) ? ' привлечению инвестиций' : ' содействию в инвестировании' }.</Text>
               } />
             { user.roles.includes(Role.borrower) ? (
               <CheckBox

@@ -84,6 +84,7 @@ export const AcceptRulesDocument: FC<AcceptRulesDocument.Props> = (props) => {
 
   useEffect(() => {
     setSmsCodeError('Неверный код подтверждения');
+    getSignDocuments(null);
   }, [signDocsApiState.error]);
 
   function sign(code: string) {
