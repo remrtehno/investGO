@@ -131,6 +131,22 @@ app.get('/documents/disclosure', async (req, res, next) => {
   next();
 });
 
+app.get('/tariffs', async (req, res, next) => {
+  const response = await fetch(`https://testing.investgo.ru/api/user`, {
+    headers: {
+      Cookie: req.headers.Cookie
+    }
+  })
+    .then((res) => res.json());
+
+  if (response.status === 'error') {
+    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/tariffs.html'));
+    return;
+  }
+
+  next();
+});
+
 app.get('/robots.txt', async (req, res, next) => {
   res.type('text/plain')
   res.send("User-agent: *\nDisallow: /");
