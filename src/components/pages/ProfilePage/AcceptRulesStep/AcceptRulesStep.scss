@@ -63,3 +63,15 @@
     margin-bottom: 60px;
   }
 }
+
+.modalInner {
+  padding: 70px 0;
+
+  @include media-breakpoint-up(lg) {
+    padding: 80px 0;
+  }
+}
+
+.modalText {
+  margin-top: 11px;
+}

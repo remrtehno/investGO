@@ -1,15 +1,19 @@
+import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
+import {useState} from 'react';
 import React, {useEffect, useMemo} from 'react';
-import { useHistory } from 'react-router';
+import {useHistory} from 'react-router';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import { RoutePaths } from 'src/components/common/App/routes';
 
+import {RoutePaths} from 'src/components/common/App/routes';
+import {Modal} from 'src/components/common/Modal/Modal';
 import {AcceptRulesDocument} from 'src/components/pages/ProfilePage/AcceptRulesStep/AcceptRulesDocument';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {Role} from 'src/contstants/Role';
 import {useIsRegistrationComplete} from 'src/hooks/useIsRegistrationComplete';
 import {BackArrowIcon} from 'src/icons/BackArrowIcon';
+import {InfoMessageIcon} from 'src/icons/InfoMessageIcon';
 import {documentsAtom} from 'src/recoil/documentsAtom';
 import {ProfileSteps, uiAtom} from 'src/recoil/uiAtom';
 import {userAtom} from 'src/recoil/userAtom';
@@ -41,6 +45,29 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
     });
   }, [documents]);
 
+  function getIsLoading(): boolean {
+    let loading = true;
+    if (user?.roles.includes(Role.borrower) && user?.roles.includes(Role.investor)) {
+      if (borrowerAccessionAgreement && investorAccessionAgreement) {
+        loading = false;
+      }
+      return loading;
+    }
+    if (user?.roles.includes(Role.borrower) && borrowerAccessionAgreement) {
+      loading = false;
+    }
+    if (user?.roles.includes(Role.investor) && investorAccessionAgreement) {
+      loading = false;
+    }
+    return loading;
+  }
+
+  const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(getIsLoading());
+
+  useEffect(() => {
+    setIsLoadingModalOpen(getIsLoading());
+  }, [documents]);
+
   function back() {
     setProfileStep({profileStep: ProfileSteps.profile});
   }
@@ -54,6 +81,10 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
       }
     }
   }, [documents]);
+
+  function handleModalClose() {
+    setIsLoadingModalOpen(false);
+  }
 
   if (!user) {
     return null;
@@ -88,6 +119,19 @@ export const AcceptRulesStep: FC<AcceptRulesStep.Props> = (props) => {
           ) : null }
         </div>
       </div>
+      { isLoadingModalOpen ? (
+        <Modal className={s.successModal} allowClose={true} onClose={handleModalClose}>
+          <div className={cx(s.modalInner, 'text-center')}>
+            <InfoMessageIcon />
+            <Text size={TextSize.body2} className={s.modalText}>
+              Подождите...
+            </Text>
+            <Text size={TextSize.body2}>
+              Формируются договоры присоединения.
+            </Text>
+          </div>
+        </Modal>
+      ) : null }
     </div>
   );
 };
