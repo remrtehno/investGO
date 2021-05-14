@@ -1,11 +1,13 @@
 import cx from 'classnames';
 import type {FC} from 'react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // @ts-ignore
 import lg1 from 'src/assets/images/logo1.png';
 // @ts-ignore
 import pr1 from 'src/assets/images/project-1.png';
+import { RoutePaths } from 'src/components/common/App/routes';
 import {ProgressBar} from 'src/components/pages/ProjectsPage/ProjectCard/ProgressBar';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {TextWeight} from 'src/components/ui/Text/Text';
@@ -43,6 +45,7 @@ export const ProjectCard: FC<ProjectCard.Props> = (props) => {
   return (
     <div className='col-lg-4 col-md-6 col-sm-10 offset-sm-1 offset-md-0'>
       <div className={s.projectItem}>
+        <Link to={RoutePaths.investOffer(project.uuid)}>
         <div
           className={s.projectImageContainer}
           style={{backgroundImage: `url(${project?.preview?.url || pr1})`}}
@@ -67,6 +70,7 @@ export const ProjectCard: FC<ProjectCard.Props> = (props) => {
             </Text>
           </div>
         </div>
+        </Link>
         <div className={s.projectItemSteps}>
           <div className={s.projectItemStepsItem}>
             <Text size={TextSize.tabMenu} color={Color.label}>ставка</Text>
