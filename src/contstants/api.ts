@@ -45,5 +45,6 @@ export const api = {
     loanRequest: () => '/investor/loan-request',
     projects: () => '/investor/available-projects',
     getLoanRequest: (loanId: string) => `/investor/loan-request/${loanId}`,
+    createInvestAgreement: () => '/investor/invest-agreement',
   },
 };

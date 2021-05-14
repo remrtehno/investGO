@@ -20,7 +20,6 @@ export declare namespace InvestOfferPage {
 
 export const InvestOfferPage = withAuth(() => {
   const {loanId} = useParams() as {loanId: string};
-  // const [, getLoans] = useGetInvestorLoans();
   const [loan, getLoan, getLoanState] = useGetLoan(loanId);
   const [error, setError] = useState(null);
 
@@ -65,7 +64,7 @@ export const InvestOfferPage = withAuth(() => {
                     { loan.borrower.name }
                   </Text>
                   <Text size={TextSize.tabMenu} weight={TextWeight.semibold} className={s.description}>
-                    Проект лвоавлоапвап { loan.description }
+                    { loan.description }
                   </Text>
                 </div>
               </div>
