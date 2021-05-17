@@ -14,21 +14,18 @@ export declare namespace useSignInvestAgreementApi {
     code: number,
     loan_request_id: string
   };
-
-  export type Response = {
-  };
 }
 
 export const useSignInvestAgreementApi = () => {
   const request = useApiRequest();
 
   return useApi<useSignInvestAgreementApi.Payload, null>(async(payload) => {
-    const result = await request<useSignInvestAgreementApi.Response>(api.investor.signInvestAgreement(), {
+    await request(api.investor.signInvestAgreement(), {
       method: 'POST',
       body: JSON.stringify(payload),
     });
 
-    return result;
+    return null;
   }, null);
 };
 

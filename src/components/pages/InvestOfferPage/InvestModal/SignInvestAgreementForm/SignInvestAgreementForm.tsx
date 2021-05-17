@@ -14,7 +14,6 @@ import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import {SmsForm} from 'src/components/common/SmsForm';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
-import {Text, TextSize} from 'src/components/ui/Text';
 import {DocumentIcon} from 'src/icons/DocumentIcon';
 import type {Borrower} from 'src/types/Borrower';
 
@@ -32,10 +31,9 @@ export declare namespace SignInvestAgreementForm {
 
 export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props) => {
   const fields = useSignInvestAgreementFields();
-  const [signInvestAgreementResult, signInvestAgreement, signInvestAgreementState] = useSignInvestAgreementApi();
+  const [, signInvestAgreement, signInvestAgreementState] = useSignInvestAgreementApi();
   const formApiRef = useRef<Form.Api | null>(null);
-  const [isSmsFormOpened, setIsSmsFormOpened] = useState(false);
-  const [, smsSignApi] = useSmsSignApi();
+  const [, smsSignApi, smsSignApiState] = useSmsSignApi();
   const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
   const [smsCodeError, setSmsCodeError] = useState('');
 
@@ -74,6 +72,13 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
       loan_request_id: props.loan.id,
     });
   }
+
+  useEffect(() => {
+    if (!smsSignApiState.error) {
+      return;
+    }
+    setSmsCodeError('Неверный код подтверждения');
+  }, [smsSignApiState.error]);
 
   useEffect(() => {
     const error = signInvestAgreementState.error;
