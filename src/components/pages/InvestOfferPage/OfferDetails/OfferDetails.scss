@@ -138,3 +138,14 @@
     }
   }
 }
+
+.successModal {
+  & > div {
+    min-width: 450px;
+    max-width: 450px;
+  }
+}
+
+.successModalText {
+  margin-bottom: 40px;
+}

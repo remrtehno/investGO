@@ -1,43 +1,31 @@
 import cx from 'classnames';
 import type {FC} from 'react';
-import React, {Fragment, useEffect, useState} from 'react';
-import {useRecoilValue} from 'recoil';
+import React, {useState} from 'react';
 
-import {Table} from 'src/components/common/Table';
+import {Modal} from 'src/components/common/Modal/Modal';
 import {InvestModal} from 'src/components/pages/InvestOfferPage/InvestModal';
 import {LoanConditions} from 'src/components/pages/LoanRequestPage/LoanDetails/LoanConditions';
 import {LoanDocuments} from 'src/components/pages/LoanRequestPage/LoanDetails/LoanDocuments';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import Tabs from 'src/components/ui/Tabs/Tabs';
 import {Text, TextSize} from 'src/components/ui/Text';
-import {TextWeight} from 'src/components/ui/Text/Text';
-import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
-import {LoanModerationStatus} from 'src/contstants/ModerationStatus';
-import {Role} from 'src/contstants/Role';
-import {Document2Icon} from 'src/icons/Document2Icon';
-import {DownloadIcon} from 'src/icons/DownloadIcon';
-import {FilePdfIcon} from 'src/icons/files/FilePdfIcon';
-import {userAtom} from 'src/recoil/userAtom';
 import type {Borrower} from 'src/types/Borrower';
-import {breackpointUp} from 'src/utils/breackpointUtils';
-import {formatDate} from 'src/utils/formatDate';
 import {formatNumber} from 'src/utils/formatNumber';
-import {plural} from 'src/utils/plural';
 
 import s from './OfferDetails.scss';
 
 export declare namespace OfferDetails {
   export type Props = {
-    loan: Borrower.LoanDetails
+    loan: Borrower.LoanDetails,
+    onSignInvestAgreement(): void,
   };
 }
 
 export const OfferDetails: FC<OfferDetails.Props> = (props) => {
   const {loan} = props;
-  const {user} = useRecoilValue(userAtom);
-  const company = user?.company;
   const [activeTab, setActiveTab] = useState('1');
   const [isInvestModalOpened, setIsInvestModalOpened] = useState(false);
+  const [isSignSuccessModalOpened, setIsSignSuccessModalOpened] = useState(false);
 
   const tabs = [
     {id: '1', label: 'Условия'},
@@ -50,6 +38,16 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
 
   function handleInvestModalClose() {
     setIsInvestModalOpened(false);
+  }
+
+  function handleSignInvestAgreement() {
+    setIsInvestModalOpened(false);
+    setIsSignSuccessModalOpened(true);
+    props.onSignInvestAgreement();
+  }
+
+  function handleSignSuccessModalClose() {
+    setIsSignSuccessModalOpened(false);
   }
 
   return (
@@ -90,7 +88,33 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
       ) : null }
 
       { isInvestModalOpened ? (
-        <InvestModal loan={loan} onClose={handleInvestModalClose} />
+        <InvestModal
+          loan={loan}
+          onClose={handleInvestModalClose}
+          onSignInvestAgreement={handleSignInvestAgreement}
+        />
+      ) : null }
+      { isSignSuccessModalOpened ? (
+        <Modal
+          allowClose={true}
+          onClose={handleSignSuccessModalClose}
+          className={s.successModal}
+        >
+          <div>
+            <Text size={TextSize.h4} className='mb-20px'>Договор подписан</Text>
+            <div className={s.successModalText}>
+              В течение 5 (пяти) рабочих дней вы вправе отказаться от договора инвестирования,
+              но не позднее дня завершения сбора инвестиций.
+            </div>
+            <div className='row justify-content-center'>
+              <div className='col-4'>
+                <Button size={ButtonSize.m} theme={ButtonTheme.black} onClick={handleSignSuccessModalClose}>
+                  Ок
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Modal>
       ) : null }
     </div>
   );

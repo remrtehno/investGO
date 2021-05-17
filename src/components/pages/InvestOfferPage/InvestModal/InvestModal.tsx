@@ -1,35 +1,32 @@
-import {FC, useState} from 'react';
-import React from 'react';
-import { useCreateInvestAgreementApi } from 'src/api/investorApi/useCreateInvestAgreementApi';
+import type {FC} from 'react';
+import React, {useState} from 'react';
 
-import { Modal } from 'src/components/common/Modal/Modal';
-import { Borrower } from 'src/types/Borrower';
-import {breackpointUp} from 'src/utils/breackpointUtils';
-import {formatDate} from 'src/utils/formatDate';
-import {formatNumber} from 'src/utils/formatNumber';
-import {plural} from 'src/utils/plural';
-import { InvestAgreementForm } from './InvestAgreementForm';
+import type {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
+import {Modal} from 'src/components/common/Modal/Modal';
+import type {Borrower} from 'src/types/Borrower';
 
+import {InvestAgreementForm} from './InvestAgreementForm';
 import s from './InvestModal.scss';
-import { SignInvestAgreementForm } from './SignInvestAgreementForm';
+import {SignInvestAgreementForm} from './SignInvestAgreementForm';
 
 export declare namespace InvestModal {
   export type Props = {
     loan: Borrower.LoanDetails,
     onClose(): void,
+    onSignInvestAgreement(): void,
   };
 }
 
 export const InvestModal: FC<InvestModal.Props> = (props) => {
   const {loan} = props;
-  const [investAgreement, setInvestAgreement] = useState(null as useCreateInvestAgreementApi.Response | null)
+  const [investAgreement, setInvestAgreement] = useState(null as useCreateInvestAgreementApi.Response | null);
 
   function handleInvesAgreementSuccess(investAgreement: useCreateInvestAgreementApi.Response) {
-    setInvestAgreement(investAgreement)
+    setInvestAgreement(investAgreement);
   }
 
-  function handleSignInvesAgreementSuccess() {
-    console.log('handleSignInvesAgreementSuccess')
+  function cancelAgreement() {
+    setInvestAgreement(null);
   }
 
   return (
@@ -42,10 +39,11 @@ export const InvestModal: FC<InvestModal.Props> = (props) => {
           <SignInvestAgreementForm
             loan={loan}
             agreement={investAgreement}
-            onSuccess={handleSignInvesAgreementSuccess}
+            onSignInvestAgreement={props.onSignInvestAgreement}
+            onBack={cancelAgreement}
           />
         ) : null }
       </div>
     </Modal>
-  )
-}
+  );
+};

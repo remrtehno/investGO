@@ -2,9 +2,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {useParams} from 'react-router';
 
-import {useCreateLoan} from 'src/api/borrowerApi/useCreateLoanApi';
 import {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
@@ -12,7 +10,6 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
-import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import type {Borrower} from 'src/types/Borrower';
@@ -29,9 +26,12 @@ export declare namespace InvestAgreementForm {
 
 export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   const fields = useInvestAgreementFields(props.loan.min_investment_size, props.loan.amount);
-  const [createInvestAgreementResult, createInvestAgreement, createInvestAgreementState] = useCreateInvestAgreementApi();
+  const [
+    createInvestAgreementResult,
+    createInvestAgreement,
+    createInvestAgreementState,
+  ] = useCreateInvestAgreementApi();
   const formApiRef = useRef<Form.Api | null>(null);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   function getInitialValues() {
     return ({
@@ -51,9 +51,8 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('success form', createInvestAgreementResult)
     if (createInvestAgreementState.isSuccess) {
-      props.onSuccess(createInvestAgreementResult)
+      props.onSuccess(createInvestAgreementResult);
     }
   }, [createInvestAgreementResult]);
 

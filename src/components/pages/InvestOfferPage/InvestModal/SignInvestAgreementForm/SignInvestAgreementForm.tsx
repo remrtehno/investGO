@@ -2,18 +2,16 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {useParams} from 'react-router';
 
-import {useCreateLoan} from 'src/api/borrowerApi/useCreateLoanApi';
 import type {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
 import {useSignInvestAgreementApi} from 'src/api/investorApi/useSignInvestAgreementApi';
+import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
-import {Modal} from 'src/components/common/Modal/Modal';
 import {SmsForm} from 'src/components/common/SmsForm';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
@@ -27,7 +25,8 @@ export declare namespace SignInvestAgreementForm {
   export type Props = {
     loan: Borrower.LoanDetails,
     agreement: useCreateInvestAgreementApi.Response,
-    onSuccess(investAgreement: useSignInvestAgreementApi.Response): void,
+    onSignInvestAgreement(): void,
+    onBack(): void,
   };
 }
 
@@ -36,12 +35,14 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
   const [signInvestAgreementResult, signInvestAgreement, signInvestAgreementState] = useSignInvestAgreementApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const [isSmsFormOpened, setIsSmsFormOpened] = useState(false);
+  const [, smsSignApi] = useSmsSignApi();
+  const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
+  const [smsCodeError, setSmsCodeError] = useState('');
 
   function getInitialValues() {
     return ({
       ...getDefaultFieldValues(fields),
       loan_request_id: props.loan.id,
-      // amount: props.loan.min_investment_size,
     });
   }
 
@@ -54,14 +55,25 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
     setErrors(errors);
   }, []);
 
-  /*
-   * useEffect(() => {
-   *   console.log('success form', signInvestAgreementResult)
-   *   if (signInvestAgreementState.isSuccess) {
-   *     props.onSuccess(signInvestAgreementResult)
-   *   }
-   * }, [signInvestAgreementResult]);
-   */
+  function getCode() {
+    setSmsCodeError('');
+    setIsSmsModalOpened(true);
+    smsSignApi({
+      entity_id: props.agreement.uuid as string,
+      entity_type: props.agreement.type as string,
+    });
+  }
+
+  function handleSubmit() {
+    getCode();
+  }
+
+  function handleSmsCode(code: string) {
+    signInvestAgreement({
+      code: parseInt(code, 10),
+      loan_request_id: props.loan.id,
+    });
+  }
 
   useEffect(() => {
     const error = signInvestAgreementState.error;
@@ -74,15 +86,14 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
     }
   }, [signInvestAgreementState.error]);
 
-  function handleSubmit() {
-    setIsSmsFormOpened(true);
-  }
+  useEffect(() => {
+    if (signInvestAgreementState.isSuccess) {
+      props.onSignInvestAgreement();
+    }
+  }, [signInvestAgreementState.isSuccess]);
 
-  function handleSmsCode(code: string) {
-    signInvestAgreement({
-      code: parseInt(code, 10),
-      loan_request_id: values.loan_request_id,
-    });
+  function handleBackButton() {
+    props.onBack();
   }
 
   return (
@@ -94,6 +105,7 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
       fields={fields}
       onSubmit={handleSubmit}
       formApiRef={formApiRef}
+      id='SignInvestAgreementForm'
     >
       <FormTitle>Подписание договора инвестирования</FormTitle>
       <div className={s.subtitle}>Ознакомьтесь с договором и подтвердите / подпишите КЭП.</div>
@@ -115,6 +127,7 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
             theme={ButtonTheme.light}
             size={ButtonSize.m}
             disabled={Boolean(formApiRef?.current?.isValid === false)}
+            onClick={handleBackButton}
           >
             Назад
           </Button>
@@ -124,15 +137,23 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
             theme={ButtonTheme.black}
             size={ButtonSize.m}
             disabled={Boolean(formApiRef?.current?.isValid === false)}
+            form='SignInvestAgreementForm'
           >
             Подтвердить
           </Button>
         </div>
       </FormActions>
-      <SmsForm
-        onClose={() => setIsSmsFormOpened(false)}
-        onCodeEnter={handleSmsCode}
-      />
+      { isSmsModalOpened ? (
+        <SmsForm
+          onCodeEnter={handleSmsCode}
+          error={smsCodeError}
+          onClose={() => {
+            setSmsCodeError('');
+            setIsSmsModalOpened(false);
+          }}
+          onCodeResend={getCode}
+        />
+      ) : null }
     </Form>
   );
 };

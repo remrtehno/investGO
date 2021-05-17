@@ -17,25 +17,20 @@ export declare namespace useCreateInvestAgreementApi {
   };
 
   export type Response = {
-    file: FilePrimitive
+    file: FilePrimitive,
+    type: string,
+    uuid: string,
   };
 }
 
 export const useCreateInvestAgreementApi = () => {
   const request = useApiRequest();
-  // const setUser = useSetRecoilState(userAtom);
 
   return useApi<useCreateInvestAgreementApi.Payload, null>(async(payload) => {
     const result = await request<useCreateInvestAgreementApi.Response>(api.investor.createInvestAgreement(), {
       method: 'POST',
       body: JSON.stringify(payload),
     });
-
-    // setUser({
-    //   user: null,
-    //   status: RequestStatus.success,
-    //   error: null,
-    // });
 
     return result;
   }, null);

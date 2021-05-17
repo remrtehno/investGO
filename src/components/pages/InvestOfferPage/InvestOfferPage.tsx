@@ -31,6 +31,10 @@ export const InvestOfferPage = withAuth(() => {
     setError(getLoanState.error);
   }, [getLoanState.error]);
 
+  function handleSignInvestAgreement() {
+    getLoan(null);
+  }
+
   const menuItems = useMemo(() => {
     return (
       [
@@ -68,7 +72,7 @@ export const InvestOfferPage = withAuth(() => {
                   </Text>
                 </div>
               </div>
-              <OfferDetails loan={loan} />
+              <OfferDetails loan={loan} onSignInvestAgreement={handleSignInvestAgreement} />
             </div>
           ) : null }
           { error ? (
