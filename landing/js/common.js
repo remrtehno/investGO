@@ -211,6 +211,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+  var isMobile = window.innerWidth < 992;
+
 
   // JSON to CSV Converter
   function ConvertToCSV(objArray) {
@@ -249,16 +251,39 @@ $(document).ready(function () {
             var dateAchieve = new Date(value.limit_achievement_date);
             documentsAjaxLoadTable.append(`
              <tr>
-                <th scope="row">${value.loan_request_id}</th>
+                <th scope="row">
+                    <div class="mobile">ID</div>
+                    ${value.num}
+                </th>
                 <td>
+                    <div class="mobile">
+                      Дата публикации инвестиционного предложения
+                    </div>
                     ${datePublish.getDate()}.${datePublish.getMonth()}.${datePublish.getFullYear()} / 
                     ${datePublish.getHours() > 10 ? datePublish.getHours() : '0' + datePublish.getHours()}:${datePublish.getMinutes() > 10 ? datePublish.getMinutes() : '0' + datePublish.getMinutes()}</td>
-                <td>${dateAchieve.getDate()}.${dateAchieve.getMonth()}.${dateAchieve.getFullYear()}</td>
-                <td>${value.amount}</td>
-                <td>${value.okved && value.okved[0] && value.okved[0].cod}</td>
+                <td>
+                  <div class="mobile">
+                    Дата достижения максимальной суммы инвестиционного предложения
+                  </div>
+                    ${dateAchieve.getDate()}.${dateAchieve.getMonth()}.${dateAchieve.getFullYear()}</td>
+                <td>
+                  <div class="mobile">Сумма инвестиционного предложения</div>
+                  ${value.amount}
+                </td>
+                <td>
+                  <div class="mobile">ОКВЕД лица, привлекающего инвестиции</div>
+                  ${value.okved && value.okved[0] && value.okved[0].cod}
+                </td>
               </tr>
           `)
           })
+
+          if(isMobile) {
+            $('.responsive-js tbody').find('th').on('click', function (){
+              $(this).toggleClass('active');
+              $(this).parent().find('td').slideToggle();
+            })
+          }
         }
       }
 

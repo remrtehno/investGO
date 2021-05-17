@@ -3607,3 +3607,80 @@ ul.inline-list li {
   margin-bottom: 20px;
   margin-left: 43px;
 }
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .documents-item {
+    font-size: 14px;
+  }
+  .documents-item__top {
+    flex-flow: wrap;
+  }
+  .documents-item__text {
+    padding: 0;
+    margin-bottom: 15px;
+    padding-right: 32px;
+  }
+  .documents-item__right {
+    margin: auto;
+    margin-right: 0;
+    text-align: right;
+  }
+  .accordion-content__table tbody th {
+    position: relative;
+  }
+  .accordion-content__table tbody th:first-child::after {
+    content: "\f0dd";
+    font-family: 'Font Awesome 5 Pro';
+    right: 15px;
+    position: absolute;
+    transform: rotate(90deg);
+  }
+  .accordion-content__table tbody th:first-child.active::after {
+    transform: rotate(0deg);
+  }
+  .accordion-content__table thead, .accordion-content__table td {
+    display: none;
+  }
+
+  .accordion-content__table, .accordion-content__table th,  .accordion-content__table td,
+  .accordion-content__table tbody, .accordion-content__table tr{
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .accordion-content__table .col-6 {
+    max-width: 50%;
+  }
+  .accordion-content__table td {
+    display: none;
+  }
+
+  .accordion-content__table .col-6:first-child {
+    color: #BDBDBD;
+  }
+  .accordion-content__table td:nth-child(odd) {
+    background-color: #f7f7f7;
+  }
+  .accordion-content__table th:first-child {
+    background-color: #f7f7f7;
+  }
+  .mobile {
+    color: #BDBDBD;
+    display: inline-block;
+    max-width: 50%;
+    width: 100%;
+    vertical-align: middle;
+    padding-right: 15px;
+    font-size: 90%;
+    padding-left: 15px;
+  }
+
+  .download-button {
+    margin-left: 0;
+  }
+}
