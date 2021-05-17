@@ -7,6 +7,7 @@ import {AcceptRules} from 'src/components/pages/ProfilePage/AcceptRules';
 import {SignDocuments} from 'src/components/pages/ProfilePage/ProfileForms/forms/SignDocuments';
 import type {ProfilePage} from 'src/components/pages/ProfilePage/ProfilePage';
 import {ProfileFormType} from 'src/components/pages/ProfilePage/profilePageTypes';
+import { useIsRegistrationComplete } from 'src/hooks/useIsRegistrationComplete';
 import {usePageScroll} from 'src/hooks/usePageScroll';
 import {userAtom} from 'src/recoil/userAtom';
 import {getElementPosition} from 'src/utils/getElementPosition';
@@ -27,8 +28,9 @@ const forms: Record<ProfileFormType, FC<ProfileForms.FormProps>> = {
   [ProfileFormType.ur]: UrForm,
   [ProfileFormType.fl]: () => {
     const {user} = useRecoilValue(userAtom);
+    const isRegistrationComplete = useIsRegistrationComplete();
 
-    if (!user || !user.sign_document) {
+    if (!user || isRegistrationComplete) {
       return null;
     }
 
