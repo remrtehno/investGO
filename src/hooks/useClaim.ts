@@ -1,9 +1,9 @@
 import {useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
 
+import {ModerationStatus} from 'src/contstants/ModerationStatus';
 import {Role} from 'src/contstants/Role';
 import {userAtom} from 'src/recoil/userAtom';
-import {ModerationStatus} from 'src/contstants/ModerationStatus';
 
 export function useClaims() {
   const {user} = useRecoilValue(userAtom);
@@ -17,18 +17,27 @@ export function useClaims() {
     },
     bankDetailsForm: {
       read: () => {
-        if (user && user.company) {
-          console.log(Boolean(
-            user?.company &&
-            user?.company?.status !== ModerationStatus.filled  &&
-            user?.company?.status !== ModerationStatus.waiting  &&
-            user?.roles.includes(Role.borrower)));
-        }
         return Boolean(
-          user?.company &&
-          user?.company?.status !== ModerationStatus.filled  &&
-          user?.company?.status !== ModerationStatus.waiting  &&
-          user?.roles.includes(Role.borrower));
+          user?.company
+          && user?.company?.status !== ModerationStatus.filled
+          && user?.company?.status !== ModerationStatus.waiting
+          && user?.roles.includes(Role.borrower)
+        );
+      },
+    },
+    signDocuments: {
+      read: () => {
+        if (user && user.roles.includes(Role.fl)) {
+          return Boolean(
+            true
+          );
+        }
+
+        if (user && user.company && user.company.status === ModerationStatus.approved) {
+          return true;
+        }
+
+        return false;
       },
     },
   }), [user]);
