@@ -9,9 +9,9 @@ import {userAtom} from 'src/recoil/userAtom';
 import {RequestStatus} from 'src/types/common';
 import type {User} from 'src/types/User';
 
-export declare namespace useInvestAgreementApi {
+export declare namespace useSignInvestAgreementApi {
   export type Payload = {
-    amount: number,
+    code: number,
     loan_request_id: string
   };
 
@@ -19,23 +19,16 @@ export declare namespace useInvestAgreementApi {
   };
 }
 
-export const useInvestAgreementApi = () => {
+export const useSignInvestAgreementApi = () => {
   const request = useApiRequest();
-  // const setUser = useSetRecoilState(userAtom);
 
-  return useApi<useInvestAgreementApi.Payload, null>(async(payload) => {
-    const result = await request<useInvestAgreementApi.Response>(api.investor.createInvestAgreement(), {
+  return useApi<useSignInvestAgreementApi.Payload, null>(async(payload) => {
+    const result = await request<useSignInvestAgreementApi.Response>(api.investor.signInvestAgreement(), {
       method: 'POST',
       body: JSON.stringify(payload),
     });
 
-    // setUser({
-    //   user: null,
-    //   status: RequestStatus.success,
-    //   error: null,
-    // });
-
-    return null;
+    return result;
   }, null);
 };
 

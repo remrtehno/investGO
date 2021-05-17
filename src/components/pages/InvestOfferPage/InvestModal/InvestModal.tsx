@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import React from 'react';
-import { useInvestAgreementApi } from 'src/api/investorApi/useInvestAgreementApi';
+import { useCreateInvestAgreementApi } from 'src/api/investorApi/useCreateInvestAgreementApi';
 
 import { Modal } from 'src/components/common/Modal/Modal';
 import { Borrower } from 'src/types/Borrower';
@@ -11,6 +11,7 @@ import {plural} from 'src/utils/plural';
 import { InvestAgreementForm } from './InvestAgreementForm';
 
 import s from './InvestModal.scss';
+import { SignInvestAgreementForm } from './SignInvestAgreementForm';
 
 export declare namespace InvestModal {
   export type Props = {
@@ -21,10 +22,14 @@ export declare namespace InvestModal {
 
 export const InvestModal: FC<InvestModal.Props> = (props) => {
   const {loan} = props;
-  const [investAgreement, setInvestAgreement] = useState(null as useInvestAgreementApi.Response | null)
+  const [investAgreement, setInvestAgreement] = useState(null as useCreateInvestAgreementApi.Response | null)
 
-  function handleInvesAgreementSuccess(investAgreement: useInvestAgreementApi.Response) {
+  function handleInvesAgreementSuccess(investAgreement: useCreateInvestAgreementApi.Response) {
     setInvestAgreement(investAgreement)
+  }
+
+  function handleSignInvesAgreementSuccess() {
+    console.log('handleSignInvesAgreementSuccess')
   }
 
   return (
@@ -34,7 +39,11 @@ export const InvestModal: FC<InvestModal.Props> = (props) => {
           <InvestAgreementForm loan={loan} onSuccess={handleInvesAgreementSuccess} />
         ) : null }
         { investAgreement ? (
-          <div>!!!</div>
+          <SignInvestAgreementForm
+            loan={loan}
+            agreement={investAgreement}
+            onSuccess={handleSignInvesAgreementSuccess}
+          />
         ) : null }
       </div>
     </Modal>

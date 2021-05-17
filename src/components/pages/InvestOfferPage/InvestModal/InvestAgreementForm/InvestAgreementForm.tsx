@@ -5,7 +5,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useParams} from 'react-router';
 
 import {useCreateLoan} from 'src/api/borrowerApi/useCreateLoanApi';
-import {useInvestAgreementApi} from 'src/api/investorApi/useInvestAgreementApi';
+import {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -23,13 +23,13 @@ import {useInvestAgreementFields} from './useInvestAgreementFields';
 export declare namespace InvestAgreementForm {
   export type Props = {
     loan: Borrower.LoanDetails,
-    onSuccess(investAgreement: useInvestAgreementApi.Response): void,
+    onSuccess(investAgreement: useCreateInvestAgreementApi.Response): void,
   };
 }
 
 export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   const fields = useInvestAgreementFields(props.loan.min_investment_size, props.loan.amount);
-  const [createInvestAgreementResult, createInvestAgreement, createInvestAgreementState] = useInvestAgreementApi();
+  const [createInvestAgreementResult, createInvestAgreement, createInvestAgreementState] = useCreateInvestAgreementApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
@@ -51,10 +51,11 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log('success form', createInvestAgreementResult)
     if (createInvestAgreementState.isSuccess) {
       props.onSuccess(createInvestAgreementResult)
     }
-  }, [createInvestAgreementState.isSuccess]);
+  }, [createInvestAgreementResult]);
 
   useEffect(() => {
     const error = createInvestAgreementState.error;
