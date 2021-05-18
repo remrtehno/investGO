@@ -65,7 +65,7 @@ export const InvestorPage = withAuth(() => {
             </section>
             <section className={s.section}>
               <Text size={TextSize.h2} className={s.sectionTitle}>Статистика</Text>
-              <InvestorStats />
+              <InvestorStats portfolio={portfolio} />
             </section>
             { loans && loans.length ? (
               <section className={s.section}>
