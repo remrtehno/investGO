@@ -60,6 +60,7 @@ export declare namespace Project {
     title: string,
     users_count: number,
     uuid: string,
+    loan_request_id: string,
 
     amount: string,
     rate: number,

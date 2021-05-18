@@ -38,14 +38,13 @@ export const ProjectCard: FC<ProjectCard.Props> = (props) => {
   const {project} = props;
 
   function getProgress() {
-    // return `${project.collected_amount * 100 / project.amount}%`;
-    return 0;
+    return `${parseInt(project.collected_amount, 10) * 100 / parseInt(project.amount, 10)}%`;
   }
 
   return (
     <div className='col-lg-4 col-md-6 col-sm-10 offset-sm-1 offset-md-0'>
       <div className={s.projectItem}>
-        <Link to={RoutePaths.investOffer(project.uuid)}>
+        <Link to={RoutePaths.investOffer(project.loan_request_id)}>
           <div
             className={s.projectImageContainer}
             style={{backgroundImage: `url(${project?.preview?.url || pr1})`}}
