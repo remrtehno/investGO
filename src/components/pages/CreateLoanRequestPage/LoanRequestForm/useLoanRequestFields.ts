@@ -8,7 +8,7 @@ import {minValue} from 'src/validations/minValue';
 import {required} from 'src/validations/required';
 
 function getCollectionStartMinDate() {
-  return new Date(Date.now() + (1000 * 60 * 60 * 24 * 10));
+  return new Date(Date.now() + (1000 * 60 * 60 * 24 * 1));
 }
 
 export const useLoanRequestFields = () => {
@@ -30,7 +30,7 @@ export const useLoanRequestFields = () => {
       name: 'target',
       type: FieldType.textArea,
       label: 'Цель займа',
-      validations: [required(), minLength(20)],
+      validations: [required()],
     },
     rate: {
       name: 'rate',
