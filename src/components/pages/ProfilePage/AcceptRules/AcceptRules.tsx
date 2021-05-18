@@ -28,7 +28,9 @@ export function AcceptRules(props: AcceptRules.Props) {
     return null;
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    // e.preventDefault();
+    // e.stopPropagation();
     setProfileStep({profileStep: ProfileSteps.rules});
   }
 
