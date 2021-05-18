@@ -157,6 +157,10 @@
       text-align: left;
       max-width: 740px;
       margin-bottom: 40px;
+      @media (max-width: 992px) {
+        font-size: 18px;
+        line-height: 22px;
+      }
     }
   }
 
@@ -168,6 +172,11 @@
     --pd-x: 110px;
     padding: 75px var(--pd-x);
     margin-bottom: 40px;
+
+    @media (max-width: 992px) {
+      --pd-x: 20px;
+      padding-top: 35px;
+    }
 
     &:last-child {
       margin-bottom: 81px;
@@ -187,17 +196,29 @@
         text-align: left;
       }
     }
+    ul {
+      @media (max-width: 992px) {
+        list-style: none;
+      }
+    }
 
     ol {
       counter-reset: my-sec-counter;
 
       li {
         position: relative;
-        padding-left: 20px;
-        padding-right: 20px;
+        @media (min-width: 992px) {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        --text-indent: 1px;
+        text-indent: var(--text-indent);
+        @media (max-width: 992px) {
+          --text-indent: 19px;
+        }
 
         &::before {
-          left: -1px;
+          left: calc(var(--text-indent) * -1);
           position: absolute;
           counter-increment: my-sec-counter;
           content: counter(my-sec-counter) ".";
@@ -240,6 +261,11 @@
     width: 50%;
     @media (max-width: 992px) {
       width: 100%;
+      margin-bottom: 10px;
+
+      .text-content {
+
+      }
     }
 
     .text-content {
@@ -276,7 +302,9 @@
   }
 
   .vertical-line {
-    @include verticalLine;
+    @media (min-width: 992px) {
+      @include verticalLine;
+    }
     overflow: hidden;
     //& > ul {
     //  .row {
@@ -289,12 +317,18 @@
       &.has-header {
         border-top: 1px solid #eeeef0;
         margin-top: 0;
+        @media (max-width: 992px) {
+          & > li:first-child {
+            display: none;
+          }
+        }
       }
 
       li {
         box-shadow: inset 0px -1px 0px #eeeef0;
         padding-bottom: 12px;
         padding-top: 12px;
+
 
         .row {
           --bs-gutter-x: 40px;
@@ -314,6 +348,9 @@
       float: left;
       padding: 0;
       margin-left: 16px;
+      @media (max-width: 992px) {
+        display: none;
+      }
     }
 
     tr {
@@ -322,7 +359,9 @@
   }
 
   .text-content {
-    max-width: calc(50% - 20px);
+    @media (min-width: 992px) {
+      max-width: calc(50% - 20px);
+    }
     font-family: Nunito;
     font-style: normal;
     font-weight: 600;
@@ -368,15 +407,18 @@
 
   .grid-table {
     margin-bottom: 13px;
-    @include verticalLine;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: auto;
-    gap: 0px 0px;
-    grid-template-areas:
+    @media (min-width: 992px) {
+      @include verticalLine;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: auto;
+      gap: 0px 0px;
+      grid-template-areas:
     ". ."
     ". ."
     ". .";
+    }
+
 
     &-title {
       color: #7F7F7F;
@@ -440,6 +482,9 @@
         /* Text */
 
         color: #000000;
+        @media (max-width: 992px) {
+          display: none;
+        }
       }
 
       table {
@@ -448,7 +493,9 @@
         font-weight: normal;
         font-size: 13px;
         line-height: 16px;
-        margin-left: 20px;
+        @media (min-width: 992px) {
+          margin-left: 20px;
+        }
         /* identical to box height, or 123% */
 
 
