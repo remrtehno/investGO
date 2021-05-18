@@ -70,17 +70,25 @@ export const ProjectDetails: FC<ProjectDetails.Props> = (props) => {
             <Text size={TextSize.body2} className='col-8'>
               { loan.borrower?.emails?.map((email, index) => {
                 return (
-                  <a href={`mailto:${email}`} key={index}>{ email }</a>
+                  <div key={index}>
+                    <a href={`mailto:${email}`}>{ email }</a>
+                  </div>
                 );
               }) }
             </Text>
           </div>
           <div className={cx('row', s.companyRow)}>
             <Text size={TextSize.body2} weight={TextWeight.semibold} className='col-4'>
-              Телефон:
+              { loan.borrower?.phones?.length > 1 ? (<span>Телефоны:</span>) : <span>Телефон:</span> }
             </Text>
             <Text size={TextSize.body2} className='col-8'>
-              { loan.borrower?.phones[0] }
+              { loan.borrower?.phones?.map((phone, index) => {
+                return (
+                  <div key={index}>
+                    { phone }
+                  </div>
+                );
+              }) }
             </Text>
           </div>
           <div className={cx('row', s.companyRow)}>
