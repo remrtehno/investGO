@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router';
+import {useHistory} from 'react-router';
 import {useSetRecoilState} from 'recoil';
-import { RoutePaths } from 'src/components/common/App/routes';
 
+import {RoutePaths} from 'src/components/common/App/routes';
 import {api} from 'src/contstants/api';
 import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
