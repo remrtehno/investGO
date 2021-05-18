@@ -4,10 +4,11 @@ import type {RouteProps} from 'react-router';
 import {AboutUs} from 'src/components/pages/AboutUs';
 import {BorrowerPage} from 'src/components/pages/BorrowerPage';
 import {CompanyEditPage} from 'src/components/pages/CompanyEditPage';
+import {CreateLoanRequestPage} from 'src/components/pages/CreateLoanRequestPage';
 import {EmailConfirmationPage} from 'src/components/pages/EmailConfirmationPage';
+import { InvestOfferPage } from 'src/components/pages/InvestOfferPage';
 import {InvestorPage} from 'src/components/pages/InvestorPage';
 import {LoanRequestPage} from 'src/components/pages/LoanRequestPage';
-import {CreateLoanRequestPage} from 'src/components/pages/CreateLoanRequestPage';
 import {PasswordResetPage} from 'src/components/pages/PasswordResetPage';
 import {ProfilePage} from 'src/components/pages/ProfilePage';
 import {ProjectsPage} from 'src/components/pages/ProjectsPage';
@@ -34,6 +35,7 @@ export const RoutePaths = {
   createLoanRequest: (companyId = ':companyId') => `/borrower/create-loan-request/${companyId}`,
   loanRequest: (loanId = ':loanId') => `/borrower/loan-request/${loanId}`,
   companyEdit: (companyId = ':companyId') => `/company/edit/${companyId}`,
+  investOffer: (loanId = ':loanId') => `/offer/${loanId}`,
 };
 
 export const routes: RouteInfo[] = [
@@ -95,5 +97,9 @@ export const routes: RouteInfo[] = [
   {
     path: RoutePaths.loanRequest(),
     Component: LoanRequestPage,
+  },
+  {
+    path: RoutePaths.investOffer(),
+    Component: InvestOfferPage,
   },
 ];

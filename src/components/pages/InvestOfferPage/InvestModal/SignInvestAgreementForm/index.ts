@@ -1,0 +1,1 @@
+export {SignInvestAgreementForm} from './SignInvestAgreementForm';

@@ -1,0 +1,11 @@
+@import 'src/libs/bootstrap/_breakpoints.scss';
+@import 'src/libs/bootstrap/_variables.scss';
+
+.investModal {
+  & > div {
+    @include media-breakpoint-up(sm) {
+      min-width: 550px;
+      max-width: 550px;
+    }
+  }
+}
