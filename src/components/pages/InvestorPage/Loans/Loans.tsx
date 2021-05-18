@@ -3,6 +3,7 @@ import type {FC} from 'react';
 import React, {useRef, useState} from 'react';
 import {useRecoilValue} from 'recoil';
 
+import type {useGetPortfolioProjects} from 'src/api/investorApi/useGetPortfolioProjectsApi';
 import {investorLoansAtom} from 'src/recoil/investorLoansAtom';
 
 import {Loan} from './Loan/Loan';
@@ -11,6 +12,7 @@ import s from './Loans.scss';
 
 declare namespace Loans {
   export type Props = {
+    projects: useGetPortfolioProjects.Response,
   }
 }
 
@@ -46,8 +48,12 @@ export const Loans: FC<Loans.Props> = (props) => {
             return null;
           }
 
+          const project = props?.projects?.filter((proj) => {
+            return proj.loan_request_id === loan.id;
+          });
+
           return (
-            <Loan loan={loan} key={index} />
+            <Loan loan={loan} project={project} key={index} />
           );
         }) }
       </div>

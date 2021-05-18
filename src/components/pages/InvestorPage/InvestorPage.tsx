@@ -3,6 +3,7 @@ import {useRecoilValue} from 'recoil';
 
 import {useGetInvestorLoans} from 'src/api/investorApi/useGetInvestorLoansApi';
 import { useGetInvestorPortfolio } from 'src/api/investorApi/useGetInvestorPortfolioApi';
+import { useGetPortfolioProjects } from 'src/api/investorApi/useGetPortfolioProjectsApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
 import {TopMenu} from 'src/components/common/TopMenu';
@@ -24,6 +25,7 @@ export const InvestorPage = withAuth(() => {
   const {loans} = useRecoilValue(investorLoansAtom);
   const [, getPortfolio] = useGetInvestorPortfolio();
   const {portfolio} = useRecoilValue(investorPortfolioAtom);
+  const [portfolioProjects, getPortfolioProjects] = useGetPortfolioProjects();
 
   const menuItems = useMemo(() => {
     return (
@@ -52,6 +54,10 @@ export const InvestorPage = withAuth(() => {
     getPortfolio(null);
   }, []);
 
+  useEffect(() => {
+    getPortfolioProjects(null);
+  }, []);
+
   return (
     <Page>
       <div className={s.investorPage}>
@@ -72,7 +78,7 @@ export const InvestorPage = withAuth(() => {
                 <Text size={TextSize.h2} className={s.sectionTitle}>
                   Список инвестируемых проектов
                 </Text>
-                <Loans />
+                <Loans projects={portfolioProjects} />
               </section>
             ) : null }
           </div>

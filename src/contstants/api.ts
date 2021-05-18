@@ -48,5 +48,6 @@ export const api = {
     createInvestAgreement: () => '/investor/invest-agreement',
     signInvestAgreement: () => '/investor/invest-agreement-sign',
     getPortfolio: () => '/investor/portfolio',
+    getPortfolioProjects: () => '/investor/portfolio/projects',
   },
 };

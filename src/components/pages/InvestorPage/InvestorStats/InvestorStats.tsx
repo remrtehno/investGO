@@ -45,7 +45,14 @@ export const InvestorStats: FC<InvestorStats.Props> = (props) => {
           <div className={s.chart}>
             <PieChart
               data={[
-                {title: 'One', value: parseInt(props.portfolio?.wait_debts || '0', 10) || 100, color: '#D1CED2'},
+                {
+                  title: 'One',
+                  value: (
+                    !parseInt(props.portfolio?.wait_debts || '0', 10) && !parseInt(props.portfolio?.paid_out || '0', 10) && !parseInt(props.portfolio?.missed_debts || '0', 10)
+                      ? 100
+                      : parseInt(props.portfolio?.wait_debts || '0', 10)),
+                  color: '#D1CED2',
+                },
                 {title: 'Two', value: parseInt(props.portfolio?.paid_out || '0', 10), color: '#000000'},
                 {title: 'Three', value: parseInt(props.portfolio?.missed_debts || '0', 10), color: '#FF3B30'},
               ]}
