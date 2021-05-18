@@ -4,6 +4,7 @@ import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
 import type {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
+import { useInvestApi } from 'src/api/investorApi/useInvestApi';
 import {useSignInvestAgreementApi} from 'src/api/investorApi/useSignInvestAgreementApi';
 import {useSmsSignApi} from 'src/api/smsApi/useSmsSignApi';
 import {Form} from 'src/components/common/Form';
@@ -32,6 +33,7 @@ export declare namespace SignInvestAgreementForm {
 export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props) => {
   const fields = useSignInvestAgreementFields();
   const [, signInvestAgreement, signInvestAgreementState] = useSignInvestAgreementApi();
+  const [, invest, investState] = useInvestApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const [, smsSignApi, smsSignApiState] = useSmsSignApi();
   const [isSmsModalOpened, setIsSmsModalOpened] = useState(false);
@@ -112,7 +114,7 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
       id='SignInvestAgreementForm'
     >
       <FormTitle>Подписание договора инвестирования</FormTitle>
-      <div className={s.subtitle}>Ознакомьтесь с договором и подтвердите / подпишите КЭП.</div>
+      <div className={s.subtitle}>Ознакомьтесь с договором и подтвердите.</div>
       <FormRow>
         <div className='col-12'>
           <a target='_blank' href={props.agreement.file.url} className={s.docLink}>
