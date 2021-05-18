@@ -44,7 +44,6 @@ export const Loan: FC<Loan.Props> = (props) => {
     <div className={cx(s.loan, isOpened && s.opened)}>
       <div className={cx('row', 'align-items-center', s.row)}>
         <div className='col-11 col-md-3'>
-          <i className={s.projectImg} />
           { loan?.company?.name || 'ООО Завод ЖБИ' }
         </div>
         <div className='col-1 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>

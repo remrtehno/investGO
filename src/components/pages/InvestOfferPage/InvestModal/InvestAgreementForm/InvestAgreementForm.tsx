@@ -2,9 +2,10 @@ import cx from 'classnames';
 import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import { useRecoilValue } from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
+import {useInvestApi} from 'src/api/investorApi/useInvestApi';
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FormActions} from 'src/components/common/Form/FormActions';
@@ -13,7 +14,7 @@ import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
-import { investorPortfolioAtom } from 'src/recoil/investorPortfolioAtom';
+import {investorPortfolioAtom} from 'src/recoil/investorPortfolioAtom';
 import type {Borrower} from 'src/types/Borrower';
 
 import s from './InvestAgreementForm.scss';
@@ -27,7 +28,7 @@ export declare namespace InvestAgreementForm {
 }
 
 export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
-  const fields = useInvestAgreementFields(props.loan.min_investment_size, props.loan.amount);
+  const fields = useInvestAgreementFields(props.loan.min_amount, props.loan.amount);
   const [
     createInvestAgreementResult,
     createInvestAgreement,
@@ -35,13 +36,14 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   ] = useCreateInvestAgreementApi();
   const formApiRef = useRef<Form.Api | null>(null);
   const {portfolio} = useRecoilValue(investorPortfolioAtom);
+  const [, invest, investState] = useInvestApi();
 
   function getInitialValues() {
     return ({
       ...getDefaultFieldValues(fields),
       amount_available: portfolio?.balance || 0,
       loan_request_id: props.loan.id,
-      amount: props.loan.min_investment_size,
+      amount: props.loan.min_amount,
     });
   }
 
@@ -72,11 +74,21 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   }, [createInvestAgreementState.error]);
 
   function handleSubmit() {
-    createInvestAgreement({
+    invest({
       amount: values.amount,
       loan_request_id: values.loan_request_id,
+      type: 'loan',
     });
   }
+
+  useEffect(() => {
+    if (investState.isSuccess) {
+      createInvestAgreement({
+        amount: values.amount,
+        loan_request_id: values.loan_request_id,
+      });
+    }
+  }, [investState.isSuccess]);
 
   return (
     <Form
