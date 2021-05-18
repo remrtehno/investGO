@@ -20,6 +20,7 @@ export const Loans: FC<Loans.Props> = (props) => {
   const {loans} = useRecoilValue(investorLoansAtom);
   const [showAll, setShowAll] = useState(false);
   const loansToShow = 5;
+  const projects = props.projects;
 
   function toggleShowAll() {
     setShowAll(!showAll);
@@ -43,13 +44,13 @@ export const Loans: FC<Loans.Props> = (props) => {
         </div>
       </div>
       <div className={s.body}>
-        { loans.map((loan, index) => {
+        { projects.map((project, index) => {
           if (showAll && index > loansToShow - 1) {
             return null;
           }
 
-          const project = props?.projects?.filter((proj) => {
-            return proj.loan_request_id === loan.id;
+          const loan = loans?.filter((loan) => {
+            return project.loan_request_id === loan.id;
           });
 
           return (

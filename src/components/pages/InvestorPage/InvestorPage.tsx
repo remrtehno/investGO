@@ -73,7 +73,7 @@ export const InvestorPage = withAuth(() => {
               <Text size={TextSize.h2} className={s.sectionTitle}>Статистика</Text>
               <InvestorStats portfolio={portfolio} />
             </section>
-            { loans && loans.length ? (
+            { portfolioProjects && portfolioProjects.length ? (
               <section className={s.section}>
                 <Text size={TextSize.h2} className={s.sectionTitle}>
                   Список инвестируемых проектов
