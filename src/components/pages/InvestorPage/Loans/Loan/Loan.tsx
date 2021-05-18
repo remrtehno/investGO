@@ -21,6 +21,7 @@ import {PaymentTimeline} from './PaymentTimeline';
 declare namespace Loan {
   export type Props = {
     loan: Borrower.Loan,
+    project: {}
   }
 }
 
@@ -56,7 +57,7 @@ export const Loan: FC<Loan.Props> = (props) => {
           { loan.rate }%
         </div>
         <div className='col-2 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
-          12 500 ₽
+          { props.project && props.project.accrued_amount ? props.project.accrued_amount : '0' } ₽
         </div>
         <div className='col-1 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
           { loan.term_limit } { plural(loan.term_limit, ['день', 'дня', 'дней']) }

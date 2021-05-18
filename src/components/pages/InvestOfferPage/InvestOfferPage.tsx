@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import {useRecoilValue} from 'recoil';
 
 import {useGetInvestorLoans} from 'src/api/investorApi/useGetInvestorLoansApi';
+import { useGetInvestorPortfolio } from 'src/api/investorApi/useGetInvestorPortfolioApi';
 import { useGetLoan } from 'src/api/investorApi/useGetLoanApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
@@ -22,6 +23,7 @@ export const InvestOfferPage = withAuth(() => {
   const {loanId} = useParams() as {loanId: string};
   const [loan, getLoan, getLoanState] = useGetLoan(loanId);
   const [error, setError] = useState(null);
+  const [, getPortfolio] = useGetInvestorPortfolio();
 
   useEffect(() => {
     getLoan(null);
@@ -30,6 +32,10 @@ export const InvestOfferPage = withAuth(() => {
   useEffect(() => {
     setError(getLoanState.error);
   }, [getLoanState.error]);
+
+  useEffect(() => {
+    getPortfolio(null);
+  }, []);
 
   function handleSignInvestAgreement() {
     getLoan(null);
