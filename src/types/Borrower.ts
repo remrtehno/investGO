@@ -1,4 +1,5 @@
 import type {LoanModerationStatus} from 'src/contstants/ModerationStatus';
+import { Project } from './Project';
 
 import type {User} from './User';
 
@@ -194,6 +195,7 @@ export declare namespace Borrower {
     target: string,
     term_limit: number,
     updated_at: string,
-    user_id: string
+    user_id: string,
+    project: Project.InvestorProject
   }
 }

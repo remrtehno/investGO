@@ -15,6 +15,7 @@ import {investorLoansAtom} from 'src/recoil/investorLoansAtom';
 
 import s from './InvestOfferPage.scss';
 import { OfferDetails } from './OfferDetails';
+import { ProjectDetails } from './ProjectDetails';
 
 export declare namespace InvestOfferPage {
 }
@@ -79,6 +80,7 @@ export const InvestOfferPage = withAuth(() => {
                 </div>
               </div>
               <OfferDetails loan={loan} onSignInvestAgreement={handleSignInvestAgreement} />
+              <ProjectDetails loan={loan} />
             </div>
           ) : null }
           { error ? (
