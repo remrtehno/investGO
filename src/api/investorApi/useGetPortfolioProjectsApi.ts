@@ -3,20 +3,19 @@ import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
 
 export declare namespace useGetPortfolioProjects {
-  export type Response = [
-    {
-      accrued_amount: number,
-      company_id: string,
-      company_logo: string,
-      company_name: string,
-      invest_amount: number,
-      loan_request_id: string,
-      loan_request_num: number,
-      rate: number,
-      status: string,
-      term: number
-    }
-  ]
+  export type PortfolioProject = {
+    accrued_amount: number,
+    company_id: string,
+    company_logo: string,
+    company_name: string,
+    invest_amount: number,
+    loan_request_id: string,
+    loan_request_num: number,
+    rate: number,
+    status: string,
+    term: number
+  }
+  export type Response = PortfolioProject[]
 }
 
 export const useGetPortfolioProjects = () => {
