@@ -233,9 +233,7 @@ export function Form(props: Form.Props) {
   return (
     <FormModelProvider value={model}>
       <FormFieldsProvider value={formFields}>
-        <form id={props.id} onSubmit={handleSubmit}>
-          { props.children }
-        </form>
+        { props.children }
       </FormFieldsProvider>
     </FormModelProvider>
   );

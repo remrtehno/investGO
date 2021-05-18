@@ -83,7 +83,6 @@ export const AddPointForm: FC<AddPointForm.Props> = (props) => {
       fields={fields}
       onChange={onChange}
       formApiRef={formApiRef}
-      onSubmit={handleSubmit}
       id='AddPointForm'
     >
       <FormTitle>Новый пункт</FormTitle>
@@ -105,6 +104,7 @@ export const AddPointForm: FC<AddPointForm.Props> = (props) => {
             disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
             type='submit'
             form='AddPointForm'
+            onClick={handleSubmit}
           >Добавить</Button>
         </div>
       </FormActions>

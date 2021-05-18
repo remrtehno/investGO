@@ -162,7 +162,6 @@ export const UrForm: FC<UrForm.Props> = (props) => {
           onChange={onChange}
           formApiRef={formApiRef}
           id='UrForm'
-          onSubmit={onSave}
         >
           <FormRow>
             <Field className='container col-12' name='name' />
@@ -332,10 +331,12 @@ export const UrForm: FC<UrForm.Props> = (props) => {
               <Button
                 theme={ButtonTheme.black}
                 size={ButtonSize.m}
+                onClick={onSave}
                 form='UrForm'
               >Сохранить</Button>
             </div>
           </FormActions>
+
           { user.company
             && user.company.status === ModerationStatus.approved
             && !isRegistrationComplete

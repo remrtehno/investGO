@@ -154,11 +154,6 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
     setIsSuccessModalOpen(false);
   }
 
-
-  function handleSubmit() {
-    return false;
-  }
-
   return (
     <Form
       initialValues={initialValues}
@@ -166,7 +161,6 @@ export const CompanyEditForm: FC<CompanyEditForm.Props> = (props) => {
       values={values}
       onChange={onChange}
       fields={fields}
-      onSubmit={handleSubmit}
       formApiRef={formApiRef}
       id='CompanyEditForm'
     >

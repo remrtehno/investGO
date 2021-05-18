@@ -95,7 +95,6 @@ export const RecoverForm: FC = () => {
       fields={recoverFields}
       onChange={onChange}
       formApiRef={formApiRef}
-      onSubmit={onSubmit}
     >
       <Text className={s.title} size={TextSize.h3}>Восстановление пароля</Text>
       <Field className={s.field} name='email' />
@@ -104,6 +103,7 @@ export const RecoverForm: FC = () => {
         size={ButtonSize.m}
         theme={ButtonTheme.black}
         disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+        onClick={onSubmit}
       >
         Отправить ссылку на почту
       </Button>
