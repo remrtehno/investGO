@@ -81,7 +81,6 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
       values={values}
       onChange={onChange}
       fields={fields}
-      onSubmit={handleSubmit}
       formApiRef={formApiRef}
     >
       <FormTitle>Заключить договор инвестирования</FormTitle>
@@ -101,6 +100,7 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
             theme={ButtonTheme.black}
             size={ButtonSize.m}
             disabled={Boolean(formApiRef?.current?.isValid === false)}
+            onClick={handleSubmit}
           >
             Отправить заявку
           </Button>

@@ -116,7 +116,6 @@ export const PasswordResetForm: FC = () => {
       fields={passwordResetFields}
       onChange={onChange}
       formApiRef={formApiRef}
-      onSubmit={onSubmit}
     >
       <Text className={s.title} size={TextSize.h3}>Новый пароль</Text>
       <Field className={s.field} name='new_password' />
@@ -126,6 +125,7 @@ export const PasswordResetForm: FC = () => {
         size={ButtonSize.m}
         theme={ButtonTheme.black}
         disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+        onClick={onSubmit}
       >
         Применить
       </Button>

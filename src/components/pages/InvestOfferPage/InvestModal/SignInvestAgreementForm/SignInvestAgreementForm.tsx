@@ -108,7 +108,6 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
       values={values}
       onChange={onChange}
       fields={fields}
-      onSubmit={handleSubmit}
       formApiRef={formApiRef}
       id='SignInvestAgreementForm'
     >
@@ -142,6 +141,7 @@ export const SignInvestAgreementForm: FC<SignInvestAgreementForm.Props> = (props
             theme={ButtonTheme.black}
             size={ButtonSize.m}
             disabled={Boolean(formApiRef?.current?.isValid === false)}
+            onClick={handleSubmit}
             form='SignInvestAgreementForm'
           >
             Подтвердить

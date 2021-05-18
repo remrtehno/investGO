@@ -1,4 +1,5 @@
 import cx from 'classnames';
+import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useParams} from 'react-router';
@@ -49,6 +50,15 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
     }
   }, [createLoanState.isSuccess]);
 
+  useEffect(() => {
+    const error = createLoanState.error;
+    const errorMessage = _.get(error, '[0].message');
+    if (!error || !errorMessage) {
+      return;
+    }
+    setErrors({...errors, [error[0].key]: errorMessage});
+  }, [createLoanState.error]);
+
   function handleSubmit() {
     createLoanApi({
       ...values,
@@ -75,7 +85,6 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
         values={values}
         onChange={onChange}
         fields={fields}
-        onSubmit={handleSubmit}
         formApiRef={formApiRef}
       >
         <FormRow>
@@ -134,6 +143,7 @@ export const LoanRequestForm: FC<LoanRequestForm.Props> = () => {
               theme={ButtonTheme.black}
               size={ButtonSize.m}
               disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+              onClick={handleSubmit}
             >
               Отправить заявку
             </Button>

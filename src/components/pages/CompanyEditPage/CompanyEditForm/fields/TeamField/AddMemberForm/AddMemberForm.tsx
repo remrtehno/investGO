@@ -94,7 +94,6 @@ export const AddMemberForm: FC<AddMemberForm.Props> = (props) => {
       fields={fields}
       onChange={onChange}
       formApiRef={formApiRef}
-      onSubmit={handleSubmit}
     >
       <FormTitle>Добавление представителя команды</FormTitle>
       <FormRow>
@@ -118,6 +117,7 @@ export const AddMemberForm: FC<AddMemberForm.Props> = (props) => {
             theme={ButtonTheme.black}
             size={ButtonSize.m}
             disabled={Boolean(!formApiRef.current || !formApiRef.current.isValid)}
+            onClick={handleSubmit}
           >Добавить</Button>
         </div>
       </FormActions>
