@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 import type {useGetPortfolioProjects} from 'src/api/investorApi/useGetPortfolioProjectsApi';
+import { RoutePaths } from 'src/components/common/App/routes';
 import Tabs from 'src/components/ui/Tabs/Tabs';
 import {adaptiveBreackpoints} from 'src/contstants/adaptiveBreackpoints';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
@@ -49,7 +50,7 @@ export const Loan: FC<Loan.Props> = (props) => {
           { project?.company_name }
         </div>
         <div className='col-1 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
-          <Link to='/'>{ loan.num }</Link>
+          <Link to={RoutePaths.investOffer(project.loan_request_id)}>{ project.loan_request_num }</Link>
         </div>
         <div className='col-2 d-none d-md-block d-lg-block d-xl-block d-xxl-block'>
           <span className={s.mainSum}>{ project.invest_amount } ₽</span>
