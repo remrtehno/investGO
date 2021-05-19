@@ -1,1 +1,0 @@
-export {InvestModal} from './InvestModal';

@@ -12,6 +12,7 @@ import {FormActions} from 'src/components/common/Form/FormActions';
 import {FormRow} from 'src/components/common/Form/FormRow';
 import {FormTitle} from 'src/components/common/Form/FormTitle';
 import {getDefaultFieldValues} from 'src/components/common/Form/getDefaultFieldValues';
+import {Modal} from 'src/components/common/Modal/Modal';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {investorPortfolioAtom} from 'src/recoil/investorPortfolioAtom';
@@ -24,6 +25,8 @@ export declare namespace InvestAgreementForm {
   export type Props = {
     loan: Borrower.LoanDetails,
     onSuccess(investAgreement: useCreateInvestAgreementApi.Response): void,
+    onLowBalanceError(): void,
+    onClose(): void,
   };
 }
 
@@ -57,7 +60,7 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    if (createInvestAgreementState.isSuccess) {
+    if (createInvestAgreementState.isSuccess && createInvestAgreementResult) {
       props.onSuccess(createInvestAgreementResult);
     }
   }, [createInvestAgreementResult]);
@@ -69,7 +72,7 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
       return;
     }
     if (errorMessage === 'invest_amount_less_min_amount') {
-      setErrors({...errors, amount: 'Сумма ниже минимальной'});
+      setErrors({...errors, amount: 'Сумма меньше минимальной'});
     }
   }, [createInvestAgreementState.error]);
 
@@ -80,7 +83,11 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
       return;
     }
     if (errorMessage === 'amount_less_min_invest_amount') {
-      setErrors({...errors, amount: 'Сумма ниже минимальной'});
+      setErrors({...errors, amount: 'Сумма меньше минимальной'});
+    }
+    if (errorMessage === 'balance_is_not_enough') {
+      setErrors({...errors, amount_available: 'Недостаточно средств на счете'});
+      props.onLowBalanceError();
     }
   }, [investState.error]);
 
@@ -102,37 +109,39 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   }, [investState.isSuccess]);
 
   return (
-    <Form
-      initialValues={initialValues}
-      errors={errors}
-      values={values}
-      onChange={onChange}
-      fields={fields}
-      formApiRef={formApiRef}
-    >
-      <FormTitle>Заключить договор инвестирования</FormTitle>
-      <FormRow>
-        <Field className='col-12' name='amount_available' />
-      </FormRow>
-      <FormRow>
-        <Field className='col-12' name='amount' />
-      </FormRow>
-      <FormRow>
-        <Field className='col-12' name='legal_agreement' />
-      </FormRow>
+    <Modal className={s.investModal} allowClose={true} onClose={props.onClose}>
+      <Form
+        initialValues={initialValues}
+        errors={errors}
+        values={values}
+        onChange={onChange}
+        fields={fields}
+        formApiRef={formApiRef}
+      >
+        <FormTitle>Заключить договор инвестирования</FormTitle>
+        <FormRow>
+          <Field className='col-12' name='amount_available' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='amount' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-12' name='legal_agreement' />
+        </FormRow>
 
-      <FormActions className='mb-0'>
-        <div className='col-5'>
-          <Button
-            theme={ButtonTheme.black}
-            size={ButtonSize.m}
-            disabled={Boolean(formApiRef?.current?.isValid === false)}
-            onClick={handleSubmit}
-          >
-            Отправить заявку
-          </Button>
-        </div>
-      </FormActions>
-    </Form>
+        <FormActions className='mb-0'>
+          <div className='col-5'>
+            <Button
+              theme={ButtonTheme.black}
+              size={ButtonSize.m}
+              disabled={Boolean(formApiRef?.current?.isValid === false)}
+              onClick={handleSubmit}
+            >
+              Отправить заявку
+            </Button>
+          </div>
+        </FormActions>
+      </Form>
+    </Modal>
   );
 };

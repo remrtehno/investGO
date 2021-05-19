@@ -2,6 +2,30 @@
 @import 'src/libs/bootstrap/_variables.scss';
 
 :global {
+  .mt-20px {
+    margin-top: 20px !important;
+  }
+  .mt-sm-20px {
+    @include media-breakpoint-up(sm) {
+      margin-top: 20px !important;
+    }
+  }
+  .mt-md-20px {
+    @include media-breakpoint-up(md) {
+      margin-top: 20px !important;
+    }
+  }
+  .mt-lg-20px {
+    @include media-breakpoint-up(lg) {
+      margin-top: 20px !important;
+    }
+  }
+  .mt-xl-20px {
+    @include media-breakpoint-up(xl) {
+      margin-top: 20px !important;
+    }
+  }
+
   .mb-20px {
     margin-bottom: 20px !important;
   }
