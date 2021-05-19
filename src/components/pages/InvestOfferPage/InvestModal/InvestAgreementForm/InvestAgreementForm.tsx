@@ -28,7 +28,7 @@ export declare namespace InvestAgreementForm {
 }
 
 export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
-  const fields = useInvestAgreementFields(props.loan.min_investment_size, props.loan.amount);
+  const fields = useInvestAgreementFields(props.loan.min_amount, props.loan.amount);
   const [
     createInvestAgreementResult,
     createInvestAgreement,
@@ -43,7 +43,7 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
       ...getDefaultFieldValues(fields),
       amount_available: portfolio?.balance || 0,
       loan_request_id: props.loan.id,
-      amount: props.loan.min_investment_size,
+      amount: props.loan.min_amount,
     });
   }
 
@@ -69,9 +69,20 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
       return;
     }
     if (errorMessage === 'invest_amount_less_min_amount') {
-      setErrors({...errors, amount: 'Сумма'});
+      setErrors({...errors, amount: 'Сумма ниже минимальной'});
     }
   }, [createInvestAgreementState.error]);
+
+  useEffect(() => {
+    const error = investState.error;
+    const errorMessage = _.get(error, '[0].message');
+    if (!error || !errorMessage) {
+      return;
+    }
+    if (errorMessage === 'amount_less_min_invest_amount') {
+      setErrors({...errors, amount: 'Сумма ниже минимальной'});
+    }
+  }, [investState.error]);
 
   function handleSubmit() {
     invest({
