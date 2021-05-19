@@ -49,7 +49,7 @@ export const LoanConditions: FC<LoanConditions.Props> = (props) => {
           </tr>
           <tr>
             <td>Минимальный объем инвестиций</td>
-            <td className='text-end'>{ formatNumber(loan.min_amount) }₽</td>
+            <td className='text-end'>{ formatNumber(loan.min_investment_size) }₽</td>
           </tr>
           <tr>
             <td>Максимальный объем инвестиций</td>
@@ -57,7 +57,7 @@ export const LoanConditions: FC<LoanConditions.Props> = (props) => {
           </tr>
           <tr>
             <td>Минимальная сумма инвестиции</td>
-            <td className='text-end'>{ formatNumber(loan.min_investment_size) }₽</td>
+            <td className='text-end'>{ formatNumber(loan.min_amount) }₽</td>
           </tr>
           <tr>
             <td>Срок действия предложения</td>
