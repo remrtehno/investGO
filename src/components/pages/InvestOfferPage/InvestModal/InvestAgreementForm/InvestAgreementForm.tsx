@@ -28,7 +28,7 @@ export declare namespace InvestAgreementForm {
 }
 
 export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
-  const fields = useInvestAgreementFields(props.loan.min_amount, props.loan.amount);
+  const fields = useInvestAgreementFields(props.loan.min_investment_size, props.loan.amount);
   const [
     createInvestAgreementResult,
     createInvestAgreement,
@@ -43,7 +43,7 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
       ...getDefaultFieldValues(fields),
       amount_available: portfolio?.balance || 0,
       loan_request_id: props.loan.id,
-      amount: props.loan.min_amount,
+      amount: props.loan.min_investment_size,
     });
   }
 

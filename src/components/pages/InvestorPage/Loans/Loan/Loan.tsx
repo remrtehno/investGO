@@ -78,7 +78,7 @@ export const Loan: FC<Loan.Props> = (props) => {
                   <div className={s.fields}>
                     <div className={s.field}>
                       <div className={s.fieldLabel}>Заявка</div>
-                      <div className={s.fieldValue}>{ loan.num }</div>
+                      <div className={s.fieldValue}>{ project.loan_request_num }</div>
                     </div>
                     <div className={s.field}>
                       <div className={s.fieldLabel}>Инвестиции</div>
