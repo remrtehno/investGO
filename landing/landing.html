@@ -580,46 +580,8 @@
     </div>
 
   </section>
-  <section class="contacts">
-    <div class="container">
-      <div class="contacts__wrap">
-        <h2 class="contacts__title">
-          Связаться с нами
-        </h2>
-        <p class="contacts__text">
-          У вас есть вопросы? Оставьте Ваши данные, и мы свяжемся с Вами в <br>
-          ближайшее время.
-        </p>
-        <form action="/api/appeal" class="formSend">
-          <div class="form-grid">
-            <div class="form-item">
-              <input type="text" id="name" placeholder="Имя" class="formSendName">
-              <label for="name">Имя</label>
-              <span class="invalid__text">Введите имя</span>
-            </div>
-            <div class="form-item">
-              <input type="tel" id="tel" placeholder="Телефон" class="formSendTel" pattern="^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$">
-              <label for="tel">Телефон</label>
-              <span class="invalid__text">Введите номер</span>
-            </div>
-            <div class="form-item">
-              <textarea type="text" id="text" placeholder="Текст обращения"></textarea>
-              <label for="text">Текст обращения</label>
-            </div>
-
-          </div>
-          <button class="btn contacts__btn btn--200 btn--center btn--big btn-reset" type="submit">
-            Отправить
-          </button>
-          <p class="agreement__text">
-            Нажимая кнопку "Отправить", Вы подтверждаете, что ознакомлены и согласны с
-            <a href="/landing/documents/Политика_конфиденциальности_Инвест_Гоу.pdf" target="_blank">Политикой конфиденциальности</a>
-          </p>
-        </form>
-
-      </div>
-    </div>
-  </section>
+  
+  <%- include(process.cwd() + '/landing/include/feedbackForm.html'); -%>
 
 </main>
 

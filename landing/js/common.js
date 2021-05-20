@@ -63,55 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  class Mmodal {
-    constructor(options = {}) {
-      const {
-        open = '.contacts__btn',
-        modal = '.modal',
-        close = '.modalClose',
-      } = options;
-
-      this.open = open;
-      this.modal = modal;
-      this.close = close;
-      this.init();
-    }
-
-    toggleModal() {
-      const modal = document.querySelector(this.modal);
-      const open = document.querySelectorAll(this.open);
-
-      open.forEach(elem => {
-        elem.addEventListener('click', (e) => {
-          e.preventDefault();
-          modal.classList.add('modal--open');
-          modal.setAttribute('tabindex', '-1');
-
-          modal.addEventListener('animationend', () => {
-            modal.firstElementChild.classList.add('modal__content--open');
-          });
-
-          modal.addEventListener('click', event => {
-            const target = event.target;
-            if (target.closest(this.close) || target.closest(this.modal) && !target.closest('.modal__content')) {
-              modal.firstElementChild.classList.remove('modal__content--open');
-              modal.classList.remove('modal--open');
-              modal.removeAttribute('tabindex');
-            }
-          });
-
-        });
-
-      });
-    }
-
-    init() {
-      this.toggleModal();
-    }
-  }
-
-  new Mmodal();
-
 });
 
 $(document).ready(function () {
@@ -129,18 +80,49 @@ $(document).ready(function () {
     }
   });
 
+  function openModal(modalSelector = '.modal') {
+    const modal = document.querySelector(modalSelector);
+    const close = '.modalClose';
+    modal.classList.add('modal--open');
+    modal.setAttribute('tabindex', '-1');
+
+    modal.addEventListener('animationend', () => {
+      modal.firstElementChild.classList.add('modal__content--open');
+    });
+
+    modal.addEventListener('click', event => {
+      const target = event.target;
+      if (target.closest(close) || target.closest(modalSelector) && !target.closest('.modal__content')) {
+        modal.firstElementChild.classList.remove('modal__content--open');
+        modal.classList.remove('modal--open');
+        modal.removeAttribute('tabindex');
+      }
+    });
+  }
+
   function valLength(count, el) {
+    var valid = false
     if ($(el).val().length < count) {
       $(el).addClass('invalid');
     } else {
       $(el).removeClass('invalid');
+      valid = true;
     }
+    return valid;
   }
 
   $('.formSend').on('submit', function (e) {
-    // e.preventDefault();
-    valLength(3, '.formSendName');
-    valLength(17, '.formSendTel');
+    e.preventDefault();
+    var formValid = false
+    if (valLength(3, '.formSendName') && valLength(17, '.formSendTel') && valLength(3, '.formSendText')) {
+      formValid = true;
+    }
+    if (!formValid) return;
+    
+    var action = $(this).attr('action');
+    $.post(action, $('.formSend').serialize(), function(data) {
+      openModal();
+    })
   });
 
   $('.formSendName').on('keypress', function () {
@@ -148,6 +130,9 @@ $(document).ready(function () {
   });
   $('.formSendTel').on('keypress', function () {
     valLength(17, '.formSendTel');
+  });
+  $('.formSendText').on('keypress', function () {
+    valLength(3, '.formSendText');
   });
 
   $(window).scroll(function () {
