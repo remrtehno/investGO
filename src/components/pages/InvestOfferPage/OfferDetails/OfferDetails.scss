@@ -149,3 +149,12 @@
 .successModalText {
   margin-bottom: 40px;
 }
+
+.investModal {
+  & > div {
+    @include media-breakpoint-up(sm) {
+      min-width: 550px;
+      max-width: 550px;
+    }
+  }
+}

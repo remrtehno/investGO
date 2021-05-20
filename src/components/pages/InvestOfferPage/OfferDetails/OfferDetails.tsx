@@ -11,7 +11,7 @@ import {LoanDocuments} from 'src/components/pages/LoanRequestPage/LoanDetails/Lo
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import Tabs from 'src/components/ui/Tabs/Tabs';
 import {Text, TextSize} from 'src/components/ui/Text';
-import { WarningIcon } from 'src/icons/WarningIcon';
+import {WarningIcon} from 'src/icons/WarningIcon';
 import type {Borrower} from 'src/types/Borrower';
 import {formatNumber} from 'src/utils/formatNumber';
 
@@ -48,16 +48,23 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
 
   function handleInvesAgreementSuccess(investAgreement: useCreateInvestAgreementApi.Response) {
     setInvestAgreement(investAgreement);
-    setIsInvestModalOpened(false);
   }
 
   function cancelAgreement() {
     setInvestAgreement(null);
   }
 
+  /*
+   * function handleAgreementBack() {
+   *   cancelAgreement();
+   *   setIsInvestModalOpened(true);
+   * }
+   */
+
   function handleSignInvestAgreement() {
     setIsInvestModalOpened(false);
     setIsSignSuccessModalOpened(true);
+    setInvestAgreement(null);
     props.onSignInvestAgreement();
   }
 
@@ -117,20 +124,23 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
       ) : null }
 
       { isInvestModalOpened ? (
-        <InvestAgreementForm
-          loan={loan}
-          onClose={handleInvestModalClose}
-          onSuccess={handleInvesAgreementSuccess}
-          onLowBalanceError={handleLowBalanceError}
-        />
-      ) : null }
-      { investAgreement ? (
-        <SignInvestAgreementForm
-          loan={loan}
-          agreement={investAgreement}
-          onSignInvestAgreement={handleSignInvestAgreement}
-          onBack={cancelAgreement}
-        />
+        <Modal className={s.investModal} allowClose={true} onClose={handleInvestModalClose}>
+          { !investAgreement ? (
+            <InvestAgreementForm
+              loan={loan}
+              onSuccess={handleInvesAgreementSuccess}
+              onLowBalanceError={handleLowBalanceError}
+            />
+          ) : null }
+          { investAgreement ? (
+            <SignInvestAgreementForm
+              loan={loan}
+              agreement={investAgreement}
+              onSignInvestAgreement={handleSignInvestAgreement}
+              onBack={cancelAgreement}
+            />
+          ) : null }
+        </Modal>
       ) : null }
       { isSignSuccessModalOpened ? (
         <Modal
@@ -168,8 +178,8 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
             </div>
             <div className='row justify-content-center mt-20px'>
               <div className='col-5'>
-                <Button 
-                  size={ButtonSize.s} 
+                <Button
+                  size={ButtonSize.s}
                   theme={ButtonTheme.black}
                   onClick={handleLowBalanceClick}
                 >

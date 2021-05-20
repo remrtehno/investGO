@@ -26,7 +26,6 @@ export declare namespace InvestAgreementForm {
     loan: Borrower.LoanDetails,
     onSuccess(investAgreement: useCreateInvestAgreementApi.Response): void,
     onLowBalanceError(): void,
-    onClose(): void,
   };
 }
 
@@ -109,39 +108,37 @@ export const InvestAgreementForm: FC<InvestAgreementForm.Props> = (props) => {
   }, [investState.isSuccess]);
 
   return (
-    <Modal className={s.investModal} allowClose={true} onClose={props.onClose}>
-      <Form
-        initialValues={initialValues}
-        errors={errors}
-        values={values}
-        onChange={onChange}
-        fields={fields}
-        formApiRef={formApiRef}
-      >
-        <FormTitle>Заключить договор инвестирования</FormTitle>
-        <FormRow>
-          <Field className='col-12' name='amount_available' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='amount' />
-        </FormRow>
-        <FormRow>
-          <Field className='col-12' name='legal_agreement' />
-        </FormRow>
+    <Form
+      initialValues={initialValues}
+      errors={errors}
+      values={values}
+      onChange={onChange}
+      fields={fields}
+      formApiRef={formApiRef}
+    >
+      <FormTitle>Заключить договор инвестирования</FormTitle>
+      <FormRow>
+        <Field className='col-12' name='amount_available' />
+      </FormRow>
+      <FormRow>
+        <Field className='col-12' name='amount' />
+      </FormRow>
+      <FormRow>
+        <Field className='col-12' name='legal_agreement' />
+      </FormRow>
 
-        <FormActions className='mb-0'>
-          <div className='col-5'>
-            <Button
-              theme={ButtonTheme.black}
-              size={ButtonSize.m}
-              disabled={Boolean(formApiRef?.current?.isValid === false)}
-              onClick={handleSubmit}
-            >
-              Отправить заявку
-            </Button>
-          </div>
-        </FormActions>
-      </Form>
-    </Modal>
+      <FormActions className='mb-0'>
+        <div className='col-5'>
+          <Button
+            theme={ButtonTheme.black}
+            size={ButtonSize.m}
+            disabled={Boolean(formApiRef?.current?.isValid === false)}
+            onClick={handleSubmit}
+          >
+            Отправить заявку
+          </Button>
+        </div>
+      </FormActions>
+    </Form>
   );
 };
