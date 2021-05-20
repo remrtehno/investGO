@@ -28,74 +28,8 @@
 </head>
 
 <body class="page__body">
-<header class="page-header">
-  <div class="container">
-    <div class="page-header__row">
-      <a href="/" class="link-reset logo">
-        <img src="/landing/img/logo.svg" alt="Лого">
-      </a>
-      <button class="hamburger btn-reset" type="button" aria-label="Открыть/Закрыть меню">
-        <svg class="hamburger__menu" width="18" height="13" viewBox="0 0 18 13" fill="none">
-          <rect width="18" height="1" fill="black"/>
-          <rect y="6" width="18" height="1" fill="black"/>
-          <rect y="12" width="18" height="1" fill="black"/>
-        </svg>
-        <svg class="hamburger__close" width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <rect y="12.728" width="18" height="1" transform="rotate(-45 0 12.728)" fill="black"/>
-          <rect width="18" height="1" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 13.4355 12.728)" fill="black"/>
-        </svg>
-      </button>
-      <nav class="nav">
-        <ul class="list-reset nav__list">
-          <li>
-            <a href="/investor">Инвесторам</a>
-          </li>
-          <li>
-            <a href="/borrower">Заемщикам</a>
-          </li>
-        </ul>
-        <a href="tel:+74994443361" class="phone link-reset">+7 (499) 444-33-61</a>
-        <a class="btn btn--130 link-reset btn--disabled">
-          Войти
-        </a>
-      </nav>
-    </div>
-  </div>
-</header>
-<header class="page-header page-header--second">
-  <div class="container">
-    <div class="page-header__row">
-      <a href="/" class="link-reset logo">
-        <img src="/landing/img/logo.svg" alt="Лого">
-      </a>
-      <button class="hamburger btn-reset" type="button" aria-label="Открыть/Закрыть меню">
-        <svg class="hamburger__menu" width="18" height="13" viewBox="0 0 18 13" fill="none">
-          <rect width="18" height="1" fill="black"/>
-          <rect y="6" width="18" height="1" fill="black"/>
-          <rect y="12" width="18" height="1" fill="black"/>
-        </svg>
-        <svg class="hamburger__close" width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <rect y="12.728" width="18" height="1" transform="rotate(-45 0 12.728)" fill="black"/>
-          <rect width="18" height="1" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 13.4355 12.728)" fill="black"/>
-        </svg>
-      </button>
-      <nav class="nav">
-        <ul class="list-reset nav__list">
-          <li>
-            <a href="/investor">Инвесторам</a>
-          </li>
-          <li>
-            <a href="/borrower">Заемщикам</a>
-          </li>
-        </ul>
-        <a href="tel:+7 (499) 444-33-61" class="phone link-reset">+7 (499) 444-33-61</a>
-        <a class="btn btn--130 link-reset btn--disabled">
-          Войти
-        </a>
-      </nav>
-    </div>
-  </div>
-</header>
+
+<%- include(process.cwd() + '/landing/include/header.html', {current: ''}); -%>
 
 <main class="page-main">
 
