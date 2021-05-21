@@ -14,6 +14,7 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {WarningIcon} from 'src/icons/WarningIcon';
 import type {Borrower} from 'src/types/Borrower';
 import {formatNumber} from 'src/utils/formatNumber';
+import { BalanceForm } from '../BalanceForm';
 
 import s from './OfferDetails.scss';
 
@@ -53,13 +54,6 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
   function cancelAgreement() {
     setInvestAgreement(null);
   }
-
-  /*
-   * function handleAgreementBack() {
-   *   cancelAgreement();
-   *   setIsInvestModalOpened(true);
-   * }
-   */
 
   function handleSignInvestAgreement() {
     setIsInvestModalOpened(false);
@@ -170,7 +164,7 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
           onClose={handleLowBalanceModalClose}
           className={s.errorModal}
         >
-          <div className='text-center'>
+          <div className={cx(s.errorModalInner, 'text-center')}>
             <WarningIcon />
             <div className='mt-3'>
               На вашем счете недостаточно средств для инвестирования
@@ -188,6 +182,15 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
               </div>
             </div>
           </div>
+        </Modal>
+      ) : null }
+      { isBalanceFormOpened ? (
+        <Modal
+          allowClose={true}
+          onClose={handleLowBalanceModalClose}
+          className={s.balanceModal}
+        >
+          <BalanceForm />
         </Modal>
       ) : null }
     </div>
