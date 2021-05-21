@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 
 import type {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
 import {Modal} from 'src/components/common/Modal/Modal';
+import {BalanceForm} from 'src/components/pages/InvestOfferPage/BalanceForm';
 import {InvestAgreementForm} from 'src/components/pages/InvestOfferPage/InvestAgreementForm';
 import {SignInvestAgreementForm} from 'src/components/pages/InvestOfferPage/SignInvestAgreementForm';
 import {LoanConditions} from 'src/components/pages/LoanRequestPage/LoanDetails/LoanConditions';
@@ -14,7 +15,6 @@ import {Text, TextSize} from 'src/components/ui/Text';
 import {WarningIcon} from 'src/icons/WarningIcon';
 import type {Borrower} from 'src/types/Borrower';
 import {formatNumber} from 'src/utils/formatNumber';
-import { BalanceForm } from '../BalanceForm';
 
 import s from './OfferDetails.scss';
 
@@ -78,6 +78,10 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
   function handleLowBalanceClick() {
     setIsLowBalanceModalOpened(false);
     setIsBalanceFormOpened(true);
+  }
+
+  function handleBalanceFormClose() {
+    setIsBalanceFormOpened(false);
   }
 
   return (
@@ -187,7 +191,7 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
       { isBalanceFormOpened ? (
         <Modal
           allowClose={true}
-          onClose={handleLowBalanceModalClose}
+          onClose={handleBalanceFormClose}
           className={s.balanceModal}
         >
           <BalanceForm />
