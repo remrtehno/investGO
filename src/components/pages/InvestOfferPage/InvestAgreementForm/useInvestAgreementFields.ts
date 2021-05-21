@@ -27,7 +27,7 @@ export const useInvestAgreementFields = (minAmount: number, maxAmount: number) =
       isInteger: true,
       label: 'Сумма для инвестирования',
       postfix: '₽',
-      // validations: [required(), minValue(minAmount), maxValue(maxAmount)],
+      validations: [required(), minValue(minAmount), maxValue(maxAmount)],
     },
     legal_agreement: {
       name: 'legal_agreement',

@@ -149,3 +149,23 @@
 .successModalText {
   margin-bottom: 40px;
 }
+
+.investModal {
+  & > div {
+    @include media-breakpoint-up(sm) {
+      min-width: 550px;
+      max-width: 550px;
+    }
+  }
+}
+
+.errorModalInner {
+  padding: 70px 0;
+}
+
+.balanceModal {
+  & > div {
+    min-width: 550px;
+    max-width: 550px;
+  }
+}

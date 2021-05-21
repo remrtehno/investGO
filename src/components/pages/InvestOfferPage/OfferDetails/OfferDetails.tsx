@@ -2,13 +2,17 @@ import cx from 'classnames';
 import type {FC} from 'react';
 import React, {useState} from 'react';
 
+import type {useCreateInvestAgreementApi} from 'src/api/investorApi/useCreateInvestAgreementApi';
 import {Modal} from 'src/components/common/Modal/Modal';
-import {InvestModal} from 'src/components/pages/InvestOfferPage/InvestModal';
+import {BalanceForm} from 'src/components/pages/InvestOfferPage/BalanceForm';
+import {InvestAgreementForm} from 'src/components/pages/InvestOfferPage/InvestAgreementForm';
+import {SignInvestAgreementForm} from 'src/components/pages/InvestOfferPage/SignInvestAgreementForm';
 import {LoanConditions} from 'src/components/pages/LoanRequestPage/LoanDetails/LoanConditions';
 import {LoanDocuments} from 'src/components/pages/LoanRequestPage/LoanDetails/LoanDocuments';
 import {Button, ButtonSize, ButtonTheme} from 'src/components/ui/Button';
 import Tabs from 'src/components/ui/Tabs/Tabs';
 import {Text, TextSize} from 'src/components/ui/Text';
+import {WarningIcon} from 'src/icons/WarningIcon';
 import type {Borrower} from 'src/types/Borrower';
 import {formatNumber} from 'src/utils/formatNumber';
 
@@ -26,6 +30,9 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
   const [activeTab, setActiveTab] = useState('1');
   const [isInvestModalOpened, setIsInvestModalOpened] = useState(false);
   const [isSignSuccessModalOpened, setIsSignSuccessModalOpened] = useState(false);
+  const [investAgreement, setInvestAgreement] = useState(null as useCreateInvestAgreementApi.Response | null);
+  const [isLowBalanceModalOpened, setIsLowBalanceModalOpened] = useState(false);
+  const [isBalanceFormOpened, setIsBalanceFormOpened] = useState(false);
 
   const tabs = [
     {id: '1', label: 'Условия'},
@@ -40,14 +47,41 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
     setIsInvestModalOpened(false);
   }
 
+  function handleInvesAgreementSuccess(investAgreement: useCreateInvestAgreementApi.Response) {
+    setInvestAgreement(investAgreement);
+  }
+
+  function cancelAgreement() {
+    setInvestAgreement(null);
+  }
+
   function handleSignInvestAgreement() {
     setIsInvestModalOpened(false);
     setIsSignSuccessModalOpened(true);
+    setInvestAgreement(null);
     props.onSignInvestAgreement();
   }
 
   function handleSignSuccessModalClose() {
     setIsSignSuccessModalOpened(false);
+  }
+
+  function handleLowBalanceError() {
+    setIsInvestModalOpened(false);
+    setIsLowBalanceModalOpened(true);
+  }
+
+  function handleLowBalanceModalClose() {
+    setIsLowBalanceModalOpened(false);
+  }
+
+  function handleLowBalanceClick() {
+    setIsLowBalanceModalOpened(false);
+    setIsBalanceFormOpened(true);
+  }
+
+  function handleBalanceFormClose() {
+    setIsBalanceFormOpened(false);
   }
 
   return (
@@ -88,11 +122,23 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
       ) : null }
 
       { isInvestModalOpened ? (
-        <InvestModal
-          loan={loan}
-          onClose={handleInvestModalClose}
-          onSignInvestAgreement={handleSignInvestAgreement}
-        />
+        <Modal className={s.investModal} allowClose={true} onClose={handleInvestModalClose}>
+          { !investAgreement ? (
+            <InvestAgreementForm
+              loan={loan}
+              onSuccess={handleInvesAgreementSuccess}
+              onLowBalanceError={handleLowBalanceError}
+            />
+          ) : null }
+          { investAgreement ? (
+            <SignInvestAgreementForm
+              loan={loan}
+              agreement={investAgreement}
+              onSignInvestAgreement={handleSignInvestAgreement}
+              onBack={cancelAgreement}
+            />
+          ) : null }
+        </Modal>
       ) : null }
       { isSignSuccessModalOpened ? (
         <Modal
@@ -114,6 +160,41 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
               </div>
             </div>
           </div>
+        </Modal>
+      ) : null }
+      { isLowBalanceModalOpened ? (
+        <Modal
+          allowClose={true}
+          onClose={handleLowBalanceModalClose}
+          className={s.errorModal}
+        >
+          <div className={cx(s.errorModalInner, 'text-center')}>
+            <WarningIcon />
+            <div className='mt-3'>
+              На вашем счете недостаточно средств для инвестирования
+              данного проекта.
+            </div>
+            <div className='row justify-content-center mt-20px'>
+              <div className='col-5'>
+                <Button
+                  size={ButtonSize.s}
+                  theme={ButtonTheme.black}
+                  onClick={handleLowBalanceClick}
+                >
+                  Пополнить счет
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      ) : null }
+      { isBalanceFormOpened ? (
+        <Modal
+          allowClose={true}
+          onClose={handleBalanceFormClose}
+          className={s.balanceModal}
+        >
+          <BalanceForm />
         </Modal>
       ) : null }
     </div>
