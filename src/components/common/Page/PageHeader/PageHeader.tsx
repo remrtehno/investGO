@@ -49,7 +49,7 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
   }, []);
 
   function getHomePath() {
-    if (isRegistrationComplete) {
+    if (user && isRegistrationComplete) {
       if (user?.roles.includes(Role.borrower)) {
         return RoutePaths.borrowerDashboard;
       }
@@ -61,9 +61,16 @@ export const PageHeader: FC<PageHeader.Props> = (props) => {
   return (
     <div className={cx(s.pageHeader, props.className)}>
       <div className={cx('container', s.container)}>
-        <Link to={getHomePath()}>
-          <LogoIcon isBig={props.isBigLogo} className={s.logo} />
-        </Link>
+        { user ? (
+          <Link to={getHomePath()}>
+            <LogoIcon isBig={props.isBigLogo} className={s.logo} />
+          </Link>
+        ) : null }
+        { !user ? (
+          <a href={RoutePaths.home}>
+            <LogoIcon isBig={props.isBigLogo} className={s.logo} />
+          </a>
+        ) : null }
         <div className={s.space} />
         { user && isRegistrationComplete && breackpointUp(adaptiveBreackpoints.md) ? (
           <HeaderMenu user={user} />

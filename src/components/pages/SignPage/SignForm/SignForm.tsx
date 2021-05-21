@@ -170,9 +170,22 @@ export const SignForm: FC<SignForm.Props> = () => {
       >
         Продолжить
       </Button>
-      <div className={s.subLink}>
-        <Link to={RoutePaths.recover}>Восстановить пароль</Link>
-      </div>
+      { isUserExists ? (
+        <div className={s.subLink}>
+          <Link to={RoutePaths.recover}>Восстановить пароль</Link>
+        </div>
+      ) : null }
+      { !isUserExists ? (
+        <div className={s.subLink}>
+          Нажимая &quot;Продолжить&quot;, вы ознакомились и соглашаетесь 
+          c <a href='https://investgo.ru/landing/documents/Правила%20ОИП_ИНВЕСТ%20ГОУ_11.01.2021_V2.pdf' target='_blank'>
+            Правилами инвестиционной платформы &quot;Инвест Гоу&quot;
+          </a>
+          и <a href='https://investgo.ru/landing/documents/Политика_конфиденциальности_Инвест_Гоу.pdf' target='_blank'>
+            Политикой конфиденциальности при обработке персональных данных
+          </a>
+        </div>
+      ) : null }
       { isShowSmsForm
         ? (
           <SmsForm
