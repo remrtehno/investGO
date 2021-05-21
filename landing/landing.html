@@ -2,31 +2,7 @@
 <html class="page" lang="ru">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="description" content="">
-  <meta content="telephone=no" name="format-detection">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:image" content="path/to/image.jpg">
-  <meta name="theme-color" content="#FF3B30">
-
-  <title>Главная</title>
-
-  <link rel="icon" href="img/favicon/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/landing/fonts/fonts.css">
-
-  <link rel="stylesheet" href="/landing/css/styles.min.css">
-  <link rel="stylesheet" href="/landing/css/nouislider.min.css">
-  <link rel="stylesheet" href="/landing/css/nice-select.css">
-  <link rel="stylesheet" href="/landing/css/main.css?v1">
-  <link rel="stylesheet" href="/landing/css/new.css">
+  <%- include(process.cwd() + '/landing/include/head-scripts.html' , {title: 'Главная' }); -%>
 </head>
 
 <body class="page__body">
