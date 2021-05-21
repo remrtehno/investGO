@@ -25,9 +25,13 @@
 }
 
 .subLink {
-  color: var(--label);
+  color: #828282;
   text-align: center;
   margin-top: 30px;
+  font-family: Nunito;
+  font-size: 14px;
+  line-height: 1.4em;
+  letter-spacing: -0.4px;
 
   @include media-breakpoint-up(md) {
     margin-top: 34px;
@@ -36,7 +40,8 @@
 
   a {
     color: var(--label);
-    text-decoration: none;
+    text-decoration: underline;
+    transition: color .3s;
     
     &:hover {
       color: var(--black)
