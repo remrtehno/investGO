@@ -3157,6 +3157,7 @@ ul.inline-list li {
   position: static;
   transform: none;
 }
+
 .page-404 .page-header--second .logo img {
   height: auto;
   width: 130px;
@@ -3203,11 +3204,16 @@ ul.inline-list li {
   margin-bottom: 28px;
 }
 .error h1 {
-  font-size: 34px;
-  line-height: 40px;
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
   text-align: center;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.2px;
   margin: 0;
+  color: #7f7f7f;
+  margin-top: 5px;
   font-weight: 400;
 }
 .error p {
