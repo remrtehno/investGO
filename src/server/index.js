@@ -152,13 +152,13 @@ app.get('/robots.txt', async (req, res, next) => {
   res.send("User-agent: *\nDisallow: /");
 });
 
-// app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
+app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 
-app.get('*', async (req, res, next) => {
-  res.status(404);
-  res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
-  return;
-});
+// app.get('*', async (req, res, next) => {
+//   res.status(404);
+//   res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
+//   return;
+// });
 
 app.listen(PORT, () => {
   console.log('Server running on http://localhost: ' + PORT);
