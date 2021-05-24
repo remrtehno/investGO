@@ -2,6 +2,7 @@ import React, {useEffect, useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
 
 import {useGetLoans} from 'src/api/borrowerApi/useGetLoansApi';
+import { useGetProjectApi } from 'src/api/projectApi/useGetProjectApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
 import {TopMenu} from 'src/components/common/TopMenu';
@@ -23,9 +24,14 @@ export const BorrowerPage = withAuth(() => {
   const company = user?.company;
   const [, getLoans] = useGetLoans();
   const {loans} = useRecoilValue(borrowerLoansAtom);
+  const [project, getProject, getProjectState] = useGetProjectApi();
 
   useEffect(() => {
     getLoans(null);
+  }, []);
+
+  useEffect(() => {
+    getProject(null);
   }, []);
 
   const menuItems = useMemo(() => {

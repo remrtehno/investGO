@@ -7,7 +7,7 @@
 }
 
 .logo {
-  padding: 0 18px;
+  padding-left: 18px;
 }
 
 .img {
@@ -17,11 +17,14 @@
   border-radius: 4px;
   border: 1px solid var(--gray2);
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .name {
   flex: 1 1 60%; 
   font-size: 13px;
+  padding-left: 18px;
 }
 
 .buttons {
