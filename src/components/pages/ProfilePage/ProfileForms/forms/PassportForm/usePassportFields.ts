@@ -17,11 +17,35 @@ function validateAge(value: string) {
 }
 
 export const usePassportFields = () => useMemo((): Form.FieldModels => ({
-  fio: {
-    name: 'fio',
+  last_name: {
+    name: 'last_name',
     type: FieldType.text,
-    label: 'ФИО',
+    label: 'Фамилия',
     validations: [required()],
+  },
+  first_name: {
+    name: 'first_name',
+    type: FieldType.text,
+    label: 'Имя',
+    validations: [required()],
+  },
+  patronymic: {
+    name: 'patronymic',
+    type: FieldType.text,
+    label: 'Отчество',
+    validations: [required()],
+  },
+  nationality: {
+    name: 'nationality',
+    type: FieldType.select,
+    label: 'Гражданство',
+    validations: [required()],
+    options: [
+      {
+        value: 'russia',
+        label: 'Россия',
+      },
+    ],
   },
   date_of_birth: {
     name: 'date_of_birth',
@@ -32,6 +56,12 @@ export const usePassportFields = () => useMemo((): Form.FieldModels => ({
       .toDate(),
     minDate: moment().subtract(100, 'years')
       .toDate(),
+  },
+  place_of_birth: {
+    name: 'place_of_birth',
+    type: FieldType.text,
+    label: 'Место рождения',
+    validations: [required()],
   },
   serialNumber: {
     name: 'serialNumber',

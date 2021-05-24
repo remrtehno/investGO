@@ -90,9 +90,11 @@ export const OfferDetails: FC<OfferDetails.Props> = (props) => {
         <div className={cx('row')}>
           <div className={cx(s.amount, 'col-9')}>{ formatNumber(loan.received_amount) } ₽</div>
           <div className='col-3 text-end'>
-            <Button theme={ButtonTheme.red} size={ButtonSize.s} onClick={handleInvestButton}>
-              Инвестировать
-            </Button>
+            { loan.received_amount < loan.amount ? (
+              <Button theme={ButtonTheme.red} size={ButtonSize.s} onClick={handleInvestButton}>
+                Инвестировать
+              </Button>
+            ) : null }
           </div>
         </div>
         <div className={cx('row', s.statsRow)}>
