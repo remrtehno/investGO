@@ -25,11 +25,11 @@ const menuItems = () => {
         text: 'Портфель',
       },
       {
-        to: RoutePaths.investorDashboard,
+        to: RoutePaths.borrowerLoanRequests,
         text: 'Мои заявки',
       },
       {
-        to: RoutePaths.investorDashboard,
+        to: RoutePaths.home,
         text: 'Транзакции',
       },
     ]

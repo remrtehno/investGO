@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
 
 import {useGetLoanRequests} from 'src/api/borrowerApi/useGetLoanRequestsApi';
-import {useGetLoans} from 'src/api/borrowerApi/useGetLoansApi';
-import {useGetProjectApi} from 'src/api/projectApi/useGetProjectApi';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {Page} from 'src/components/common/Page';
 import {Table} from 'src/components/common/Table';
@@ -13,9 +11,9 @@ import {withAuth} from 'src/components/hocs/withAuth';
 import {Text, TextSize} from 'src/components/ui/Text';
 import {borrowerLoansAtom} from 'src/recoil/borrowerLoansAtom';
 import {userAtom} from 'src/recoil/userAtom';
+import {LoanRequestStatusTranslation} from 'src/translations/LoanRequestStatusTranslation';
 import {formatDate} from 'src/utils/formatDate';
 import {plural} from 'src/utils/plural';
-import {LoanRequestStatusTranslation} from 'src/translations/LoanRequestStatusTranslation';
 
 import s from './BorrowerLoanRequestsPage.scss';
 
@@ -24,12 +22,6 @@ export declare namespace BorrowerLoanRequestsPage {
 
 export const BorrowerLoanRequestsPage = withAuth(() => {
   const {user} = useRecoilValue(userAtom);
-  const company = user?.company;
-  /*
-   * const [, getLoans] = useGetLoans();
-   * const {loans} = useRecoilValue(borrowerLoansAtom);
-   */
-  // const [project, getProject, getProjectState] = useGetProjectApi();
   const [loanRequests, getLoanRequests, getLoanRequestsState] = useGetLoanRequests();
 
   useEffect(() => {
