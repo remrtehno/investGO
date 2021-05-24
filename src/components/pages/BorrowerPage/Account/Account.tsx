@@ -18,7 +18,7 @@ export const Account: FC<Account.Props> = (props) => {
     },
     {
       label: 'Займы:',
-      value: '1 163 000.00 ₽',
+      value: '0.00 ₽',
     },
     {
       label: 'Начислено:',
