@@ -36,7 +36,7 @@ export const Loan: FC<Loan.Props> = (props) => {
           5 000.00 ₽
         </span>
         <span className='col-2'>
-          { BorrowerLoanStatusTranslation[loan.status] }
+          { loan.status }
         </span>
         <i className={s.openBtn}><DropDownIcon /></i>
       </span>
