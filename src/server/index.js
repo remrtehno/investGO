@@ -156,9 +156,9 @@ app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 
 // app.get('*', async (req, res, next) => {
 //   res.status(404);
-//   res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
+//   res.sendFile(path.resolve(process.cwd(), 'build/public/landing/404.html'));
 //   return;
-// });
+// });п
 
 app.listen(PORT, () => {
   console.log('Server running on http://localhost: ' + PORT);
