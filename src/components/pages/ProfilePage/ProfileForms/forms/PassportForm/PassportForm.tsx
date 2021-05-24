@@ -118,14 +118,14 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         disabled={Boolean(user && user.passport && user.passport.status !== ModerationStatus.declined)}
       >
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='name' />
-          <Field className='col-sm-12 col-md-6 position-relative' name='surname' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='first_name' />
+          <Field className='col-sm-12 col-md-6 position-relative' name='last_name' />
         </FormRow>
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='patronym' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='patronymic' />
         </FormRow>
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='citizenship' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='nationality' />
           <Field
             className='col-sm-12 col-md-6 position-relative'
             name='date_of_birth'
