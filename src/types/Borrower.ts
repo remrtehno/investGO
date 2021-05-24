@@ -8,6 +8,28 @@ export declare namespace Borrower {
 
   export type Loan = {
     amount: number,
+    amount_percent: number,
+    begin_date: string,
+    end_date: string,
+    loan_request_id: string,
+    rate: number,
+    repayment_schedule_type: string,
+    repayment_type: string,
+    repayment_units: number,
+    schedule: [
+      {
+        amount: number,
+        date: string,
+        status: string
+      }
+    ],
+    status: string
+  }
+
+  export type LoanRequests = LoanRequest[]
+  
+  export type LoanRequest = {
+    amount: number,
     collection_start_at: string,
     company: User.Company,
     created_at: string,

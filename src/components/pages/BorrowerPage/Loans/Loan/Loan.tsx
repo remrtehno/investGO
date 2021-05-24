@@ -22,21 +22,21 @@ export const Loan: FC<Loan.Props> = (props) => {
   const {loan} = props;
 
   return (
-    <Link to={RoutePaths.loanRequest(loan.id)} className={s.link}>
+    <Link to={RoutePaths.loanRequest(loan.loan_request_id)} className={s.link}>
       <span className={cx('row', 'align-items-center', s.row)}>
-        <span className='col-1'>{ loan.num }</span>
+        <span className='col-1'>{ loan.loan_request_id }</span>
         <span className='col-2'>
           <span className={s.mainSum}>{ loan.amount } ₽</span>
-          + 7 500.00₽
+          { loan.amount_percent }
         </span>
-        <span className='col-2'>{ formatDate(new Date(loan.collection_start_at)) }</span>
-        <span className='col-2'>0.00 ₽</span>
+        <span className='col-2'>{ formatDate(new Date(loan.end_date)) }</span>
+        <span className='col-2'>&mdash;</span>
         <span className='col-2'>
           <i className={s.icon}><CalendarDateIcon /></i>
           5 000.00 ₽
         </span>
         <span className='col-2'>
-          { BorrowerLoanStatusTranslation[loan.status] }
+          { loan.status }
         </span>
         <i className={s.openBtn}><DropDownIcon /></i>
       </span>
