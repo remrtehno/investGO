@@ -41,7 +41,7 @@
   a {
     color: var(--label);
     text-decoration: underline;
-    transition: color .3s;
+    transition: color .3s ;
     
     &:hover {
       color: var(--black)

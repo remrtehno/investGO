@@ -2,6 +2,7 @@ import _ from 'lodash';
 import type {FC} from 'react';
 import React, {useMemo} from 'react';
 import {useRecoilValue} from 'recoil';
+
 import {Form} from 'src/components/common/Form';
 import {Field} from 'src/components/common/Form/Field';
 import {FieldType} from 'src/components/common/Form/Form';
@@ -56,7 +57,7 @@ export const ProfileForm: FC<ProfileForms.FormProps> = (props) => {
         onChange={_.noop}
       >
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='email' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='email' />
           <Field className='col-sm-12 col-md-6' name='phone' />
         </FormRow>
       </Form>

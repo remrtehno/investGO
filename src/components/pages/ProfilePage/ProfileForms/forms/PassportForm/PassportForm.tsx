@@ -118,7 +118,14 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
         disabled={Boolean(user && user.passport && user.passport.status !== ModerationStatus.declined)}
       >
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='fio' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='name' />
+          <Field className='col-sm-12 col-md-6 position-relative' name='surname' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='patronym' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='citizenship' />
           <Field
             className='col-sm-12 col-md-6 position-relative'
             name='date_of_birth'
@@ -126,8 +133,11 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           />
         </FormRow>
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='subdivision_code' />
-          <Field className='col-sm-12 col-md-3 mb-20px mb-md-20px' name='serialNumber' />
+          <Field className='col-12' name='place_of_birth' />
+        </FormRow>
+        <FormRow>
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='subdivision_code' />
+          <Field className='col-sm-12 col-md-3 mb-20px mb-md-0' name='serialNumber' />
           <Field className='col-sm-12 col-md-3' name='date_of_issue' />
         </FormRow>
         <FormRow>
@@ -140,7 +150,7 @@ export const PassportForm: FC<PassportForm.Props> = (props) => {
           <Field className='col-12' name='place_of_residence' />
         </FormRow>
         <FormRow>
-          <Field className='col-sm-12 col-md-6 mb-20px mb-md-20px' name='snils' />
+          <Field className='col-sm-12 col-md-6 mb-20px mb-md-0' name='snils' />
           <Field className='col-sm-12 col-md-6' name='inn' />
         </FormRow>
         <FormRow>
