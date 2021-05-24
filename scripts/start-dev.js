@@ -9,7 +9,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const webpack = require('webpack');
 const [clientConfig, serverConfig] = require('../webpack/webpackDevConfig');
-const {createProxyMiddleware} = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -159,6 +159,13 @@ app.get('/robots.txt', async (req, res, next) => {
   // next();
 });
 
+
+app.get('*', async (req, res, next) => {
+  res.status(404);
+  res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
+  return;
+});
+
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
   webpackDevMiddleware(multiCompiler, {
@@ -170,7 +177,7 @@ app.use(webpackHotMiddleware(clientCompiler, {
   path: '/__webpack_hmr'
 }));
 app.use(webpackHotServerMiddleware(multiCompiler, {
-  serverRendererOptions: {outputPath: clientConfig.output.path},
+  serverRendererOptions: { outputPath: clientConfig.output.path },
   publicPath: clientConfig.output.publicPath,
 }));
 

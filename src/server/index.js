@@ -21,8 +21,8 @@ const app = express();
 const PORT = 4444;
 
 if (envConfig.useCompression) {
-    const compression = require('compression');
-    app.use(compression());
+  const compression = require('compression');
+  app.use(compression());
 }
 
 // for temporary old landing
@@ -30,25 +30,25 @@ app.use('/public', express.static(path.resolve(process.cwd(), 'build/public')));
 app.use('/landing', express.static(path.resolve(process.cwd(), 'build/public/landing')));
 
 if (process.env.APP_ENV === 'stage') {
-    app.use('/storybook', express.static(path.resolve(process.cwd(), 'build/storybook')));
+  app.use('/storybook', express.static(path.resolve(process.cwd(), 'build/storybook')));
 }
 
 app.use(cookieParser());
 
 app.get('/', async (req, res, next) => {
-    const response = await fetch(`https://testing.investgo.ru/api/user`, {
-        headers: {
-            Cookie: req.headers.Cookie
-        }
-    })
-      .then((res) => res.json());
-
-    if (response.status === 'error') {
-        res.sendFile(path.resolve(process.cwd(), 'build/public/landing/landing.html'));
-        return;
+  const response = await fetch(`https://testing.investgo.ru/api/user`, {
+    headers: {
+      Cookie: req.headers.Cookie
     }
+  })
+    .then((res) => res.json());
 
-    next();
+  if (response.status === 'error') {
+    res.sendFile(path.resolve(process.cwd(), 'build/public/landing/landing.html'));
+    return;
+  }
+
+  next();
 });
 
 app.get('/investor', async (req, res, next) => {
@@ -154,6 +154,12 @@ app.get('/robots.txt', async (req, res, next) => {
 
 app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 
+// app.get('*', async (req, res, next) => {
+//   res.status(404);
+//   res.sendFile(path.resolve(process.cwd(), 'build/public/landing/404.html'));
+//   return;
+// });п
+
 app.listen(PORT, () => {
-    console.log('Server running on http://localhost: ' + PORT);
+  console.log('Server running on http://localhost: ' + PORT);
 });

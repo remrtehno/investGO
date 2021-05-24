@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html class="page" lang="ru">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="description" content="">
-	<meta content="telephone=no" name="format-detection">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta property="og:image" content="path/to/image.jpg">
-	<meta name="theme-color" content="#FF3B30">
+  <!-- <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta content="telephone=no" name="format-detection">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:image" content="path/to/image.jpg">
+  <meta name="theme-color" content="#FF3B30">
 
-	<title>404</title>
+  <title>404</title>
 
-	<link rel="icon" href="img/favicon/favicon.svg">
-	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/favicon/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="./fonts/fonts.css">
-	
-	<link rel="stylesheet" href="./css/styles.min.css">
-	<link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./fonts/fonts.css">
+
+  <link rel="stylesheet" href="./css/styles.min.css">
+  <link rel="stylesheet" href="./css/main.css"> -->
+
+  <%- include(process.cwd() + '/landing/include/head-scripts.html' , {title: '404 Ошибка. Страница не найдена.' }); -%>
 </head>
+
 <body class="page__body page-404 login second-page">
 
   <header class="page-header page-header--second">
-		<div class="container">
-			<div class="page-header__row">
-				<a href="/" class="link-reset logo">
-					<img src="./img/logo.svg" alt="Лого">
-				</a>
-				<div class="page-header__enter">
+    <div class="container">
+      <div class="page-header__row">
+        <a href="/" class="link-reset logo">
+          <img src="/landing/img/logo.svg" alt="Лого">
+        </a>
+        <div class="page-header__enter">
           <a href="#" class="link-reset">
             <svg width="18" height="15" viewBox="0 0 18 15" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M1 1.81641H17V4.30862C16.9986 4.21571 16.9714 4.12211 16.916 4.03906C16.7628 3.80929 16.4524 3.7472 16.2226 3.90038L9 8.71548L1.77735 3.90038C1.54759 3.7472 1.23715 3.80929 1.08397 4.03906C1.0286 4.12212 1.00135 4.21574 1 4.30865V1.81641ZM1 4.32324V13.8164H17V4.32328C16.9977 4.4823 16.9197 4.63754 16.7774 4.73243L9.27735 9.73243C9.1094 9.8444 8.8906 9.8444 8.72265 9.73243L1.22265 4.73243C1.0803 4.63753 1.00232 4.48228 1 4.32324ZM0 1.81641C0 1.26412 0.447715 0.816406 1 0.816406H17C17.5523 0.816406 18 1.26412 18 1.81641V13.8164C18 14.3687 17.5523 14.8164 17 14.8164H1C0.447716 14.8164 0 14.3687 0 13.8164V1.81641Z" fill="black"/>
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M1 1.81641H17V4.30862C16.9986 4.21571 16.9714 4.12211 16.916 4.03906C16.7628 3.80929 16.4524 3.7472 16.2226 3.90038L9 8.71548L1.77735 3.90038C1.54759 3.7472 1.23715 3.80929 1.08397 4.03906C1.0286 4.12212 1.00135 4.21574 1 4.30865V1.81641ZM1 4.32324V13.8164H17V4.32328C16.9977 4.4823 16.9197 4.63754 16.7774 4.73243L9.27735 9.73243C9.1094 9.8444 8.8906 9.8444 8.72265 9.73243L1.22265 4.73243C1.0803 4.63753 1.00232 4.48228 1 4.32324ZM0 1.81641C0 1.26412 0.447715 0.816406 1 0.816406H17C17.5523 0.816406 18 1.26412 18 1.81641V13.8164C18 14.3687 17.5523 14.8164 17 14.8164H1C0.447716 14.8164 0 14.3687 0 13.8164V1.81641Z"
+                fill="black" />
             </svg>
           </a>
           <a href="#" class="link-reset">
@@ -41,27 +49,32 @@
           </a>
           <a href="#" class="link-reset">
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none">
-              <path d="M20.8195 18.568H19.5586C19.4602 18.568 19.3781 18.65 19.3781 18.7484V20.1969H4.61953V5.43594H19.3805V6.88437C19.3805 6.98281 19.4625 7.06484 19.5609 7.06484H20.8219C20.9203 7.06484 21.0023 6.98516 21.0023 6.88437V4.53594C21.0023 4.1375 20.6813 3.81641 20.2828 3.81641H3.71953C3.32109 3.81641 3 4.1375 3 4.53594V21.0969C3 21.4953 3.32109 21.8164 3.71953 21.8164H20.2805C20.6789 21.8164 21 21.4953 21 21.0969V18.7484C21 18.6477 20.918 18.568 20.8195 18.568ZM21.2555 12.6688L17.9297 10.0438C17.8055 9.94531 17.625 10.0344 17.625 10.1914V11.9727H10.2656C10.1625 11.9727 10.0781 12.057 10.0781 12.1602V13.4727C10.0781 13.5758 10.1625 13.6602 10.2656 13.6602H17.625V15.4414C17.625 15.5984 17.8078 15.6875 17.9297 15.5891L21.2555 12.9641C21.2779 12.9465 21.296 12.9241 21.3085 12.8985C21.3209 12.8729 21.3274 12.8449 21.3274 12.8164C21.3274 12.7879 21.3209 12.7599 21.3085 12.7343C21.296 12.7087 21.2779 12.6863 21.2555 12.6688Z" fill="black"/>
+              <path
+                d="M20.8195 18.568H19.5586C19.4602 18.568 19.3781 18.65 19.3781 18.7484V20.1969H4.61953V5.43594H19.3805V6.88437C19.3805 6.98281 19.4625 7.06484 19.5609 7.06484H20.8219C20.9203 7.06484 21.0023 6.98516 21.0023 6.88437V4.53594C21.0023 4.1375 20.6813 3.81641 20.2828 3.81641H3.71953C3.32109 3.81641 3 4.1375 3 4.53594V21.0969C3 21.4953 3.32109 21.8164 3.71953 21.8164H20.2805C20.6789 21.8164 21 21.4953 21 21.0969V18.7484C21 18.6477 20.918 18.568 20.8195 18.568ZM21.2555 12.6688L17.9297 10.0438C17.8055 9.94531 17.625 10.0344 17.625 10.1914V11.9727H10.2656C10.1625 11.9727 10.0781 12.057 10.0781 12.1602V13.4727C10.0781 13.5758 10.1625 13.6602 10.2656 13.6602H17.625V15.4414C17.625 15.5984 17.8078 15.6875 17.9297 15.5891L21.2555 12.9641C21.2779 12.9465 21.296 12.9241 21.3085 12.8985C21.3209 12.8729 21.3274 12.8449 21.3274 12.8164C21.3274 12.7879 21.3209 12.7599 21.3085 12.7343C21.296 12.7087 21.2779 12.6863 21.2555 12.6688Z"
+                fill="black" />
             </svg>
           </a>
         </div>
+      </div>
+    </div>
+  </header>
 
-			</div>
-		</div>
-	</header>
-  
   <main class="page-main">
     <div class="error">
-      <svg width="76" height="80" viewBox="0 0 76 80" fill="none">
-        <path d="M29.3957 25.5348H17.8895C9.11396 25.5348 2 31.5749 2 39.0259V42.2823C2 49.7332 9.11396 55.7734 17.8895 55.7734H29.3957M45.833 55.7734H57.3392C66.1147 55.7734 73.2287 49.7332 73.2287 42.2823V39.0259C73.2287 31.5749 66.1147 25.5348 57.3392 25.5348H45.833" stroke="black" stroke-width="4"/>
-        <path d="M37.9502 0V14.7833" stroke="black" stroke-width="3"/>
-        <path d="M24.8467 11.7887L30.2786 17.0328" stroke="black" stroke-width="3"/>
-        <path d="M51.1094 11.7887L45.6774 17.0328" stroke="black" stroke-width="3"/>
-        <path d="M37.9502 79.8911V65.1078" stroke="black" stroke-width="3"/>
-        <path d="M24.8467 68.1024L30.2786 62.8583" stroke="black" stroke-width="3"/>
-        <path d="M51.1094 68.1024L45.6774 62.8583" stroke="black" stroke-width="3"/>
+      <svg width="199" height="181" viewBox="0 0 199 181" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M51.0029 7.79297L192 89.5L150.997 180.707L9.99957 99L51.0029 7.79297Z" fill="black" />
+        <rect x="41.2539" y="0.661052" width="171" height="99" transform="rotate(24.2069 41.2539 0.661052)" fill="white"
+          stroke="black" />
+        <path
+          d="M72.4709 79.3422C74.6161 80.3066 75.2852 81.6863 74.4783 83.4812C73.6714 85.2762 72.1953 85.6915 70.0501 84.7271L65.8473 82.8376L62.9246 89.3389C62.4325 90.4334 61.7423 91.1493 60.8538 91.4866C59.985 91.7802 59.0472 91.7007 58.0403 91.248C57.0771 90.815 56.417 90.1762 56.06 89.3315C55.7226 88.4431 55.7999 87.4516 56.292 86.3571L59.2147 79.8559L40.7617 71.5601C39.7985 71.1271 39.1724 70.5298 38.8832 69.7683C38.594 69.0067 38.6364 68.2101 39.0104 67.3783C39.404 66.5027 40.0724 65.7769 41.0154 65.201L75.5147 44.4765C76.6678 43.7845 77.8792 43.7239 79.1488 44.2946C80.0682 44.7079 80.7184 45.3687 81.0996 46.2768C81.5004 47.1412 81.4548 48.1206 80.9628 49.2151L68.2681 77.4528L72.4709 79.3422ZM47.451 68.0942L61.6355 74.471L70.8465 53.9822L47.451 68.0942ZM89.1116 105.453C83.7267 103.033 80.5168 99.1686 79.4818 93.8616C78.4907 88.5743 79.7271 82.078 83.191 74.3728C86.6747 66.6239 90.7228 61.3654 95.3354 58.5973C99.9917 55.8489 105.012 55.6851 110.397 58.106C115.782 60.5268 118.97 64.3809 119.961 69.6682C121.016 74.9314 119.801 81.4375 116.318 89.1865C112.834 96.9354 108.764 102.184 104.108 104.932C99.4952 107.701 94.4964 107.874 89.1116 105.453ZM91.5619 100.003C94.9329 101.518 98.0658 101.164 100.961 98.939C103.855 96.7144 106.72 92.4499 109.554 86.1457C112.388 79.8414 113.667 74.8903 113.389 71.2924C113.132 67.6506 111.318 65.072 107.947 63.5565C104.576 62.041 101.443 62.3956 98.5483 64.6203C95.6732 66.8012 92.8186 71.0438 89.9845 77.348C87.17 83.6084 85.8816 88.5814 86.1193 92.267C86.3767 95.9087 88.1909 98.4873 91.5619 100.003ZM149.763 114.09C151.908 115.054 152.578 116.434 151.771 118.229C150.964 120.024 149.488 120.439 147.342 119.475L143.14 117.585L140.217 124.087C139.725 125.181 139.035 125.897 138.146 126.234C137.277 126.528 136.339 126.448 135.333 125.996C134.369 125.563 133.709 124.924 133.352 124.079C133.015 123.191 133.092 122.199 133.584 121.105L136.507 114.604L118.054 106.308C117.091 105.875 116.465 105.278 116.175 104.516C115.886 103.755 115.929 102.958 116.303 102.126C116.696 101.25 117.365 100.525 118.308 99.9487L152.807 79.2243C153.96 78.5323 155.171 78.4716 156.441 79.0424C157.36 79.4557 158.011 80.1164 158.392 81.0246C158.793 81.8889 158.747 82.8684 158.255 83.9628L145.56 112.201L149.763 114.09ZM124.743 102.842L138.928 109.219L148.139 88.73L124.743 102.842Z"
+          fill="black" />
+        <path d="M55.5 9.5L51.5 14.5" stroke="black" />
+        <circle cx="55.5" cy="9.5" r="2.5" fill="black" />
+        <path d="M190.5 9.5L186.5 14.5" stroke="black" />
+        <circle cx="190.5" cy="9.5" r="2.5" fill="black" />
       </svg>
-      <h1>
+
+      <h1 class="page-404-title">
         Ошибка 404!
       </h1>
       <p>
@@ -70,12 +83,13 @@
     </div>
   </main>
   <div class="overlay"></div>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="./js/scripts.min.js"></script>
-<script src="./js/nouislider.min.js"></script>
-<script src="./js/jquery.maskedinput.min.js"></script>
-<script src="./js/jquery.nice-select.min.js"></script>
-<script src="./js/common.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="./js/scripts.min.js"></script>
+  <script src="./js/nouislider.min.js"></script>
+  <script src="./js/jquery.maskedinput.min.js"></script>
+  <script src="./js/jquery.nice-select.min.js"></script>
+  <script src="./js/common.js"></script>
 </body>
+
 </html>
