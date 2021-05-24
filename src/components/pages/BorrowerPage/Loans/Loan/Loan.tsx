@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 import {RoutePaths} from 'src/components/common/App/routes';
 import {CalendarDateIcon} from 'src/icons/CalendarDateIcon';
 import {DropDownIcon} from 'src/icons/DropDownIcon';
-import {BorrowerLoanStatusTranslation} from 'src/translations/BorrowerLoanStatusTranslation';
 import type {Borrower} from 'src/types/Borrower';
 import {formatDate} from 'src/utils/formatDate';
 

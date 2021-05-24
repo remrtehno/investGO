@@ -1,4 +1,4 @@
-export const BorrowerLoanStatusTranslation = {
+export const LoanRequestStatusTranslation = {
   new: 'Новая',
   moderating: 'На модерации',
   declined: 'Отклонена',

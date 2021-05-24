@@ -42,7 +42,7 @@ export const BorrowerPage = withAuth(() => {
           text: 'Портфель',
         },
         {
-          to: RoutePaths.home,
+          to: RoutePaths.borrowerLoanRequests,
           text: 'Мои заявки',
         },
         {

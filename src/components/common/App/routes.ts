@@ -2,6 +2,7 @@ import type {FC} from 'react';
 import type {RouteProps} from 'react-router';
 
 import {AboutUs} from 'src/components/pages/AboutUs';
+import { BorrowerLoanRequestsPage } from 'src/components/pages/BorrowerLoanRequestsPage';
 import {BorrowerPage} from 'src/components/pages/BorrowerPage';
 import {CompanyEditPage} from 'src/components/pages/CompanyEditPage';
 import {CreateLoanRequestPage} from 'src/components/pages/CreateLoanRequestPage';
@@ -32,6 +33,7 @@ export const RoutePaths = {
   passwordReset: '/password-reset',
   investorDashboard: '/investor/dashboard',
   borrowerDashboard: '/borrower/dashboard',
+  borrowerLoanRequests: '/borrower/loan-requests',
   createLoanRequest: (companyId = ':companyId') => `/borrower/create-loan-request/${companyId}`,
   loanRequest: (loanId = ':loanId') => `/borrower/loan-request/${loanId}`,
   companyEdit: (companyId = ':companyId') => `/company/edit/${companyId}`,
@@ -84,6 +86,11 @@ export const routes: RouteInfo[] = [
   {
     path: RoutePaths.borrowerDashboard,
     Component: BorrowerPage,
+    exact: true,
+  },
+  {
+    path: RoutePaths.borrowerLoanRequests,
+    Component: BorrowerLoanRequestsPage,
     exact: true,
   },
   {

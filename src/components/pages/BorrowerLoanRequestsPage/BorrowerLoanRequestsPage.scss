@@ -1,0 +1,17 @@
+.content {
+  padding: 71px 95px;
+}
+
+.section {
+  margin-top: 24px;
+  background-color: var(--white);
+  border-radius: 6px;
+}
+
+.link {
+  color: var(--black);
+
+  &:hover {
+    color: var(--black);
+  }
+}
