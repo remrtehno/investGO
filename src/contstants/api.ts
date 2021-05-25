@@ -39,6 +39,7 @@ export const api = {
     accessionAgreement: () => '/borrower/accession-agreement',
     getLoans: () => '/borrower/loan',
     getLoanRequests: () => '/borrower/loan-request',
+    createLoanRequest: () => '/borrower/loan-request',
     getLoanRequest: (loanId: string) => `/borrower/loan-request/${loanId}`,
   },
   investor: {
