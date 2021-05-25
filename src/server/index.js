@@ -158,7 +158,7 @@ app.get('*', serverRenderer({ clientStats: statsFile, hot: false }));
 //   res.status(404);
 //   res.sendFile(path.resolve(process.cwd(), 'build/public/landing/404.html'));
 //   return;
-// });п
+// });
 
 app.listen(PORT, () => {
   console.log('Server running on http://localhost: ' + PORT);

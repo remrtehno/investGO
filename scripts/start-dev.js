@@ -155,16 +155,14 @@ app.get('/tariffs', async (req, res, next) => {
 app.get('/robots.txt', async (req, res, next) => {
   res.type('text/plain')
   res.send("User-agent: *\nDisallow: /");
-  //res.sendFile(path.resolve(process.cwd(), 'build/landing/documents.html'));
-  // next();
 });
 
 
-// app.get('*', async (req, res, next) => {
-//   res.status(404);
-//   res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
-//   return;
-// });
+app.get('/404', async (req, res, next) => {
+  res.status(404);
+  res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
+  return;
+});
 
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(

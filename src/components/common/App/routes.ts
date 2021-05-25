@@ -1,21 +1,22 @@
-import type {FC} from 'react';
-import type {RouteProps} from 'react-router';
+import type { FC } from 'react';
+import type { RouteProps } from 'react-router';
 
-import {AboutUs} from 'src/components/pages/AboutUs';
+import { AboutUs } from 'src/components/pages/AboutUs';
 import { BorrowerLoanRequestsPage } from 'src/components/pages/BorrowerLoanRequestsPage';
-import {BorrowerPage} from 'src/components/pages/BorrowerPage';
-import {CompanyEditPage} from 'src/components/pages/CompanyEditPage';
-import {CreateLoanRequestPage} from 'src/components/pages/CreateLoanRequestPage';
-import {EmailConfirmationPage} from 'src/components/pages/EmailConfirmationPage';
+import { BorrowerPage } from 'src/components/pages/BorrowerPage';
+import { CompanyEditPage } from 'src/components/pages/CompanyEditPage';
+import { CreateLoanRequestPage } from 'src/components/pages/CreateLoanRequestPage';
+import { EmailConfirmationPage } from 'src/components/pages/EmailConfirmationPage';
 import { InvestOfferPage } from 'src/components/pages/InvestOfferPage';
-import {InvestorPage} from 'src/components/pages/InvestorPage';
-import {LoanRequestPage} from 'src/components/pages/LoanRequestPage';
-import {PasswordResetPage} from 'src/components/pages/PasswordResetPage';
-import {ProfilePage} from 'src/components/pages/ProfilePage';
-import {ProjectsPage} from 'src/components/pages/ProjectsPage';
-import {RecoverPage} from 'src/components/pages/RecoverPage';
-import {RegisterPage} from 'src/components/pages/RegisterPage';
-import {SignPage} from 'src/components/pages/SignPage';
+import { InvestorPage } from 'src/components/pages/InvestorPage';
+import { LoanRequestPage } from 'src/components/pages/LoanRequestPage';
+import { PasswordResetPage } from 'src/components/pages/PasswordResetPage';
+import { ProfilePage } from 'src/components/pages/ProfilePage';
+import { ProjectsPage } from 'src/components/pages/ProjectsPage';
+import { RecoverPage } from 'src/components/pages/RecoverPage';
+import { RegisterPage } from 'src/components/pages/RegisterPage';
+import { SignPage } from 'src/components/pages/SignPage';
+import { Page404 } from 'src/components/pages/Page404';
 
 export type RouteInfo = RouteProps & {
   Component: FC
@@ -38,6 +39,7 @@ export const RoutePaths = {
   loanRequest: (loanId = ':loanId') => `/borrower/loan-request/${loanId}`,
   companyEdit: (companyId = ':companyId') => `/company/edit/${companyId}`,
   investOffer: (loanId = ':loanId') => `/offer/${loanId}`,
+  page404: '*',
 };
 
 export const routes: RouteInfo[] = [
@@ -109,4 +111,8 @@ export const routes: RouteInfo[] = [
     path: RoutePaths.investOffer(),
     Component: InvestOfferPage,
   },
+  {
+    path: RoutePaths.page404,
+    Component: Page404,
+  }
 ];
