@@ -1,6 +1,7 @@
 import {api} from 'src/contstants/api';
 import {useApi} from 'src/hooks/useApi';
 import {useApiRequest} from 'src/hooks/useApiRequest';
+import type {FilePrimitive} from 'src/types/FilePrimitive';
 
 export declare namespace useGetPortfolioProjects {
   export type PortfolioProject = {
@@ -13,7 +14,8 @@ export declare namespace useGetPortfolioProjects {
     loan_request_num: number,
     rate: number,
     status: string,
-    term: number
+    term: number,
+    documents: FilePrimitive[],
   }
   export type Response = PortfolioProject[]
 }
