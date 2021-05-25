@@ -121,7 +121,7 @@ export const Loan: FC<Loan.Props> = (props) => {
                 ) : null }
                 { activeTab === '2' ? (
                   <div className='row'>
-                    <LoanDocuments />
+                    <LoanDocuments project={project} />
                   </div>
                 ) : null }
                 { activeTab === '3' ? (
