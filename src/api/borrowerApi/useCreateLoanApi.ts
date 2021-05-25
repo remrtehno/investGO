@@ -33,7 +33,7 @@ export const useCreateLoan = () => {
   const request = useApiRequest();
 
   return useApi<useCreateLoan.Payload, null>(async(payload) => {
-    const result = await request<useCreateLoan.Response>(api.borrower.loanRequest(), {
+    const result = await request<useCreateLoan.Response>(api.borrower.createLoanRequest(), {
       method: 'POST',
       body: JSON.stringify(payload),
     });

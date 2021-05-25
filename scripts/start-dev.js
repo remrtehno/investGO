@@ -160,11 +160,11 @@ app.get('/robots.txt', async (req, res, next) => {
 });
 
 
-app.get('*', async (req, res, next) => {
-  res.status(404);
-  res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
-  return;
-});
+// app.get('*', async (req, res, next) => {
+//   res.status(404);
+//   res.sendFile(path.resolve(process.cwd(), 'build/landing/404.html'));
+//   return;
+// });
 
 // note that we pass multiCompiler to webpackDevMiddleware
 app.use(
