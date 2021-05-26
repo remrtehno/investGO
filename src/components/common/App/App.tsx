@@ -50,17 +50,15 @@ const AppContent: FC = () => {
   return (
     <QueryParamProvider ReactRouterRoute={Route}>
       <Switch>
-        <div>
-          {routes.map((route, index) => {
-            const { Component, ...routeProps } = route;
-            return (
-              <Route key={index} {...routeProps}>
-                <Component />
-              </Route>
-            );
-          })}
-          <div id='modal-root' />
-        </div>
+        {routes.map((route, index) => {
+          const { Component, ...routeProps } = route;
+          return (
+            <Route key={index} {...routeProps}>
+              <Component />
+            </Route>
+          );
+        })}
+        <div id='modal-root' />
       </Switch>
     </QueryParamProvider>
   );

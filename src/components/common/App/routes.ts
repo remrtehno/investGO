@@ -39,7 +39,7 @@ export const RoutePaths = {
   loanRequest: (loanId = ':loanId') => `/borrower/loan-request/${loanId}`,
   companyEdit: (companyId = ':companyId') => `/company/edit/${companyId}`,
   investOffer: (loanId = ':loanId') => `/offer/${loanId}`,
-  page404: '*',
+  page404: '',
 };
 
 export const routes: RouteInfo[] = [
@@ -98,20 +98,25 @@ export const routes: RouteInfo[] = [
   {
     path: RoutePaths.companyEdit(),
     Component: CompanyEditPage,
+    exact: true,
   },
   {
     path: RoutePaths.createLoanRequest(),
     Component: CreateLoanRequestPage,
+    exact: true,
   },
   {
     path: RoutePaths.loanRequest(),
     Component: LoanRequestPage,
+    exact: true,
   },
   {
     path: RoutePaths.investOffer(),
     Component: InvestOfferPage,
+    exact: true,
   },
   {
+    exact: true,
     path: RoutePaths.page404,
     Component: Page404,
   }
