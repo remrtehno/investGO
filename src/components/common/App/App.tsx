@@ -58,8 +58,8 @@ const AppContent: FC = () => {
             </Route>
           );
         })}
-        <div id='modal-root' />
       </Switch>
+      <div id='modal-root' />
     </QueryParamProvider>
   );
 };
