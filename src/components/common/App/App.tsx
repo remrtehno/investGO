@@ -1,8 +1,8 @@
-import type {FC} from 'react';
-import React, {useEffect} from 'react';
-import {BrowserRouter, Route, StaticRouter} from 'react-router-dom';
-import {RecoilRoot, useRecoilValue, useSetRecoilState} from 'recoil';
-import {QueryParamProvider} from 'use-query-params';
+import type { FC } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Route, StaticRouter, Switch } from 'react-router-dom';
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
+import { QueryParamProvider } from 'use-query-params';
 
 import 'src/components/common/Form/fields/dateField';
 import 'src/components/common/Form/fields/fileArrayField';
@@ -22,18 +22,18 @@ import 'src/libs/helpers.scss';
 import 'src/libs/bootstrap/bootstrap-utilities.css';
 import 'src/theme/theme.css';
 import 'src/theme/container.scss';
-import {useUserDocuments} from 'src/api/userApi/useUserDocuments';
-import {useUserApi} from 'src/hooks/useUser';
-import {isPageInitAtom} from 'src/recoil/isPageInitAtom';
-import {userAtom} from 'src/recoil/userAtom';
-import {RequestStatus} from 'src/types/common';
+import { useUserDocuments } from 'src/api/userApi/useUserDocuments';
+import { useUserApi } from 'src/hooks/useUser';
+import { isPageInitAtom } from 'src/recoil/isPageInitAtom';
+import { userAtom } from 'src/recoil/userAtom';
+import { RequestStatus } from 'src/types/common';
 
-import {routes} from './routes';
+import { routes } from './routes';
 
 const AppContent: FC = () => {
   const userApi = useUserApi();
   const [, getSignDocuments] = useUserDocuments();
-  const {status: userStatus} = useRecoilValue(userAtom);
+  const { status: userStatus } = useRecoilValue(userAtom);
   const setIsPageInit = useSetRecoilState(isPageInitAtom);
 
   useEffect(() => {
@@ -49,17 +49,19 @@ const AppContent: FC = () => {
 
   return (
     <QueryParamProvider ReactRouterRoute={Route}>
-      <div>
-        { routes.map((route, index) => {
-          const {Component, ...routeProps} = route;
-          return (
-            <Route key={index} {...routeProps}>
-              <Component />
-            </Route>
-          );
-        }) }
-        <div id='modal-root' />
-      </div>
+      <Switch>
+        <div>
+          {routes.map((route, index) => {
+            const { Component, ...routeProps } = route;
+            return (
+              <Route key={index} {...routeProps}>
+                <Component />
+              </Route>
+            );
+          })}
+          <div id='modal-root' />
+        </div>
+      </Switch>
     </QueryParamProvider>
   );
 };
@@ -89,7 +91,7 @@ export const App: FC<App.Props> = (props) => {
 
   return (
     <RecoilRoot>
-      { renderRouter() }
+      { renderRouter()}
     </RecoilRoot>
   );
 };
